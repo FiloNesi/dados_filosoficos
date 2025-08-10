@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emoji Warm-Up! (Modificado)</title>
+    <title>Emoji Warm-Up! (Corregido)</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
@@ -22,9 +22,8 @@
         .hidden { display: none !important; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes popIn { 0% { opacity: 0; transform: scale(0.8); } 80% { opacity: 1; transform: scale(1.05); } 100% { opacity: 1; transform: scale(1); } }
-        @keyframes pop-in-slide-up { 0% { opacity: 0; transform: translateY(20px) scale(0.95); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
         @keyframes animate-border { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        
+
         /* --- Estilos Pantalla de Inicio (Warmup) --- */
         #warmup-screen { font-family: 'Nunito', sans-serif; background: radial-gradient(circle at 50% 50%, #e6f7f3, #d0f0e8); color: #3d4f63; text-align: center; position: relative; }
         #warmup-screen .main-container { position: relative; z-index: 1; width: 100%; max-width: 1300px; display: flex; flex-direction: column; align-items: center; gap: 1rem; animation: fadeIn 1s ease-in-out; }
@@ -60,8 +59,6 @@
         #dice-challenge-screen .video-container video { transition: filter 0.7s ease-in-out; }
         #dice-challenge-screen .video-is-blurred { filter: blur(12px); }
         #dice-challenge-screen .is-playing #reveal-button-dice { opacity: 0; pointer-events: none; }
-        
-        /* Estilos para los nuevos controles del juego */
         #dice-challenge-screen .quantity-btn { width: 40px; height: 40px; border-radius: 50%; background-color: #ffc8dd; color: #c13a69; font-size: 2rem; font-weight: bold; border: none; cursor: pointer; line-height: 1; transition: all 0.2s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         #dice-challenge-screen .quantity-btn:hover { transform: scale(1.1); background-color: #ffafcc; }
         #dice-challenge-screen .quantity-btn:disabled { background-color: #e5e7eb; color: #9ca3af; cursor: not-allowed; transform: scale(1); }
@@ -70,6 +67,39 @@
         .dice-toggle-wrapper input[type="checkbox"]:hover + .dice-toggle-label { transform: scale(1.03); box-shadow: 0 8px 15px rgba(45, 55, 72, 0.1); }
         .dice-toggle-wrapper input[type="checkbox"]:checked + .dice-toggle-label { background-color: #818cf8; color: white; border-color: #c7d2fe; box-shadow: 0 0 15px 3px rgba(129, 140, 248, 0.4); }
         .dice-toggle-wrapper input[type="checkbox"]:disabled + .dice-toggle-label { background-color: #e5e7eb; color: #9ca3af; cursor: not-allowed; transform: scale(1); box-shadow: none; opacity: 0.7; }
+        
+        /* --- [CORREGIDO] ESTILOS PARA LA CUADRÍCULA 3x3 --- */
+        #dice-challenge-screen .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 0.75rem;
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1 / 1;
+            background-color: rgba(238, 244, 255, 0.7);
+            padding: 0.75rem;
+            border-radius: 1.5rem;
+            border: 2px dashed #c7d2fe;
+        }
+        #dice-challenge-screen .grid-container .pop-in {
+            width: 100%;
+            height: 100%;
+            padding: 0.25rem;
+            overflow: hidden; /* [AÑADIDO] Evita que el contenido se salga */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #dice-challenge-screen .grid-container .pop-in span {
+            font-size: clamp(2rem, 12vw, 4rem); /* [MODIFICADO] Tamaño del emoji ajustado */
+            line-height: 1;
+        }
+        #dice-challenge-screen .grid-container .pop-in img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain; /* [AÑADIDO] Escala la imagen para que quepa */
+        }
     </style>
 </head>
 <body>
@@ -139,12 +169,11 @@
                     </div>
                 </div>
 
-                <div class="w-full p-4 rounded-2xl space-y-4 flex flex-col" style="background-color: #eef4ff;">
-                    <section class="flex flex-col items-center justify-center space-y-4 flex-grow">
-                        <div id="emoji-display" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 sm:gap-5 w-full max-w-2xl mx-auto min-h-[100px]"></div>
-                        <p id="consigna" class="font-baloo text-center text-gray-800 text-lg md:text-xl px-2 min-h-[2rem]">¡Configura tu tirada y pulsa "Lanzar Dados"!</p>
-                        <button id="roll-dice-btn" class="group font-bold text-white py-3 px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-xl focus:outline-none transition-all duration-300" style="background-image: linear-gradient(to right, #ff9a8b, #ff6a88);"><span class="text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Lanzar Dados</span></button>
-                    </section>
+                <div class="w-full p-4 rounded-2xl space-y-4 flex flex-col items-center">
+                    <div id="emoji-display" class="grid-container">
+                        </div>
+                    <p id="consigna" class="font-baloo text-center text-gray-800 text-lg md:text-xl px-2 min-h-[2rem]">¡Configura tu tirada y pulsa "Lanzar Dados"!</p>
+                    <button id="roll-dice-btn" class="group font-bold text-white py-3 px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-xl focus:outline-none transition-all duration-300" style="background-image: linear-gradient(to right, #ff9a8b, #ff6a88);"><span class="text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Lanzar Dados</span></button>
                 </div>
                 <footer class="p-2 flex-shrink-0">
                     <div class="flex justify-center items-center gap-4">
@@ -166,9 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function showScreen(screenToShow) { allScreens.forEach(screen => screen.classList.add('hidden')); screenToShow.classList.remove('hidden'); }
     const goHome = () => showScreen(warmupScreen);
     goToDiceChallengeBtn.addEventListener('click', () => { showScreen(diceChallengeScreen); });
-    // ... (El código de audio y vídeo de la pantalla de inicio puede ir aquí si se desea)
 
-    // --- LÓGICA DEL JUEGO DE DADOS (MODIFICADA) ---
+    // --- LÓGICA DEL JUEGO DE DADOS ---
     const diceGameManager = (() => {
         const screen1 = document.getElementById('dice-screen-1');
         const screen2 = document.getElementById('dice-screen-2');
@@ -180,29 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const videoWrapperDice = document.getElementById('video-wrapper-dice');
         const revealButton = document.getElementById('reveal-button-dice');
         
-        // --- DATOS PARA LOS DADOS ---
         const DADOS_FILOSOFICOS = {
-            "Conceptos": ["imagenes/conceptos/destino.png",
-                    "imagenes/conceptos/dios.png",
-                    "filosofia/conceptos.png",
-                    "imagenes/conceptos/icon1.png",
-                    "imagenes/conceptos/libertad.png",
-                    "imagenes/conceptos/tiempo.png"
-                    ],
+            "Conceptos": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/dios.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/libertad.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/tiempo.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/destino.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/esencia.png"],
             "Autores": ["imagenes/autores/platón.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png", "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png", "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"],
-            "Acciones": [
-                    "imagenes/acciones/espiral.png",
-                    "imagenes/acciones/explosion.png",
-                    "imagenes/acciones/flechas.png",
-                    "imagenes/acciones/mano.png",
-                    "imagenes/acciones/mascara.png",
-                    "imagenes/acciones/caminar.png",
-                    "imagenes/acciones/construir.png",
-                    "imagenes/acciones/mirar.png",
-                    "imagenes/acciones/pensar.png",
-                    "imagenes/acciones/saltar.png",
-                    "imagenes/acciones/toser.png"
-                    ],            
+            "Acciones": ["imagenes/acciones/espiral.png", "imagenes/acciones/explosion.png", "imagenes/acciones/flechas.png", "imagenes/acciones/mano.png", "imagenes/acciones/mascara.png", "imagenes/acciones/caminar.png", "imagenes/acciones/construir.png", "imagenes/acciones/mirar.png", "imagenes/acciones/pensar.png", "imagenes/acciones/saltar.png", "imagenes/acciones/toser.png", "imagenes/acciones2/paracaidas.png"],
             "Objetos": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/arcoiris.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/balanza.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/candado.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/llave.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/lupa.png"],
             "Personajes": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/astronauta.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/mago.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/nina.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/reina.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/superheroe.png"],
             "Objetos II": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos2/brujula.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos2/caja.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos2/cerebro.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos2/espejo.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos2/libros.png"]
@@ -249,25 +258,14 @@ document.addEventListener('DOMContentLoaded', () => {
         function updateControlsAndState() {
             const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
             const totalDice = numRandomDice + numSpecificDice;
-
             totalDiceLaunchDisplay.textContent = `${totalDice} Dado${totalDice !== 1 ? 's' : ''}`;
-
-            // Actualizar botones de cantidad de dados al azar
             btnMinusRandom.disabled = numRandomDice <= 0;
             btnPlusRandom.disabled = totalDice >= MAX_TOTAL_DICE;
-
-            // Actualizar toggles de dados específicos
             const toggles = specificDiceSelection.querySelectorAll('input[type="checkbox"]');
             if (totalDice >= MAX_TOTAL_DICE) {
-                toggles.forEach(toggle => {
-                    if (!toggle.checked) {
-                        toggle.disabled = true;
-                    }
-                });
+                toggles.forEach(toggle => { if (!toggle.checked) { toggle.disabled = true; } });
             } else {
-                toggles.forEach(toggle => {
-                    toggle.disabled = false;
-                });
+                toggles.forEach(toggle => { toggle.disabled = false; });
             }
         }
 
@@ -290,37 +288,29 @@ document.addEventListener('DOMContentLoaded', () => {
         rollDiceBtn.addEventListener('click', () => {
             const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
             const totalDice = numRandomDice + numSpecificDice;
-
             if (totalDice === 0) {
                 alert("Por favor, selecciona al menos un dado para lanzar.");
                 return;
             }
-            
             rollSound.currentTime = 0; rollSound.play();
             emojiDisplay.innerHTML = '';
             let results = [];
-
-            // 1. Dados al Azar
             for (let i = 0; i < numRandomDice; i++) {
                 results.push({ type: 'emoji', value: getRandomItem(DADOS_EMOJIS_BASE) });
             }
-
-            // 2. Dados Específicos
             const checkedToggles = specificDiceSelection.querySelectorAll('input:checked');
             checkedToggles.forEach(toggle => {
                 const diceName = toggle.value;
                 results.push({ type: 'image', value: getRandomItem(DADOS_FILOSOFICOS[diceName]) });
             });
-
-            // 3. Renderizar resultados
             results.forEach((res, i) => {
                 const card = document.createElement('div');
-                card.className = 'bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in';
+                card.className = 'bg-white rounded-xl shadow-lg pop-in';
                 card.style.animationDelay = `${i * 0.1}s`;
                 if (res.type === 'emoji') {
-                    card.innerHTML = `<span class="text-5xl sm:text-7xl emoji-shadow">${res.value}</span>`;
+                    card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`;
                 } else {
-                    card.innerHTML = `<img src="${res.value}" alt="Resultado de dado" style="max-width: 80%; max-height: 80%; object-fit: contain;">`;
+                    card.innerHTML = `<img src="${res.value}" alt="Resultado de dado">`;
                 }
                 emojiDisplay.appendChild(card);
             });
@@ -337,10 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
             consigna.textContent = '¡Configura tu tirada y pulsa "Lanzar Dados"!';
             showSubScreen(screen2);
         });
-
     })();
-    
-    // El resto de la lógica de los otros juegos no se incluye para brevedad.
 });
 </script>
 </body>
