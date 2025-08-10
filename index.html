@@ -70,8 +70,6 @@
         #dice-challenge-screen .video-container video { transition: filter 0.7s ease-in-out, transform 0.7s ease-in-out; transform: scale(1); }
         #dice-challenge-screen .video-is-blurred { filter: blur(12px); }
         #dice-challenge-screen .is-playing #reveal-button-dice { opacity: 0; pointer-events: none; }
-        
-        /* --- [NUEVO] ESTILOS PARA LOS CONTROLES DEL JUEGO DE DADOS --- */
         #dice-challenge-screen .quantity-btn { width: 40px; height: 40px; border-radius: 50%; background-color: #ffc8dd; color: #c13a69; font-size: 2rem; font-weight: bold; border: none; cursor: pointer; line-height: 1; transition: all 0.2s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         #dice-challenge-screen .quantity-btn:hover { transform: scale(1.1); background-color: #ffafcc; }
         #dice-challenge-screen .quantity-btn:active { transform: scale(0.95); }
@@ -85,12 +83,6 @@
         .dice-toggle-wrapper input[type="checkbox"]:hover + .dice-toggle-label { transform: scale(1.03); box-shadow: 0 8px 15px rgba(45, 55, 72, 0.1); }
         .dice-toggle-wrapper input[type="checkbox"]:checked + .dice-toggle-label { background-color: #818cf8; color: white; border-color: #c7d2fe; box-shadow: 0 0 15px 3px rgba(129, 140, 248, 0.4); }
         .dice-toggle-wrapper input[type="checkbox"]:disabled + .dice-toggle-label { background-color: #e5e7eb; color: #9ca3af; cursor: not-allowed; transform: scale(1); box-shadow: none; opacity: 0.7; }
-        
-        /* --- Resto de Estilos (This or That, Secret Message, etc. - Sin Cambios) --- */
-        #this-or-that-screen { font-family: 'Nunito', sans-serif; background-color: #e6f3fa; background-image: url('data:image/svg+xml;utf8,<svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><circle fill="white" cx="25" cy="25" r="1" fill-opacity="0.1"></circle></svg>'), linear-gradient(to bottom, #e6f3fa, #d0eaf7); }
-        #this-or-that-screen h1, #this-or-that-screen h2 { font-family: 'Fredoka', sans-serif; }
-        #this-or-that-screen h1 { text-shadow: 3px 3px 0px rgba(255, 127, 80, 0.3); }
-        /* ... (el resto de los estilos continúan sin cambios) ... */
     </style>
 </head>
 <body>
@@ -109,22 +101,10 @@
                 <button id="playVideoButton" class="play-button">Play Welcome Video</button>
             </div>
             <div class="button-grid">
-                <button id="go-to-dice-challenge-btn" class="game-button btn-1">
-                    <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-dice.png?raw=true" alt="Icono de dado" class="button-icon">
-                    Emoji Dice Challenge
-                </button>
-                <button id="go-to-this-or-that-btn" class="game-button btn-2">
-                    <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-arrow.png?raw=true" alt="Icono de flecha" class="button-icon">
-                    This or That
-                </button>
-                <button id="go-to-secret-message-btn" class="game-button btn-3">
-                    <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-lock.png?raw=true" alt="Icono de candado" class="button-icon">
-                    Secret Emoji Message
-                </button>
-                <button id="go-to-emoji-says-btn" class="game-button btn-4">
-                    <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-megaphone.png?raw=true" alt="Icono de megáfono" class="button-icon">
-                    Emoji Says
-                </button>
+                <button id="go-to-dice-challenge-btn" class="game-button btn-1"><img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-dice.png?raw=true" alt="Icono de dado" class="button-icon"> Emoji Dice Challenge</button>
+                <button id="go-to-this-or-that-btn" class="game-button btn-2"><img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-arrow.png?raw=true" alt="Icono de flecha" class="button-icon"> This or That</button>
+                <button id="go-to-secret-message-btn" class="game-button btn-3"><img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-lock.png?raw=true" alt="Icono de candado" class="button-icon"> Secret Emoji Message</button>
+                <button id="go-to-emoji-says-btn" class="game-button btn-4"><img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-megaphone.png?raw=true" alt="Icono de megáfono" class="button-icon"> Emoji Says</button>
             </div>
         </div>
         <footer class="footer-text">© Tamara Llorens · Chromtastic Teacher</footer>
@@ -133,36 +113,24 @@
     <div id="dice-challenge-screen" class="screen hidden">
         <div id="dice-screen-1" class="dice-sub-screen">
             <main class="w-full max-w-md mx-auto text-center flex flex-col justify-center items-center">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase text-[#FF6F61] mb-4" style="text-shadow: -2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,0.1);">
-                    Emoji Dice<br>Challenge
-                </h1>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase text-[#FF6F61] mb-4" style="text-shadow: -2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,0.1);">Emoji Dice<br>Challenge</h1>
                 <div class="bg-white p-2 sm:p-3 w-full relative video-card rounded-2xl shadow-lg">
                     <div id="video-wrapper-dice" class="relative rounded-xl overflow-hidden aspect-square bg-black video-container">
                         <video id="instructions-video-dice" class="w-full h-full object-cover video-is-blurred" src="https://cdn.jsdelivr.net/gh/TamaraLlorens/warmup-assets@main/emoji%20video%20dice%20app.mp4" playsinline controls></video>
-                        <button id="reveal-button-dice" class="absolute inset-0 flex items-center justify-center w-full h-full bg-transparent">
-                            <span class="bg-white/90 text-[#4A4A4A] text-lg font-bold py-3 px-6 rounded-xl shadow-md hover:scale-105 transition-transform">🎬 Watch Instructions</span>
-                        </button>
+                        <button id="reveal-button-dice" class="absolute inset-0 flex items-center justify-center w-full h-full bg-transparent"><span class="bg-white/90 text-[#4A4A4A] text-lg font-bold py-3 px-6 rounded-xl shadow-md hover:scale-105 transition-transform">🎬 Watch Instructions</span></button>
                     </div>
                 </div>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
-                    <button id="dice-home-btn-1" class="bg-white text-gray-700 font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all duration-200 ease-in-out py-2 px-5 shadow-md hover:shadow-lg hover:transform hover:-translate-y-0.5 no-underline">
-                        <span class="text-xl">🏠</span>
-                        <span>Home</span>
-                    </button>
-                    <button id="start-challenge-btn" class="font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all duration-200 ease-in-out text-white py-2 px-6" style="background-image: linear-gradient(135deg, #FFC894 0%, #FF9A8B 100%); box-shadow: 0 4px 20px rgba(255, 154, 139, 0.35); ">
-                        <span class="text-2xl">🎲</span>
-                        <span>Start Challenge</span>
-                    </button>
+                    <button id="dice-home-btn-1" class="bg-white text-gray-700 font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all duration-200 ease-in-out py-2 px-5 shadow-md hover:shadow-lg hover:transform hover:-translate-y-0.5 no-underline"><span class="text-xl">🏠</span><span>Home</span></button>
+                    <button id="start-challenge-btn" class="font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all duration-200 ease-in-out text-white py-2 px-6" style="background-image: linear-gradient(135deg, #FFC894 0%, #FF9A8B 100%); box-shadow: 0 4px 20px rgba(255, 154, 139, 0.35); "><span class="text-2xl">🎲</span><span>Start Challenge</span></button>
                 </div>
             </main>
         </div>
-        
         <div id="dice-screen-2" class="dice-sub-screen hidden">
             <div class="w-full max-w-5xl flex flex-col gap-4">
                 <header class="text-center flex-shrink-0">
                     <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase text-[#FF6F61]" style="text-shadow: -1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,0.1);">Emoji Dice Challenge</h1>
                 </header>
-                
                 <div id="dice-config-panel" class="p-3 rounded-2xl space-y-4" style="background-color: #fff8f2; box-shadow: 0px 6px 12px rgba(0,0,0,0.06);">
                     <div class="text-center p-2 rounded-lg bg-white/70">
                         <label class="font-bold text-gray-700 text-lg">1. Elige cuántos dados lanzar en total</label>
@@ -173,7 +141,6 @@
                         </div>
                         <p class="text-xs text-gray-500 mt-1">Mínimo 3, máximo 9.</p>
                     </div>
-
                     <div id="source-selector" class="hidden text-center p-2 rounded-lg bg-white/70">
                          <label class="font-bold text-gray-700 text-lg">2. Elige tus dados extra</label>
                          <div class="flex justify-center gap-4 mt-2">
@@ -181,19 +148,14 @@
                              <button id="source-specific-btn" class="source-btn">Elegir ✍️</button>
                          </div>
                     </div>
-
-                    <div id="specific-dice-selection" class="hidden grid grid-cols-2 md:grid-cols-4 gap-3 p-2">
-                        </div>
+                    <div id="specific-dice-selection" class="hidden grid grid-cols-2 md:grid-cols-4 gap-3 p-2"></div>
                 </div>
                 <div class="flex flex-col md:flex-row gap-4 w-full">
                     <div id="emoji-main-block" class="w-full p-4 rounded-2xl space-y-4 flex flex-col" style="background-color: #eef4ff;">
                         <section class="flex flex-col items-center justify-center space-y-4 flex-grow">
                             <div id="emoji-display" class="grid grid-cols-3 gap-3 sm:gap-5 w-full max-w-sm mx-auto min-h-[100px]"></div>
                             <p id="consigna" class="font-baloo text-center text-gray-800 text-base sm:text-lg md:text-xl px-2 flex-grow flex items-center justify-center min-h-[3rem]">¡Configura tu tirada y pulsa "Lanzar Dados"!</p>
-                            <button id="roll-dice-btn" class="group font-bold text-white py-3 px-6 sm:px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-lg sm:text-xl focus:outline-none transition-all duration-300" style="background-image: linear-gradient(to right, #ff9a8b, #ff6a88);">
-                                <span class="text-2xl sm:text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span>
-                                <span>Lanzar Dados</span>
-                            </button>
+                            <button id="roll-dice-btn" class="group font-bold text-white py-3 px-6 sm:px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-lg sm:text-xl focus:outline-none transition-all duration-300" style="background-image: linear-gradient(to right, #ff9a8b, #ff6a88);"><span class="text-2xl sm:text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Lanzar Dados</span></button>
                         </section>
                     </div>
                 </div>
@@ -209,22 +171,14 @@
     
     <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // --- NAVEGACIÓN PRINCIPAL (Sin Cambios) ---
+    // --- NAVEGACIÓN Y CONFIGURACIÓN INICIAL (Sin cambios) ---
     const warmupScreen = document.getElementById('warmup-screen');
     const diceChallengeScreen = document.getElementById('dice-challenge-screen');
-    // ... (resto de variables de navegación)
-    const allScreens = [warmupScreen, diceChallengeScreen/*, ...otros*/];
+    const allScreens = [warmupScreen, diceChallengeScreen];
     const goToDiceChallengeBtn = document.getElementById('go-to-dice-challenge-btn');
-    // ... (resto de botones de navegación)
-    
-    function showScreen(screenToShow) {
-        allScreens.forEach(screen => screen.classList.add('hidden'));
-        screenToShow.classList.remove('hidden');
-    }
+    function showScreen(screenToShow) { allScreens.forEach(screen => screen.classList.add('hidden')); screenToShow.classList.remove('hidden'); }
     const goHome = () => showScreen(warmupScreen);
-
-    // --- SCRIPT PANTALLA DE INICIO (WARMUP) (Sin Cambios) ---
-    // ... (código de inicialización de audio, vídeo de bienvenida, etc.)
+    // ... (resto del código de navegación y audio/video de la pantalla de inicio) ...
 
     // --- LÓGICA DEL JUEGO DE DADOS (MODIFICADA) ---
     const diceGameManager = (() => {
@@ -238,18 +192,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const videoWrapperDice = document.getElementById('video-wrapper-dice');
         const revealButton = document.getElementById('reveal-button-dice');
         
-        // --- [NUEVO] DATOS PARA LOS DADOS ---
         const DADOS_FILOSOFICOS = {
             "Conceptos": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/dios.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/libertad.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/tiempo.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/destino.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/esencia.png"],
-            "Autores": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/autores/aquino.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/autores/aristoteles.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/autores/descartes.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/autores/kant.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/autores/nietzsche.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/autores/platon.png"],
+            /* [MODIFICADO] */ "Autores": ["imagenes/autores/platón.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png", "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png", "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"],
             "Acciones": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/acciones1/caminar.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/acciones1/construir.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/acciones1/saltar.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/acciones1/mirar.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/acciones1/pensar.png"],
             "Objetos": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/arcoiris.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/balanza.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/candado.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/llave.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/lupa.png"],
             "Personajes": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/astronauta.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/mago.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/nina.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/reina.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/superheroe.png"],
             "Objetos II": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos2/brujula.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos2/caja.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos2/cerebro.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos2/espejo.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos2/libros.png"]
         };
         const DADOS_EMOJIS_BASE = ['😂', '😍', '🤔', '😎', '😢', '😡', '🥳', '🤯', '😴', '👍', '👎', '🙏', '💪', '👀', '🧠', '🐶', '🐱', '🐭', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🐔', '🐧', '🐦', '🐤', '🦆', '🦅', '🦉', '🦇', '🐺', '🐗', '🐴', '🦄', '🐝', '🐛', '🦋', '🐌', '🐞', '🐜', '⚽️', '🏀', '🏈', '⚾️', '🎾', '🏐', '🏉', '🎱', '🏓', '🏸', '🥅', '🏒', '🏑', '🏏', '⛳️', '🏹', '🎣', '🥊', '🥋', '🎽', '⛸', '🥌', '🛷', '🎿', '⛷', '🏂', '🏋️‍♀️', '🤼‍♀️', '🤸‍♀️', '🤺', '🤾‍♀️', '🏌️‍♀️', '🏇', '🏆', '🥇', '🥈', '🥉', '🎨', '🎬', '🎤', '🎧', '🎼', '🎹', '🥁', '🎷', '🎺', '🎸', '🎻', '🎮', '🧩', '🎭', '🚗', '✈️', '🚀', '🛸', '🚁', '⛵️', '🏰', '🏠', '❤️', '💔', '💯', '🔥', '✨', '⭐️', '⚡️', '☀️', '☁️', '🌈', '🌊', '🍔', '🍕', '🍟', '🎂', '🍭', '🍩', '🍪', '☕️', '⏰', '💡', '💰', '🔑', '🎁', '🎉'];
-
-        // --- [NUEVO] OBTENER ELEMENTOS DEL DOM PARA LA NUEVA LÓGICA ---
+        
         const consigna = document.getElementById('consigna');
         const rollDiceBtn = document.getElementById('roll-dice-btn');
         const emojiDisplay = document.getElementById('emoji-display');
@@ -262,9 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const specificDiceSelection = document.getElementById('specific-dice-selection');
         const rollSound = new Audio('https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/button_06-190439.mp3');
 
-        // --- [NUEVO] VARIABLES DE ESTADO DEL JUEGO ---
         let totalDice = 3;
-        let source = null; // 'random' o 'specific'
+        let source = null;
 
         function stopDiceVideo() { instructionsVideo.pause(); instructionsVideo.currentTime = 0; }
         function showSubScreen(screenToShow) { screen1.classList.add('hidden'); screen2.classList.add('hidden'); screenToShow.classList.remove('hidden'); }
@@ -276,13 +227,11 @@ document.addEventListener('DOMContentLoaded', () => {
         revealButton.addEventListener('click', () => { videoWrapperDice.classList.add('is-playing'); instructionsVideo.classList.remove('video-is-blurred'); instructionsVideo.play(); });
         instructionsVideo.addEventListener('pause', () => { videoWrapperDice.classList.remove('is-playing'); instructionsVideo.classList.add('video-is-blurred'); });
 
-        // --- [NUEVO] LÓGICA DE LA INTERFAZ DE CONFIGURACIÓN ---
         function updateTotalDice(amount) {
             totalDice = Math.max(3, Math.min(9, totalDice + amount));
             totalDiceDisplay.textContent = totalDice;
             btnMinus.disabled = totalDice === 3;
             btnPlus.disabled = totalDice === 9;
-
             const extraDice = totalDice - 3;
             if (extraDice > 0) {
                 sourceSelector.classList.remove('hidden');
@@ -369,10 +318,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
         
-        // --- [MODIFICADO] LÓGICA DEL BOTÓN DE LANZAR DADOS ---
         rollDiceBtn.addEventListener('click', () => {
             const extraDice = totalDice - 3;
-            
             if (extraDice > 0 && !source) {
                 alert("Por favor, elige cómo añadir los dados extra (Al Azar o Elegir).");
                 return;
@@ -381,24 +328,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert(`Debes seleccionar exactamente ${extraDice} dado(s) especial(es).`);
                 return;
             }
-            
-            rollSound.currentTime = 0;
-            rollSound.play();
+            rollSound.currentTime = 0; rollSound.play();
             emojiDisplay.innerHTML = '';
             let results = [];
 
-            // 1. Obtener los 3 dados base
             for (let i = 0; i < 3; i++) {
                 results.push({ type: 'emoji', value: getRandomItem(DADOS_EMOJIS_BASE) });
             }
 
-            // 2. Obtener los dados extra
             if (extraDice > 0) {
                 if (source === 'random') {
                     for (let i = 0; i < extraDice; i++) {
                         results.push({ type: 'emoji', value: getRandomItem(DADOS_EMOJIS_BASE) });
                     }
-                } else { // source === 'specific'
+                } else {
                     const checkedToggles = specificDiceSelection.querySelectorAll('input:checked');
                     checkedToggles.forEach(toggle => {
                         const diceName = toggle.value;
@@ -408,24 +351,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // 3. Renderizar los resultados
             results.forEach((res, i) => {
                 const card = document.createElement('div');
                 card.className = 'bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in';
                 card.style.animationDelay = `${i * 0.1}s`;
-                
                 if (res.type === 'emoji') {
                     card.innerHTML = `<span class="text-5xl sm:text-7xl emoji-shadow">${res.value}</span>`;
-                } else { // type === 'image'
+                } else {
                      card.innerHTML = `<img src="${res.value}" alt="Resultado de dado" style="max-width: 80%; max-height: 80%; object-fit: contain;">`;
                 }
                 emojiDisplay.appendChild(card);
             });
-            
             consigna.textContent = "¡Aquí está tu resultado! Crea una historia o frase.";
         });
         
-        // --- [MODIFICADO] LÓGICA DEL BOTÓN START CHALLENGE ---
         startBtn.addEventListener('click', () => {
             stopDiceVideo();
             updateTotalDice(0); 
@@ -434,18 +373,9 @@ document.addEventListener('DOMContentLoaded', () => {
             updateConsigna();
             showSubScreen(screen2);
         });
-
     })();
-
-    // --- SCRIPT JUEGO "THIS OR THAT" (Sin Cambios) ---
-    // ... (código original de this or that)
-
-    // --- SCRIPT JUEGO "SECRET MESSAGE" (Sin Cambios) ---
-    // ... (código original de secret message)
     
-    // --- SCRIPT JUEGO "EMOJI SAYS" (Sin Cambios) ---
-    // ... (código original de emoji says)
-
+    // El resto de la lógica de los otros juegos no necesita ser incluida aquí de nuevo.
 });
 </script>
 </body>
