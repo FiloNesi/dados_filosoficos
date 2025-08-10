@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- Estilos Globales y Animaciones (Sin Cambios) --- */
+        /* --- Estilos Globales y Animaciones --- */
         html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
         body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         .screen { width: 100%; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; box-sizing: border-box; overflow-y: auto; transition: opacity 0.3s ease-in-out; }
@@ -24,16 +24,10 @@
         @keyframes popIn { 0% { opacity: 0; transform: scale(0.8); } 80% { opacity: 1; transform: scale(1.05); } 100% { opacity: 1; transform: scale(1); } }
         @keyframes pop-in-slide-up { 0% { opacity: 0; transform: translateY(20px) scale(0.95); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
         @keyframes animate-border { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        @keyframes glow { 0%, 100% { transform: scale(1); text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(246, 138, 184, 0.5); } 50% { transform: scale(1.1); text-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(246, 138, 184, 1); } }
-        @keyframes countdown { from { width: 100%; } to { width: 0%; } }
-        @keyframes sparkle { 0% { transform: scale(0) rotate(0deg); opacity: 1; } 100% { transform: scale(1.5) rotate(360deg); opacity: 0; } }
-        @keyframes bounceIn { 0% { opacity: 0; transform: scale(0.3); } 50% { opacity: 1; transform: scale(1.05); } 100% { transform: scale(1); } }
-
-        /* --- Estilos Pantalla de Inicio (Warmup) (Sin Cambios) --- */
+        
+        /* --- Estilos Pantalla de Inicio (Warmup) --- */
         #warmup-screen { font-family: 'Nunito', sans-serif; background: radial-gradient(circle at 50% 50%, #e6f7f3, #d0f0e8); color: #3d4f63; text-align: center; position: relative; }
-        #warmup-screen::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E'); opacity: 0.2; z-index: 0; }
         #warmup-screen .main-container { position: relative; z-index: 1; width: 100%; max-width: 1300px; display: flex; flex-direction: column; align-items: center; gap: 1rem; animation: fadeIn 1s ease-in-out; }
-        #warmup-screen .title-container { animation: popIn 0.8s 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; opacity: 0; margin-bottom: 0.5rem; }
         #warmup-screen .main-title { font-family: 'Fredoka', sans-serif; font-size: clamp(2.5rem, 8vw, 3.2rem); font-weight: 700; color: #E5989B; text-shadow: 2px 2px 0px #ffffff, 4px 4px 8px rgba(0,0,0,0.1); margin: 0; line-height: 1.1; }
         #warmup-screen .subtitle { font-size: clamp(1rem, 4vw, 1.1rem); font-weight: 400; color: #5a6b80; margin-top: 0.25rem; }
         #warmup-screen .video-wrapper { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 500px; border-radius: 2rem; box-shadow: 0 20px 40px -10px rgba(45, 55, 72, 0.2); overflow: hidden; background-color: #000; }
@@ -42,15 +36,11 @@
         #warmup-screen .video-wrapper.is-playing .welcome-video { filter: none; }
         #warmup-screen .play-button { position: absolute; z-index: 10; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); border: 2px solid rgba(255, 255, 255, 0.9); padding: 0.8rem 1.8rem; font-size: 1.1rem; font-weight: 600; color: #3d4f63; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem; }
         #warmup-screen .play-button::before { content: '▶'; font-size: 1.5rem; line-height: 1; }
-        #warmup-screen .play-button:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
         #warmup-screen .video-wrapper.is-playing .play-button { opacity: 0; pointer-events: none; }
         #warmup-screen .button-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; width: 100%; max-width: 400px; margin-top: 1rem; }
         @media (min-width: 768px) { #warmup-screen .button-grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; } }
         @media (min-width: 1200px) { #warmup-screen .button-grid { grid-template-columns: repeat(4, 1fr); max-width: 1300px; } }
-        #warmup-screen .game-button { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 1.1rem; border-radius: 1.5rem; border: none; font-family: 'Fredoka', sans-serif; font-size: clamp(1.1rem, 4vw, 1.2rem); font-weight: 500; color: #3d4f63; text-decoration: none; box-shadow: 0 8px 15px rgba(45, 55, 72, 0.1); transition: all 0.3s ease; background-size: 200% auto; cursor: pointer; opacity: 0; animation: popIn 0.6s 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; }
-        #warmup-screen .game-button:nth-child(2) { animation-delay: 0.6s; }
-        #warmup-screen .game-button:nth-child(3) { animation-delay: 0.7s; }
-        #warmup-screen .game-button:nth-child(4) { animation-delay: 0.8s; }
+        #warmup-screen .game-button { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 1.1rem; border-radius: 1.5rem; border: none; font-family: 'Fredoka', sans-serif; font-size: clamp(1.1rem, 4vw, 1.2rem); font-weight: 500; color: #3d4f63; text-decoration: none; box-shadow: 0 8px 15px rgba(45, 55, 72, 0.1); transition: all 0.3s ease; background-size: 200% auto; cursor: pointer; }
         #warmup-screen .game-button:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 12px 25px rgba(45, 55, 72, 0.15); background-position: right center; }
         #warmup-screen .button-icon { width: 44px; height: 44px; filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.2)); transition: transform 0.3s ease; }
         #warmup-screen .game-button:hover .button-icon { transform: scale(1.1) rotate(-8deg); }
@@ -60,26 +50,23 @@
         #warmup-screen .btn-4 { background-image: linear-gradient(to right, #fdffb6, #ffd6a5 51%, #fdffb6 100%); }
         #warmup-screen .footer-text { margin-top: 1rem; font-family: 'Nunito', sans-serif; font-size: 12px; color: #6d6d6d; opacity: 0.7; }
 
-        /* --- Estilos Pantalla "Emoji Dice Challenge" (Con Modificaciones) --- */
+        /* --- Estilos Pantalla "Emoji Dice Challenge" --- */
         #dice-challenge-screen { font-family: 'Nunito', sans-serif; background-color: #FFF9E6; background-image: linear-gradient(to bottom, #fefae0 0%, #fde4cf 100%); }
         .dice-sub-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
         #dice-screen-2 { justify-content: flex-start; padding-top: 1rem; padding-bottom: 1rem; }
-        #dice-challenge-screen h1, #dice-challenge-screen h3 { font-family: 'Fredoka', sans-serif; }
+        #dice-challenge-screen h1 { font-family: 'Fredoka', sans-serif; }
         #dice-challenge-screen .pop-in { animation: popIn 0.4s ease-out forwards; }
         #dice-challenge-screen .emoji-shadow { text-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-        #dice-challenge-screen .video-container video { transition: filter 0.7s ease-in-out, transform 0.7s ease-in-out; transform: scale(1); }
+        #dice-challenge-screen .video-container video { transition: filter 0.7s ease-in-out; }
         #dice-challenge-screen .video-is-blurred { filter: blur(12px); }
         #dice-challenge-screen .is-playing #reveal-button-dice { opacity: 0; pointer-events: none; }
+        
+        /* Estilos para los nuevos controles del juego */
         #dice-challenge-screen .quantity-btn { width: 40px; height: 40px; border-radius: 50%; background-color: #ffc8dd; color: #c13a69; font-size: 2rem; font-weight: bold; border: none; cursor: pointer; line-height: 1; transition: all 0.2s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         #dice-challenge-screen .quantity-btn:hover { transform: scale(1.1); background-color: #ffafcc; }
-        #dice-challenge-screen .quantity-btn:active { transform: scale(0.95); }
         #dice-challenge-screen .quantity-btn:disabled { background-color: #e5e7eb; color: #9ca3af; cursor: not-allowed; transform: scale(1); }
-        #dice-challenge-screen .source-btn { padding: 0.5rem 1.5rem; border-radius: 20px; border: 2px solid #fdba74; background-color: #fff; color: #c2410c; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
-        #dice-challenge-screen .source-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
-        #dice-challenge-screen .source-btn.active { background-color: #fb923c; color: white; border-color: #fb923c; box-shadow: 0 4px 15px rgba(251, 146, 60, 0.4); }
-        .dice-toggle-wrapper { position: relative; }
         .dice-toggle-wrapper input[type="checkbox"] { display: none; }
-        .dice-toggle-label { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 1rem; border-radius: 1rem; background-color: #e0e7ff; color: #4338ca; font-family: 'Fredoka', sans-serif; font-weight: 500; cursor: pointer; transition: all 0.2s ease-in-out; border: 2px solid transparent; text-align: center; }
+        .dice-toggle-label { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0.75rem; border-radius: 1rem; background-color: #e0e7ff; color: #4338ca; font-family: 'Fredoka', sans-serif; font-weight: 500; cursor: pointer; transition: all 0.2s ease-in-out; border: 2px solid transparent; text-align: center; }
         .dice-toggle-wrapper input[type="checkbox"]:hover + .dice-toggle-label { transform: scale(1.03); box-shadow: 0 8px 15px rgba(45, 55, 72, 0.1); }
         .dice-toggle-wrapper input[type="checkbox"]:checked + .dice-toggle-label { background-color: #818cf8; color: white; border-color: #c7d2fe; box-shadow: 0 0 15px 3px rgba(129, 140, 248, 0.4); }
         .dice-toggle-wrapper input[type="checkbox"]:disabled + .dice-toggle-label { background-color: #e5e7eb; color: #9ca3af; cursor: not-allowed; transform: scale(1); box-shadow: none; opacity: 0.7; }
@@ -94,17 +81,14 @@
                 <p class="subtitle">Pick a game to start your emoji adventure!</p>
             </div>
             <div class="video-wrapper">
-                <video id="introVideo" class="welcome-video" playsinline preload="auto" muted>
-                    <source src="https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/video%20emoji%20.mp4" type="video/mp4">
-                    Tu navegador no soporta la etiqueta de vídeo.
-                </video>
+                <video id="introVideo" class="welcome-video" playsinline preload="auto" muted><source src="https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/video%20emoji%20.mp4" type="video/mp4"></video>
                 <button id="playVideoButton" class="play-button">Play Welcome Video</button>
             </div>
             <div class="button-grid">
                 <button id="go-to-dice-challenge-btn" class="game-button btn-1"><img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-dice.png?raw=true" alt="Icono de dado" class="button-icon"> Emoji Dice Challenge</button>
-                <button id="go-to-this-or-that-btn" class="game-button btn-2"><img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-arrow.png?raw=true" alt="Icono de flecha" class="button-icon"> This or That</button>
-                <button id="go-to-secret-message-btn" class="game-button btn-3"><img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-lock.png?raw=true" alt="Icono de candado" class="button-icon"> Secret Emoji Message</button>
-                <button id="go-to-emoji-says-btn" class="game-button btn-4"><img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-megaphone.png?raw=true" alt="Icono de megáfono" class="button-icon"> Emoji Says</button>
+                <button id="go-to-this-or-that-btn" class="game-button btn-2" disabled><img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-arrow.png?raw=true" alt="Icono de flecha" class="button-icon"> This or That</button>
+                <button id="go-to-secret-message-btn" class="game-button btn-3" disabled><img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-lock.png?raw=true" alt="Icono de candado" class="button-icon"> Secret Emoji Message</button>
+                <button id="go-to-emoji-says-btn" class="game-button btn-4" disabled><img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-megaphone.png?raw=true" alt="Icono de megáfono" class="button-icon"> Emoji Says</button>
             </div>
         </div>
         <footer class="footer-text">© Tamara Llorens · Chromtastic Teacher</footer>
@@ -116,7 +100,7 @@
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase text-[#FF6F61] mb-4" style="text-shadow: -2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,0.1);">Emoji Dice<br>Challenge</h1>
                 <div class="bg-white p-2 sm:p-3 w-full relative video-card rounded-2xl shadow-lg">
                     <div id="video-wrapper-dice" class="relative rounded-xl overflow-hidden aspect-square bg-black video-container">
-                        <video id="instructions-video-dice" class="w-full h-full object-cover video-is-blurred" src="https://cdn.jsdelivr.net/gh/TamaraLlorens/warmup-assets@main/emoji%20video%20dice%20app.mp4" playsinline controls></video>
+                        <video id="instructions-video-dice" class="w-full h-full object-cover video-is-blurred" src="https://cdn.jsdelivr.net/gh/TamaraLlorens/warmup-assets@main/emoji%20video%20dice%20app.mp4" playsinline></video>
                         <button id="reveal-button-dice" class="absolute inset-0 flex items-center justify-center w-full h-full bg-transparent"><span class="bg-white/90 text-[#4A4A4A] text-lg font-bold py-3 px-6 rounded-xl shadow-md hover:scale-105 transition-transform">🎬 Watch Instructions</span></button>
                     </div>
                 </div>
@@ -126,59 +110,63 @@
                 </div>
             </main>
         </div>
+        
         <div id="dice-screen-2" class="dice-sub-screen hidden">
             <div class="w-full max-w-5xl flex flex-col gap-4">
                 <header class="text-center flex-shrink-0">
-                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase text-[#FF6F61]" style="text-shadow: -1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,0.1);">Emoji Dice Challenge</h1>
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase text-[#FF6F61]" style="text-shadow: -1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,0.1);">Crea tu Tirada</h1>
                 </header>
-                <div id="dice-config-panel" class="p-3 rounded-2xl space-y-4" style="background-color: #fff8f2; box-shadow: 0px 6px 12px rgba(0,0,0,0.06);">
-                    <div class="text-center p-2 rounded-lg bg-white/70">
-                        <label class="font-bold text-gray-700 text-lg">1. Elige cuántos dados lanzar en total</label>
-                        <div id="quantity-controls" class="flex items-center justify-center gap-4 mt-2">
-                            <button id="btn-minus" class="quantity-btn">-</button>
-                            <span id="total-dice-display" class="text-3xl font-bold text-pink-500 w-16 text-center">3</span>
-                            <button id="btn-plus" class="quantity-btn">+</button>
+                
+                <div id="dice-config-panel" class="p-4 rounded-2xl space-y-4" style="background-color: #fff8f2; box-shadow: 0px 6px 12px rgba(0,0,0,0.06);">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-3 rounded-lg bg-white/70">
+                            <label class="font-bold text-gray-700 text-lg flex items-center justify-center gap-2"><span>1.</span> Dados al Azar (Emojis)</label>
+                            <div id="random-dice-controls" class="flex items-center justify-center gap-4 mt-2">
+                                <button id="btn-minus-random" class="quantity-btn">-</button>
+                                <span id="random-dice-display" class="text-3xl font-bold text-pink-500 w-16 text-center">3</span>
+                                <button id="btn-plus-random" class="quantity-btn">+</button>
+                            </div>
                         </div>
-                        <p class="text-xs text-gray-500 mt-1">Mínimo 3, máximo 9.</p>
+                        <div class="p-3 rounded-lg bg-white/70 flex flex-col justify-center items-center">
+                            <h2 class="font-bold text-gray-700 text-lg">Total a Lanzar</h2>
+                            <p id="total-dice-launch-display" class="text-3xl font-bold text-green-600">3 Dados</p>
+                        </div>
                     </div>
-                    <div id="source-selector" class="hidden text-center p-2 rounded-lg bg-white/70">
-                         <label class="font-bold text-gray-700 text-lg">2. Elige tus dados extra</label>
-                         <div class="flex justify-center gap-4 mt-2">
-                             <button id="source-random-btn" class="source-btn">Al Azar 🎲</button>
-                             <button id="source-specific-btn" class="source-btn">Elegir ✍️</button>
-                         </div>
+                    <div>
+                        <label class="font-bold text-gray-700 text-lg text-center block mb-2">2. Dados Específicos (Filosóficos)</label>
+                        <div id="specific-dice-selection" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 p-2">
+                            </div>
                     </div>
-                    <div id="specific-dice-selection" class="hidden grid grid-cols-2 md:grid-cols-4 gap-3 p-2"></div>
                 </div>
-                <div class="flex flex-col md:flex-row gap-4 w-full">
-                    <div id="emoji-main-block" class="w-full p-4 rounded-2xl space-y-4 flex flex-col" style="background-color: #eef4ff;">
-                        <section class="flex flex-col items-center justify-center space-y-4 flex-grow">
-                            <div id="emoji-display" class="grid grid-cols-3 gap-3 sm:gap-5 w-full max-w-sm mx-auto min-h-[100px]"></div>
-                            <p id="consigna" class="font-baloo text-center text-gray-800 text-base sm:text-lg md:text-xl px-2 flex-grow flex items-center justify-center min-h-[3rem]">¡Configura tu tirada y pulsa "Lanzar Dados"!</p>
-                            <button id="roll-dice-btn" class="group font-bold text-white py-3 px-6 sm:px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-lg sm:text-xl focus:outline-none transition-all duration-300" style="background-image: linear-gradient(to right, #ff9a8b, #ff6a88);"><span class="text-2xl sm:text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Lanzar Dados</span></button>
-                        </section>
-                    </div>
+
+                <div class="w-full p-4 rounded-2xl space-y-4 flex flex-col" style="background-color: #eef4ff;">
+                    <section class="flex flex-col items-center justify-center space-y-4 flex-grow">
+                        <div id="emoji-display" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 sm:gap-5 w-full max-w-2xl mx-auto min-h-[100px]"></div>
+                        <p id="consigna" class="font-baloo text-center text-gray-800 text-lg md:text-xl px-2 min-h-[2rem]">¡Configura tu tirada y pulsa "Lanzar Dados"!</p>
+                        <button id="roll-dice-btn" class="group font-bold text-white py-3 px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-xl focus:outline-none transition-all duration-300" style="background-image: linear-gradient(to right, #ff9a8b, #ff6a88);"><span class="text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Lanzar Dados</span></button>
+                    </section>
                 </div>
                 <footer class="p-2 flex-shrink-0">
                     <div class="flex justify-center items-center gap-4">
-                        <button id="back-btn" class="nav-btn bg-white font-bold text-[#4A4A4A] py-1 px-4 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all">⬅️ Back</button>
-                        <button id="dice-home-btn-2" class="nav-btn bg-white font-bold text-[#4A4A4A] py-1 px-4 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all no-underline">🏠 Home</button>
+                        <button id="back-btn" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all">⬅️ Back</button>
+                        <button id="dice-home-btn-2" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all no-underline">🏠 Home</button>
                     </div>
                 </footer>
             </div>
         </div>
     </div>
     
-    <script>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
-    // --- NAVEGACIÓN Y CONFIGURACIÓN INICIAL (Sin cambios) ---
+    // --- NAVEGACIÓN Y CONFIGURACIÓN INICIAL ---
     const warmupScreen = document.getElementById('warmup-screen');
     const diceChallengeScreen = document.getElementById('dice-challenge-screen');
     const allScreens = [warmupScreen, diceChallengeScreen];
     const goToDiceChallengeBtn = document.getElementById('go-to-dice-challenge-btn');
     function showScreen(screenToShow) { allScreens.forEach(screen => screen.classList.add('hidden')); screenToShow.classList.remove('hidden'); }
     const goHome = () => showScreen(warmupScreen);
-    // ... (resto del código de navegación y audio/video de la pantalla de inicio) ...
+    goToDiceChallengeBtn.addEventListener('click', () => { showScreen(diceChallengeScreen); });
+    // ... (El código de audio y vídeo de la pantalla de inicio puede ir aquí si se desea)
 
     // --- LÓGICA DEL JUEGO DE DADOS (MODIFICADA) ---
     const diceGameManager = (() => {
@@ -192,9 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const videoWrapperDice = document.getElementById('video-wrapper-dice');
         const revealButton = document.getElementById('reveal-button-dice');
         
+        // --- DATOS PARA LOS DADOS ---
         const DADOS_FILOSOFICOS = {
             "Conceptos": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/dios.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/libertad.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/tiempo.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/destino.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/esencia.png"],
-            /* [MODIFICADO] */ "Autores": ["imagenes/autores/platón.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png", "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png", "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"],
+            "Autores": ["imagenes/autores/platón.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png", "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png", "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"],
             "Acciones": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/acciones1/caminar.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/acciones1/construir.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/acciones1/saltar.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/acciones1/mirar.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/acciones1/pensar.png"],
             "Objetos": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/arcoiris.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/balanza.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/candado.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/llave.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/lupa.png"],
             "Personajes": ["https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/astronauta.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/mago.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/nina.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/reina.png", "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/superheroe.png"],
@@ -205,46 +194,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const consigna = document.getElementById('consigna');
         const rollDiceBtn = document.getElementById('roll-dice-btn');
         const emojiDisplay = document.getElementById('emoji-display');
-        const btnPlus = document.getElementById('btn-plus');
-        const btnMinus = document.getElementById('btn-minus');
-        const totalDiceDisplay = document.getElementById('total-dice-display');
-        const sourceSelector = document.getElementById('source-selector');
-        const sourceRandomBtn = document.getElementById('source-random-btn');
-        const sourceSpecificBtn = document.getElementById('source-specific-btn');
+        const btnPlusRandom = document.getElementById('btn-plus-random');
+        const btnMinusRandom = document.getElementById('btn-minus-random');
+        const randomDiceDisplay = document.getElementById('random-dice-display');
         const specificDiceSelection = document.getElementById('specific-dice-selection');
+        const totalDiceLaunchDisplay = document.getElementById('total-dice-launch-display');
         const rollSound = new Audio('https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/button_06-190439.mp3');
 
-        let totalDice = 3;
-        let source = null;
+        const MAX_TOTAL_DICE = 9;
+        let numRandomDice = 3;
 
         function stopDiceVideo() { instructionsVideo.pause(); instructionsVideo.currentTime = 0; }
         function showSubScreen(screenToShow) { screen1.classList.add('hidden'); screen2.classList.add('hidden'); screenToShow.classList.remove('hidden'); }
         
-        goToDiceChallengeBtn.addEventListener('click', () => { showSubScreen(screen1); showScreen(diceChallengeScreen); });
         homeBtn1.addEventListener('click', () => { stopDiceVideo(); goHome(); });
         homeBtn2.addEventListener('click', () => { stopDiceVideo(); goHome(); });
         backBtn.addEventListener('click', () => showSubScreen(screen1));
         revealButton.addEventListener('click', () => { videoWrapperDice.classList.add('is-playing'); instructionsVideo.classList.remove('video-is-blurred'); instructionsVideo.play(); });
         instructionsVideo.addEventListener('pause', () => { videoWrapperDice.classList.remove('is-playing'); instructionsVideo.classList.add('video-is-blurred'); });
-
-        function updateTotalDice(amount) {
-            totalDice = Math.max(3, Math.min(9, totalDice + amount));
-            totalDiceDisplay.textContent = totalDice;
-            btnMinus.disabled = totalDice === 3;
-            btnPlus.disabled = totalDice === 9;
-            const extraDice = totalDice - 3;
-            if (extraDice > 0) {
-                sourceSelector.classList.remove('hidden');
-            } else {
-                sourceSelector.classList.add('hidden');
-                specificDiceSelection.classList.add('hidden');
-                source = null;
-                sourceRandomBtn.classList.remove('active');
-                sourceSpecificBtn.classList.remove('active');
-            }
-            updateConsigna();
-        }
-
+        
         function populateDiceToggles() {
             specificDiceSelection.innerHTML = '';
             Object.keys(DADOS_FILOSOFICOS).forEach(name => {
@@ -260,97 +228,73 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        function handleToggleChange() {
-            const extraDice = totalDice - 3;
-            const checkedToggles = specificDiceSelection.querySelectorAll('input:checked').length;
-            if (checkedToggles >= extraDice) {
-                specificDiceSelection.querySelectorAll('input:not(:checked)').forEach(t => t.disabled = true);
-            } else {
-                specificDiceSelection.querySelectorAll('input').forEach(t => t.disabled = false);
-            }
-        }
+        function updateControlsAndState() {
+            const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
+            const totalDice = numRandomDice + numSpecificDice;
 
-        function updateConsigna() {
-            if (totalDice === 3) {
-                consigna.textContent = `Se lanzarán 3 dados de emojis. ¡Pulsa "Lanzar Dados"!`;
-            } else {
-                const extraDice = totalDice - 3;
-                if (!source) {
-                    consigna.textContent = `Has añadido ${extraDice} dado(s) extra. ¿Serán al azar o los eliges?`;
-                } else if (source === 'random') {
-                    consigna.textContent = `¡Listo! Se lanzarán 3 dados base + ${extraDice} de emojis al azar.`;
-                } else if (source === 'specific') {
-                    const checkedCount = specificDiceSelection.querySelectorAll('input:checked').length;
-                    const remaining = extraDice - checkedCount;
-                    if (remaining > 0) {
-                        consigna.textContent = `Elige ${remaining} dado(s) especial(es) más.`;
-                    } else {
-                        consigna.textContent = `¡Todo listo para lanzar tus ${totalDice} dados!`;
+            totalDiceLaunchDisplay.textContent = `${totalDice} Dado${totalDice !== 1 ? 's' : ''}`;
+
+            // Actualizar botones de cantidad de dados al azar
+            btnMinusRandom.disabled = numRandomDice <= 0;
+            btnPlusRandom.disabled = totalDice >= MAX_TOTAL_DICE;
+
+            // Actualizar toggles de dados específicos
+            const toggles = specificDiceSelection.querySelectorAll('input[type="checkbox"]');
+            if (totalDice >= MAX_TOTAL_DICE) {
+                toggles.forEach(toggle => {
+                    if (!toggle.checked) {
+                        toggle.disabled = true;
                     }
-                }
+                });
+            } else {
+                toggles.forEach(toggle => {
+                    toggle.disabled = false;
+                });
             }
         }
 
-        btnPlus.addEventListener('click', () => updateTotalDice(1));
-        btnMinus.addEventListener('click', () => updateTotalDice(-1));
-
-        sourceRandomBtn.addEventListener('click', () => {
-            source = 'random';
-            sourceRandomBtn.classList.add('active');
-            sourceSpecificBtn.classList.remove('active');
-            specificDiceSelection.classList.add('hidden');
-            updateConsigna();
-        });
-
-        sourceSpecificBtn.addEventListener('click', () => {
-            source = 'specific';
-            sourceSpecificBtn.classList.add('active');
-            sourceRandomBtn.classList.remove('active');
-            specificDiceSelection.classList.remove('hidden');
-            handleToggleChange();
-            updateConsigna();
-        });
-
-        specificDiceSelection.addEventListener('change', () => {
-            handleToggleChange();
-            updateConsigna();
-        });
-
+        function changeRandomDice(amount) {
+            const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
+            const potentialNumRandom = numRandomDice + amount;
+            if (potentialNumRandom + numSpecificDice <= MAX_TOTAL_DICE && potentialNumRandom >= 0) {
+                numRandomDice = potentialNumRandom;
+                randomDiceDisplay.textContent = numRandomDice;
+                updateControlsAndState();
+            }
+        }
+        
+        btnPlusRandom.addEventListener('click', () => changeRandomDice(1));
+        btnMinusRandom.addEventListener('click', () => changeRandomDice(-1));
+        specificDiceSelection.addEventListener('change', updateControlsAndState);
+        
         const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
         
         rollDiceBtn.addEventListener('click', () => {
-            const extraDice = totalDice - 3;
-            if (extraDice > 0 && !source) {
-                alert("Por favor, elige cómo añadir los dados extra (Al Azar o Elegir).");
+            const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
+            const totalDice = numRandomDice + numSpecificDice;
+
+            if (totalDice === 0) {
+                alert("Por favor, selecciona al menos un dado para lanzar.");
                 return;
             }
-            if (source === 'specific' && specificDiceSelection.querySelectorAll('input:checked').length !== extraDice) {
-                alert(`Debes seleccionar exactamente ${extraDice} dado(s) especial(es).`);
-                return;
-            }
+            
             rollSound.currentTime = 0; rollSound.play();
             emojiDisplay.innerHTML = '';
             let results = [];
 
-            for (let i = 0; i < 3; i++) {
+            // 1. Dados al Azar
+            for (let i = 0; i < numRandomDice; i++) {
                 results.push({ type: 'emoji', value: getRandomItem(DADOS_EMOJIS_BASE) });
             }
 
-            if (extraDice > 0) {
-                if (source === 'random') {
-                    for (let i = 0; i < extraDice; i++) {
-                        results.push({ type: 'emoji', value: getRandomItem(DADOS_EMOJIS_BASE) });
-                    }
-                } else {
-                    const checkedToggles = specificDiceSelection.querySelectorAll('input:checked');
-                    checkedToggles.forEach(toggle => {
-                        const diceName = toggle.value;
-                        const diceSet = DADOS_FILOSOFICOS[diceName];
-                        results.push({ type: 'image', value: getRandomItem(diceSet) });
-                    });
-                }
-            }
+            // 2. Dados Específicos
+            const checkedToggles = specificDiceSelection.querySelectorAll('input:checked');
+            checkedToggles.forEach(toggle => {
+                const diceName = toggle.value;
+                results.push({ type: 'image', value: getRandomItem(DADOS_FILOSOFICOS[diceName]) });
+            });
 
+            // 3. Renderizar resultados
             results.forEach((res, i) => {
                 const card = document.createElement('div');
                 card.className = 'bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in';
@@ -358,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (res.type === 'emoji') {
                     card.innerHTML = `<span class="text-5xl sm:text-7xl emoji-shadow">${res.value}</span>`;
                 } else {
-                     card.innerHTML = `<img src="${res.value}" alt="Resultado de dado" style="max-width: 80%; max-height: 80%; object-fit: contain;">`;
+                    card.innerHTML = `<img src="${res.value}" alt="Resultado de dado" style="max-width: 80%; max-height: 80%; object-fit: contain;">`;
                 }
                 emojiDisplay.appendChild(card);
             });
@@ -367,15 +311,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         startBtn.addEventListener('click', () => {
             stopDiceVideo();
-            updateTotalDice(0); 
+            numRandomDice = 3;
+            randomDiceDisplay.textContent = numRandomDice;
             populateDiceToggles();
+            updateControlsAndState();
             emojiDisplay.innerHTML = '';
-            updateConsigna();
+            consigna.textContent = '¡Configura tu tirada y pulsa "Lanzar Dados"!';
             showSubScreen(screen2);
         });
+
     })();
     
-    // El resto de la lógica de los otros juegos no necesita ser incluida aquí de nuevo.
+    // El resto de la lógica de los otros juegos no se incluye para brevedad.
 });
 </script>
 </body>
