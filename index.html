@@ -5,77 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dados filosóficos</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  <!-- (Eliminado Tone.js: no se usaba) -->
 
+  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet"/>
 
   <style>
-    html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
-    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    .screen { width: 100%; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; box-sizing: border-box; transition: opacity 0.3s ease-in-out; }
-    .hidden { display: none !important; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes popIn { 0% { opacity: 0; transform: scale(0.8); } 80% { opacity: 1; transform: scale(1.05); } 100% { opacity: 1; transform: scale(1); } }
-    @keyframes animate-border { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    :root{
+      --brand-rose:#FF6F61;
+      --brand-amber:#FFC894;
+      --brand-rose-2:#FF9A8B;
+      --bg-cream:#FFF9E6;
+    }
+    html,body{height:100%;width:100%;margin:0;padding:0}
+    body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    .screen{width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;box-sizing:border-box;transition:opacity .3s ease-in-out}
+    .hidden{display:none!important}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes popIn{0%{opacity:0;transform:scale(.8)}80%{opacity:1;transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
+    @keyframes animate-border{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
     /* Home */
-    #warmup-screen { font-family: 'Nunito', sans-serif; background: radial-gradient(circle at 50% 50%, #e6f7f3, #d0f0e8); color: #3d4f63; text-align: center; position: relative; overflow-y: auto; }
-    #warmup-screen .main-container { position: relative; z-index: 1; width: 100%; max-width: 1300px; display: flex; flex-direction: column; align-items: center; gap: 1rem; animation: fadeIn 1s ease-in-out; }
-    #warmup-screen .main-title { font-family: 'Fredoka', sans-serif; font-size: clamp(2.5rem, 8vw, 3.2rem); font-weight: 700; color: #E5989B; text-shadow: 2px 2px 0px #ffffff, 4px 4px 8px rgba(0,0,0,0.1); margin: 0; line-height: 1.1; }
-    #warmup-screen .subtitle { font-size: clamp(1rem, 4vw, 1.1rem); font-weight: 400; color: #5a6b80; margin-top: 0.25rem; }
-    #warmup-screen .video-wrapper { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 500px; border-radius: 2rem; box-shadow: 0 20px 40px -10px rgba(45, 55, 72, 0.2); overflow: hidden; background-color: #000; }
-    #warmup-screen .video-wrapper::before { content: ''; position: absolute; top: -3px; left: -3px; width: calc(100% + 6px); height: calc(100% + 6px); background: linear-gradient(45deg, #a6e4b6, #fde68a, #a2d2ff, #ffc8dd, #a6e4b6); background-size: 400% 400%; border-radius: 2rem; z-index: 0; animation: animate-border 12s linear infinite; }
-    #warmup-screen .welcome-video { width: 100%; height: auto; display: block; border-radius: calc(2rem - 3px); position: relative; z-index: 1; filter: blur(4px) brightness(0.7); transition: filter 0.5s ease-in-out; }
-    #warmup-screen .video-wrapper.is-playing .welcome-video { filter: none; }
-    #warmup-screen .play-button { position: absolute; z-index: 10; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); border: 2px solid rgba(255, 255, 255, 0.9); padding: 0.8rem 1.8rem; font-size: 1.1rem; font-weight: 600; color: #3d4f63; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem; }
-    #warmup-screen .play-button::before { content: '▶'; font-size: 1.5rem; line-height: 1; }
-    #warmup-screen .video-wrapper.is-playing .play-button { opacity: 0; pointer-events: none; }
-    #warmup-screen .button-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; width: 100%; max-width: 400px; margin-top: 1rem; }
-    @media (min-width: 768px) { #warmup-screen .button-grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; } }
-    @media (min-width: 1200px) { #warmup-screen .button-grid { grid-template-columns: repeat(4, 1fr); max-width: 1300px; } }
-    #warmup-screen .game-button { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 1.1rem; border-radius: 1.5rem; border: none; font-family: 'Fredoka', sans-serif; font-size: clamp(1.1rem, 4vw, 1.2rem); font-weight: 500; color: #3d4f63; text-decoration: none; box-shadow: 0 8px 15px rgba(45, 55, 72, 0.1); transition: all 0.3s ease; background-size: 200% auto; cursor: pointer; }
-    #warmup-screen .game-button:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 12px 25px rgba(45, 55, 72, 0.15); background-position: right center; }
-    #warmup-screen .button-icon { width: 44px; height: 44px; filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.2)); transition: transform 0.3s ease; }
-    #warmup-screen .game-button:hover .button-icon { transform: scale(1.1) rotate(-8deg); }
-    #warmup-screen .btn-1 { background-image: linear-gradient(to right, #a2d2ff, #bde0fe 51%, #a2d2ff 100%); }
-    #warmup-screen .btn-2 { background-image: linear-gradient(to right, #ffc8dd, #ffafcc 51%, #ffc8dd 100%); }
-    #warmup-screen .btn-3 { background-image: linear-gradient(to right, #cdb4db, #caffbf 51%, #cdb4db 100%); }
-    #warmup-screen .btn-4 { background-image: linear-gradient(to right, #fdffb6, #ffd6a5 51%, #fdffb6 100%); }
-    #warmup-screen .footer-text { margin-top: 1rem; font-family: 'Nunito', sans-serif; font-size: 12px; color: #6d6d6d; opacity: 0.7; }
+    #warmup-screen{font-family:'Nunito',sans-serif;background:radial-gradient(circle at 50% 50%,#e6f7f3,#d0f0e8);color:#3d4f63;text-align:center;position:relative;overflow-y:auto}
+    #warmup-screen .main-container{position:relative;z-index:1;width:100%;max-width:1300px;display:flex;flex-direction:column;align-items:center;gap:1rem;animation:fadeIn 1s ease-in-out}
+    #warmup-screen .main-title{font-family:'Fredoka',sans-serif;font-size:clamp(2.5rem,8vw,3.2rem);font-weight:700;color:#E5989B;text-shadow:2px 2px 0 #fff,4px 4px 8px rgba(0,0,0,.1);margin:0;line-height:1.1}
+    #warmup-screen .subtitle{font-size:clamp(1rem,4vw,1.1rem);font-weight:400;color:#5a6b80;margin-top:.25rem}
+    #warmup-screen .video-wrapper{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:500px;border-radius:2rem;box-shadow:0 20px 40px -10px rgba(45,55,72,.2);overflow:hidden;background-color:#000}
+    #warmup-screen .video-wrapper::before{content:'';position:absolute;top:-3px;left:-3px;width:calc(100% + 6px);height:calc(100% + 6px);background:linear-gradient(45deg,#a6e4b6,#fde68a,#a2d2ff,#ffc8dd,#a6e4b6);background-size:400% 400%;border-radius:2rem;z-index:0;animation:animate-border 12s linear infinite}
+    #warmup-screen .welcome-video{width:100%;height:auto;display:block;border-radius:calc(2rem - 3px);position:relative;z-index:1;filter:blur(4px) brightness(.7);transition:filter .5s ease-in-out}
+    #warmup-screen .video-wrapper.is-playing .welcome-video{filter:none}
+    #warmup-screen .play-button{position:absolute;z-index:10;background:rgba(255,255,255,.8);backdrop-filter:blur(5px);border:2px solid rgba(255,255,255,.9);padding:.8rem 1.8rem;font-size:1.1rem;font-weight:600;color:#3d4f63;border-radius:50px;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.2);transition:all .3s ease;display:flex;align-items:center;gap:.5rem}
+    #warmup-screen .play-button::before{content:'▶';font-size:1.5rem;line-height:1}
+    #warmup-screen .video-wrapper.is-playing .play-button{opacity:0;pointer-events:none}
+    #warmup-screen .button-grid{display:grid;grid-template-columns:1fr;gap:1rem;width:100%;max-width:400px;margin-top:1rem}
+    @media (min-width:768px){#warmup-screen .button-grid{grid-template-columns:repeat(2,1fr);max-width:700px}}
+    @media (min-width:1200px){#warmup-screen .button-grid{grid-template-columns:repeat(4,1fr);max-width:1300px}}
+    #warmup-screen .game-button{display:flex;align-items:center;justify-content:center;gap:12px;padding:1.1rem;border-radius:1.5rem;border:none;font-family:'Fredoka',sans-serif;font-size:clamp(1.1rem,4vw,1.2rem);font-weight:500;color:#3d4f63;text-decoration:none;box-shadow:0 8px 15px rgba(45,55,72,.1);transition:all .3s ease;background-size:200% auto;cursor:pointer}
+    #warmup-screen .game-button:hover{transform:translateY(-5px) scale(1.03);box-shadow:0 12px 25px rgba(45,55,72,.15);background-position:right center}
+    #warmup-screen .button-icon{width:44px;height:44px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.2));transition:transform .3s ease}
+    #warmup-screen .game-button:hover .button-icon{transform:scale(1.1) rotate(-8deg)}
+    #warmup-screen .btn-1{background-image:linear-gradient(to right,#a2d2ff,#bde0fe 51%,#a2d2ff 100%)}
+    #warmup-screen .btn-2{background-image:linear-gradient(to right,#ffc8dd,#ffafcc 51%,#ffc8dd 100%)}
+    #warmup-screen .btn-3{background-image:linear-gradient(to right,#cdb4db,#caffbf 51%,#cdb4db 100%)}
+    #warmup-screen .btn-4{background-image:linear-gradient(to right,#fdffb6,#ffd6a5 51%,#fdffb6 100%)}
+    #warmup-screen .footer-text{margin-top:1rem;font-family:'Nunito',sans-serif;font-size:12px;color:#6d6d6d;opacity:.7}
 
     /* Dice Challenge */
-    #dice-challenge-screen { font-family: 'Nunito', sans-serif; background-color: #FFF9E6; background-image: linear-gradient(to bottom, #fefae0 0%, #fde4cf 100%); position: relative; overflow: hidden; justify-content: flex-start; }
-    .screen-content-wrapper { width: 100%; height: 100%; overflow-y: auto; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
-    .dice-sub-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; min-height: 100%; padding: 1rem; box-sizing: border-box; }
-    #dice-screen-2 { justify-content: flex-start; padding-top: 1rem; padding-bottom: 1rem; min-height: auto; }
-    #dice-challenge-screen h1 { font-family: 'Fredoka', sans-serif; }
-    #dice-challenge-screen .pop-in { animation: popIn 0.4s ease-out forwards; }
-    #dice-challenge-screen .emoji-shadow { text-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-    #dice-challenge-screen .video-container video { transition: filter 0.7s ease-in-out; }
-    #dice-challenge-screen .video-is-blurred { filter: blur(12px); }
-    #dice-challenge-screen .is-playing #reveal-button-dice { opacity: 0; pointer-events: none; }
-    #dice-challenge-screen .quantity-btn { width: 40px; height: 40px; border-radius: 50%; background-color: #ffc8dd; color: #c13a69; font-size: 2rem; font-weight: bold; border: none; cursor: pointer; line-height: 1; transition: all 0.2s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    #dice-challenge-screen .quantity-btn:hover { transform: scale(1.1); background-color: #ffafcc; }
-    #dice-challenge-screen .quantity-btn:disabled { background-color: #e5e7eb; color: #9ca3af; cursor: not-allowed; transform: scale(1); }
-    .dice-toggle-wrapper input[type="checkbox"] { display: none; }
-    .dice-toggle-label { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0.75rem; border-radius: 1rem; background-color: #e0e7ff; color: #4338ca; font-family: 'Fredoka', sans-serif; font-weight: 500; cursor: pointer; transition: all 0.2s ease-in-out; border: 2px solid transparent; text-align: center; }
-    .dice-toggle-wrapper input[type="checkbox"]:hover + .dice-toggle-label { transform: scale(1.03); box-shadow: 0 8px 15px rgba(45, 55, 72, 0.1); }
-    .dice-toggle-wrapper input[type="checkbox"]:checked + .dice-toggle-label { background-color: #818cf8; color: white; border-color: #c7d2fe; box-shadow: 0 0 15px 3px rgba(129, 140, 248, 0.4); }
-    .dice-toggle-wrapper input[type="checkbox"]:disabled + .dice-toggle-label { background-color: #e5e7eb; color: #9ca3af; cursor: not-allowed; transform: scale(1); box-shadow: none; opacity: 0.7; }
+    #dice-challenge-screen{font-family:'Nunito',sans-serif;background-color:var(--bg-cream);background-image:linear-gradient(to bottom,#fefae0 0%,#fde4cf 100%);position:relative;overflow:hidden;justify-content:flex-start}
+    .screen-content-wrapper{width:100%;height:100%;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+    .dice-sub-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:100%;padding:1rem;box-sizing:border-box}
+    #dice-screen-2{justify-content:flex-start;padding-top:1rem;padding-bottom:1rem;min-height:auto}
+    #dice-challenge-screen h1{font-family:'Fredoka',sans-serif}
+    .pop-in{animation:popIn .4s ease-out forwards}
+    .emoji-shadow{text-shadow:0 4px 10px rgba(0,0,0,.15)}
+    .video-container video{transition:filter .7s ease-in-out}
+    .video-is-blurred{filter:blur(12px)}
+    .is-playing #reveal-button-dice{opacity:0;pointer-events:none}
+    .quantity-btn{width:40px;height:40px;border-radius:50%;background-color:#ffc8dd;color:#c13a69;font-size:2rem;font-weight:700;border:none;cursor:pointer;line-height:1;transition:all .2s ease;box-shadow:0 4px 10px rgba(0,0,0,.1)}
+    .quantity-btn:hover{transform:scale(1.1);background-color:#ffafcc}
+    .quantity-btn:disabled{background-color:#e5e7eb;color:#9ca3af;cursor:not-allowed;transform:scale(1)}
+    .dice-toggle-wrapper input[type="checkbox"]{display:none}
+    .dice-toggle-label{display:flex;align-items:center;justify-content:center;gap:8px;padding:.75rem;border-radius:1rem;background-color:#e0e7ff;color:#4338ca;font-family:'Fredoka',sans-serif;font-weight:500;cursor:pointer;transition:all .2s ease-in-out;border:2px solid transparent;text-align:center}
+    .dice-toggle-wrapper input[type="checkbox"]:hover + .dice-toggle-label{transform:scale(1.03);box-shadow:0 8px 15px rgba(45,55,72,.1)}
+    .dice-toggle-wrapper input[type="checkbox"]:checked + .dice-toggle-label{background-color:#818cf8;color:#fff;border-color:#c7d2fe;box-shadow:0 0 15px 3px rgba(129,140,248,.4)}
+    .dice-toggle-wrapper input[type="checkbox"]:disabled + .dice-toggle-label{background-color:#e5e7eb;color:#9ca3af;cursor:not-allowed;transform:none;box-shadow:none;opacity:.7}
 
-    #dice-challenge-screen .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 0.75rem; width: 100%; max-width: 400px; aspect-ratio: 1 / 1; background-color: rgba(238, 244, 255, 0.7); padding: 0.75rem; border-radius: 1.5rem; border: 2px dashed #c7d2fe; }
-    #dice-challenge-screen .grid-container .pop-in { width: 100%; height: 100%; padding: 0.25rem; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    #dice-challenge-screen .grid-container .pop-in span { font-size: clamp(2rem, 12vw, 4rem); line-height: 1; }
-    #dice-challenge-screen .grid-container .pop-in img { width: 90%; height: 90%; object-fit: contain; }
+    #dice-challenge-screen .grid-container{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:.75rem;width:100%;max-width:400px;aspect-ratio:1/1;background-color:rgba(238,244,255,.7);padding:.75rem;border-radius:1.5rem;border:2px dashed #c7d2fe}
+    #dice-challenge-screen .grid-container .pop-in{width:100%;height:100%;padding:.25rem;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    #dice-challenge-screen .grid-container .pop-in span{font-size:clamp(2rem,12vw,4rem);line-height:1}
+    #dice-challenge-screen .grid-container .pop-in img{width:90%;height:90%;object-fit:contain}
 
-    /* Historial (fixed a la ventana) */
-    #history-panel { position: fixed; transition: transform 0.3s ease-in-out; }
-    #history-panel.is-open { transform: translateX(0); }
+    /* Historial */
+    #history-panel{position:fixed;transition:transform .3s ease-in-out}
+    #history-panel.is-open{transform:translateX(0)}
+
+    @media (prefers-reduced-motion: reduce){
+      .pop-in{animation:none}
+      .video-is-blurred{filter:none}
+    }
   </style>
 </head>
 <body>
@@ -89,16 +100,16 @@
 
       <div class="button-grid">
         <button id="go-to-dice-challenge-btn" class="game-button btn-1">
-          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-dice.png?raw=true" alt="Icono de dado" class="button-icon"> Lanzar dados
+          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-dice.png?raw=true" alt="Icono de dado" class="button-icon" loading="lazy" decoding="async"> Lanzar dados
         </button>
         <button id="go-to-this-or-that-btn" class="game-button btn-2" disabled>
-          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-arrow.png?raw=true" alt="Icono de flecha" class="button-icon"> ¿Cuál eliges?
+          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-arrow.png?raw=true" alt="Icono de flecha" class="button-icon" loading="lazy" decoding="async"> ¿Cuál eliges?
         </button>
         <button id="go-to-secret-message-btn" class="game-button btn-3" disabled>
-          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-lock.png?raw=true" alt="Icono de candado" class="button-icon"> Mensaje secreto
+          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-lock.png?raw=true" alt="Icono de candado" class="button-icon" loading="lazy" decoding="async"> Mensaje secreto
         </button>
         <button id="go-to-emoji-says-btn" class="game-button btn-4">
-          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-megaphone.png?raw=true" alt="Icono de megáfono" class="button-icon"> Conceptos filosóficos
+          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-megaphone.png?raw=true" alt="Icono de megáfono" class="button-icon" loading="lazy" decoding="async"> Conceptos filosóficos
         </button>
       </div>
     </div>
@@ -111,18 +122,18 @@
       <!-- Subpantalla 1 -->
       <div id="dice-screen-1" class="dice-sub-screen">
         <main class="w-full max-w-md mx-auto text-center flex flex-col justify-center items-center">
-          <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase text-[#FF6F61] mb-4" style="text-shadow: -2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,0.1);">Emoji Dice<br>Challenge</h1>
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,0.1);">Emoji Dice<br>Challenge</h1>
           <div class="bg-white p-2 sm:p-3 w-full relative video-card rounded-2xl shadow-lg">
             <div id="video-wrapper-dice" class="relative rounded-xl overflow-hidden aspect-square bg-black video-container">
-              <video id="instructions-video-dice" class="w-full h-full object-cover video-is-blurred" src="https://cdn.jsdelivr.net/gh/TamaraLlorens/warmup-assets@main/emoji%20video%20dice%20app.mp4" playsinline></video>
+              <video id="instructions-video-dice" class="w-full h-full object-cover video-is-blurred" src="https://cdn.jsdelivr.net/gh/TamaraLlorens/warmup-assets@main/emoji%20video%20dice%20app.mp4" playsinline muted></video>
               <button id="reveal-button-dice" class="absolute inset-0 flex items-center justify-center w-full h-full bg-transparent">
-                <span class="bg-white/90 text-[#4A4A4A] text-lg font-bold py-3 px-6 rounded-xl shadow-md hover:scale-105 transition-transform">🎬 Watch Instructions</span>
+                <span class="bg-white/90 text-[#4A4A4A] text-lg font-bold py-3 px-6 rounded-xl shadow-md hover:scale-105 transition-transform">🎬 Ver instrucciones</span>
               </button>
             </div>
           </div>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
-            <button id="dice-home-btn-1" class="bg-white text-gray-700 font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all duration-200 ease-in-out py-2 px-5 shadow-md hover:shadow-lg hover:transform hover:-translate-y-0.5 no-underline"><span class="text-xl">🏠</span><span>Home</span></button>
-            <button id="start-challenge-btn" class="font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all duration-200 ease-in-out text-white py-2 px-6" style="background-image: linear-gradient(135deg, #FFC894 0%, #FF9A8B 100%); box-shadow: 0 4px 20px rgba(255, 154, 139, 0.35); "><span class="text-2xl">🎲</span><span>Start Challenge</span></button>
+            <button id="dice-home-btn-1" class="bg-white text-gray-700 font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all duration-200 ease-in-out py-2 px-5 shadow-md hover:shadow-lg hover:-translate-y-0.5 no-underline"><span class="text-xl">🏠</span><span>Inicio</span></button>
+            <button id="start-challenge-btn" class="font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all duration-200 ease-in-out text-white py-2 px-6" style="background-image:linear-gradient(135deg,var(--brand-amber) 0%, var(--brand-rose-2) 100%); box-shadow:0 4px 20px rgba(255,154,139,.35);"><span class="text-2xl">🎲</span><span>Empezar</span></button>
           </div>
         </main>
       </div>
@@ -131,26 +142,26 @@
       <div id="dice-screen-2" class="dice-sub-screen hidden">
         <div class="w-full max-w-5xl flex flex-col items-center gap-4">
           <header class="text-center flex-shrink-0">
-            <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase text-[#FF6F61]" style="text-shadow: -1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,0.1);">Crea tu Tirada</h1>
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,0.1);">Crea tu Tirada</h1>
           </header>
 
-          <div id="dice-config-panel" class="w-full p-4 rounded-2xl space-y-4" style="background-color: #fff8f2; box-shadow: 0px 6px 12px rgba(0,0,0,0.06);">
+          <div id="dice-config-panel" class="w-full p-4 rounded-2xl space-y-4" style="background-color:#fff8f2;box-shadow:0 6px 12px rgba(0,0,0,.06);">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="p-3 rounded-lg bg-white/70">
-                <label class="font-bold text-gray-700 text-lg flex items-center justify-center gap-2"><span>1.</span> Dados al Azar (Emojis)</label>
+                <label class="font-bold text-gray-700 text-lg flex items-center justify-center gap-2"><span>1.</span> Dados al azar (Emojis)</label>
                 <div id="random-dice-controls" class="flex items-center justify-center gap-4 mt-2">
-                  <button id="btn-minus-random" class="quantity-btn">-</button>
+                  <button id="btn-minus-random" class="quantity-btn" aria-label="Restar dado">-</button>
                   <span id="random-dice-display" class="text-3xl font-bold text-pink-500 w-16 text-center">3</span>
-                  <button id="btn-plus-random" class="quantity-btn">+</button>
+                  <button id="btn-plus-random" class="quantity-btn" aria-label="Sumar dado">+</button>
                 </div>
               </div>
               <div class="p-3 rounded-lg bg-white/70 flex flex-col justify-center items-center">
-                <h2 class="font-bold text-gray-700 text-lg">Total a Lanzar</h2>
+                <h2 class="font-bold text-gray-700 text-lg">Total a lanzar</h2>
                 <p id="total-dice-launch-display" class="text-3xl font-bold text-green-600">3 Dados</p>
               </div>
             </div>
             <div>
-              <label class="font-bold text-gray-700 text-lg text-center block mb-2">2. Dados Específicos (Filosóficos)</label>
+              <label class="font-bold text-gray-700 text-lg text-center block mb-2">2. Dados específicos (Filosóficos)</label>
               <div id="specific-dice-selection" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 p-2"></div>
             </div>
           </div>
@@ -160,18 +171,18 @@
 
             <div id="save-roll-section" class="hidden w-full max-w-md mt-4 flex flex-col sm:flex-row items-center gap-2">
               <input id="roll-name-input" type="text" placeholder="Ponle un nombre a tu tirada..." class="flex-grow p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400">
-              <button id="save-roll-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><span class="text-xl">💾</span> Guardar Tirada</button>
+              <button id="save-roll-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><span class="text-xl">💾</span> Guardar</button>
             </div>
 
-            <p id="consigna" class="font-baloo text-center text-gray-800 text-lg md:text-xl px-2 min-h-[2rem]">¡Configura tu tirada y pulsa "Lanzar Dados"!</p>
-            <button id="roll-dice-btn" class="group font-bold text-white py-3 px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-xl focus:outline-none transition-all duration-300" style="background-image: linear-gradient(to right, #ff9a8b, #ff6a88);"><span class="text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Lanzar Dados</span></button>
+            <p id="consigna" class="font-baloo text-center text-gray-800 text-lg md:text-xl px-2 min-h-[2rem]">¡Configura tu tirada y pulsa «Lanzar dados»!</p>
+            <button id="roll-dice-btn" class="group font-bold text-white py-3 px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-xl focus:outline-none transition-all duration-300" style="background-image:linear-gradient(to right,#ff9a8b,#ff6a88);"><span class="text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Lanzar dados</span></button>
           </div>
 
           <footer class="p-2 flex-shrink-0">
             <div class="flex justify-center items-center gap-4">
-              <button id="toggle-history-btn" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all">📖 Historial</button>
-              <button id="back-btn" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all">⬅️ Back</button>
-              <button id="dice-home-btn-2" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all no-underline">🏠 Home</button>
+              <button id="toggle-history-btn" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all" aria-controls="history-panel" aria-expanded="false">📖 Historial</button>
+              <button id="back-btn" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all">⬅️ Atrás</button>
+              <button id="dice-home-btn-2" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all no-underline">🏠 Inicio</button>
             </div>
           </footer>
         </div>
@@ -184,17 +195,14 @@
     <!-- SUBPANTALLA 1 · Configuración -->
     <div id="ed-screen-1" class="dice-sub-screen">
       <main class="w-full max-w-3xl mx-auto text-center flex flex-col gap-4">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase text-[#FF6F61]"
-            style="text-shadow: -2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,0.1);">
-          Conceptos filosóficos
-        </h1>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,.1);">Conceptos filosóficos</h1>
 
         <section class="w-full bg-white/80 rounded-2xl shadow p-4 text-left space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="font-bold text-gray-700 text-sm">🎲 Nº de emojis (3–9)</label>
               <div class="flex items-center gap-3 mt-1">
-                <input id="ed-emoji-count-range" type="range" min="3" max="9" value="3" class="w-full">
+                <input id="ed-emoji-count-range" type="range" min="3" max="9" value="3" class="w-full" aria-label="Número de emojis">
                 <span id="ed-emoji-count-range-value" class="inline-block w-6 text-center font-bold">3</span>
               </div>
             </div>
@@ -211,20 +219,13 @@
           <div>
             <label class="font-bold text-gray-700 text-sm block mb-1">📝 Lista de palabras del reto (opcional)</label>
             <p class="text-xs text-gray-600 mb-2">Una por línea o separadas por comas. Si lo dejas vacío se usa la lista por defecto.</p>
-            <textarea id="ed-custom-words" rows="4" class="w-full rounded-xl border border-gray-200 p-3"
-                      placeholder="ej.: rápido
-misterioso, espacio, saltar, brillante"></textarea>
+            <textarea id="ed-custom-words" rows="4" class="w-full rounded-xl border border-gray-200 p-3" placeholder="ej.: rápido\nmisterioso, espacio, saltar, brillante"></textarea>
           </div>
         </section>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button id="ed-home-btn-1" class="bg-white text-gray-700 font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all py-2 px-5 shadow-md hover:shadow-lg">
-            <span class="text-xl">🏠</span><span>Inicio</span>
-          </button>
-          <button id="ed-start-btn" class="font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all text-white py-2 px-6"
-                  style="background-image: linear-gradient(135deg, #FFC894 0%, #FF9A8B 100%); box-shadow: 0 4px 20px rgba(255, 154, 139, 0.35); ">
-            <span class="text-2xl">▶️</span><span>Empezar</span>
-          </button>
+          <button id="ed-home-btn-1" class="bg-white text-gray-700 font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all py-2 px-5 shadow-md hover:shadow-lg"><span class="text-xl">🏠</span><span>Inicio</span></button>
+          <button id="ed-start-btn" class="font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all text-white py-2 px-6" style="background-image:linear-gradient(135deg,var(--brand-amber) 0%, var(--brand-rose-2) 100%); box-shadow:0 4px 20px rgba(255,154,139,.35); "><span class="text-2xl">▶️</span><span>Empezar</span></button>
         </div>
       </main>
     </div>
@@ -233,16 +234,13 @@ misterioso, espacio, saltar, brillante"></textarea>
     <div id="ed-screen-2" class="dice-sub-screen hidden">
       <div class="w-full max-w-5xl flex flex-col gap-4">
         <header class="text-center">
-          <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase text-[#FF6F61]"
-              style="text-shadow: -1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,0.1);">
-            Emoji Dice
-          </h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,.1);">Emoji Dice</h1>
         </header>
 
         <div class="p-3 rounded-2xl bg-white/80 shadow flex flex-wrap items-center gap-3">
           <div class="flex items-center gap-2">
             <label class="font-bold text-gray-700 text-sm">🎲 Nº de emojis</label>
-            <select id="ed-emoji-count-select" class="rounded-lg border border-gray-200 px-2 py-1">
+            <select id="ed-emoji-count-select" class="rounded-lg border border-gray-200 px-2 py-1" aria-label="Número de emojis">
               <option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
             </select>
           </div>
@@ -257,9 +255,9 @@ misterioso, espacio, saltar, brillante"></textarea>
         </div>
 
         <div class="flex flex-col md:flex-row gap-4 w-full">
-          <div id="ed-emoji-main-block" class="w-full p-4 rounded-2xl space-y-4 flex flex-col" style="background-color: #eef4ff;">
+          <div id="ed-emoji-main-block" class="w-full p-4 rounded-2xl space-y-4 flex flex-col" style="background-color:#eef4ff;">
             <section class="flex flex-col items-center justify-center space-y-4 flex-grow">
-              <div id="ed-emoji-display" class="grid gap-3 sm:gap-5 w-full max-w-2xl mx-auto" style="grid-template-columns: repeat(3, minmax(64px,1fr));"></div>
+              <div id="ed-emoji-display" class="grid gap-3 sm:gap-5 w-full max-w-2xl mx-auto" style="grid-template-columns:repeat(3,minmax(64px,1fr));"></div>
 
               <div id="ed-word-display-card" class="hidden rounded-xl shadow-lg px-4 py-2 bg-[#dcd6ff]">
                 <span class="text-white font-bold">Palabra del reto: </span>
@@ -268,12 +266,7 @@ misterioso, espacio, saltar, brillante"></textarea>
 
               <p id="ed-consigna" class="text-center text-gray-800 text-base sm:text-lg md:text-xl px-2 flex-grow flex items-center justify-center min-h-[3rem]"></p>
 
-              <button id="ed-roll-dice-btn"
-                      class="group font-bold text-white py-3 px-6 sm:px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-lg sm:text-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 focus:ring-offset-gray-50 transition-all"
-                      style="background-image: linear-gradient(to right, #ff9a8b, #ff6a88);">
-                <span class="text-2xl sm:text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span>
-                <span>Tirar dados</span>
-              </button>
+              <button id="ed-roll-dice-btn" class="group font-bold text-white py-3 px-6 sm:px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-lg sm:text-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 focus:ring-offset-gray-50 transition-all" style="background-image:linear-gradient(to right,#ff9a8b,#ff6a88);"><span class="text-2xl sm:text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Tirar dados</span></button>
             </section>
           </div>
 
@@ -292,493 +285,496 @@ misterioso, espacio, saltar, brillante"></textarea>
     </div>
   </div>
 
-  <!-- PANEL HISTORIAL (para el juego de dados principal) -->
-  <div id="history-panel" class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl p-4 flex flex-col transition-transform transform translate-x-full z-20">
+  <!-- PANEL HISTORIAL -->
+  <div id="history-panel" class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl p-4 flex flex-col transition-transform translate-x-full z-20" role="dialog" aria-modal="true" aria-labelledby="history-title">
     <div class="flex justify-between items-center mb-4 flex-shrink-0">
-      <h2 class="text-2xl font-bold text-gray-800">Historial de Tiradas</h2>
-      <button id="close-history-btn" class="text-3xl font-bold text-gray-600 hover:text-red-500 leading-none">&times;</button>
+      <h2 id="history-title" class="text-2xl font-bold text-gray-800">Historial de tiradas</h2>
+      <button id="close-history-btn" class="text-3xl font-bold text-gray-600 hover:text-red-500 leading-none" aria-label="Cerrar historial">&times;</button>
     </div>
     <div id="history-list" class="flex-grow overflow-y-auto space-y-3"></div>
-    <button id="clear-history-btn" class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg w-full flex-shrink-0">🗑️ Borrar Todo</button>
+    <button id="clear-history-btn" class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg w-full flex-shrink-0">🗑️ Borrar todo</button>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const warmupScreen = document.getElementById('warmup-screen');
-      const diceChallengeScreen = document.getElementById('dice-challenge-screen');
-      const allScreens = [warmupScreen, diceChallengeScreen];
+  // Utilidades DOM
+  const $ = (id)=>document.getElementById(id);
 
-      const goToDiceChallengeBtn = document.getElementById('go-to-dice-challenge-btn');
-      const goToEmojiDiceBtn = document.getElementById('go-to-emoji-says-btn');
-      const emojiDiceScreen = document.getElementById('emoji-dice-screen');
+  document.addEventListener('DOMContentLoaded', () => {
+    const warmupScreen = $('warmup-screen');
+    const diceChallengeScreen = $('dice-challenge-screen');
+    const emojiDiceScreen = $('emoji-dice-screen');
+    const allScreens = [warmupScreen, diceChallengeScreen, emojiDiceScreen];
 
-      // Añadimos el nuevo screen a la gestión de navegación
-      allScreens.push(emojiDiceScreen);
+    const showScreen = (el)=>{ allScreens.forEach(s=>s.classList.add('hidden')); el.classList.remove('hidden'); };
+    const goHome = ()=> showScreen(warmupScreen);
 
-      function showScreen(screenToShow) {
-        allScreens.forEach(screen => screen.classList.add('hidden'));
-        screenToShow.classList.remove('hidden');
-      }
-      const goHome = () => showScreen(warmupScreen);
+    // Nav Home → juegos
+    $('go-to-dice-challenge-btn').addEventListener('click', ()=> showScreen(diceChallengeScreen));
+    $('go-to-emoji-says-btn').addEventListener('click', ()=> {
+      showScreen(emojiDiceScreen);
+      $('ed-screen-1').classList.remove('hidden');
+      $('ed-screen-2').classList.add('hidden');
+    });
 
-      // Navegación Home → juegos
-      goToDiceChallengeBtn.addEventListener('click', () => { showScreen(diceChallengeScreen); });
-      goToEmojiDiceBtn.addEventListener('click', () => {
-        showScreen(emojiDiceScreen);
-        document.getElementById('ed-screen-1').classList.remove('hidden');
-        document.getElementById('ed-screen-2').classList.add('hidden');
+    /* =======================
+       Datos compartidos
+       ======================= */
+    const SHARED_EMOJIS = ['😂','😍','🤔','😎','😢','😡','🥳','🤯','😴','👍','👎','🙏','💪','👀','🧠','🐶','🐱','🐭','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🐔','🐧','🐦','🐤','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🐛','🦋','🐌','🐞','🐜','⚽️','🏀','🏈','⚾️','🎾','🏐','🏉','🎱','🏓','🏸','🥅','🏒','🏑','🏏','⛳️','🏹','🎣','🥊','🥋','🎽','⛸','🎿','⛷','🏂','🏋️‍♀️','🤼‍♀️','🤸‍♀️','🤺','🤾‍♀️','🏌️‍♀️','🏇','🏆','🥇','🥈','🥉','🎨','🎬','🎤','🎧','🎼','🎹','🥁','🎷','🎺','🎸','🎻','🎮','🧩','🎭','🚗','✈️','🚀','🛸','🚁','⛵️','🏰','🏠','❤️','💔','💯','🔥','✨','⭐️','⚡️','☀️','☁️','🌈','🌊','🍔','🍕','🍟','🎂','🍭','🍩','🍪','☕️','⏰','💡','💰','🔑','🎁','🎉'];
+
+    /* =======================
+       Juego 1: Dice Challenge
+       ======================= */
+    (function diceGameManager(){
+      const screen1 = $('dice-screen-1');
+      const screen2 = $('dice-screen-2');
+      const homeBtn1 = $('dice-home-btn-1');
+      const homeBtn2 = $('dice-home-btn-2');
+      const startBtn = $('start-challenge-btn');
+      const backBtn = $('back-btn');
+      const instructionsVideo = $('instructions-video-dice');
+      const videoWrapperDice = $('video-wrapper-dice');
+      const revealButton = $('reveal-button-dice');
+
+      // Helper para rutas (evita 404 de paths relativos)
+      const BASE = 'https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/';
+      const abs = (p)=> p.startsWith('http') ? p : BASE + p.replace(/^\/?/, '');
+
+      const DADOS_FILOSOFICOS = {
+        "Conceptos": [
+          abs('imagenes/dios.png'),
+          abs('imagenes/libertad.png'),
+          abs('imagenes/tiempo.png'),
+          abs('imagenes/destino.png'),
+          abs('imagenes/esencia.png')
+        ],
+        "Autores": [
+          abs('imagenes/autores/platon.png'), abs('imagenes/autores/kant.png'), abs('imagenes/autores/descartes.png'),
+          abs('imagenes/autores/nietzsche.png'), abs('imagenes/autores/wittgenstein.png'), abs('imagenes/autores/aristoteles.png'),
+          abs('imagenes/autores/spinoza.png'), abs('imagenes/autores/aquino.png')
+        ],
+        "Acciones": [
+          abs('imagenes/acciones/espiral.png'), abs('imagenes/acciones/explosion.png'), abs('imagenes/acciones/flechas.png'),
+          abs('imagenes/acciones/mano.png'), abs('imagenes/acciones/mascara.png'), abs('imagenes/acciones/caminar.png'),
+          abs('imagenes/acciones/construir.png'), abs('imagenes/acciones/mirar.png'), abs('imagenes/acciones/pensar.png'),
+          abs('imagenes/acciones/saltar.png'), abs('imagenes/acciones/toser.png'), abs('imagenes/acciones/paracaidas.png')
+        ],
+        "Objetos": [
+          abs('imagenes/objetos1/arcoiris.png'), abs('imagenes/objetos1/balanza.png'), abs('imagenes/objetos1/candado.png'),
+          abs('imagenes/objetos1/llave.png'), abs('imagenes/objetos1/lupa.png')
+        ],
+        "Personajes": [
+          abs('imagenes/personajes/astronauta.png'), abs('imagenes/personajes/mago.png'), abs('imagenes/personajes/nina.png'),
+          abs('imagenes/personajes/reina.png'), abs('imagenes/personajes/superheroe.png')
+        ],
+        "Derechos Humanos": [
+          abs('imagenes/ddhh/1_dignidad.png'), abs('imagenes/ddhh/2_igualdad.png'), abs('imagenes/ddhh/3_vida.png'), abs('imagenes/ddhh/4_no_esclavitud.png'),
+          abs('imagenes/ddhh/5_no_tortura.png'), abs('imagenes/ddhh/6_personalidad_jurídica.png'), abs('imagenes/ddhh/7_igualdad_ley.png'), abs('imagenes/ddhh/8_derecho_reparacion.png'),
+          abs('imagenes/ddhh/9_no_detencion_ilegal.png'), abs('imagenes/ddhh/10_juicio_justo.png'), abs('imagenes/ddhh/11_inocencia.png'), abs('imagenes/ddhh/12_intimidad.png'),
+          abs('imagenes/ddhh/13_libre_desplazamiento.png'), abs('imagenes/ddhh/14_asilo.png'), abs('imagenes/ddhh/15_nacionalidad.png'), abs('imagenes/ddhh/16_familia.png'),
+          abs('imagenes/ddhh/17_propiedad.png'), abs('imagenes/ddhh/18_libertad_religiosa.png'), abs('imagenes/ddhh/19_libertad_expresion.png'), abs('imagenes/ddhh/20_libertad_asociacion.png')
+        ]
+      };
+
+      const consigna = $('consigna');
+      const rollDiceBtn = $('roll-dice-btn');
+      const emojiDisplay = $('emoji-display');
+      const btnPlusRandom = $('btn-plus-random');
+      const btnMinusRandom = $('btn-minus-random');
+      const randomDiceDisplay = $('random-dice-display');
+      const specificDiceSelection = $('specific-dice-selection');
+      const totalDiceLaunchDisplay = $('total-dice-launch-display');
+      const rollSound = new Audio('https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/button_06-190439.mp3');
+
+      const saveRollSection = $('save-roll-section');
+      const rollNameInput = $('roll-name-input');
+      const saveRollBtn = $('save-roll-btn');
+      const toggleHistoryBtn = $('toggle-history-btn');
+      const historyPanel = $('history-panel');
+      const closeHistoryBtn = $('close-history-btn');
+      const historyList = $('history-list');
+      const clearHistoryBtn = $('clear-history-btn');
+
+      const MAX_TOTAL_DICE = 9;
+      let numRandomDice = 3;
+      let historial = [];
+      let tiradaActualResultados = null;
+      let tiradaCounter = 1;
+
+      function stopDiceVideo(){ instructionsVideo.pause(); instructionsVideo.currentTime = 0; }
+      function showSubScreen(el){ screen1.classList.add('hidden'); screen2.classList.add('hidden'); el.classList.remove('hidden'); }
+
+      const goHomeDC = ()=>{ stopDiceVideo(); goHome(); };
+      homeBtn1.addEventListener('click', goHomeDC);
+      homeBtn2.addEventListener('click', goHomeDC);
+      backBtn.addEventListener('click', ()=> showSubScreen(screen1));
+
+      revealButton.addEventListener('click', ()=>{
+        videoWrapperDice.classList.add('is-playing');
+        instructionsVideo.classList.remove('video-is-blurred');
+        instructionsVideo.play();
+      });
+      instructionsVideo.addEventListener('pause', ()=>{
+        videoWrapperDice.classList.remove('is-playing');
+        instructionsVideo.classList.add('video-is-blurred');
       });
 
-      /* =======================
-         Juego 1: Dice Challenge
-         ======================= */
-      (function diceGameManager(){
-        const screen1 = document.getElementById('dice-screen-1');
-        const screen2 = document.getElementById('dice-screen-2');
-        const homeBtn1 = document.getElementById('dice-home-btn-1');
-        const homeBtn2 = document.getElementById('dice-home-btn-2');
-        const startBtn = document.getElementById('start-challenge-btn');
-        const backBtn = document.getElementById('back-btn');
-        const instructionsVideo = document.getElementById('instructions-video-dice');
-        const videoWrapperDice = document.getElementById('video-wrapper-dice');
-        const revealButton = document.getElementById('reveal-button-dice');
-
-        const DADOS_FILOSOFICOS = {
-          "Conceptos": [
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/dios.png",
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/libertad.png",
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/tiempo.png",
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/destino.png",
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/esencia.png"
-          ],
-          "Autores": ["imagenes/autores/platon.png","imagenes/autores/kant.png","imagenes/autores/descartes.png","imagenes/autores/nietzsche.png","imagenes/autores/wittgenstein.png","imagenes/autores/aristoteles.png","imagenes/autores/spinoza.png","imagenes/autores/aquino.png"],
-          "Acciones": ["imagenes/acciones/espiral.png","imagenes/acciones/explosion.png","imagenes/acciones/flechas.png","imagenes/acciones/mano.png","imagenes/acciones/mascara.png","imagenes/acciones/caminar.png","imagenes/acciones/construir.png","imagenes/acciones/mirar.png","imagenes/acciones/pensar.png","imagenes/acciones/saltar.png","imagenes/acciones/toser.png","imagenes/acciones/paracaidas.png"],
-          "Objetos": [
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/arcoiris.png",
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/balanza.png",
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/candado.png",
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/llave.png",
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/objetos1/lupa.png"
-          ],
-          "Personajes": [
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/astronauta.png",
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/mago.png",
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/nina.png",
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/reina.png",
-            "https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/imagenes/personajes/superheroe.png"
-          ],
-          "Derechos Humanos": [
-            "imagenes/ddhh/1_dignidad.png","imagenes/ddhh/2_igualdad.png","imagenes/ddhh/3_vida.png","imagenes/ddhh/4_no_esclavitud.png","imagenes/ddhh/5_no_tortura.png","imagenes/ddhh/6_personalidad_jurídica.png","imagenes/ddhh/7_igualdad_ley.png","imagenes/ddhh/8_derecho_reparacion.png","imagenes/ddhh/9_no_detencion_ilegal.png","imagenes/ddhh/10_juicio_justo.png","imagenes/ddhh/11_inocencia.png","imagenes/ddhh/12_intimidad.png","imagenes/ddhh/13_libre_desplazamiento.png","imagenes/ddhh/14_asilo.png","imagenes/ddhh/15_nacionalidad.png","imagenes/ddhh/16_familia.png","imagenes/ddhh/17_propiedad.png","imagenes/ddhh/18_libertad_religiosa.png","imagenes/ddhh/19_libertad_expresion.png","imagenes/ddhh/20_libertad_asociacion.png"
-          ]
-        };
-
-        const DADOS_EMOJIS_BASE = ['😂','😍','🤔','😎','😢','😡','🥳','🤯','😴','👍','👎','🙏','💪','👀','🧠','🐶','🐱','🐭','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🐔','🐧','🐦','🐤','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🐛','🦋','🐌','🐞','🐜','⚽️','🏀','🏈','⚾️','🎾','🏐','🏉','🎱','🏓','🏸','🥅','🏒','🏑','🏏','⛳️','🏹','🎣','🥊','🥋','🎽','⛸','🎿','⛷','🏂','🏋️‍♀️','🤼‍♀️','🤸‍♀️','🤺','🤾‍♀️','🏌️‍♀️','🏇','🏆','🥇','🥈','🥉','🎨','🎬','🎤','🎧','🎼','🎹','🥁','🎷','🎺','🎸','🎻','🎮','🧩','🎭','🚗','✈️','🚀','🛸','🚁','⛵️','🏰','🏠','❤️','💔','💯','🔥','✨','⭐️','⚡️','☀️','☁️','🌈','🌊','🍔','🍕','🍟','🎂','🍭','🍩','🍪','☕️','⏰','💡','💰','🔑','🎁','🎉'];
-
-        const consigna = document.getElementById('consigna');
-        const rollDiceBtn = document.getElementById('roll-dice-btn');
-        const emojiDisplay = document.getElementById('emoji-display');
-        const btnPlusRandom = document.getElementById('btn-plus-random');
-        const btnMinusRandom = document.getElementById('btn-minus-random');
-        const randomDiceDisplay = document.getElementById('random-dice-display');
-        const specificDiceSelection = document.getElementById('specific-dice-selection');
-        const totalDiceLaunchDisplay = document.getElementById('total-dice-launch-display');
-        const rollSound = new Audio('https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/button_06-190439.mp3');
-
-        const saveRollSection = document.getElementById('save-roll-section');
-        const rollNameInput = document.getElementById('roll-name-input');
-        const saveRollBtn = document.getElementById('save-roll-btn');
-        const toggleHistoryBtn = document.getElementById('toggle-history-btn');
-        const historyPanel = document.getElementById('history-panel');
-        const closeHistoryBtn = document.getElementById('close-history-btn');
-        const historyList = document.getElementById('history-list');
-        const clearHistoryBtn = document.getElementById('clear-history-btn');
-
-        const MAX_TOTAL_DICE = 9;
-        let numRandomDice = 3;
-
-        let historial = [];
-        let tiradaActualResultados = null;
-        let tiradaCounter = 1;
-
-        function stopDiceVideo() { instructionsVideo.pause(); instructionsVideo.currentTime = 0; }
-        function showSubScreen(screenToShow) {
-          screen1.classList.add('hidden');
-          screen2.classList.add('hidden');
-          screenToShow.classList.remove('hidden');
-        }
-
-        const goHomeDC = () => { stopDiceVideo(); goHome(); };
-        homeBtn1.addEventListener('click', goHomeDC);
-        homeBtn2.addEventListener('click', goHomeDC);
-        backBtn.addEventListener('click', () => showSubScreen(screen1));
-
-        revealButton.addEventListener('click', () => {
-          videoWrapperDice.classList.add('is-playing');
-          instructionsVideo.classList.remove('video-is-blurred');
-          instructionsVideo.play();
+      function populateDiceToggles(){
+        specificDiceSelection.innerHTML = '';
+        const frag = document.createDocumentFragment();
+        Object.keys(DADOS_FILOSOFICOS).forEach(name=>{
+          const id = `toggle-${name.replace(/\s+/g,'-')}`;
+          const wrapper = document.createElement('div');
+          wrapper.className='dice-toggle-wrapper';
+          const checkbox = document.createElement('input');
+          checkbox.type='checkbox'; checkbox.id=id; checkbox.value=name;
+          const label = document.createElement('label');
+          label.className='dice-toggle-label'; label.htmlFor=id; label.textContent=name;
+          wrapper.appendChild(checkbox); wrapper.appendChild(label);
+          frag.appendChild(wrapper);
         });
-        instructionsVideo.addEventListener('pause', () => {
-          videoWrapperDice.classList.remove('is-playing');
-          instructionsVideo.classList.add('video-is-blurred');
-        });
+        specificDiceSelection.appendChild(frag);
+      }
 
-        function populateDiceToggles() {
-          specificDiceSelection.innerHTML = '';
-          Object.keys(DADOS_FILOSOFICOS).forEach(name => {
-            const id = `toggle-${name.replace(/\s+/g, '-')}`;
-            const wrapper = document.createElement('div');
-            wrapper.className = 'dice-toggle-wrapper';
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox'; checkbox.id = id; checkbox.value = name;
-            const label = document.createElement('label');
-            label.className = 'dice-toggle-label'; label.htmlFor = id; label.textContent = name;
-            wrapper.appendChild(checkbox); wrapper.appendChild(label);
-            specificDiceSelection.appendChild(wrapper);
-          });
+      function updateControlsAndState(){
+        const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
+        const totalDice = numRandomDice + numSpecificDice;
+        totalDiceLaunchDisplay.textContent = `${totalDice} Dado${totalDice!==1?'s':''}`;
+        btnMinusRandom.disabled = numRandomDice <= 0;
+        btnPlusRandom.disabled = totalDice >= MAX_TOTAL_DICE;
+        const toggles = specificDiceSelection.querySelectorAll('input[type="checkbox"]');
+        const lock = totalDice >= MAX_TOTAL_DICE;
+        toggles.forEach(t=>{ if(!t.checked) t.disabled = lock; else t.disabled = false; });
+      }
+
+      function changeRandomDice(delta){
+        const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
+        const next = numRandomDice + delta;
+        if(next + numSpecificDice <= MAX_TOTAL_DICE && next >= 0){
+          numRandomDice = next;
+          randomDiceDisplay.textContent = numRandomDice;
+          updateControlsAndState();
         }
+      }
 
-        function updateControlsAndState() {
-          const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
-          const totalDice = numRandomDice + numSpecificDice;
-          totalDiceLaunchDisplay.textContent = `${totalDice} Dado${totalDice !== 1 ? 's' : ''}`;
-          btnMinusRandom.disabled = numRandomDice <= 0;
-          btnPlusRandom.disabled = totalDice >= MAX_TOTAL_DICE;
-          const toggles = specificDiceSelection.querySelectorAll('input[type="checkbox"]');
-          if (totalDice >= MAX_TOTAL_DICE) {
-            toggles.forEach(toggle => { if (!toggle.checked) { toggle.disabled = true; } });
-          } else {
-            toggles.forEach(toggle => { toggle.disabled = false; });
-          }
-        }
+      btnPlusRandom.addEventListener('click', ()=> changeRandomDice(1));
+      btnMinusRandom.addEventListener('click', ()=> changeRandomDice(-1));
+      specificDiceSelection.addEventListener('change', updateControlsAndState);
 
-        function changeRandomDice(amount) {
-          const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
-          const potentialNumRandom = numRandomDice + amount;
-          if (potentialNumRandom + numSpecificDice <= MAX_TOTAL_DICE && potentialNumRandom >= 0) {
-            numRandomDice = potentialNumRandom;
-            randomDiceDisplay.textContent = numRandomDice;
-            updateControlsAndState();
-          }
-        }
+      const rand = (arr)=> arr[Math.floor(Math.random()*arr.length)];
 
-        btnPlusRandom.addEventListener('click', () => changeRandomDice(1));
-        btnMinusRandom.addEventListener('click', () => changeRandomDice(-1));
-        specificDiceSelection.addEventListener('change', updateControlsAndState);
-
-        const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-        function cargarHistorial() {
+      function cargarHistorial(){
+        try{
           const guardado = localStorage.getItem('emojiDiceHistory');
           const contadorGuardado = localStorage.getItem('emojiDiceCounter');
-          if (guardado) { historial = JSON.parse(guardado); }
-          if (contadorGuardado) { tiradaCounter = parseInt(contadorGuardado, 10); }
-          renderizarHistorial();
-        }
+          if(guardado) historial = JSON.parse(guardado) || [];
+          if(contadorGuardado) tiradaCounter = parseInt(contadorGuardado,10) || 1;
+        }catch{ historial = []; tiradaCounter = 1; }
+        renderizarHistorial();
+      }
 
-        function guardarHistorialEnStorage() {
+      function guardarHistorialEnStorage(){
+        try{
           localStorage.setItem('emojiDiceHistory', JSON.stringify(historial));
-          localStorage.setItem('emojiDiceCounter', tiradaCounter.toString());
-        }
+          localStorage.setItem('emojiDiceCounter', String(tiradaCounter));
+        }catch{ /* storage lleno o bloqueado */ }
+      }
 
-        function renderizarHistorial() {
-          historyList.innerHTML = '';
-          if (historial.length === 0) {
-            historyList.innerHTML = '<p class="text-gray-500 text-center mt-4">No hay tiradas guardadas.</p>';
-            return;
-          }
-          [...historial].reverse().forEach(tirada => {
-            const item = document.createElement('div');
-            item.className = 'p-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm';
-            item.innerHTML = `
-              <div class="flex justify-between items-start">
-                <div>
-                  <p class="font-bold text-gray-800">${tirada.name}</p>
-                  <p class="text-xs text-gray-500">${tirada.timestamp}</p>
-                </div>
-                <div class="flex items-center gap-3">
-                  <button class="load-btn font-semibold text-sm text-blue-600 hover:text-blue-800" data-id="${tirada.id}">Cargar</button>
-                  <button class="delete-btn text-red-500 hover:text-red-700 text-lg" data-id="${tirada.id}">🗑️</button>
-                </div>
+      function renderizarHistorial(){
+        historyList.innerHTML = '';
+        if(historial.length===0){
+          historyList.innerHTML = '<p class="text-gray-500 text-center mt-4">No hay tiradas guardadas.</p>';
+          return;
+        }
+        const frag = document.createDocumentFragment();
+        [...historial].reverse().forEach(tirada=>{
+          const item = document.createElement('div');
+          item.className = 'p-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm';
+          item.innerHTML = `
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-bold text-gray-800">${tirada.name}</p>
+                <p class="text-xs text-gray-500">${tirada.timestamp}</p>
               </div>
-            `;
-            historyList.appendChild(item);
-          });
-        }
-
-        function cargarTirada(id) {
-          const tirada = historial.find(t => t.id == id);
-          if (tirada) {
-            saveRollSection.classList.add('hidden');
-            emojiDisplay.innerHTML = '';
-            tirada.results.forEach((res, i) => {
-              const card = document.createElement('div');
-              card.className = 'bg-white rounded-xl shadow-lg pop-in';
-              card.style.animationDelay = `${i * 0.1}s`;
-              if (res.type === 'emoji') {
-                card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`;
-              } else {
-                card.innerHTML = `<img src="${res.value}" alt="Resultado de dado">`;
-              }
-              emojiDisplay.appendChild(card);
-            });
-            consigna.textContent = `Viendo "${tirada.name}" del ${tirada.timestamp}.`;
-            historyPanel.classList.remove('is-open');
-          }
-        }
-
-        rollDiceBtn.addEventListener('click', () => {
-          const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
-          const totalDice = numRandomDice + numSpecificDice;
-          if (totalDice === 0) {
-            alert("Por favor, selecciona al menos un dado para lanzar.");
-            return;
-          }
-          rollSound.currentTime = 0; rollSound.play();
-          emojiDisplay.innerHTML = '';
-          let results = [];
-          for (let i = 0; i < numRandomDice; i++) {
-            results.push({ type: 'emoji', value: getRandomItem(DADOS_EMOJIS_BASE) });
-          }
-          const checkedToggles = specificDiceSelection.querySelectorAll('input:checked');
-          checkedToggles.forEach(toggle => {
-            const diceName = toggle.value;
-            results.push({ type: 'image', value: getRandomItem(DADOS_FILOSOFICOS[diceName]) });
-          });
-
-          tiradaActualResultados = results;
-
-          results.forEach((res, i) => {
-            const card = document.createElement('div');
-            card.className = 'bg-white rounded-xl shadow-lg pop-in';
-            card.style.animationDelay = `${i * 0.1}s`;
-            if (res.type === 'emoji') {
-              card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`;
-            } else {
-              card.innerHTML = `<img src="${res.value}" alt="Resultado de dado">`;
-            }
-            emojiDisplay.appendChild(card);
-          });
-          consigna.textContent = "¡Aquí está tu resultado! Ponle un nombre y guárdalo.";
-
-          saveRollSection.classList.remove('hidden');
-          rollNameInput.value = '';
-          rollNameInput.focus();
+              <div class="flex items-center gap-3">
+                <button class="load-btn font-semibold text-sm text-blue-600 hover:text-blue-800" data-id="${tirada.id}">Cargar</button>
+                <button class="delete-btn text-red-500 hover:text-red-700 text-lg" data-id="${tirada.id}" aria-label="Eliminar">🗑️</button>
+              </div>
+            </div>`;
+          frag.appendChild(item);
         });
+        historyList.appendChild(frag);
+      }
 
-        startBtn.addEventListener('click', () => {
-          stopDiceVideo();
-          numRandomDice = 3;
-          randomDiceDisplay.textContent = numRandomDice;
-          populateDiceToggles();
-          updateControlsAndState();
-          emojiDisplay.innerHTML = '';
-          consigna.textContent = '¡Configura tu tirada y pulsa "Lanzar Dados"!';
-          saveRollSection.classList.add('hidden');
-          showSubScreen(screen2);
-        });
-
-        saveRollBtn.addEventListener('click', () => {
-          if (!tiradaActualResultados) return;
-          const nombre = rollNameInput.value.trim();
-          const nuevaTirada = {
-            id: Date.now(),
-            name: nombre || `Tirada ${tiradaCounter}`,
-            timestamp: new Date().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' }),
-            results: tiradaActualResultados
-          };
-          historial.push(nuevaTirada);
-          if (!nombre) { tiradaCounter++; }
-          guardarHistorialEnStorage();
-          renderizarHistorial();
-          saveRollSection.classList.add('hidden');
-          tiradaActualResultados = null;
-          consigna.textContent = '¡Tirada guardada en el historial!';
-        });
-
-        toggleHistoryBtn.addEventListener('click', () => { historyPanel.classList.toggle('is-open'); });
-        closeHistoryBtn.addEventListener('click', () => { historyPanel.classList.remove('is-open'); });
-        clearHistoryBtn.addEventListener('click', () => {
-          if (confirm('¿Estás seguro de que quieres borrar todo el historial? Esta acción no se puede deshacer.')) {
-            historial = []; tiradaCounter = 1; guardarHistorialEnStorage(); renderizarHistorial();
+      function cargarTirada(id){
+        const t = historial.find(x=> x.id == id);
+        if(!t) return;
+        saveRollSection.classList.add('hidden');
+        emojiDisplay.innerHTML = '';
+        const frag = document.createDocumentFragment();
+        t.results.forEach((res,i)=>{
+          const card = document.createElement('div');
+          card.className='bg-white rounded-xl shadow-lg pop-in';
+          card.style.animationDelay = `${i*0.1}s`;
+          if(res.type==='emoji'){
+            card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`;
+          }else{
+            const img = new Image();
+            img.src = res.value; img.alt = 'Resultado de dado'; img.loading = 'lazy'; img.decoding = 'async';
+            card.appendChild(img);
           }
+          frag.appendChild(card);
         });
-        historyList.addEventListener('click', (e) => {
-          const target = e.target.closest('button'); if (!target) return;
-          const id = target.getAttribute('data-id'); if (!id) return;
-          if (target.classList.contains('load-btn')) {
-            cargarTirada(id);
-          } else if (target.classList.contains('delete-btn')) {
-            if (confirm('¿Quieres eliminar esta tirada?')) {
-              historial = historial.filter(t => t.id != id); guardarHistorialEnStorage(); renderizarHistorial();
-            }
+        emojiDisplay.appendChild(frag);
+        consigna.textContent = `Viendo "${t.name}" del ${t.timestamp}.`;
+        historyPanel.classList.remove('is-open');
+        $('toggle-history-btn').setAttribute('aria-expanded','false');
+      }
+
+      rollDiceBtn.addEventListener('click', ()=>{
+        const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
+        const totalDice = numRandomDice + numSpecificDice;
+        if(totalDice===0){ alert('Selecciona al menos un dado.'); return; }
+        rollSound.currentTime = 0; rollSound.play().catch(()=>{});
+        emojiDisplay.innerHTML = '';
+        const results = [];
+        for(let i=0;i<numRandomDice;i++) results.push({type:'emoji', value: rand(SHARED_EMOJIS)});
+        specificDiceSelection.querySelectorAll('input:checked').forEach(t=>{
+          results.push({type:'image', value: rand(DADOS_FILOSOFICOS[t.value])});
+        });
+        tiradaActualResultados = results;
+
+        const frag = document.createDocumentFragment();
+        results.forEach((res,i)=>{
+          const card = document.createElement('div');
+          card.className='bg-white rounded-xl shadow-lg pop-in';
+          card.style.animationDelay = `${i*0.1}s`;
+          if(res.type==='emoji'){
+            card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`;
+          }else{
+            const img = new Image();
+            img.src = res.value; img.alt='Resultado de dado'; img.loading='lazy'; img.decoding='async';
+            card.appendChild(img);
           }
+          frag.appendChild(card);
         });
+        emojiDisplay.appendChild(frag);
+        consigna.textContent = '¡Aquí está tu resultado! Ponle un nombre y guárdalo.';
+        saveRollSection.classList.remove('hidden');
+        rollNameInput.value='';
+        rollNameInput.focus({preventScroll:true});
+      });
 
-        // Cargar historial al iniciar
-        (function cargarHistorialInicial(){ cargarHistorial(); })();
-      })();
+      startBtn.addEventListener('click', ()=>{
+        stopDiceVideo();
+        numRandomDice = 3; randomDiceDisplay.textContent = numRandomDice;
+        populateDiceToggles();
+        updateControlsAndState();
+        emojiDisplay.innerHTML='';
+        consigna.textContent = '¡Configura tu tirada y pulsa «Lanzar dados»!';
+        saveRollSection.classList.add('hidden');
+        showSubScreen(screen2);
+      });
 
-      /* =======================
-         Juego 2: Emoji Dice
-         ======================= */
-      (function emojiDiceMinigameManager(){
-        const screen1 = document.getElementById('ed-screen-1');
-        const screen2 = document.getElementById('ed-screen-2');
-
-        const home1 = document.getElementById('ed-home-btn-1');
-        const home2 = document.getElementById('ed-home-btn-2');
-        const backBtn = document.getElementById('ed-back-btn');
-        const startBtn = document.getElementById('ed-start-btn');
-
-        const emojiCountRange = document.getElementById('ed-emoji-count-range');
-        const emojiCountRangeValue = document.getElementById('ed-emoji-count-range-value');
-        const groupingSelect = document.getElementById('ed-grouping-select');
-        const customWordsTA = document.getElementById('ed-custom-words');
-
-        const emojiCountSelect = document.getElementById('ed-emoji-count-select');
-        const groupingSelectLive = document.getElementById('ed-grouping-select-live');
-        const emojiDisplay = document.getElementById('ed-emoji-display');
-        const wordDisplayCard = document.getElementById('ed-word-display-card');
-        const wordDisplay = document.getElementById('ed-word-display');
-        const consigna = document.getElementById('ed-consigna');
-        const rollBtn = document.getElementById('ed-roll-dice-btn');
-
-        const stepsSection = document.getElementById('ed-steps-section');
-        const stepsContainer = document.getElementById('ed-steps-container');
-        const emojiMainBlock = document.getElementById('ed-emoji-main-block');
-
-        const showSub = (el) => { screen1.classList.add('hidden'); screen2.classList.add('hidden'); el.classList.remove('hidden'); };
-
-        // Beep WebAudio
-        let audioCtx;
-        const beep = (freq=880, ms=120) => {
-          try {
-            audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.value = freq;
-            gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
-            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + ms/1000);
-            osc.connect(gain); gain.connect(audioCtx.destination);
-            osc.start(); osc.stop(audioCtx.currentTime + ms/1000 + 0.02);
-          } catch(e) {}
+      saveRollBtn.addEventListener('click', ()=>{
+        if(!tiradaActualResultados) return;
+        const nombre = rollNameInput.value.trim();
+        const nueva = {
+          id: Date.now(),
+          name: nombre || `Tirada ${tiradaCounter}`,
+          timestamp: new Date().toLocaleString('es-ES',{dateStyle:'short', timeStyle:'short'}),
+          results: tiradaActualResultados
         };
+        historial.push(nueva);
+        if(!nombre) tiradaCounter++;
+        guardarHistorialEnStorage();
+        renderizarHistorial();
+        saveRollSection.classList.add('hidden');
+        tiradaActualResultados = null;
+        consigna.textContent = '¡Tirada guardada en el historial!';
+      });
 
-        const EMOJIS = ['😂','😍','🤔','😎','😢','😡','🥳','🤯','😴','👍','👎','🙏','💪','👀','🧠','🐶','🐱','🐭','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🐔','🐧','🐦','🐤','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🐛','🦋','🐌','🐞','🐜','⚽️','🏀','🏈','⚾️','🎾','🏐','🏉','🎱','🏓','🏸','🥅','🏒','🏑','🏏','⛳️','🏹','🎣','🥊','🥋','🎽','⛸','🎿','⛷','🏂','🏋️‍♀️','🤼‍♀️','🤸‍♀️','🤺','🤾‍♀️','🏌️‍♀️','🏇','🏆','🥇','🥈','🥉','🎨','🎬','🎤','🎧','🎼','🎹','🥁','🎷','🎺','🎸','🎻','🎮','🧩','🎭','🚗','✈️','🚀','🛸','🚁','⛵️','🏰','🏠','❤️','💔','💯','🔥','✨','⭐️','⚡️','☀️','☁️','🌈','🌊','🍔','🍕','🍟','🎂','🍭','🍩','🍪','☕️','⏰','💡','💰','🔑','🎁','🎉'];
+      toggleHistoryBtn.addEventListener('click', ()=>{
+        const open = historyPanel.classList.toggle('is-open');
+        toggleHistoryBtn.setAttribute('aria-expanded', String(open));
+      });
+      closeHistoryBtn.addEventListener('click', ()=>{
+        historyPanel.classList.remove('is-open');
+        toggleHistoryBtn.setAttribute('aria-expanded','false');
+      });
+      document.addEventListener('keydown', (e)=>{
+        if(e.key==='Escape'){
+          historyPanel.classList.remove('is-open');
+          toggleHistoryBtn.setAttribute('aria-expanded','false');
+        }
+      });
 
-        const DEFAULT_WORDS = [
-          'pensar','crear','escribir','leer','reír','bailar','volar','nadar','hablar','escuchar','mirar','encontrar','ayudar','usar','abrir','cerrar','empezar','parar','caminar','cambiar','imaginar','compartir','ganar','construir','dibujar','cantar','explorar','descubrir','resolver','visitar','viajar','cocinar','ver','aprender',
-          'feliz','triste','grande','pequeño','rápido','lento','rojo','azul','verde','amarillo','soleado','lluvioso','nublado','valiente','fuerte','amable','listo','delicioso','bonito','asombroso','interesante','aburrido','nuevo','viejo','joven','ruidoso','silencioso','brillante','oscuro','pesado','ligero','bueno','malo','emocionado','cansado','enfadado','hambriento','sediento','frío','caliente','divertido','misterioso','mágico','gigante','minúsculo','colorido','invisible','extraño','fantástico','genial','maravilloso','pacífico','secreto','antiguo','moderno','rápidamente','lentamente','de repente','finalmente','después','antes','cuando','mientras','si','o','también','porque','entonces','cerca','lejos','encima','debajo','dentro','fuera'
-        ];
+      clearHistoryBtn.addEventListener('click', ()=>{
+        if(confirm('¿Borrar todo el historial?')){
+          historial = []; tiradaCounter = 1; guardarHistorialEnStorage(); renderizarHistorial();
+        }
+      });
+      historyList.addEventListener('click', (e)=>{
+        const btn = e.target.closest('button'); if(!btn) return;
+        const id = btn.getAttribute('data-id'); if(!id) return;
+        if(btn.classList.contains('load-btn')) cargarTirada(id);
+        else if(btn.classList.contains('delete-btn')){
+          if(confirm('¿Eliminar esta tirada?')){
+            historial = historial.filter(t=> t.id != id); guardarHistorialEnStorage(); renderizarHistorial();
+          }
+        }
+      });
 
-        const stepsData = [
-          { title: "PASO 1/3: PENSAR 🧠", instructions: "Comenta ideas con tu pareja/grupo." },
-          { title: "PASO 2/3: CREAR ✍️", instructions: "Escribid o decid la frase juntos." },
-          { title: "PASO 3/3: COMPARTIR 🎤", instructions: "¡Presentad vuestra frase a la clase!" }
-        ];
+      // Inicializar historial
+      cargarHistorial();
+    })();
 
-        let activeWords = [...DEFAULT_WORDS];
-        const rand = arr => arr[Math.floor(Math.random() * arr.length)];
-        const parseCustomWords = (raw) =>
-          (raw || '').split(/[\n,;]+/g).map(w => w.trim()).filter(Boolean).filter(w => w.length <= 30);
+    /* =======================
+       Juego 2: Emoji Dice
+       ======================= */
+    (function emojiDiceMinigameManager(){
+      const screen1 = $('ed-screen-1');
+      const screen2 = $('ed-screen-2');
+      const home1 = $('ed-home-btn-1');
+      const home2 = $('ed-home-btn-2');
+      const backBtn = $('ed-back-btn');
+      const startBtn = $('ed-start-btn');
 
-        const setEmojiGridCols = (n) => {
-          emojiDisplay.style.gridTemplateColumns = `repeat(${Math.min(n,6)}, minmax(64px, 1fr))`;
+      const emojiCountRange = $('ed-emoji-count-range');
+      const emojiCountRangeValue = $('ed-emoji-count-range-value');
+      const groupingSelect = $('ed-grouping-select');
+      const customWordsTA = $('ed-custom-words');
+
+      const emojiCountSelect = $('ed-emoji-count-select');
+      const groupingSelectLive = $('ed-grouping-select-live');
+      const emojiDisplay = $('ed-emoji-display');
+      const wordDisplayCard = $('ed-word-display-card');
+      const wordDisplay = $('ed-word-display');
+      const consigna = $('ed-consigna');
+      const rollBtn = $('ed-roll-dice-btn');
+
+      const stepsSection = $('ed-steps-section');
+      const stepsContainer = $('ed-steps-container');
+      const emojiMainBlock = $('ed-emoji-main-block');
+
+      const showSub = (el)=>{ screen1.classList.add('hidden'); screen2.classList.add('hidden'); el.classList.remove('hidden'); };
+
+      // WebAudio beep minimalista
+      let audioCtx;
+      const beep = (f=880, ms=120)=>{
+        try{
+          audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type='sine'; osc.frequency.value=f;
+          gain.gain.setValueAtTime(0.0001,audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.2,audioCtx.currentTime+0.01);
+          gain.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+ms/1000);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(); osc.stop(audioCtx.currentTime + ms/1000 + 0.02);
+        }catch{}
+      };
+
+      const DEFAULT_WORDS = [
+        'pensar','crear','escribir','leer','reír','bailar','volar','nadar','hablar','escuchar','mirar','encontrar','ayudar','usar','abrir','cerrar','empezar','parar','caminar','cambiar','imaginar','compartir','ganar','construir','dibujar','cantar','explorar','descubrir','resolver','visitar','viajar','cocinar','ver','aprender',
+        'feliz','triste','grande','pequeño','rápido','lento','rojo','azul','verde','amarillo','soleado','lluvioso','nublado','valiente','fuerte','amable','listo','delicioso','bonito','asombroso','interesante','aburrido','nuevo','viejo','joven','ruidoso','silencioso','brillante','oscuro','pesado','ligero','bueno','malo','emocionado','cansado','enfadado','hambriento','sediento','frío','caliente','divertido','misterioso','mágico','gigante','minúsculo','colorido','invisible','extraño','fantástico','genial','maravilloso','pacífico','secreto','antiguo','moderno','rápidamente','lentamente','de repente','finalmente','después','antes','cuando','mientras','si','o','también','porque','entonces','cerca','lejos','encima','debajo','dentro','fuera'
+      ];
+
+      const stepsData = [
+        { title:'PASO 1/3: PENSAR 🧠', instructions:'Comenta ideas con tu pareja/grupo.' },
+        { title:'PASO 2/3: CREAR ✍️',  instructions:'Escribid o decid la frase juntos.' },
+        { title:'PASO 3/3: COMPARTIR 🎤', instructions:'¡Presentad vuestra frase a la clase!' }
+      ];
+
+      let activeWords = [...DEFAULT_WORDS];
+      const rand = (arr)=> arr[Math.floor(Math.random()*arr.length)];
+      const parseCustomWords = (raw)=> (raw||'').split(/[\n,;]+/g).map(w=>w.trim()).filter(Boolean).filter(w=>w.length<=30);
+      const setEmojiGridCols = (n)=>{ emojiDisplay.style.gridTemplateColumns = `repeat(${Math.min(n,6)}, minmax(64px,1fr))`; };
+
+      const resetSteps = ()=>{
+        const grouping = groupingSelectLive.value;
+        if(grouping==='Individual'){
+          stepsContainer.classList.add('hidden');
+          emojiMainBlock.classList.remove('md:w-3/5');
+          emojiMainBlock.classList.add('w-full');
+          return;
+        }
+        stepsContainer.classList.remove('hidden');
+        emojiMainBlock.classList.remove('w-full');
+        emojiMainBlock.classList.add('md:w-3/5');
+
+        stepsSection.innerHTML = `
+          <div class="text-center"><h3 id="ed-step-title" class="text-2xl sm:text-3xl font-bold text-pink-600"></h3></div>
+          <div class="text-center flex-grow flex items-center justify-center p-2 min-h-[6rem]">
+            <p id="ed-step-instructions" class="text-gray-700 text-base sm:text-lg font-medium"></p>
+          </div>
+          <div class="flex justify-center">
+            <button id="ed-next-step-btn" class="py-2 px-6 rounded-xl shadow-md text-white font-semibold" style="background-image:linear-gradient(to right,#a2d2ff,#bde0fe);">➡️ Siguiente paso</button>
+          </div>`;
+        let currentStep=1;
+        const update=()=>{
+          const d = stepsData[currentStep-1];
+          $('ed-step-title').textContent = d.title;
+          $('ed-step-instructions').textContent = d.instructions;
+          $('ed-next-step-btn').textContent = (currentStep===3)?'🎉 Terminar':'➡️ Siguiente paso';
         };
-
-        const resetSteps = () => {
-          const grouping = groupingSelectLive.value;
-          if (grouping === 'Individual') {
+        $('ed-next-step-btn').addEventListener('click', ()=>{
+          if(currentStep<3){ currentStep++; update(); }
+          else{
             stepsContainer.classList.add('hidden');
             emojiMainBlock.classList.remove('md:w-3/5');
             emojiMainBlock.classList.add('w-full');
-            return;
           }
-          stepsContainer.classList.remove('hidden');
-          emojiMainBlock.classList.remove('w-full');
-          emojiMainBlock.classList.add('md:w-3/5');
-
-          stepsSection.innerHTML = `
-            <div class="text-center"><h3 id="ed-step-title" class="text-2xl sm:text-3xl font-bold text-pink-600"></h3></div>
-            <div class="text-center flex-grow flex items-center justify-center p-2 min-h-[6rem]">
-              <p id="ed-step-instructions" class="text-gray-700 text-base sm:text-lg font-medium"></p>
-            </div>
-            <div class="flex justify-center">
-              <button id="ed-next-step-btn" class="py-2 px-6 rounded-xl shadow-md text-white font-semibold"
-                      style="background-image: linear-gradient(to right, #a2d2ff, #bde0fe);">
-                ➡️ Siguiente paso
-              </button>
-            </div>
-          `;
-          let currentStep = 1;
-          const update = () => {
-            const d = stepsData[currentStep-1];
-            document.getElementById('ed-step-title').textContent = d.title;
-            document.getElementById('ed-step-instructions').textContent = d.instructions;
-            document.getElementById('ed-next-step-btn').textContent = (currentStep===3) ? '🎉 Terminar' : '➡️ Siguiente paso';
-          };
-          document.getElementById('ed-next-step-btn').addEventListener('click', () => {
-            if (currentStep < 3) { currentStep++; update(); }
-            else {
-              stepsContainer.classList.add('hidden');
-              emojiMainBlock.classList.remove('md:w-3/5');
-              emojiMainBlock.classList.add('w-full');
-            }
-          });
-          update();
-        };
-
-        const roll = () => {
-          const n = parseInt(emojiCountSelect.value, 10) || 3;
-          emojiDisplay.innerHTML = '';
-          setEmojiGridCols(n);
-          for (let i=0; i<n; i++){
-            const e = rand(EMOJIS);
-            const card = document.createElement('div');
-            card.className = 'bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in';
-            card.style.animationDelay = `${i*0.06}s`;
-            card.innerHTML = `<span class="text-5xl sm:text-7xl" style="text-shadow: 0 4px 10px rgba(0,0,0,0.15);">${e}</span>`;
-            emojiDisplay.appendChild(card);
-          }
-          const word = rand(activeWords);
-          document.getElementById('ed-word-display').textContent = word;
-          document.getElementById('ed-word-display-card').classList.remove('hidden');
-          consigna.textContent = `Usa los ${n} emojis y la palabra “${word}” para crear una frase.`;
-          beep(900,110);
-        };
-
-        // Navegación
-        const goHomeLocal = () => showScreen(warmupScreen);
-        home1.addEventListener('click', goHomeLocal);
-        home2.addEventListener('click', goHomeLocal);
-        backBtn.addEventListener('click', () => showSub(screen1));
-
-        // Entradas iniciales
-        emojiCountRange.addEventListener('input', () => {
-          emojiCountRangeValue.textContent = emojiCountRange.value;
         });
-        groupingSelectLive.addEventListener('change', resetSteps);
-        emojiCountSelect.addEventListener('change', () => setEmojiGridCols(parseInt(emojiCountSelect.value,10)));
+        update();
+      };
 
-        startBtn.addEventListener('click', () => {
-          const custom = parseCustomWords(customWordsTA.value);
-          activeWords = custom.length ? custom : [...DEFAULT_WORDS];
-          emojiCountSelect.value = emojiCountRange.value;
-          groupingSelectLive.value = groupingSelect.value;
+      const roll = ()=>{
+        const n = parseInt(emojiCountSelect.value,10) || 3;
+        emojiDisplay.innerHTML = '';
+        setEmojiGridCols(n);
+        const frag = document.createDocumentFragment();
+        for(let i=0;i<n;i++){
+          const e = rand(SHARED_EMOJIS);
+          const card = document.createElement('div');
+          card.className='bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in';
+          card.style.animationDelay = `${i*0.06}s`;
+          card.innerHTML = `<span class="text-5xl sm:text-7xl" style="text-shadow:0 4px 10px rgba(0,0,0,.15);">${e}</span>`;
+          frag.appendChild(card);
+        }
+        emojiDisplay.appendChild(frag);
+        const word = rand(activeWords);
+        wordDisplay.textContent = word;
+        wordDisplayCard.classList.remove('hidden');
+        consigna.textContent = `Usa los ${n} emojis y la palabra «${word}» para crear una frase.`;
+        beep(900,110);
+      };
 
-          emojiDisplay.innerHTML = '<div class="text-center text-gray-400 p-6">Pulsa “Tirar dados” para empezar</div>';
-          wordDisplayCard.classList.add('hidden');
-          consigna.textContent = '';
+      // Navegación
+      const goHomeLocal = ()=> showScreen($('warmup-screen'));
+      home1.addEventListener('click', goHomeLocal);
+      home2.addEventListener('click', goHomeLocal);
+      backBtn.addEventListener('click', ()=> showSub(screen1));
 
-          showSub(screen2);
-          resetSteps();
-        });
+      // Entradas iniciales
+      emojiCountRange.addEventListener('input', ()=>{ emojiCountRangeValue.textContent = emojiCountRange.value; });
+      groupingSelectLive.addEventListener('change', resetSteps);
+      emojiCountSelect.addEventListener('change', ()=> setEmojiGridCols(parseInt(emojiCountSelect.value,10)));
 
-        rollBtn.addEventListener('click', roll);
-      })();
-    });
+      startBtn.addEventListener('click', ()=>{
+        const custom = parseCustomWords(customWordsTA.value);
+        activeWords = custom.length ? custom : [...DEFAULT_WORDS];
+        emojiCountSelect.value = emojiCountRange.value;
+        groupingSelectLive.value = groupingSelect.value;
+        emojiDisplay.innerHTML = '<div class="text-center text-gray-400 p-6">Pulsa “Tirar dados” para empezar</div>';
+        wordDisplayCard.classList.add('hidden');
+        consigna.textContent = '';
+        showSub(screen2);
+        resetSteps();
+      });
+
+      rollBtn.addEventListener('click', roll);
+    })();
+  });
   </script>
 </body>
 </html>
