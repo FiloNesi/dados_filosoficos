@@ -167,6 +167,128 @@
             </div>
         </div>
         </div>
+<!-- MINI-JUEGO: Emoji Dice (Challenge aislado) -->
+<div id="emoji-dice-screen" class="screen hidden">
+  <!-- SUBPANTALLA 1 · Configuración -->
+  <div id="ed-screen-1" class="dice-sub-screen">
+    <main class="w-full max-w-3xl mx-auto text-center flex flex-col gap-4">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase text-[#FF6F61]"
+          style="text-shadow: -2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,0.1);">
+        Emoji Dice
+      </h1>
+
+      <section class="w-full bg-white/80 rounded-2xl shadow p-4 text-left space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Nº de emojis -->
+          <div>
+            <label class="font-bold text-gray-700 text-sm">🎲 Nº de emojis (2–6)</label>
+            <div class="flex items-center gap-3 mt-1">
+              <input id="ed-emoji-count-range" type="range" min="2" max="6" value="3" class="w-full">
+              <span id="ed-emoji-count-range-value" class="inline-block w-6 text-center font-bold">3</span>
+            </div>
+          </div>
+          <!-- Agrupación -->
+          <div>
+            <label class="font-bold text-gray-700 text-sm">👥 Agrupación</label>
+            <select id="ed-grouping-select" class="w-full rounded-xl border-0 bg-white shadow-sm px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
+              <option value="Individual">Individual 👤</option>
+              <option value="Pairs">Parejas 👥</option>
+              <option value="Group">Grupo 👨‍👩‍👧‍👦</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Lista personalizada -->
+        <div>
+          <label class="font-bold text-gray-700 text-sm block mb-1">📝 Lista de palabras del reto (opcional)</label>
+          <p class="text-xs text-gray-600 mb-2">Una por línea o separadas por comas. Si lo dejas vacío se usa la lista por defecto.</p>
+          <textarea id="ed-custom-words" rows="4" class="w-full rounded-xl border border-gray-200 p-3"
+                    placeholder="ej.: rápido
+misterioso, espacio, saltar, brillante"></textarea>
+        </div>
+      </section>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button id="ed-home-btn-1" class="bg-white text-gray-700 font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all py-2 px-5 shadow-md hover:shadow-lg">
+          <span class="text-xl">🏠</span><span>Inicio</span>
+        </button>
+        <button id="ed-start-btn" class="font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all text-white py-2 px-6"
+                style="background-image: linear-gradient(135deg, #FFC894 0%, #FF9A8B 100%); box-shadow: 0 4px 20px rgba(255, 154, 139, 0.35); ">
+          <span class="text-2xl">▶️</span><span>Empezar</span>
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- SUBPANTALLA 2 · Juego -->
+  <div id="ed-screen-2" class="dice-sub-screen hidden">
+    <div class="w-full max-w-5xl flex flex-col gap-4">
+      <header class="text-center">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase text-[#FF6F61]"
+            style="text-shadow: -1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,0.1);">
+          Emoji Dice
+        </h1>
+      </header>
+
+      <!-- Ajustes rápidos -->
+      <div class="p-3 rounded-2xl bg-white/80 shadow flex flex-wrap items-center gap-3">
+        <div class="flex items-center gap-2">
+          <label class="font-bold text-gray-700 text-sm">🎲 Nº de emojis</label>
+          <select id="ed-emoji-count-select" class="rounded-lg border border-gray-200 px-2 py-1">
+            <option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2">
+          <label class="font-bold text-gray-700 text-sm">👥 Agrupación</label>
+          <select id="ed-grouping-select-live" class="rounded-lg border border-gray-200 px-2 py-1">
+            <option value="Individual">Individual</option>
+            <option value="Pairs">Parejas</option>
+            <option value="Group">Grupo</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row gap-4 w-full">
+        <div id="ed-emoji-main-block" class="w-full p-4 rounded-2xl space-y-4 flex flex-col" style="background-color: #eef4ff;">
+          <section class="flex flex-col items-center justify-center space-y-4 flex-grow">
+            <!-- Emojis -->
+            <div id="ed-emoji-display" class="grid gap-3 sm:gap-5 w-full max-w-2xl mx-auto"
+                 style="grid-template-columns: repeat(3, minmax(64px,1fr));"></div>
+
+            <!-- Palabra del reto -->
+            <div id="ed-word-display-card" class="hidden rounded-xl shadow-lg px-4 py-2 bg-[#dcd6ff]">
+              <span class="text-white font-bold">Palabra del reto: </span>
+              <span id="ed-word-display" class="text-white font-extrabold"></span>
+            </div>
+
+            <!-- Consigna -->
+            <p id="ed-consigna" class="text-center text-gray-800 text-base sm:text-lg md:text-xl px-2 flex-grow flex items-center justify-center min-h-[3rem]"></p>
+
+            <!-- Tirar dados -->
+            <button id="ed-roll-dice-btn"
+                    class="group font-bold text-white py-3 px-6 sm:px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-lg sm:text-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 focus:ring-offset-gray-50 transition-all"
+                    style="background-image: linear-gradient(to right, #ff9a8b, #ff6a88);">
+              <span class="text-2xl sm:text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span>
+              <span>Tirar dados</span>
+            </button>
+          </section>
+        </div>
+
+        <!-- Pasos cooperativos -->
+        <div id="ed-steps-container" class="w-full md:w-2/5">
+          <section id="ed-steps-section" class="p-4 bg-white/60 rounded-2xl h-full flex flex-col justify-between"></section>
+        </div>
+      </div>
+
+      <footer class="p-2">
+        <div class="flex justify-center items-center gap-4">
+          <button id="ed-back-btn" class="bg-white font-bold text-[#4A4A4A] py-1 px-4 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all">⬅️ Atrás</button>
+          <button id="ed-home-btn-2" class="bg-white font-bold text-[#4A4A4A] py-1 px-4 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all no-underline">🏠 Inicio</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
 
     <!-- [CORRECCIÓN] Quitamos la clase "hidden" para que el panel se oculte solo mediante translateX -->
     <div id="history-panel" class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl p-4 flex flex-col transition-transform transform translate-x-full z-20">
