@@ -17,13 +17,31 @@
     }
     html,body{height:100%;width:100%;margin:0;padding:0}
     body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-    .screen{width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;box-sizing:border-box;transition:opacity .3s ease-in-out}
+    .screen{
+        width:100%;
+        height:100vh;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:flex-start;
+        padding:1rem;
+        box-sizing:border-box;
+        transition:opacity .3s ease-in-out
+    }
     .hidden{display:none!important}
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     @keyframes popIn{0%{opacity:0;transform:scale(.8)}80%{opacity:1;transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
     @keyframes animate-border{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-    #warmup-screen{font-family:'Nunito',sans-serif;background:radial-gradient(circle at 50% 50%,#e6f7f3,#d0f0e8);color:#3d4f63;text-align:center;position:relative;overflow-y:auto}
+    #warmup-screen{
+        font-family:'Nunito',sans-serif;
+        background:radial-gradient(circle at 50% 50%,#e6f7f3,#d0f0e8);
+        color:#3d4f63;
+        text-align:center;
+        position:relative;
+        overflow-y:auto;
+        justify-content: center;
+    }
     #warmup-screen .main-container{position:relative;z-index:1;width:100%;max-width:1300px;display:flex;flex-direction:column;align-items:center;gap:1rem;animation:fadeIn 1s ease-in-out}
     #warmup-screen .main-title{font-family:'Fredoka',sans-serif;font-size:clamp(2.5rem,8vw,3.2rem);font-weight:700;color:#E5989B;text-shadow:2px 2px 0 #fff,4px 4px 8px rgba(0,0,0,.1);margin:0;line-height:1.1}
     #warmup-screen .subtitle{font-size:clamp(1rem,4vw,1.1rem);font-weight:400;color:#5a6b80;margin-top:.25rem}
@@ -40,9 +58,10 @@
     #warmup-screen .btn-4{background-image:linear-gradient(to right,#fdffb6,#ffd6a5 51%,#fdffb6 100%)}
     #warmup-screen .footer-text{margin-top:1rem;font-family:'Nunito',sans-serif;font-size:12px;color:#6d6d6d;opacity:.7}
 
-    #dice-challenge-screen, #emoji-dice-screen, #this-or-that-screen {font-family:'Nunito',sans-serif;background-color:var(--bg-cream);background-image:linear-gradient(to bottom,#fefae0 0%,#fde4cf 100%);position:relative;overflow: hidden;justify-content:flex-start}
+    #dice-challenge-screen, #emoji-dice-screen, #this-or-that-screen {font-family:'Nunito',sans-serif;background-color:var(--bg-cream);background-image:linear-gradient(to bottom,#fefae0 0%,#fde4cf 100%);position:relative;justify-content:flex-start}
+    
     .screen-content-wrapper{width:100%;height:100%;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
-    .dice-sub-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:100%;padding:1rem;box-sizing:border-box}
+    .dice-sub-screen{display:flex;flex-direction:column;align-items:center; justify-content:flex-start;width:100%;min-height:100%;padding:1rem;box-sizing:border-box}
     #dice-challenge-screen h1, #emoji-dice-screen h1 {font-family:'Fredoka',sans-serif}
     .pop-in{animation:popIn .4s ease-out forwards}
     .emoji-shadow{text-shadow:0 4px 10px rgba(0,0,0,.15)}
@@ -63,7 +82,6 @@
     #history-panel.is-open{transform:translateX(0)}
     @media (prefers-reduced-motion: reduce){.pop-in{animation:none}}
     
-    /* --- Estilos Pantalla "Secret Message" --- */
     #secret-message-screen {
         font-family: 'Nunito', sans-serif;
         background-color: #E8D9FF;
@@ -78,7 +96,7 @@
         max-height: none;
         overflow: visible;
     }
-    @media (min-width: 1024px) { /* lg breakpoint */
+    @media (min-width: 1024px) {
         #secret-message-screen .app-split-container {
             min-height: calc(100vh - 2rem);
             max-height: calc(100vh - 2rem);
@@ -156,18 +174,6 @@
         #secret-message-screen .flip-card { width: 4.5rem; height: 4.5rem; margin: 0.25rem; }
         #secret-message-screen .flip-card-front, #secret-message-screen .flip-card-back { font-size: 3rem; border-radius: 1rem; }
     }
-    #secret-message-screen .video-card {
-        background-color: rgba(255, 255, 255, 0.6); backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 1.5rem;
-        padding: 1rem; text-align: center;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        width: 100%; max-width: 450px; position: relative;
-    }
-    #secret-message-screen .video-container { position: relative; border-radius: 1rem; overflow: hidden; }
-    #secret-message-screen #sm-intro-video { width: 100%; display: block; filter: blur(8px); transition: filter 0.5s ease; }
-    #secret-message-screen #sm-intro-video.unblur { filter: blur(0px); }
-    #secret-message-screen #watch-intro-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-    #secret-message-screen .intro-title { color: #772D8B; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
     #secret-message-screen #game-ui-panel, #secret-message-screen #code-table-panel {
         overflow-y: visible; max-height: none; flex-shrink: 0;
     }
@@ -183,6 +189,7 @@
   </style>
 </head>
 <body>
+  <!-- PANTALLA PRINCIPAL -->
   <div id="warmup-screen" class="screen">
     <div class="main-container">
       <div class="title-container">
@@ -207,11 +214,12 @@
     <footer class="footer-text">Basado en emoji-warm-up-games de © Tamara Llorens · Chromtastic Teacher</footer>
   </div>
 
+  <!-- JUEGO 1: DICE CHALLENGE (Lanzar dados) -->
   <div id="dice-challenge-screen" class="screen hidden">
     <div class="screen-content-wrapper">
       <div class="dice-sub-screen">
         <div class="w-full max-w-5xl flex flex-col items-center gap-4">
-          <header class="text-center flex-shrink-0">
+          <header class="text-center flex-shrink-0 pt-4">
             <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,0.1);">Crea tu Tirada</h1>
           </header>
           <div id="dice-config-panel" class="w-full p-4 rounded-2xl space-y-4" style="background-color:#fff8f2;box-shadow:0 6px 12px rgba(0,0,0,.06);">
@@ -254,6 +262,7 @@
     </div>
   </div>
 
+  <!-- JUEGO 2: THIS OR THAT (¿Cuál eliges?) -->
   <div id="this-or-that-screen" class="screen hidden">
     <div id="tot-game-screen" class="w-full max-w-7xl mx-auto text-center flex flex-col justify-around h-full">
         <audio id="tot-background-music" loop>
@@ -261,11 +270,11 @@
         </audio>
         <div>
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-slate-700 tracking-tight flex items-center justify-center">
-                This or That
+                ¿Cuál eliges?
                 <span id="speaking-icon-game" class="ml-4 text-5xl md:text-6xl lg:text-7xl">🗣️</span>
             </h1>
             <p class="mt-2 mb-4 lg:mb-6 text-xl md:text-2xl lg:text-3xl font-semibold" style="color: #666666;">
-                👆 Choose one and say why! 🎤
+                👆 Elige una de las dos opciones y explica por qué 🎤
             </p>
         </div>
         <div id="cardsContainer" class="flex-grow flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-8 lg:gap-12">
@@ -293,7 +302,9 @@
     </div>
 </div>
 
+  <!-- JUEGO 3: EMOJI DICE (Conceptos filosóficos) -->
   <div id="emoji-dice-screen" class="screen hidden">
+    <!-- SUBPANTALLA 1 · Configuración -->
     <div id="ed-screen-1" class="dice-sub-screen">
       <main class="w-full max-w-3xl mx-auto text-center flex flex-col gap-4">
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,.1);">Conceptos filosóficos</h1>
@@ -327,6 +338,7 @@
         </div>
       </main>
     </div>
+    <!-- SUBPANTALLA 2 · Juego -->
     <div id="ed-screen-2" class="dice-sub-screen hidden">
       <div class="w-full max-w-5xl flex flex-col gap-4">
         <header class="text-center">
@@ -374,108 +386,86 @@
     </div>
   </div>
 
+  <!-- Pantalla 4: Secret Message -->
   <div id="secret-message-screen" class="screen hidden">
-      <div id="sm-intro-screen" class="flex flex-col items-center justify-center">
-          <div class="video-card">
-              <h1 class="text-3xl sm:text-4xl md:text-5xl intro-title">Secret Emoji Message</h1>
-              <p class="mt-2 text-purple-700">Become an English Spy!</p>
-              <div class="video-container mt-4">
-                  <video id="sm-intro-video" muted playsinline>
-                      <source src="https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/emoji%20secret%20code%20video%20intro.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                  </video>
-                  <button id="watch-intro-btn" class="py-2 px-4 text-base sm:py-3 sm:px-6 sm:text-lg rounded-xl font-bold btn btn-lilac flex items-center gap-2">
-                      🔍 Watch Instructions
-                  </button>
-              </div>
-          </div>
-          <div class="flex flex-col sm:flex-row gap-4 mt-4">
-              <button id="sm-home-btn-intro-main" class="py-3 px-6 text-lg sm:py-4 sm:px-8 sm:text-xl rounded-xl font-bold btn btn-pink flex items-center gap-2">
-                  🏠 Home
-              </button>
-              <button id="start-mission-btn" class="py-3 px-6 text-lg sm:py-4 sm:px-8 sm:text-xl rounded-xl font-bold btn btn-lilac">
-                  🔐 Start Your Secret Mission
-              </button>
-          </div>
-      </div>
-      <div id="main-app-container" class="hidden flex-col md:flex-row w-full max-w-6xl mx-auto gap-4 p-4 app-split-container">
+      <div id="main-app-container" class="flex flex-col md:flex-row w-full max-w-6xl mx-auto gap-4 p-4 app-split-container">
+          <!-- Left Panel: Game UI -->
           <div id="game-ui-panel" class="relative w-full rounded-2xl shadow-xl p-4 sm:p-8 lg:p-4 md:flex-1">
               <header class="text-center mb-6 pt-12 sm:pt-0 lg:pt-0">
-                  <h1 class="text-3xl sm:text-4xl font-extrabold text-purple-800 tracking-wider">SECRET EMOJI MESSAGE</h1>
-                  <p class="text-purple-600">Become an English Spy!</p>
+                  <h1 class="text-3xl sm:text-4xl font-extrabold text-purple-800 tracking-wider">MENSAJE SECRETO</h1>
+                  <p class="text-purple-600">¡Adelante espía filosófico!</p>
               </header>
               <div class="tabs-container flex justify-center mb-8">
-                  <button id="tab-decode" class="tab tab-active flex-1 py-2 px-4 flex items-center justify-center gap-2"><span class="text-xl sm:text-2xl">🕵️‍♂️</span> Decode</button>
-                  <button id="tab-encode" class="tab flex-1 py-2 px-4 flex items-center justify-center gap-2"><span class="text-xl sm:text-2xl">✏️</span> Create</button>
+                  <button id="tab-decode" class="tab tab-active flex-1 py-2 px-4 flex items-center justify-center gap-2"><span class="text-xl sm:text-2xl">🕵️‍♂️</span> Descodifica</button>
+                  <button id="tab-encode" class="tab flex-1 py-2 px-4 flex items-center justify-center gap-2"><span class="text-xl sm:text-2xl">✏️</span> Crea un mensaje</button>
               </div>
               <div id="decode-section">
                   <div id="level-selection-area" class="text-center p-4">
-                      <h3 class="text-2xl font-bold text-purple-800 mb-4">Choose your level</h3>
+                      <h3 class="text-2xl font-bold text-purple-800 mb-4">Elige el nivel de dificultad</h3>
                       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                          <button id="level-easy-btn" class="py-3 px-6 rounded-xl font-bold text-lg btn btn-lilac">Easy (Words)</button>
-                          <button id="level-hard-btn" class="py-3 px-6 rounded-xl font-bold text-lg btn btn-pink">Hard (Sentences)</button>
+                          <button id="level-easy-btn" class="py-3 px-6 rounded-xl font-bold text-lg btn btn-lilac">Fácil (Autores)</button>
+                          <button id="level-hard-btn" class="py-3 px-6 rounded-xl font-bold text-lg btn btn-pink">Difícil (Frases)</button>
                       </div>
                   </div>
                   <div id="game-area" class="hidden">
                       <div class="relative text-center bg-purple-100 p-4 rounded-xl">
                           <div id="confetti-container" class="absolute top-0 left-1/2 -translate-x-1/2"></div>
-                          <p class="font-bold text-purple-800 mb-2">Can you decode the message?</p>
+                          <p class="font-bold text-purple-800 mb-2">¿Puedes descifrar este mensaje?</p>
                           <div id="secret-message-display" class="flex flex-wrap justify-center items-center min-h-[4.5rem] sm:min-h-[5.5rem] lg:min-h-[4rem]"></div>
                       </div>
                       <div class="mt-4 flex flex-col items-center gap-3">
-                          <input type="text" id="decode-input" placeholder="Type the secret message…" class="w-full max-w-md p-3 text-center border-2 border-purple-300 rounded-full styled-input focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition">
+                          <input type="text" id="decode-input" placeholder="Escribe aquí el mensaje secreto..." class="w-full max-w-md p-3 text-center border-2 border-purple-300 rounded-full styled-input focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition">
                           <p id="feedback-message" class="h-6 text-lg font-bold">&nbsp;</p>
                       </div>
                       <div class="mt-4 grid grid-cols-2 gap-4 text-center">
-                          <button id="check-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-lilac">✔️ Check!</button>
-                          <button id="new-message-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-pink">🔄 New</button>
-                          <button id="show-code-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-pink col-span-2 md:hidden">🕵️ Show Code</button>
-                          <button id="read-aloud-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-speaker col-span-2 flex items-center justify-center gap-3"><span class="text-2xl sm:text-3xl">📢</span> Read it aloud</button>
+                          <button id="check-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-lilac">✔️ Comprueba</button>
+                          <button id="new-message-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-pink">🔄 Nuevo</button>
+                          <button id="show-code-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-pink col-span-2 md:hidden">🕵️ Mostrar código</button>
+                          <button id="read-aloud-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-speaker col-span-2 flex items-center justify-center gap-3"><span class="text-2xl sm:text-3xl">📢</span> ¡Compártelo!</button>
                       </div>
                       <div class="text-center mt-4">
-                          <button id="change-level-btn" class="text-purple-600 hover:text-purple-900 font-bold underline">Change Level</button>
+                          <button id="change-level-btn" class="text-purple-600 hover:text-purple-900 font-bold underline">Cambia de nivel</button>
                       </div>
                   </div>
               </div>
               <div id="encode-section" class="hidden">
                   <div id="encode-input-area" class="text-center">
-                      <label for="encode-input" class="block font-bold text-purple-800 mb-2 flex items-center justify-center gap-2">Write your own secret message <span class="text-2xl">🔍</span></label>
+                      <label for="encode-input" class="block font-bold text-purple-800 mb-2 flex items-center justify-center gap-2">Escribe tu propio mensaje secreto <span class="text-2xl">🔍</span></label>
                       <div class="input-wrapper mt-2">
                           <div id="input-watermark" class="input-watermark text-3xl sm:text-5xl">🕵️‍♂️ 🔎 💬</div>
-                          <textarea id="encode-input" rows="3" placeholder="e.g., Hello friend" class="w-full p-3 border-4 border-purple-300 rounded-3xl styled-input focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition"></textarea>
+                          <textarea id="encode-input" rows="3" placeholder="Por ejemplo: Hola" class="w-full p-3 border-4 border-purple-300 rounded-3xl styled-input focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition"></textarea>
                       </div>
                       <button id="encode-btn" class="btn btn-yellow mt-4 w-full max-w-sm py-3 px-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3">
                           <span class="lock-icon text-3xl transition-transform">🔐</span>
-                          Create Message
+                          Crea un mensaje
                       </button>
                   </div>
                   <div id="encode-reveal-area" class="hidden text-center">
                       <div class="bg-purple-100 p-6 rounded-xl">
-                          <h3 class="text-2xl font-bold text-purple-800 mb-4">Awesome! Your secret emoji message is ready! 🥳</h3>
+                          <h3 class="text-2xl font-bold text-purple-800 mb-4">¡Genial! ¡Tu mensaje secreto de emoji está listo! 🥳</h3>
                           <div id="encoded-output" class="flex flex-wrap justify-center items-center min-h-[4.5rem] sm:min-h-[5.5rem] lg:min-h-[4rem]"></div>
-                          <button id="back-to-create-btn" class="btn btn-pink mt-4 w-full max-w-xs py-3 px-4 rounded-xl font-bold text-lg">✍️ Create Another</button>
+                          <button id="back-to-create-btn" class="btn btn-pink mt-4 w-full max-w-xs py-3 px-4 rounded-xl font-bold text-lg">✍️ Crea otro</button>
                       </div>
                   </div>
               </div>
           </div>
+          <!-- Right Panel: Emoji Code Table -->
           <div id="code-table-panel" class="w-full bg-white/80 rounded-2xl shadow-xl border-2 border-purple-300 p-4 lg:p-4 md:flex-1 flex-col">
               <div class="text-center mb-4 p-2 bg-purple-100 rounded-lg">
-                  <h3 class="text-xl font-bold text-purple-800 flex items-center justify-center gap-2"><span>🗝️</span> Emoji Code</h3>
-                  <p class="text-xs text-purple-500 mt-1"><span class="italic">Pssst… True spies always keep the code secret!</span> 😉</p>
+                  <h3 class="text-xl font-bold text-purple-800 flex items-center justify-center gap-2"><span>🗝️</span> Código Emoji</h3>
+                  <p class="text-xs text-purple-500 mt-1"><span class="italic">Pssst… ¡Los verdaderos espías siempre mantienen el código en secreto!</span> 😉</p>
               </div>
               <div id="emoji-code-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 md:gap-3 flex-grow overflow-y-auto p-1"></div>
               <div class="mt-6 flex justify-center gap-4">
                   <button id="sm-home-btn" title="Back to Home" class="nav-btn btn-pink">
-                      🏠 <span class="ml-1">Home</span>
-                  </button>
-                  <button id="sm-back-to-intro-btn" title="Back to Intro" class="nav-btn btn-lilac">
-                      ⬅️ <span class="ml-1">Back</span>
+                      🏠 <span class="ml-1">Inicio</span>
                   </button>
               </div>
           </div>
       </div>
   </div>
 
+  <!-- PANEL HISTORIAL (Para 'Lanzar Dados') -->
   <div id="history-panel" class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl p-4 flex flex-col transition-transform translate-x-full z-20" role="dialog" aria-modal="true" aria-labelledby="history-title">
     <div class="flex justify-between items-center mb-4 flex-shrink-0">
       <h2 id="history-title" class="text-2xl font-bold text-gray-800">Historial de tiradas</h2>
@@ -508,6 +498,7 @@
 
       // --- Gestor del Juego 1: "Lanzar Dados" ---
       const diceGameManager = (() => {
+        // ... (código del juego 1 sin cambios)
         const homeBtn2 = $('dice-home-btn-2');
         const consigna = $('consigna');
         const rollDiceBtn = $('roll-dice-btn');
@@ -526,212 +517,30 @@
         const closeHistoryBtn = $('close-history-btn');
         const historyList = $('history-list');
         const clearHistoryBtn = $('clear-history-btn');
-
         const DADOS_FILOSOFICOS = { "Conceptos": ["imagenes/dios.png", "imagenes/libertad.png", "imagenes/tiempo.png", "imagenes/destino.png", "imagenes/esencia.png"], "Autores": ["imagenes/autores/platon.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png", "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png", "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"], "Acciones": ["imagenes/acciones/espiral.png", "imagenes/acciones/explosion.png", "imagenes/acciones/flechas.png", "imagenes/acciones/mano.png", "imagenes/acciones/mascara.png", "imagenes/acciones/caminar.png", "imagenes/acciones/construir.png", "imagenes/acciones/mirar.png", "imagenes/acciones/pensar.png", "imagenes/acciones/saltar.png", "imagenes/acciones/toser.png", "imagenes/acciones2/paracaidas.png"], "Objetos": ["imagenes/objetos1/arcoiris.png", "imagenes/objetos1/balanza.png", "imagenes/objetos1/candado.png", "imagenes/objetos1/llave.png", "imagenes/objetos1/lupa.png"], "Personajes": ["imagenes/personajes/astronauta.png", "imagenes/personajes/mago.png", "imagenes/personajes/nina.png", "imagenes/personajes/reina.png", "imagenes/personajes/superheroe.png"], "Derechos Humanos": ["imagenes/ddhh/1_dignidad.png", "imagenes/ddhh/2_igualdad.png", "imagenes/ddhh/3_vida.png", "imagenes/ddhh/4_no_esclavitud.png", "imagenes/ddhh/5_no_tortura.png", "imagenes/ddhh/6_personalidad_juridica.png", "imagenes/ddhh/7_igualdad_ley.png", "imagenes/ddhh/8_derecho_reparacion.png", "imagenes/ddhh/9_no_detencion_ilegal.png", "imagenes/ddhh/10_juicio_justo.png", "imagenes/ddhh/11_inocencia.png", "imagenes/ddhh/12_intimidad.png", "imagenes/ddhh/13_libre_desplazamiento.png", "imagenes/ddhh/14_asilo.png", "imagenes/ddhh/15_nacionalidad.png", "imagenes/ddhh/16_familia.png", "imagenes/ddhh/17_propiedad.png", "imagenes/ddhh/18_libertad_religiosa.png", "imagenes/ddhh/19_libertad_expresion.png", "imagenes/ddhh/20_libertad_asociacion.png"] };
         const MAX_TOTAL_DICE = 9;
         let numRandomDice = 3;
         let historial = [];
         let tiradaActualResultados = null;
         let tiradaCounter = 1;
-
         const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-        function updateControlsAndState() {
-            const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
-            const totalDice = numRandomDice + numSpecificDice;
-            totalDiceLaunchDisplay.textContent = `${totalDice} Dado${totalDice !== 1 ? 's' : ''}`;
-            btnMinusRandom.disabled = numRandomDice <= 0;
-            btnPlusRandom.disabled = totalDice >= MAX_TOTAL_DICE;
-            const toggles = specificDiceSelection.querySelectorAll('input[type="checkbox"]');
-            const lock = totalDice >= MAX_TOTAL_DICE;
-            toggles.forEach(t => { t.disabled = !t.checked && lock; });
-        }
-
-        function populateDiceToggles() {
-            specificDiceSelection.innerHTML = '';
-            const frag = document.createDocumentFragment();
-            Object.keys(DADOS_FILOSOFICOS).forEach(name => {
-                const id = `toggle-${name.replace(/\s+/g, '-')}`;
-                const wrapper = document.createElement('div');
-                wrapper.className = 'dice-toggle-wrapper';
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox'; checkbox.id = id; checkbox.value = name;
-                const label = document.createElement('label');
-                label.className = 'dice-toggle-label'; label.htmlFor = id; label.textContent = name;
-                wrapper.append(checkbox, label);
-                frag.appendChild(wrapper);
-            });
-            specificDiceSelection.appendChild(frag);
-        }
-
-        function init() {
-            homeBtn2.addEventListener('click', goHome);
-            btnPlusRandom.addEventListener('click', () => changeRandomDice(1));
-            btnMinusRandom.addEventListener('click', () => changeRandomDice(-1));
-            specificDiceSelection.addEventListener('change', updateControlsAndState);
-            rollDiceBtn.addEventListener('click', rollDice);
-            saveRollBtn.addEventListener('click', saveRoll);
-            toggleHistoryBtn.addEventListener('click', () => {
-                const open = historyPanel.classList.toggle('is-open');
-                toggleHistoryBtn.setAttribute('aria-expanded', String(open));
-            });
-            closeHistoryBtn.addEventListener('click', () => historyPanel.classList.remove('is-open'));
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') historyPanel.classList.remove('is-open');
-            });
-            clearHistoryBtn.addEventListener('click', () => {
-                if (confirm('¿Borrar todo el historial?')) {
-                    historial = []; tiradaCounter = 1; guardarHistorialEnStorage(); renderizarHistorial();
-                }
-            });
-            historyList.addEventListener('click', (e) => {
-                const btn = e.target.closest('button');
-                if (!btn) return;
-                const id = btn.dataset.id;
-                if (!id) return;
-                if (btn.classList.contains('load-btn')) cargarTirada(id);
-                else if (btn.classList.contains('delete-btn')) {
-                    if (confirm('¿Eliminar esta tirada?')) {
-                        historial = historial.filter(t => t.id != id); guardarHistorialEnStorage(); renderizarHistorial();
-                    }
-                }
-            });
-            cargarHistorial();
-        }
-
-        function startGame() {
-            showScreen(diceChallengeScreen);
-            numRandomDice = 3;
-            randomDiceDisplay.textContent = numRandomDice;
-            populateDiceToggles();
-            updateControlsAndState();
-            emojiDisplay.innerHTML = '';
-            consigna.textContent = '¡Configura tu tirada y pulsa «Lanzar dados»!';
-            saveRollSection.classList.add('hidden');
-        }
-
-        function changeRandomDice(delta) {
-            const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
-            const next = numRandomDice + delta;
-            if (next + numSpecificDice <= MAX_TOTAL_DICE && next >= 0) {
-                numRandomDice = next;
-                randomDiceDisplay.textContent = numRandomDice;
-                updateControlsAndState();
-            }
-        }
-        
-        function rollDice() {
-            const totalDice = numRandomDice + specificDiceSelection.querySelectorAll('input:checked').length;
-            if (totalDice === 0) { alert('Selecciona al menos un dado.'); return; }
-            rollSound.currentTime = 0; rollSound.play().catch(()=>{});
-            emojiDisplay.innerHTML = '';
-            const results = [];
-            for (let i = 0; i < numRandomDice; i++) results.push({ type: 'emoji', value: rand(SHARED_EMOJIS) });
-            specificDiceSelection.querySelectorAll('input:checked').forEach(t => {
-                results.push({ type: 'image', value: rand(DADOS_FILOSOFICOS[t.value]) });
-            });
-            tiradaActualResultados = results;
-            const frag = document.createDocumentFragment();
-            results.forEach((res, i) => {
-                const card = document.createElement('div');
-                card.className = 'bg-white rounded-xl shadow-lg pop-in';
-                card.style.animationDelay = `${i * 0.1}s`;
-                if (res.type === 'emoji') {
-                    card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`;
-                } else {
-                    const img = new Image();
-                    img.src = res.value; img.alt = 'Resultado de dado'; img.loading = 'lazy';
-                    card.appendChild(img);
-                }
-                frag.appendChild(card);
-            });
-            emojiDisplay.appendChild(frag);
-            consigna.textContent = '¡Aquí está tu resultado! Ponle un nombre y guárdalo.';
-            saveRollSection.classList.remove('hidden');
-            rollNameInput.value = '';
-            rollNameInput.focus({ preventScroll: true });
-        }
-
-        function saveRoll() {
-            if (!tiradaActualResultados) return;
-            const nombre = rollNameInput.value.trim();
-            const nueva = {
-                id: Date.now(),
-                name: nombre || `Tirada ${tiradaCounter}`,
-                timestamp: new Date().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' }),
-                results: tiradaActualResultados
-            };
-            historial.push(nueva);
-            if (!nombre) tiradaCounter++;
-            guardarHistorialEnStorage();
-            renderizarHistorial();
-            saveRollSection.classList.add('hidden');
-            tiradaActualResultados = null;
-            consigna.textContent = '¡Tirada guardada en el historial!';
-        }
-
-        function cargarHistorial() {
-            try {
-                const guardado = localStorage.getItem('emojiDiceHistory');
-                const contadorGuardado = localStorage.getItem('emojiDiceCounter');
-                if (guardado) historial = JSON.parse(guardado) || [];
-                if (contadorGuardado) tiradaCounter = parseInt(contadorGuardado, 10) || 1;
-            } catch { historial = []; tiradaCounter = 1; }
-            renderizarHistorial();
-        }
-
-        function guardarHistorialEnStorage() {
-            try {
-                localStorage.setItem('emojiDiceHistory', JSON.stringify(historial));
-                localStorage.setItem('emojiDiceCounter', String(tiradaCounter));
-            } catch {}
-        }
-        
-        function renderizarHistorial() {
-            historyList.innerHTML = '';
-            if (historial.length === 0) {
-                historyList.innerHTML = '<p class="text-gray-500 text-center mt-4">No hay tiradas guardadas.</p>';
-                return;
-            }
-            const frag = document.createDocumentFragment();
-            [...historial].reverse().forEach(tirada => {
-                const item = document.createElement('div');
-                item.className = 'p-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm';
-                item.innerHTML = `<div class="flex justify-between items-start"><div><p class="font-bold text-gray-800">${tirada.name}</p><p class="text-xs text-gray-500">${tirada.timestamp}</p></div><div class="flex items-center gap-3"><button class="load-btn font-semibold text-sm text-blue-600 hover:text-blue-800" data-id="${tirada.id}">Cargar</button><button class="delete-btn text-red-500 hover:text-red-700 text-lg" data-id="${tirada.id}" aria-label="Eliminar">🗑️</button></div></div>`;
-                frag.appendChild(item);
-            });
-            historyList.appendChild(frag);
-        }
-
-        function cargarTirada(id) {
-            const t = historial.find(x => x.id == id);
-            if (!t) return;
-            saveRollSection.classList.add('hidden');
-            emojiDisplay.innerHTML = '';
-            const frag = document.createDocumentFragment();
-            t.results.forEach((res, i) => {
-                const card = document.createElement('div');
-                card.className = 'bg-white rounded-xl shadow-lg pop-in';
-                card.style.animationDelay = `${i*0.1}s`;
-                if (res.type === 'emoji') {
-                    card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`;
-                } else {
-                    const img = new Image();
-                    img.src = res.value; img.alt = 'Resultado de dado'; img.loading = 'lazy';
-                    card.appendChild(img);
-                }
-                frag.appendChild(card);
-            });
-            emojiDisplay.appendChild(frag);
-            consigna.textContent = `Viendo "${t.name}" del ${t.timestamp}.`;
-            historyPanel.classList.remove('is-open');
-        }
-
+        function updateControlsAndState() { const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length; const totalDice = numRandomDice + numSpecificDice; totalDiceLaunchDisplay.textContent = `${totalDice} Dado${totalDice !== 1 ? 's' : ''}`; btnMinusRandom.disabled = numRandomDice <= 0; btnPlusRandom.disabled = totalDice >= MAX_TOTAL_DICE; const toggles = specificDiceSelection.querySelectorAll('input[type="checkbox"]'); const lock = totalDice >= MAX_TOTAL_DICE; toggles.forEach(t => { t.disabled = !t.checked && lock; }); }
+        function populateDiceToggles() { specificDiceSelection.innerHTML = ''; const frag = document.createDocumentFragment(); Object.keys(DADOS_FILOSOFICOS).forEach(name => { const id = `toggle-${name.replace(/\s+/g, '-')}`; const wrapper = document.createElement('div'); wrapper.className = 'dice-toggle-wrapper'; const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.id = id; checkbox.value = name; const label = document.createElement('label'); label.className = 'dice-toggle-label'; label.htmlFor = id; label.textContent = name; wrapper.append(checkbox, label); frag.appendChild(wrapper); }); specificDiceSelection.appendChild(frag); }
+        function init() { homeBtn2.addEventListener('click', goHome); btnPlusRandom.addEventListener('click', () => changeRandomDice(1)); btnMinusRandom.addEventListener('click', () => changeRandomDice(-1)); specificDiceSelection.addEventListener('change', updateControlsAndState); rollDiceBtn.addEventListener('click', rollDice); saveRollBtn.addEventListener('click', saveRoll); toggleHistoryBtn.addEventListener('click', () => { const open = historyPanel.classList.toggle('is-open'); toggleHistoryBtn.setAttribute('aria-expanded', String(open)); }); closeHistoryBtn.addEventListener('click', () => historyPanel.classList.remove('is-open')); document.addEventListener('keydown', (e) => { if (e.key === 'Escape') historyPanel.classList.remove('is-open'); }); clearHistoryBtn.addEventListener('click', () => { if (confirm('¿Borrar todo el historial?')) { historial = []; tiradaCounter = 1; guardarHistorialEnStorage(); renderizarHistorial(); } }); historyList.addEventListener('click', (e) => { const btn = e.target.closest('button'); if (!btn) return; const id = btn.dataset.id; if (!id) return; if (btn.classList.contains('load-btn')) cargarTirada(id); else if (btn.classList.contains('delete-btn')) { if (confirm('¿Eliminar esta tirada?')) { historial = historial.filter(t => t.id != id); guardarHistorialEnStorage(); renderizarHistorial(); } } }); cargarHistorial(); }
+        function startGame() { showScreen(diceChallengeScreen); numRandomDice = 3; randomDiceDisplay.textContent = numRandomDice; populateDiceToggles(); updateControlsAndState(); emojiDisplay.innerHTML = ''; consigna.textContent = '¡Configura tu tirada y pulsa «Lanzar dados»!'; saveRollSection.classList.add('hidden'); }
+        function changeRandomDice(delta) { const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length; const next = numRandomDice + delta; if (next + numSpecificDice <= MAX_TOTAL_DICE && next >= 0) { numRandomDice = next; randomDiceDisplay.textContent = numRandomDice; updateControlsAndState(); } }
+        function rollDice() { const totalDice = numRandomDice + specificDiceSelection.querySelectorAll('input:checked').length; if (totalDice === 0) { alert('Selecciona al menos un dado.'); return; } rollSound.currentTime = 0; rollSound.play().catch(()=>{}); emojiDisplay.innerHTML = ''; const results = []; for (let i = 0; i < numRandomDice; i++) results.push({ type: 'emoji', value: rand(SHARED_EMOJIS) }); specificDiceSelection.querySelectorAll('input:checked').forEach(t => { results.push({ type: 'image', value: rand(DADOS_FILOSOFICOS[t.value]) }); }); tiradaActualResultados = results; const frag = document.createDocumentFragment(); results.forEach((res, i) => { const card = document.createElement('div'); card.className = 'bg-white rounded-xl shadow-lg pop-in'; card.style.animationDelay = `${i * 0.1}s`; if (res.type === 'emoji') { card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`; } else { const img = new Image(); img.src = res.value; img.alt = 'Resultado de dado'; img.loading = 'lazy'; card.appendChild(img); } frag.appendChild(card); }); emojiDisplay.appendChild(frag); consigna.textContent = '¡Aquí está tu resultado! Ponle un nombre y guárdalo.'; saveRollSection.classList.remove('hidden'); rollNameInput.value = ''; rollNameInput.focus({ preventScroll: true }); }
+        function saveRoll() { if (!tiradaActualResultados) return; const nombre = rollNameInput.value.trim(); const nueva = { id: Date.now(), name: nombre || `Tirada ${tiradaCounter}`, timestamp: new Date().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' }), results: tiradaActualResultados }; historial.push(nueva); if (!nombre) tiradaCounter++; guardarHistorialEnStorage(); renderizarHistorial(); saveRollSection.classList.add('hidden'); tiradaActualResultados = null; consigna.textContent = '¡Tirada guardada en el historial!'; }
+        function cargarHistorial() { try { const guardado = localStorage.getItem('emojiDiceHistory'); const contadorGuardado = localStorage.getItem('emojiDiceCounter'); if (guardado) historial = JSON.parse(guardado) || []; if (contadorGuardado) tiradaCounter = parseInt(contadorGuardado, 10) || 1; } catch { historial = []; tiradaCounter = 1; } renderizarHistorial(); }
+        function guardarHistorialEnStorage() { try { localStorage.setItem('emojiDiceHistory', JSON.stringify(historial)); localStorage.setItem('emojiDiceCounter', String(tiradaCounter)); } catch {} }
+        function renderizarHistorial() { historyList.innerHTML = ''; if (historial.length === 0) { historyList.innerHTML = '<p class="text-gray-500 text-center mt-4">No hay tiradas guardadas.</p>'; return; } const frag = document.createDocumentFragment(); [...historial].reverse().forEach(tirada => { const item = document.createElement('div'); item.className = 'p-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm'; item.innerHTML = `<div class="flex justify-between items-start"><div><p class="font-bold text-gray-800">${tirada.name}</p><p class="text-xs text-gray-500">${tirada.timestamp}</p></div><div class="flex items-center gap-3"><button class="load-btn font-semibold text-sm text-blue-600 hover:text-blue-800" data-id="${tirada.id}">Cargar</button><button class="delete-btn text-red-500 hover:text-red-700 text-lg" data-id="${tirada.id}" aria-label="Eliminar">🗑️</button></div></div>`; frag.appendChild(item); }); historyList.appendChild(frag); }
+        function cargarTirada(id) { const t = historial.find(x => x.id == id); if (!t) return; saveRollSection.classList.add('hidden'); emojiDisplay.innerHTML = ''; const frag = document.createDocumentFragment(); t.results.forEach((res, i) => { const card = document.createElement('div'); card.className = 'bg-white rounded-xl shadow-lg pop-in'; card.style.animationDelay = `${i*0.1}s`; if (res.type === 'emoji') { card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`; } else { const img = new Image(); img.src = res.value; img.alt = 'Resultado de dado'; img.loading = 'lazy'; card.appendChild(img); } frag.appendChild(card); }); emojiDisplay.appendChild(frag); consigna.textContent = `Viendo "${t.name}" del ${t.timestamp}.`; historyPanel.classList.remove('is-open'); }
         return { init, startGame };
       })();
 
       // --- Gestor del Juego 2: "¿Cuál eliges?" ---
       const thisOrThatGameManager = (() => {
+        // ... (código del juego 2 sin cambios)
         const homeBtn = $('tot-home-btn');
         const newChallengeBtn = $('tot-new-challenge-btn');
         const musicToggleBtn = $('tot-music-toggle-btn');
@@ -742,64 +551,18 @@
         const text1 = $('tot-text1');
         const emoji2 = $('tot-emoji2');
         const text2 = $('tot-text2');
-        
         const comparisons = [ { option1: { text: 'Libertad', emoji: '🗽' }, option2: { text: 'Determinismo', emoji: '🧬' } }, { option1: { text: 'Razón', emoji: '🧠' }, option2: { text: 'Emoción', emoji: '❤️' } }, { option1: { text: 'Fines', emoji: '🎯' }, option2: { text: 'Medios', emoji: '🛠' } }, { option1: { text: 'Naturaleza', emoji: '🌳' }, option2: { text: 'Cultura', emoji: '🏰' } }, { option1: { text: 'Tradición', emoji: '⛩' }, option2: { text: 'Progreso', emoji: '📱' } }, { option1: { text: 'Seguridad', emoji: '🛡' }, option2: { text: 'Libertad', emoji: '🗽' } }, { option1: { text: 'Progreso tecnológico', emoji: '🤖' }, option2: { text: 'Preservar medio ambiente', emoji: '🌳' } }, { option1: { text: 'Nacionalismo', emoji: '🏳️‍🌈' }, option2: { text: 'Cosmopolitismo', emoji: '🌍' } }, { option1: { text: 'Derechos individuales', emoji: '🙋🏽‍♀️' }, option2: { text: 'Bien común', emoji: '👥' } }, { option1: { text: 'Datos abiertos', emoji: '📂' }, option2: { text: 'Privacidad', emoji: '🔒' } }, { option1: { text: 'Ciencia', emoji: '🔬' }, option2: { text: 'Religión', emoji: '⛪️' } }, { option1: { text: 'Inteligencia artificial', emoji: '🤖' }, option2: { text: 'Inteligencia humana', emoji: '🧠' } }, { option1: { text: 'Competencia', emoji: '🏁' }, option2: { text: 'Colaboración', emoji: '🤝' } }, { option1: { text: 'Relativismo moral', emoji: '🌈' }, option2: { text: 'Universlaismo moral', emoji: '🌐' } }, { option1: { text: 'Igualdad⚖', emoji: '⚖️' }, option2: { text: 'Meritocracia', emoji: '🏆' } }, { option1: { text: 'Democracia directa', emoji: '🗳' }, option2: { text: 'Democracia representativa', emoji: '🗣' } }, { option1: { text: 'Justicia retributiva', emoji: '🔨' }, option2: { text: 'Justicia restaurativa', emoji: '🤲🏼' } }, { option1: { text: 'Bien común', emoji: '🤝' }, option2: { text: 'Interés individual', emoji: '🧍🏽' } }, { option1: { text: 'Alma', emoji: '👻' }, option2: { text: 'Cuerpo', emoji: '🧠' } }, { option1: { text: 'Hombre bueno por naturaleza', emoji: '😇' }, option2: { text: 'Hombre malo por naturaleza', emoji: '😈' } }, { option1: { text: 'Realidad objetiva', emoji: '🌍' }, option2: { text: 'Realidad subjetiva', emoji: '🌤' } }, { option1: { text: 'Orden', emoji: '📏' }, option2: { text: 'Caos', emoji: '🌪' } }, { option1: { text: 'Pacifismo', emoji: '🕊' }, option2: { text: 'Belicismo', emoji: '⚔️' } }, { option1: { text: 'Optimismo', emoji: '☀️' }, option2: { text: 'Pesimismo', emoji: '🌧️' } }, { option1: { text: 'Libertad de expresión', emoji: '🗣' }, option2: { text: 'Censura', emoji: '🚫' } }, { option1: { text: 'Individualismo', emoji: '🙋‍♂️' }, option2: { text: 'Colectivismo', emoji: '👥' } }, { option1: { text: 'Materialismo', emoji: '💰' }, option2: { text: 'Espiritualismo', emoji: '✨' } }, { option1: { text: 'Justicia social', emoji: '⚖️' }, option2: { text: 'Libre mercado', emoji: '💹' } }, { option1: { text: 'Libertad académica', emoji: '🎓' }, option2: { text: 'Control ideológico', emoji: '🛑' } }];
         let usedCombinations = new Set();
-
-        function showNewChallenge() {
-            if (usedCombinations.size >= comparisons.length) {
-                usedCombinations.clear();
-            }
-            let challenge, randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * comparisons.length);
-            } while (usedCombinations.has(randomIndex));
-            
-            usedCombinations.add(randomIndex);
-            challenge = comparisons[randomIndex];
-
-            emoji1.textContent = challenge.option1.emoji;
-            text1.textContent = challenge.option1.text;
-            emoji2.textContent = challenge.option2.emoji;
-            text2.textContent = challenge.option2.text;
-
-            [card1, card2].forEach(c => c.classList.remove('pop-in'));
-            void card1.offsetWidth;
-            [card1, card2].forEach(c => c.classList.add('pop-in'));
-        }
-
-        function startGame() {
-            showScreen(thisOrThatScreen);
-            usedCombinations.clear();
-            showNewChallenge();
-            music.play().then(() => { musicToggleBtn.textContent = '🔈'; }).catch(() => { musicToggleBtn.textContent = '🔇'; });
-        }
-        
-        function stopGame() {
-            music.pause();
-            music.currentTime = 0;
-            goHome();
-        }
-
-        function init() {
-            homeBtn.addEventListener('click', stopGame);
-            newChallengeBtn.addEventListener('click', showNewChallenge);
-            musicToggleBtn.addEventListener('click', () => {
-                if (music.paused) {
-                    music.play();
-                    musicToggleBtn.textContent = '🔈';
-                } else {
-                    music.pause();
-                    musicToggleBtn.textContent = '🔇';
-                }
-            });
-        }
-        
+        function showNewChallenge() { if (usedCombinations.size >= comparisons.length) { usedCombinations.clear(); } let challenge, randomIndex; do { randomIndex = Math.floor(Math.random() * comparisons.length); } while (usedCombinations.has(randomIndex)); usedCombinations.add(randomIndex); challenge = comparisons[randomIndex]; emoji1.textContent = challenge.option1.emoji; text1.textContent = challenge.option1.text; emoji2.textContent = challenge.option2.emoji; text2.textContent = challenge.option2.text; [card1, card2].forEach(c => c.classList.remove('pop-in')); void card1.offsetWidth; [card1, card2].forEach(c => c.classList.add('pop-in')); }
+        function startGame() { showScreen(thisOrThatScreen); usedCombinations.clear(); showNewChallenge(); music.play().then(() => { musicToggleBtn.textContent = '🔈'; }).catch(() => { musicToggleBtn.textContent = '🔇'; }); }
+        function stopGame() { music.pause(); music.currentTime = 0; goHome(); }
+        function init() { homeBtn.addEventListener('click', stopGame); newChallengeBtn.addEventListener('click', showNewChallenge); musicToggleBtn.addEventListener('click', () => { if (music.paused) { music.play(); musicToggleBtn.textContent = '🔈'; } else { music.pause(); musicToggleBtn.textContent = '🔇'; } }); }
         return { init, startGame };
       })();
 
       // --- Gestor del Juego 3: "Conceptos Filosóficos" ---
       const emojiDiceMinigameManager = (() => {
+        // ... (código del juego 3 sin cambios)
         const screen1 = $('ed-screen-1');
         const screen2 = $('ed-screen-2');
         const home1 = $('ed-home-btn-1');
@@ -820,101 +583,31 @@
         const stepsSection = $('ed-steps-section');
         const stepsContainer = $('ed-steps-container');
         const emojiMainBlock = $('ed-emoji-main-block');
-
         const showSub = (el)=>{ screen1.classList.add('hidden'); screen2.classList.add('hidden'); el.classList.remove('hidden'); };
-
         let audioCtx;
         const beep = (f=880, ms=120)=>{ try{ audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.type='sine'; osc.frequency.value=f; gain.gain.setValueAtTime(0.0001,audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.2,audioCtx.currentTime+0.01); gain.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+ms/1000); osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + ms/1000 + 0.02); }catch{} };
-
         const DEFAULT_WORDS = [ 'pensar','crear','escribir','leer','reír','bailar','volar','nadar','hablar','escuchar','mirar','encontrar','ayudar','usar','abrir','cerrar','empezar','parar','caminar','cambiar','imaginar','compartir','ganar','construir','dibujar','cantar','explorar','descubrir','resolver','visitar','viajar','cocinar','ver','aprender', 'feliz','triste','grande','pequeño','rápido','lento','rojo','azul','verde','amarillo','soleado','lluvioso','nublado','valiente','fuerte','amable','listo','delicioso','bonito','asombroso','interesante','aburrido','nuevo','viejo','joven','ruidoso','silencioso','brillante','oscuro','pesado','ligero','bueno','malo','emocionado','cansado','enfadado','hambriento','sediento','frío','caliente','divertido','misterioso','mágico','gigante','minúsculo','colorido','invisible','extraño','fantástico','genial','maravilloso','pacífico','secreto','antiguo','moderno','rápidamente','lentamente','de repente','finalmente','después','antes','cuando','mientras','si','o','también','porque','entonces','cerca','lejos','encima','debajo','dentro','fuera' ];
         const stepsData = [ { title:'PASO 1/3: PENSAR 🧠', instructions:'Comenta ideas con tu pareja/grupo.' }, { title:'PASO 2/3: CREAR ✍️',  instructions:'Escribid el texto juntos.' }, { title:'PASO 3/3: COMPARTIR 🎤', instructions:'¡Presentad vuestro texto a la clase!' } ];
         let activeWords = [...DEFAULT_WORDS];
         const rand = (arr)=> arr[Math.floor(Math.random()*arr.length)];
         const parseCustomWords = (raw)=> (raw||'').split(/[\n,;]+/g).map(w=>w.trim()).filter(Boolean).filter(w=>w.length<=30);
         const setEmojiGridCols = (n)=>{ emojiDisplay.style.gridTemplateColumns = `repeat(${Math.min(n,6)}, minmax(64px,1fr))`; };
-
-        const resetSteps = ()=>{
-            const grouping = groupingSelectLive.value;
-            if(grouping==='Individual'){
-                stepsContainer.classList.add('hidden');
-                emojiMainBlock.classList.remove('md:w-3/5');
-                emojiMainBlock.classList.add('w-full');
-                return;
-            }
-            stepsContainer.classList.remove('hidden');
-            emojiMainBlock.classList.remove('w-full');
-            emojiMainBlock.classList.add('md:w-3/5');
-            stepsSection.innerHTML = ` <div class="text-center"><h3 id="ed-step-title" class="text-2xl sm:text-3xl font-bold text-pink-600"></h3></div> <div class="text-center flex-grow flex items-center justify-center p-2 min-h-[6rem]"> <p id="ed-step-instructions" class="text-gray-700 text-base sm:text-lg font-medium"></p> </div> <div class="flex justify-center"> <button id="ed-next-step-btn" class="py-2 px-6 rounded-xl shadow-md text-white font-semibold" style="background-image:linear-gradient(to right,#a2d2ff,#bde0fe);">➡️ Siguiente paso</button> </div>`;
-            let currentStep=1;
-            const update=()=>{
-                const d = stepsData[currentStep-1];
-                $('ed-step-title').textContent = d.title;
-                $('ed-step-instructions').textContent = d.instructions;
-                $('ed-next-step-btn').textContent = (currentStep===3)?'🎉 Terminar':'➡️ Siguiente paso';
-            };
-            $('ed-next-step-btn').addEventListener('click', ()=>{
-                if(currentStep<3){ currentStep++; update(); }
-                else{
-                    stepsContainer.classList.add('hidden');
-                    emojiMainBlock.classList.remove('md:w-3/5');
-                    emojiMainBlock.classList.add('w-full');
-                }
-            });
-            update();
-        };
-
-        const roll = ()=>{
-            const n = parseInt(emojiCountSelect.value,10) || 3;
-            emojiDisplay.innerHTML = '';
-            setEmojiGridCols(n);
-            const frag = document.createDocumentFragment();
-            for(let i=0;i<n;i++){
-                const e = rand(SHARED_EMOJIS);
-                const card = document.createElement('div');
-                card.className='bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in';
-                card.style.animationDelay = `${i*0.06}s`;
-                card.innerHTML = `<span class="text-5xl sm:text-7xl" style="text-shadow:0 4px 10px rgba(0,0,0,.15);">${e}</span>`;
-                frag.appendChild(card);
-            }
-            emojiDisplay.appendChild(frag);
-            const word = rand(activeWords);
-            wordDisplay.textContent = word;
-            wordDisplayCard.classList.remove('hidden');
-            consigna.textContent = `Usa los ${n} emojis y la palabra «${word}» para crear una frase.`;
-            beep(900,110);
-        };
-        
+        const resetSteps = ()=>{ const grouping = groupingSelectLive.value; if(grouping==='Individual'){ stepsContainer.classList.add('hidden'); emojiMainBlock.classList.remove('md:w-3/5'); emojiMainBlock.classList.add('w-full'); return; } stepsContainer.classList.remove('hidden'); emojiMainBlock.classList.remove('w-full'); emojiMainBlock.classList.add('md:w-3/5'); stepsSection.innerHTML = ` <div class="text-center"><h3 id="ed-step-title" class="text-2xl sm:text-3xl font-bold text-pink-600"></h3></div> <div class="text-center flex-grow flex items-center justify-center p-2 min-h-[6rem]"> <p id="ed-step-instructions" class="text-gray-700 text-base sm:text-lg font-medium"></p> </div> <div class="flex justify-center"> <button id="ed-next-step-btn" class="py-2 px-6 rounded-xl shadow-md text-white font-semibold" style="background-image:linear-gradient(to right,#a2d2ff,#bde0fe);">➡️ Siguiente paso</button> </div>`; let currentStep=1; const update=()=>{ const d = stepsData[currentStep-1]; $('ed-step-title').textContent = d.title; $('ed-step-instructions').textContent = d.instructions; $('ed-next-step-btn').textContent = (currentStep===3)?'🎉 Terminar':'➡️ Siguiente paso'; }; $('ed-next-step-btn').addEventListener('click', ()=>{ if(currentStep<3){ currentStep++; update(); } else{ stepsContainer.classList.add('hidden'); emojiMainBlock.classList.remove('md:w-3/5'); emojiMainBlock.classList.add('w-full'); } }); update(); };
+        const roll = ()=>{ const n = parseInt(emojiCountSelect.value,10) || 3; emojiDisplay.innerHTML = ''; setEmojiGridCols(n); const frag = document.createDocumentFragment(); for(let i=0;i<n;i++){ const e = rand(SHARED_EMOJIS); const card = document.createElement('div'); card.className='bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in'; card.style.animationDelay = `${i*0.06}s`; card.innerHTML = `<span class="text-5xl sm:text-7xl" style="text-shadow:0 4px 10px rgba(0,0,0,.15);">${e}</span>`; frag.appendChild(card); } emojiDisplay.appendChild(frag); const word = rand(activeWords); wordDisplay.textContent = word; wordDisplayCard.classList.remove('hidden'); consigna.textContent = `Usa los ${n} emojis y la palabra «${word}» para crear una frase.`; beep(900,110); };
         home1.addEventListener('click', goHome);
         home2.addEventListener('click', goHome);
         backBtn.addEventListener('click', ()=> showSub(screen1));
         emojiCountRange.addEventListener('input', ()=>{ emojiCountRangeValue.textContent = emojiCountRange.value; });
         groupingSelectLive.addEventListener('change', resetSteps);
         emojiCountSelect.addEventListener('change', ()=> setEmojiGridCols(parseInt(emojiCountSelect.value,10)));
-        startBtn.addEventListener('click', ()=>{
-            const custom = parseCustomWords(customWordsTA.value);
-            activeWords = custom.length ? custom : [...DEFAULT_WORDS];
-            emojiCountSelect.value = emojiCountRange.value;
-            groupingSelectLive.value = groupingSelect.value;
-            emojiDisplay.innerHTML = '<div class="text-center text-gray-400 p-6">Pulsa “Tirar dados” para empezar</div>';
-            wordDisplayCard.classList.add('hidden');
-            consigna.textContent = '';
-            showSub(screen2);
-            resetSteps();
-        });
+        startBtn.addEventListener('click', ()=>{ const custom = parseCustomWords(customWordsTA.value); activeWords = custom.length ? custom : [...DEFAULT_WORDS]; emojiCountSelect.value = emojiCountRange.value; groupingSelectLive.value = groupingSelect.value; emojiDisplay.innerHTML = '<div class="text-center text-gray-400 p-6">Pulsa “Tirar dados” para empezar</div>'; wordDisplayCard.classList.add('hidden'); consigna.textContent = ''; showSub(screen2); resetSteps(); });
         rollBtn.addEventListener('click', roll);
       })();
 
       // --- Gestor del Juego 4: "Mensaje Secreto" ---
       const secretMessageManager = (() => {
-        const introScreen = $('sm-intro-screen');
         const mainAppContainer = $('main-app-container');
-        const watchIntroBtn = $('watch-intro-btn');
-        const startMissionBtn = $('start-mission-btn');
-        const homeBtnIntroMain = $('sm-home-btn-intro-main');
-        const introVideo = $('sm-intro-video');
         const homeBtn = $('sm-home-btn');
-        const backToIntroBtn = $('sm-back-to-intro-btn');
-        
         const tabDecode = $('tab-decode');
         const tabEncode = $('tab-encode');
         const decodeSection = $('decode-section');
@@ -945,38 +638,17 @@
 
         const EMOJI_CIPHER = { 'A': '🐶', 'B': '🍌', 'C': '🐱', 'D': '🦖', 'E': '🍎', 'F': '🐸', 'G': '🌈', 'H': '🐹', 'I': '🍦', 'J': '🎈', 'K': '🐨', 'L': '🍋', 'M': '🐵', 'N': '🍉', 'O': '🐙', 'P': '🐧', 'Q': '🧁', 'R': '🤖', 'S': '☀️', 'T': '🧸', 'U': '🦄', 'V': '🍇', 'W': '🐺', 'X': '❌', 'Y': '🌻', 'Z': '🦓' };
         const EMOJI_NAMES = { '🐶': 'dog', '🍌': 'banana', '🐱': 'cat', '🦖': 'dinosaur', '🍎': 'apple', '🐸': 'frog', '🌈': 'rainbow', '🐹': 'hamster', '🍦': 'ice cream', '🎈': 'balloon', '🐨': 'koala', '🍋': 'lemon', '🐵': 'monkey', '🍉': 'watermelon', '🐙': 'octopus', '🐧': 'penguin', '🧁': 'cupcake', '🤖': 'robot', '☀️': 'sun', '🧸': 'teddy bear', '🦄': 'unicorn', '🍇': 'grapes', '🐺': 'wolf', '❌': 'cross', '🌻': 'sunflower', '🦓': 'zebra' };
-        const SECRET_WORDS = ["HELLO", "DOG", "CAT", "RED", "BLUE", "APPLE", "BANANA", "PIZZA", "HAPPY", "SUNNY", "ORANGE", "WATER", "FRIEND", "SCHOOL", "TEACHER", "STUDENT", "BOOK", "PENCIL", "HOME", "FAMILY", "LION", "TIGER", "MONKEY", "ELEPHANT", "GIRAFFE", "PENGUIN", "CHEESE", "BREAD", "JUICE", "CARROT", "CLASSROOM", "HOMEWORK", "READ", "WRITE", "PLAY", "EAT", "DRINK", "SLEEP", "JUMP", "RUN", "BIG", "SMALL", "FAST", "SLOW", "GOOD", "GREEN", "PURPLE", "BLACK", "WHITE", "PINK"];
-        const SECRET_SENTENCES = ["GOOD MORNING", "I AM HAPPY", "IT IS SUNNY", "MY NAME IS ANNA", "SCHOOL IS COOL", "PLAY TIME", "GOOD JOB", "I LIKE PIZZA", "WHAT IS YOUR NAME", "SHE IS MY FRIEND", "HE IS READING A BOOK", "THEY ARE EATING LUNCH", "IT IS RAINING TODAY", "MY FAVORITE COLOR IS BLUE", "I HAVE A BIG FAMILY", "CAN YOU HELP ME", "WHERE ARE YOU FROM", "I GO TO SCHOOL BY BUS", "SHE LIKES TO DRAW", "HE CAN RUN FAST"];
+        const SECRET_WORDS = ["KANT", "PLATON", "ARISTOTELES", "NIETZSCHE", "SARTRE", "DESCARTES", "SPINOZA", "HUME", "LOCKE", "HEGEL"];
+        const SECRET_SENTENCES = ["SOLO SE QUE NO SE NADA", "PIENSO LUEGO EXISTO", "EL HOMBRE ES UN LOBO PARA EL HOMBRE", "DIOS HA MUERTO", "LA EXISTENCIA PRECEDE A LA ESENCIA", "EL FIN JUSTIFICA LOS MEDIOS", "CONOCETE A TI MISMO", "VIVIR ES SUFRIR", "LA VIDA ES ABSURDA"];
         
         let currentSecretMessage = '';
         let currentLevel = '';
 
-        function stopSmVideo() {
-            introVideo.pause();
-            introVideo.currentTime = 0;
-        }
-
-        const showIntro = () => {
-            stopSmVideo();
-            introVideo.classList.remove('unblur');
-            watchIntroBtn.classList.remove('hidden');
-            mainAppContainer.classList.add('hidden');
-            introScreen.classList.remove('hidden');
-            introScreen.classList.add('flex');
-        };
-
-        const hideIntro = () => {
-            stopSmVideo();
-            introScreen.classList.add('hidden');
-            introScreen.classList.remove('flex');
+        function startGame() {
+            showScreen(secretMessageScreen);
             mainAppContainer.classList.remove('hidden');
             mainAppContainer.classList.add('flex');
             updateSecretMessageLayout();
-        };
-
-        function startGame() {
-            showScreen(secretMessageScreen);
-            showIntro();
         }
         
         const updateSecretMessageLayout = () => {
@@ -1017,11 +689,7 @@
                     const emoji = EMOJI_CIPHER[char];
                     const flipCard = document.createElement('div');
                     flipCard.className = 'flip-card';
-                    flipCard.innerHTML = `
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">${emoji}</div>
-                            <div class="flip-card-back">${char}</div>
-                        </div>`;
+                    flipCard.innerHTML = `<div class="flip-card-inner"><div class="flip-card-front">${emoji}</div><div class="flip-card-back">${char}</div></div>`;
                     container.appendChild(flipCard);
                 } else if (char === ' ') {
                     const space = document.createElement('div');
@@ -1071,11 +739,11 @@
         const checkAnswer = () => {
             const userAnswer = decodeInput.value.trim().toUpperCase();
             if (userAnswer === currentSecretMessage) {
-                feedbackMessage.textContent = 'Correct! 🎉';
+                feedbackMessage.textContent = '¡Correcto! 🎉';
                 feedbackMessage.className = 'h-6 text-lg font-bold text-green-600';
                 triggerConfetti();
             } else {
-                feedbackMessage.textContent = 'Try again! 🤔';
+                feedbackMessage.textContent = '¡Inténtalo de nuevo! 🤔';
                 feedbackMessage.className = 'h-6 text-lg font-bold text-red-600';
             }
         };
@@ -1085,9 +753,9 @@
             const utterance = new SpeechSynthesisUtterance(text);
             const setVoiceAndSpeak = () => {
                 const voices = speechSynthesis.getVoices();
-                let selectedVoice = voices.find(voice => voice.name === 'Google US English') || voices.find(voice => voice.lang === 'en-US' && !voice.localService) || voices.find(voice => voice.lang === 'en-US');
+                let selectedVoice = voices.find(voice => voice.lang === 'es-ES');
                 if (selectedVoice) utterance.voice = selectedVoice;
-                utterance.lang = 'en-US';
+                utterance.lang = 'es-ES';
                 utterance.rate = 0.9;
                 utterance.pitch = 1;
                 window.speechSynthesis.cancel();
@@ -1109,7 +777,7 @@
                 cell.addEventListener('click', () => {
                     const emoji = EMOJI_CIPHER[letter];
                     const emojiName = EMOJI_NAMES[emoji] || 'emoji';
-                    speak(`${letter} is for ${emojiName}.`);
+                    speak(`${letter} es para ${emojiName}.`);
                 });
                 emojiCodeGrid.appendChild(cell);
             });
@@ -1143,19 +811,7 @@
         };
 
         function init() {
-            homeBtnIntroMain.addEventListener('click', () => { stopSmVideo(); goHome(); });
-            homeBtn.addEventListener('click', () => { stopSmVideo(); goHome(); });
-            startMissionBtn.addEventListener('click', hideIntro);
-            backToIntroBtn.addEventListener('click', showIntro);
-            
-            watchIntroBtn.addEventListener('click', () => {
-                watchIntroBtn.classList.add('hidden');
-                introVideo.classList.add('unblur');
-                introVideo.muted = false;
-                introVideo.currentTime = 0;
-                introVideo.play();
-            });
-
+            homeBtn.addEventListener('click', goHome);
             tabDecode.addEventListener('click', () => switchView('decode'));
             tabEncode.addEventListener('click', () => switchView('encode'));
             levelEasyBtn.addEventListener('click', () => startDecodeLevel('easy'));
