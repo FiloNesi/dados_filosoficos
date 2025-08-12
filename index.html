@@ -311,10 +311,11 @@
         <section class="w-full bg-white/80 rounded-2xl shadow p-4 text-left space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="font-bold text-gray-700 text-sm">🎲 Nº de emojis (3–9)</label>
-              <div class="flex items-center gap-3 mt-1">
-                <input id="ed-emoji-count-range" type="range" min="3" max="9" value="3" class="w-full" aria-label="Número de emojis">
-                <span id="ed-emoji-count-range-value" class="inline-block w-6 text-center font-bold">3</span>
+              <label class="font-bold text-gray-700 text-sm flex items-center justify-center">🎲 Nº de emojis (3–9)</label>
+              <div id="ed-emoji-controls" class="flex items-center justify-center gap-4 mt-2">
+                  <button id="ed-btn-minus" class="quantity-btn" aria-label="Restar emoji">-</button>
+                  <span id="ed-emoji-count-display" class="text-3xl font-bold text-pink-500 w-16 text-center">3</span>
+                  <button id="ed-btn-plus" class="quantity-btn" aria-label="Sumar emoji">+</button>
               </div>
             </div>
             <div>
@@ -345,12 +346,6 @@
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,.1);">Emoji Dice</h1>
         </header>
         <div class="p-3 rounded-2xl bg-white/80 shadow flex flex-wrap items-center gap-3">
-          <div class="flex items-center gap-2">
-            <label class="font-bold text-gray-700 text-sm">🎲 Nº de emojis</label>
-            <select id="ed-emoji-count-select" class="rounded-lg border border-gray-200 px-2 py-1" aria-label="Número de emojis">
-              <option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
-            </select>
-          </div>
           <div class="flex items-center gap-2">
             <label class="font-bold text-gray-700 text-sm">👥 Agrupación</label>
             <select id="ed-grouping-select-live" class="rounded-lg border border-gray-200 px-2 py-1">
@@ -421,7 +416,6 @@
                           <button id="check-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-lilac">✔️ Comprueba</button>
                           <button id="new-message-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-pink">🔄 Nuevo</button>
                           <button id="show-code-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-pink col-span-2 md:hidden">🕵️ Mostrar código</button>
-                          <button id="read-aloud-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-speaker col-span-2 flex items-center justify-center gap-3"><span class="text-2xl sm:text-3xl">📢</span> ¡Compártelo!</button>
                       </div>
                       <div class="text-center mt-4">
                           <button id="change-level-btn" class="text-purple-600 hover:text-purple-900 font-bold underline">Cambia de nivel</button>
@@ -498,7 +492,6 @@
 
       // --- Gestor del Juego 1: "Lanzar Dados" ---
       const diceGameManager = (() => {
-        // ... (código del juego 1 sin cambios)
         const homeBtn2 = $('dice-home-btn-2');
         const consigna = $('consigna');
         const rollDiceBtn = $('roll-dice-btn');
@@ -540,7 +533,6 @@
 
       // --- Gestor del Juego 2: "¿Cuál eliges?" ---
       const thisOrThatGameManager = (() => {
-        // ... (código del juego 2 sin cambios)
         const homeBtn = $('tot-home-btn');
         const newChallengeBtn = $('tot-new-challenge-btn');
         const musicToggleBtn = $('tot-music-toggle-btn');
@@ -551,7 +543,7 @@
         const text1 = $('tot-text1');
         const emoji2 = $('tot-emoji2');
         const text2 = $('tot-text2');
-        const comparisons = [ { option1: { text: 'Libertad', emoji: '🗽' }, option2: { text: 'Determinismo', emoji: '🧬' } }, { option1: { text: 'Razón', emoji: '🧠' }, option2: { text: 'Emoción', emoji: '❤️' } }, { option1: { text: 'Fines', emoji: '🎯' }, option2: { text: 'Medios', emoji: '🛠' } }, { option1: { text: 'Naturaleza', emoji: '🌳' }, option2: { text: 'Cultura', emoji: '🏰' } }, { option1: { text: 'Tradición', emoji: '⛩' }, option2: { text: 'Progreso', emoji: '📱' } }, { option1: { text: 'Seguridad', emoji: '🛡' }, option2: { text: 'Libertad', emoji: '🗽' } }, { option1: { text: 'Progreso tecnológico', emoji: '🤖' }, option2: { text: 'Preservar medio ambiente', emoji: '🌳' } }, { option1: { text: 'Nacionalismo', emoji: '🏳️‍🌈' }, option2: { text: 'Cosmopolitismo', emoji: '🌍' } }, { option1: { text: 'Derechos individuales', emoji: '🙋🏽‍♀️' }, option2: { text: 'Bien común', emoji: '👥' } }, { option1: { text: 'Datos abiertos', emoji: '📂' }, option2: { text: 'Privacidad', emoji: '🔒' } }, { option1: { text: 'Ciencia', emoji: '🔬' }, option2: { text: 'Religión', emoji: '⛪️' } }, { option1: { text: 'Inteligencia artificial', emoji: '🤖' }, option2: { text: 'Inteligencia humana', emoji: '🧠' } }, { option1: { text: 'Competencia', emoji: '🏁' }, option2: { text: 'Colaboración', emoji: '🤝' } }, { option1: { text: 'Relativismo moral', emoji: '🌈' }, option2: { text: 'Universlaismo moral', emoji: '🌐' } }, { option1: { text: 'Igualdad⚖', emoji: '⚖️' }, option2: { text: 'Meritocracia', emoji: '🏆' } }, { option1: { text: 'Democracia directa', emoji: '🗳' }, option2: { text: 'Democracia representativa', emoji: '🗣' } }, { option1: { text: 'Justicia retributiva', emoji: '🔨' }, option2: { text: 'Justicia restaurativa', emoji: '🤲🏼' } }, { option1: { text: 'Bien común', emoji: '🤝' }, option2: { text: 'Interés individual', emoji: '�🏽' } }, { option1: { text: 'Alma', emoji: '👻' }, option2: { text: 'Cuerpo', emoji: '🧠' } }, { option1: { text: 'Hombre bueno por naturaleza', emoji: '😇' }, option2: { text: 'Hombre malo por naturaleza', emoji: '😈' } }, { option1: { text: 'Realidad objetiva', emoji: '🌍' }, option2: { text: 'Realidad subjetiva', emoji: '🌤' } }, { option1: { text: 'Orden', emoji: '📏' }, option2: { text: 'Caos', emoji: '🌪' } }, { option1: { text: 'Pacifismo', emoji: '🕊' }, option2: { text: 'Belicismo', emoji: '⚔️' } }, { option1: { text: 'Optimismo', emoji: '☀️' }, option2: { text: 'Pesimismo', emoji: '🌧️' } }, { option1: { text: 'Libertad de expresión', emoji: '🗣' }, option2: { text: 'Censura', emoji: '🚫' } }, { option1: { text: 'Individualismo', emoji: '🙋‍♂️' }, option2: { text: 'Colectivismo', emoji: '👥' } }, { option1: { text: 'Materialismo', emoji: '💰' }, option2: { text: 'Espiritualismo', emoji: '✨' } }, { option1: { text: 'Justicia social', emoji: '⚖️' }, option2: { text: 'Libre mercado', emoji: '💹' } }, { option1: { text: 'Libertad académica', emoji: '🎓' }, option2: { text: 'Control ideológico', emoji: '🛑' } }];
+        const comparisons = [ { option1: { text: 'Libertad', emoji: '🗽' }, option2: { text: 'Determinismo', emoji: '🧬' } }, { option1: { text: 'Razón', emoji: '🧠' }, option2: { text: 'Emoción', emoji: '❤️' } }, { option1: { text: 'Fines', emoji: '🎯' }, option2: { text: 'Medios', emoji: '🛠' } }, { option1: { text: 'Naturaleza', emoji: '🌳' }, option2: { text: 'Cultura', emoji: '🏰' } }, { option1: { text: 'Tradición', emoji: '⛩' }, option2: { text: 'Progreso', emoji: '📱' } }, { option1: { text: 'Seguridad', emoji: '🛡' }, option2: { text: 'Libertad', emoji: '🗽' } }, { option1: { text: 'Progreso tecnológico', emoji: '🤖' }, option2: { text: 'Preservar medio ambiente', emoji: '🌳' } }, { option1: { text: 'Nacionalismo', emoji: '🏳️‍🌈' }, option2: { text: 'Cosmopolitismo', emoji: '🌍' } }, { option1: { text: 'Derechos individuales', emoji: '🙋🏽‍♀️' }, option2: { text: 'Bien común', emoji: '👥' } }, { option1: { text: 'Datos abiertos', emoji: '📂' }, option2: { text: 'Privacidad', emoji: '🔒' } }, { option1: { text: 'Ciencia', emoji: '🔬' }, option2: { text: 'Religión', emoji: '⛪️' } }, { option1: { text: 'Inteligencia artificial', emoji: '🤖' }, option2: { text: 'Inteligencia humana', emoji: '🧠' } }, { option1: { text: 'Competencia', emoji: '🏁' }, option2: { text: 'Colaboración', emoji: '🤝' } }, { option1: { text: 'Relativismo moral', emoji: '🌈' }, option2: { text: 'Universlaismo moral', emoji: '🌐' } }, { option1: { text: 'Igualdad⚖', emoji: '⚖️' }, option2: { text: 'Meritocracia', emoji: '🏆' } }, { option1: { text: 'Democracia directa', emoji: '🗳' }, option2: { text: 'Democracia representativa', emoji: '🗣' } }, { option1: { text: 'Justicia retributiva', emoji: '🔨' }, option2: { text: 'Justicia restaurativa', emoji: '🤲🏼' } }, { option1: { text: 'Bien común', emoji: '🤝' }, option2: { text: 'Interés individual', emoji: '🧍🏽' } }, { option1: { text: 'Alma', emoji: '👻' }, option2: { text: 'Cuerpo', emoji: '🧠' } }, { option1: { text: 'Hombre bueno por naturaleza', emoji: '😇' }, option2: { text: 'Hombre malo por naturaleza', emoji: '😈' } }, { option1: { text: 'Realidad objetiva', emoji: '🌍' }, option2: { text: 'Realidad subjetiva', emoji: '🌤' } }, { option1: { text: 'Orden', emoji: '📏' }, option2: { text: 'Caos', emoji: '🌪' } }, { option1: { text: 'Pacifismo', emoji: '🕊' }, option2: { text: 'Belicismo', emoji: '⚔️' } }, { option1: { text: 'Optimismo', emoji: '☀️' }, option2: { text: 'Pesimismo', emoji: '🌧️' } }, { option1: { text: 'Libertad de expresión', emoji: '🗣' }, option2: { text: 'Censura', emoji: '🚫' } }, { option1: { text: 'Individualismo', emoji: '🙋‍♂️' }, option2: { text: 'Colectivismo', emoji: '👥' } }, { option1: { text: 'Materialismo', emoji: '💰' }, option2: { text: 'Espiritualismo', emoji: '✨' } }, { option1: { text: 'Justicia social', emoji: '⚖️' }, option2: { text: 'Libre mercado', emoji: '💹' } }, { option1: { text: 'Libertad académica', emoji: '🎓' }, option2: { text: 'Control ideológico', emoji: '🛑' } }];
         let usedCombinations = new Set();
         function showNewChallenge() { if (usedCombinations.size >= comparisons.length) { usedCombinations.clear(); } let challenge, randomIndex; do { randomIndex = Math.floor(Math.random() * comparisons.length); } while (usedCombinations.has(randomIndex)); usedCombinations.add(randomIndex); challenge = comparisons[randomIndex]; emoji1.textContent = challenge.option1.emoji; text1.textContent = challenge.option1.text; emoji2.textContent = challenge.option2.emoji; text2.textContent = challenge.option2.text; [card1, card2].forEach(c => c.classList.remove('pop-in')); void card1.offsetWidth; [card1, card2].forEach(c => c.classList.add('pop-in')); }
         function startGame() { showScreen(thisOrThatScreen); usedCombinations.clear(); showNewChallenge(); music.play().then(() => { musicToggleBtn.textContent = '🔈'; }).catch(() => { musicToggleBtn.textContent = '🔇'; }); }
@@ -562,18 +554,17 @@
 
       // --- Gestor del Juego 3: "Conceptos Filosóficos" ---
       const emojiDiceMinigameManager = (() => {
-        // ... (código del juego 3 sin cambios)
         const screen1 = $('ed-screen-1');
         const screen2 = $('ed-screen-2');
         const home1 = $('ed-home-btn-1');
         const home2 = $('ed-home-btn-2');
         const backBtn = $('ed-back-btn');
         const startBtn = $('ed-start-btn');
-        const emojiCountRange = $('ed-emoji-count-range');
-        const emojiCountRangeValue = $('ed-emoji-count-range-value');
+        const btnPlus = $('ed-btn-plus');
+        const btnMinus = $('ed-btn-minus');
+        const emojiCountDisplay = $('ed-emoji-count-display');
         const groupingSelect = $('ed-grouping-select');
         const customWordsTA = $('ed-custom-words');
-        const emojiCountSelect = $('ed-emoji-count-select');
         const groupingSelectLive = $('ed-grouping-select-live');
         const emojiDisplay = $('ed-emoji-display');
         const wordDisplayCard = $('ed-word-display-card');
@@ -583,24 +574,99 @@
         const stepsSection = $('ed-steps-section');
         const stepsContainer = $('ed-steps-container');
         const emojiMainBlock = $('ed-emoji-main-block');
-        const showSub = (el)=>{ screen1.classList.add('hidden'); screen2.classList.add('hidden'); el.classList.remove('hidden'); };
-        let audioCtx;
-        const beep = (f=880, ms=120)=>{ try{ audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.type='sine'; osc.frequency.value=f; gain.gain.setValueAtTime(0.0001,audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.2,audioCtx.currentTime+0.01); gain.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+ms/1000); osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + ms/1000 + 0.02); }catch{} };
+        
+        let numEmojis = 3;
+        let activeWords = [];
         const DEFAULT_WORDS = [ 'pensar','crear','escribir','leer','reír','bailar','volar','nadar','hablar','escuchar','mirar','encontrar','ayudar','usar','abrir','cerrar','empezar','parar','caminar','cambiar','imaginar','compartir','ganar','construir','dibujar','cantar','explorar','descubrir','resolver','visitar','viajar','cocinar','ver','aprender', 'feliz','triste','grande','pequeño','rápido','lento','rojo','azul','verde','amarillo','soleado','lluvioso','nublado','valiente','fuerte','amable','listo','delicioso','bonito','asombroso','interesante','aburrido','nuevo','viejo','joven','ruidoso','silencioso','brillante','oscuro','pesado','ligero','bueno','malo','emocionado','cansado','enfadado','hambriento','sediento','frío','caliente','divertido','misterioso','mágico','gigante','minúsculo','colorido','invisible','extraño','fantástico','genial','maravilloso','pacífico','secreto','antiguo','moderno','rápidamente','lentamente','de repente','finalmente','después','antes','cuando','mientras','si','o','también','porque','entonces','cerca','lejos','encima','debajo','dentro','fuera' ];
         const stepsData = [ { title:'PASO 1/3: PENSAR 🧠', instructions:'Comenta ideas con tu pareja/grupo.' }, { title:'PASO 2/3: CREAR ✍️',  instructions:'Escribid el texto juntos.' }, { title:'PASO 3/3: COMPARTIR 🎤', instructions:'¡Presentad vuestro texto a la clase!' } ];
-        let activeWords = [...DEFAULT_WORDS];
+
+        const showSub = (el)=>{ screen1.classList.add('hidden'); screen2.classList.add('hidden'); el.classList.remove('hidden'); };
+        
+        let audioCtx;
+        const beep = (f=880, ms=120)=>{ try{ audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.type='sine'; osc.frequency.value=f; gain.gain.setValueAtTime(0.0001,audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.2,audioCtx.currentTime+0.01); gain.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+ms/1000); osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + ms/1000 + 0.02); }catch{} };
+        
         const rand = (arr)=> arr[Math.floor(Math.random()*arr.length)];
         const parseCustomWords = (raw)=> (raw||'').split(/[\n,;]+/g).map(w=>w.trim()).filter(Boolean).filter(w=>w.length<=30);
         const setEmojiGridCols = (n)=>{ emojiDisplay.style.gridTemplateColumns = `repeat(${Math.min(n,6)}, minmax(64px,1fr))`; };
-        const resetSteps = ()=>{ const grouping = groupingSelectLive.value; if(grouping==='Individual'){ stepsContainer.classList.add('hidden'); emojiMainBlock.classList.remove('md:w-3/5'); emojiMainBlock.classList.add('w-full'); return; } stepsContainer.classList.remove('hidden'); emojiMainBlock.classList.remove('w-full'); emojiMainBlock.classList.add('md:w-3/5'); stepsSection.innerHTML = ` <div class="text-center"><h3 id="ed-step-title" class="text-2xl sm:text-3xl font-bold text-pink-600"></h3></div> <div class="text-center flex-grow flex items-center justify-center p-2 min-h-[6rem]"> <p id="ed-step-instructions" class="text-gray-700 text-base sm:text-lg font-medium"></p> </div> <div class="flex justify-center"> <button id="ed-next-step-btn" class="py-2 px-6 rounded-xl shadow-md text-white font-semibold" style="background-image:linear-gradient(to right,#a2d2ff,#bde0fe);">➡️ Siguiente paso</button> </div>`; let currentStep=1; const update=()=>{ const d = stepsData[currentStep-1]; $('ed-step-title').textContent = d.title; $('ed-step-instructions').textContent = d.instructions; $('ed-next-step-btn').textContent = (currentStep===3)?'🎉 Terminar':'➡️ Siguiente paso'; }; $('ed-next-step-btn').addEventListener('click', ()=>{ if(currentStep<3){ currentStep++; update(); } else{ stepsContainer.classList.add('hidden'); emojiMainBlock.classList.remove('md:w-3/5'); emojiMainBlock.classList.add('w-full'); } }); update(); };
-        const roll = ()=>{ const n = parseInt(emojiCountSelect.value,10) || 3; emojiDisplay.innerHTML = ''; setEmojiGridCols(n); const frag = document.createDocumentFragment(); for(let i=0;i<n;i++){ const e = rand(SHARED_EMOJIS); const card = document.createElement('div'); card.className='bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in'; card.style.animationDelay = `${i*0.06}s`; card.innerHTML = `<span class="text-5xl sm:text-7xl" style="text-shadow:0 4px 10px rgba(0,0,0,.15);">${e}</span>`; frag.appendChild(card); } emojiDisplay.appendChild(frag); const word = rand(activeWords); wordDisplay.textContent = word; wordDisplayCard.classList.remove('hidden'); consigna.textContent = `Usa los ${n} emojis y la palabra «${word}» para crear una frase.`; beep(900,110); };
+
+        const changeEmojiCount = (delta) => {
+            const newValue = numEmojis + delta;
+            if (newValue >= 3 && newValue <= 9) {
+                numEmojis = newValue;
+                emojiCountDisplay.textContent = numEmojis;
+                btnMinus.disabled = numEmojis <= 3;
+                btnPlus.disabled = numEmojis >= 9;
+            }
+        };
+
+        const resetSteps = ()=>{
+            const grouping = groupingSelectLive.value;
+            if(grouping==='Individual'){
+                stepsContainer.classList.add('hidden');
+                emojiMainBlock.classList.remove('md:w-3/5');
+                emojiMainBlock.classList.add('w-full');
+                return;
+            }
+            stepsContainer.classList.remove('hidden');
+            emojiMainBlock.classList.remove('w-full');
+            emojiMainBlock.classList.add('md:w-3/5');
+            stepsSection.innerHTML = ` <div class="text-center"><h3 id="ed-step-title" class="text-2xl sm:text-3xl font-bold text-pink-600"></h3></div> <div class="text-center flex-grow flex items-center justify-center p-2 min-h-[6rem]"> <p id="ed-step-instructions" class="text-gray-700 text-base sm:text-lg font-medium"></p> </div> <div class="flex justify-center"> <button id="ed-next-step-btn" class="py-2 px-6 rounded-xl shadow-md text-white font-semibold" style="background-image:linear-gradient(to right,#a2d2ff,#bde0fe);">➡️ Siguiente paso</button> </div>`;
+            let currentStep=1;
+            const update=()=>{
+                const d = stepsData[currentStep-1];
+                $('ed-step-title').textContent = d.title;
+                $('ed-step-instructions').textContent = d.instructions;
+                $('ed-next-step-btn').textContent = (currentStep===3)?'🎉 Terminar':'➡️ Siguiente paso';
+            };
+            $('ed-next-step-btn').addEventListener('click', ()=>{
+                if(currentStep<3){ currentStep++; update(); }
+                else{
+                    stepsContainer.classList.add('hidden');
+                    emojiMainBlock.classList.remove('md:w-3/5');
+                    emojiMainBlock.classList.add('w-full');
+                }
+            });
+            update();
+        };
+
+        const roll = ()=>{
+            const n = numEmojis; // Usar la variable de estado
+            emojiDisplay.innerHTML = '';
+            setEmojiGridCols(n);
+            const frag = document.createDocumentFragment();
+            for(let i=0;i<n;i++){
+                const e = rand(SHARED_EMOJIS);
+                const card = document.createElement('div');
+                card.className='bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in';
+                card.style.animationDelay = `${i*0.06}s`;
+                card.innerHTML = `<span class="text-5xl sm:text-7xl" style="text-shadow:0 4px 10px rgba(0,0,0,.15);">${e}</span>`;
+                frag.appendChild(card);
+            }
+            emojiDisplay.appendChild(frag);
+            const word = rand(activeWords);
+            wordDisplay.textContent = word;
+            wordDisplayCard.classList.remove('hidden');
+            consigna.textContent = `Usa los ${n} emojis y la palabra «${word}» para crear una frase.`;
+            beep(900,110);
+        };
+        
         home1.addEventListener('click', goHome);
         home2.addEventListener('click', goHome);
         backBtn.addEventListener('click', ()=> showSub(screen1));
-        emojiCountRange.addEventListener('input', ()=>{ emojiCountRangeValue.textContent = emojiCountRange.value; });
+        btnPlus.addEventListener('click', () => changeEmojiCount(1));
+        btnMinus.addEventListener('click', () => changeEmojiCount(-1));
         groupingSelectLive.addEventListener('change', resetSteps);
-        emojiCountSelect.addEventListener('change', ()=> setEmojiGridCols(parseInt(emojiCountSelect.value,10)));
-        startBtn.addEventListener('click', ()=>{ const custom = parseCustomWords(customWordsTA.value); activeWords = custom.length ? custom : [...DEFAULT_WORDS]; emojiCountSelect.value = emojiCountRange.value; groupingSelectLive.value = groupingSelect.value; emojiDisplay.innerHTML = '<div class="text-center text-gray-400 p-6">Pulsa “Tirar dados” para empezar</div>'; wordDisplayCard.classList.add('hidden'); consigna.textContent = ''; showSub(screen2); resetSteps(); });
+        
+        startBtn.addEventListener('click', ()=>{
+            const custom = parseCustomWords(customWordsTA.value);
+            activeWords = custom.length ? custom : [...DEFAULT_WORDS];
+            groupingSelectLive.value = groupingSelect.value;
+            emojiDisplay.innerHTML = '<div class="text-center text-gray-400 p-6">Pulsa “Tirar dados” para empezar</div>';
+            wordDisplayCard.classList.add('hidden');
+            consigna.textContent = '';
+            showSub(screen2);
+            resetSteps();
+        });
         rollBtn.addEventListener('click', roll);
       })();
 
@@ -623,7 +689,6 @@
         const checkBtn = $('check-btn');
         const newMessageBtn = $('new-message-btn');
         const showCodeBtn = $('show-code-btn');
-        const readAloudBtn = $('read-aloud-btn');
         const codeTablePanel = $('code-table-panel');
         const emojiCodeGrid = $('emoji-code-grid');
         const encodeInputArea = $('encode-input-area');
@@ -638,62 +703,9 @@
 
         const EMOJI_CIPHER = { 'A': '🐶', 'B': '🍌', 'C': '🐱', 'D': '🦖', 'E': '🍎', 'F': '🐸', 'G': '🌈', 'H': '🐹', 'I': '🍦', 'J': '🎈', 'K': '🐨', 'L': '🍋', 'M': '🐵', 'N': '🍉', 'O': '🐙', 'P': '🐧', 'Q': '🧁', 'R': '🤖', 'S': '☀️', 'T': '🧸', 'U': '🦄', 'V': '🍇', 'W': '🐺', 'X': '❌', 'Y': '🌻', 'Z': '🦓' };
         const EMOJI_NAMES = { '🐶': 'dog', '🍌': 'banana', '🐱': 'cat', '🦖': 'dinosaur', '🍎': 'apple', '🐸': 'frog', '🌈': 'rainbow', '🐹': 'hamster', '🍦': 'ice cream', '🎈': 'balloon', '🐨': 'koala', '🍋': 'lemon', '🐵': 'monkey', '🍉': 'watermelon', '🐙': 'octopus', '🐧': 'penguin', '🧁': 'cupcake', '🤖': 'robot', '☀️': 'sun', '🧸': 'teddy bear', '🦄': 'unicorn', '🍇': 'grapes', '🐺': 'wolf', '❌': 'cross', '🌻': 'sunflower', '🦓': 'zebra' };
-        const SECRET_WORDS = [
-  "SÓCRATES", 
-  "PLATÓN", 
-  "ARISTÓTELES", 
-  "TOMÁS DE AQUINO", 
-  "DESCARTES", 
-  "HUME", 
-  "LOCKE", 
-  "SPINOZA", 
-  "LEIBNIZ", 
-  "KANT", 
-  "HEGEL", 
-  "MARX", 
-  "WITTGENSTEIN", 
-  "RUSSELL", 
-  "ADORNO", 
-  "POPPER", 
-  "HABERMAS", 
-  "ORTEGA Y GASSET", 
-  "ZAMBRANO", 
-  "STEIN", 
-  "HIPATIA", 
-  "SIMONE DE BEAUVOIR",
-  "NIETZSCHE",
-  "FREUD",
-  "SARTRE",
-  "HEIDEGGER",
-  "RAWLS",
-  "NOZICK",
-  "BUTLER",
-  "ARENDT"
-];
-
-const SECRET_SENTENCES = [
-  "COGITO ERGO SUM", // Descartes
-  "CARPE DIEM", // Horacio
-  "LO RACIONAL ES REAL Y LO REAL ES RACIONAL", // Hegel
-  "DIOS HA MUERTO", // Nietzsche
-  "EL HOMBRE ES UN LOBO PARA EL HOMBRE", // Hobbes
-  "PIENSO, LUEGO EXISTO", // Descartes
-  "SAPERE AUDE", // Kant
-  "EL HOMBRE ESTÁ CONDENADO A SER LIBRE", // Sartre
-  "EL FIN JUSTIFICA LOS MEDIOS", // Maquiavelo
-  "EL CONOCIMIENTO ES PODER", // Bacon
-  "VIVIR ES SUFRIR", // Nietzsche
-  "LA VIDA EXAMINADA NO MERECE SER VIVIDA", // Sócrates
-  "LA LIBERTAD ES EL RECONOCIMIENTO DE LA NECESIDAD", // Engels
-  "NINGÚN HOMBRE ES UNA ISLA", // John Donne
-  "EL ESTADO SOY YO", // Luis XIV (contexto político-filosófico)
-  "EL HOMBRE ES LA MEDIDA DE TODAS LAS COSAS", // Protágoras
-  "NO HAY HECHOS, SÓLO INTERPRETACIONES", // Nietzsche
-  "LA TIERRA ES LA CUNA DE LA HUMANIDAD, PERO NO PODEMOS VIVIR SIEMPRE EN UNA CUNA", // Tsiolkovsky (usada en debates sobre progreso)
-  "EDUCAR NO ES LLENAR UN VASO, SINO ENCENDER UN FUEGO", // Plutarco
-  "LA FELICIDAD ES EL FIN SUPREMO", // Aristóteles
-];
-
+        const SECRET_WORDS = ["KANT", "PLATON", "ARISTOTELES", "NIETZSCHE", "SARTRE", "DESCARTES", "SPINOZA", "HUME", "LOCKE", "HEGEL"];
+        const SECRET_SENTENCES = ["SOLO SE QUE NO SE NADA", "PIENSO LUEGO EXISTO", "EL HOMBRE ES UN LOBO PARA EL HOMBRE", "DIOS HA MUERTO", "LA EXISTENCIA PRECEDE A LA ESENCIA", "EL FIN JUSTIFICA LOS MEDIOS", "CONOCETE A TI MISMO", "VIVIR ES SUFRIR", "LA VIDA ES ABSURDA"];
+        
         let currentSecretMessage = '';
         let currentLevel = '';
 
@@ -886,7 +898,6 @@ const SECRET_SENTENCES = [
             });
             checkBtn.addEventListener('click', checkAnswer);
             decodeInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') checkAnswer(); });
-            readAloudBtn.addEventListener('click', () => { if(currentSecretMessage) speak(currentSecretMessage); });
             encodeBtn.addEventListener('click', createOwnMessage);
             backToCreateBtn.addEventListener('click', resetCreateView);
             encodeInput.addEventListener('input', () => {
@@ -924,4 +935,3 @@ const SECRET_SENTENCES = [
   </script>
 </body>
 </html>
-�
