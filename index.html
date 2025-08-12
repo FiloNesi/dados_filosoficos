@@ -4,13 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dados filosóficos</title>
-
   <script src="https://cdn.tailwindcss.com" defer></script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet"/>
-
   <style>
     :root{
       --brand-rose:#FF6F61;
@@ -26,18 +23,10 @@
     @keyframes popIn{0%{opacity:0;transform:scale(.8)}80%{opacity:1;transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
     @keyframes animate-border{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-    /* Home */
     #warmup-screen{font-family:'Nunito',sans-serif;background:radial-gradient(circle at 50% 50%,#e6f7f3,#d0f0e8);color:#3d4f63;text-align:center;position:relative;overflow-y:auto}
     #warmup-screen .main-container{position:relative;z-index:1;width:100%;max-width:1300px;display:flex;flex-direction:column;align-items:center;gap:1rem;animation:fadeIn 1s ease-in-out}
     #warmup-screen .main-title{font-family:'Fredoka',sans-serif;font-size:clamp(2.5rem,8vw,3.2rem);font-weight:700;color:#E5989B;text-shadow:2px 2px 0 #fff,4px 4px 8px rgba(0,0,0,.1);margin:0;line-height:1.1}
     #warmup-screen .subtitle{font-size:clamp(1rem,4vw,1.1rem);font-weight:400;color:#5a6b80;margin-top:.25rem}
-    #warmup-screen .video-wrapper{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:500px;border-radius:2rem;box-shadow:0 20px 40px -10px rgba(45,55,72,.2);overflow:hidden;background-color:#000}
-    #warmup-screen .video-wrapper::before{content:'';position:absolute;top:-3px;left:-3px;width:calc(100% + 6px);height:calc(100% + 6px);background:linear-gradient(45deg,#a6e4b6,#fde68a,#a2d2ff,#ffc8dd,#a6e4b6);background-size:400% 400%;border-radius:2rem;z-index:0;animation:animate-border 12s linear infinite}
-    #warmup-screen .welcome-video{width:100%;height:auto;display:block;border-radius:calc(2rem - 3px);position:relative;z-index:1;filter:blur(4px) brightness(.7);transition:filter .5s ease-in-out}
-    #warmup-screen .video-wrapper.is-playing .welcome-video{filter:none}
-    #warmup-screen .play-button{position:absolute;z-index:10;background:rgba(255,255,255,.8);backdrop-filter:blur(5px);border:2px solid rgba(255,255,255,.9);padding:.8rem 1.8rem;font-size:1.1rem;font-weight:600;color:#3d4f63;border-radius:50px;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.2);transition:all .3s ease;display:flex;align-items:center;gap:.5rem}
-    #warmup-screen .play-button::before{content:'▶';font-size:1.5rem;line-height:1}
-    #warmup-screen .video-wrapper.is-playing .play-button{opacity:0;pointer-events:none}
     #warmup-screen .button-grid{display:grid;grid-template-columns:1fr;gap:1rem;width:100%;max-width:400px;margin-top:1rem}
     @media (min-width:768px){#warmup-screen .button-grid{grid-template-columns:repeat(2,1fr);max-width:700px}}
     @media (min-width:1200px){#warmup-screen .button-grid{grid-template-columns:repeat(4,1fr);max-width:1300px}}
@@ -51,17 +40,12 @@
     #warmup-screen .btn-4{background-image:linear-gradient(to right,#fdffb6,#ffd6a5 51%,#fdffb6 100%)}
     #warmup-screen .footer-text{margin-top:1rem;font-family:'Nunito',sans-serif;font-size:12px;color:#6d6d6d;opacity:.7}
 
-    /* Dice Challenge */
-    #dice-challenge-screen{font-family:'Nunito',sans-serif;background-color:var(--bg-cream);background-image:linear-gradient(to bottom,#fefae0 0%,#fde4cf 100%);position:relative;overflow:hidden;justify-content:flex-start}
+    #dice-challenge-screen, #emoji-dice-screen, #this-or-that-screen {font-family:'Nunito',sans-serif;background-color:var(--bg-cream);background-image:linear-gradient(to bottom,#fefae0 0%,#fde4cf 100%);position:relative;overflow:hidden;justify-content:flex-start}
     .screen-content-wrapper{width:100%;height:100%;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
     .dice-sub-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:100%;padding:1rem;box-sizing:border-box}
-    #dice-screen-2{justify-content:flex-start;padding-top:1rem;padding-bottom:1rem;min-height:auto}
-    #dice-challenge-screen h1{font-family:'Fredoka',sans-serif}
+    #dice-challenge-screen h1, #emoji-dice-screen h1 {font-family:'Fredoka',sans-serif}
     .pop-in{animation:popIn .4s ease-out forwards}
     .emoji-shadow{text-shadow:0 4px 10px rgba(0,0,0,.15)}
-    .video-container video{transition:filter .7s ease-in-out}
-    .video-is-blurred{filter:blur(12px)}
-    .is-playing #reveal-button-dice{opacity:0;pointer-events:none}
     .quantity-btn{width:40px;height:40px;border-radius:50%;background-color:#ffc8dd;color:#c13a69;font-size:2rem;font-weight:700;border:none;cursor:pointer;line-height:1;transition:all .2s ease;box-shadow:0 4px 10px rgba(0,0,0,.1)}
     .quantity-btn:hover{transform:scale(1.1);background-color:#ffafcc}
     .quantity-btn:disabled{background-color:#e5e7eb;color:#9ca3af;cursor:not-allowed;transform:scale(1)}
@@ -70,20 +54,14 @@
     .dice-toggle-wrapper input[type="checkbox"]:hover + .dice-toggle-label{transform:scale(1.03);box-shadow:0 8px 15px rgba(45,55,72,.1)}
     .dice-toggle-wrapper input[type="checkbox"]:checked + .dice-toggle-label{background-color:#818cf8;color:#fff;border-color:#c7d2fe;box-shadow:0 0 15px 3px rgba(129,140,248,.4)}
     .dice-toggle-wrapper input[type="checkbox"]:disabled + .dice-toggle-label{background-color:#e5e7eb;color:#9ca3af;cursor:not-allowed;transform:none;box-shadow:none;opacity:.7}
-
     #dice-challenge-screen .grid-container{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:.75rem;width:100%;max-width:400px;aspect-ratio:1/1;background-color:rgba(238,244,255,.7);padding:.75rem;border-radius:1.5rem;border:2px dashed #c7d2fe}
     #dice-challenge-screen .grid-container .pop-in{width:100%;height:100%;padding:.25rem;overflow:hidden;display:flex;align-items:center;justify-content:center}
     #dice-challenge-screen .grid-container .pop-in span{font-size:clamp(2rem,12vw,4rem);line-height:1}
     #dice-challenge-screen .grid-container .pop-in img{width:90%;height:90%;object-fit:contain}
 
-    /* Historial */
     #history-panel{position:fixed;transition:transform .3s ease-in-out}
     #history-panel.is-open{transform:translateX(0)}
-
-    @media (prefers-reduced-motion: reduce){
-      .pop-in{animation:none}
-      .video-is-blurred{filter:none}
-    }
+    @media (prefers-reduced-motion: reduce){.pop-in{animation:none}}
   </style>
 </head>
 <body>
@@ -93,19 +71,18 @@
         <h1 class="main-title">Dados filosóficos</h1>
         <p class="subtitle">Elige un juego para comenzar</p>
       </div>
-
       <div class="button-grid">
         <button id="go-to-dice-challenge-btn" class="game-button btn-1">
-          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-dice.png?raw=true" alt="Icono de dado" class="button-icon" loading="lazy" decoding="async"> Lanzar dados
+          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-dice.png?raw=true" alt="Icono de dado" class="button-icon"> Lanzar dados
         </button>
         <button id="go-to-this-or-that-btn" class="game-button btn-2">
-          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-arrow.png?raw=true" alt="Icono de flecha" class="button-icon" loading="lazy" decoding="async"> ¿Cuál eliges?
+          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-arrow.png?raw=true" alt="Icono de flecha" class="button-icon"> ¿Cuál eliges?
         </button>
         <button id="go-to-secret-message-btn" class="game-button btn-3">
-          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-lock.png?raw=true" alt="Icono de candado" class="button-icon" loading="lazy" decoding="async"> Mensaje secreto
+          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-lock.png?raw=true" alt="Icono de candado" class="button-icon"> Mensaje secreto
         </button>
         <button id="go-to-emoji-says-btn" class="game-button btn-4">
-          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-megaphone.png?raw=true" alt="Icono de megáfono" class="button-icon" loading="lazy" decoding="async"> Conceptos filosóficos
+          <img src="https://github.com/TamaraLlorens/warmup-assets/blob/main/emoji-megaphone.png?raw=true" alt="Icono de megáfono" class="button-icon"> Conceptos filosóficos
         </button>
       </div>
     </div>
@@ -114,30 +91,11 @@
 
   <div id="dice-challenge-screen" class="screen hidden">
     <div class="screen-content-wrapper">
-      <div id="dice-screen-1" class="dice-sub-screen">
-        <main class="w-full max-w-md mx-auto text-center flex flex-col justify-center items-center">
-          <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,0.1);">Emoji Dice<br>Challenge</h1>
-          <div class="bg-white p-2 sm:p-3 w-full relative video-card rounded-2xl shadow-lg">
-            <div id="video-wrapper-dice" class="relative rounded-xl overflow-hidden aspect-square bg-black video-container">
-              <video id="instructions-video-dice" class="w-full h-full object-cover video-is-blurred" src="https://cdn.jsdelivr.net/gh/TamaraLlorens/warmup-assets@main/emoji%20video%20dice%20app.mp4" playsinline muted></video>
-              <button id="reveal-button-dice" class="absolute inset-0 flex items-center justify-center w-full h-full bg-transparent">
-                <span class="bg-white/90 text-[#4A4A4A] text-lg font-bold py-3 px-6 rounded-xl shadow-md hover:scale-105 transition-transform">🎬 Ver instrucciones</span>
-              </button>
-            </div>
-          </div>
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
-            <button id="dice-home-btn-1" class="bg-white text-gray-700 font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all duration-200 ease-in-out py-2 px-5 shadow-md hover:shadow-lg hover:-translate-y-0.5 no-underline"><span class="text-xl">🏠</span><span>Inicio</span></button>
-            <button id="start-challenge-btn" class="font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all duration-200 ease-in-out text-white py-2 px-6" style="background-image:linear-gradient(135deg,var(--brand-amber) 0%, var(--brand-rose-2) 100%); box-shadow:0 4px 20px rgba(255,154,139,.35);"><span class="text-2xl">🎲</span><span>Empezar</span></button>
-          </div>
-        </main>
-      </div>
-
-      <div id="dice-screen-2" class="dice-sub-screen hidden">
+      <div class="dice-sub-screen">
         <div class="w-full max-w-5xl flex flex-col items-center gap-4">
           <header class="text-center flex-shrink-0">
             <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,0.1);">Crea tu Tirada</h1>
           </header>
-
           <div id="dice-config-panel" class="w-full p-4 rounded-2xl space-y-4" style="background-color:#fff8f2;box-shadow:0 6px 12px rgba(0,0,0,.06);">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="p-3 rounded-lg bg-white/70">
@@ -158,23 +116,18 @@
               <div id="specific-dice-selection" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 p-2"></div>
             </div>
           </div>
-
           <div class="w-full p-4 rounded-2xl space-y-4 flex flex-col items-center">
             <div id="emoji-display" class="grid-container"></div>
-
             <div id="save-roll-section" class="hidden w-full max-w-md mt-4 flex flex-col sm:flex-row items-center gap-2">
               <input id="roll-name-input" type="text" placeholder="Ponle un nombre a tu tirada..." class="flex-grow p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400">
               <button id="save-roll-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><span class="text-xl">💾</span> Guardar</button>
             </div>
-
             <p id="consigna" class="font-baloo text-center text-gray-800 text-lg md:text-xl px-2 min-h-[2rem]">¡Configura tu tirada y pulsa «Lanzar dados»!</p>
             <button id="roll-dice-btn" class="group font-bold text-white py-3 px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-xl focus:outline-none transition-all duration-300" style="background-image:linear-gradient(to right,#ff9a8b,#ff6a88);"><span class="text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Lanzar dados</span></button>
           </div>
-
           <footer class="p-2 flex-shrink-0">
             <div class="flex justify-center items-center gap-4">
               <button id="toggle-history-btn" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all" aria-controls="history-panel" aria-expanded="false">📖 Historial</button>
-              <button id="back-btn" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all">⬅️ Atrás</button>
               <button id="dice-home-btn-2" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all no-underline">🏠 Inicio</button>
             </div>
           </footer>
@@ -183,80 +136,49 @@
     </div>
   </div>
 
-<div id="this-or-that-screen" class="screen hidden">
-        <div id="tot-start-screen" class="w-full max-w-5xl mx-auto text-center flex flex-col justify-center items-center h-full gap-y-4 md:gap-y-6">
-            <h1 class="text-6xl md:text-8xl lg:text-9xl font-black text-slate-700 tracking-tight flex items-center justify-center">
+  <div id="this-or-that-screen" class="screen hidden">
+    <div id="tot-game-screen" class="w-full max-w-7xl mx-auto text-center flex flex-col justify-around h-full">
+        <audio id="tot-background-music" loop>
+            <source src="https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/This%20or%20That,%20Kids!.mp3" type="audio/mpeg">
+        </audio>
+        <div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-slate-700 tracking-tight flex items-center justify-center">
                 This or That
-                <span id="speaking-icon" class="ml-4 text-6xl md:text-8xl lg:text-9xl">🗣️</span>
+                <span id="speaking-icon-game" class="ml-4 text-5xl md:text-6xl lg:text-7xl">🗣️</span>
             </h1>
-            <div class="flex justify-center">
-                <div id="videoContainer" class="relative w-full max-w-md lg:max-w-lg mx-auto rounded-2xl shadow-lg overflow-hidden">
-                    <video id="tot-instruction-video" class="w-full border-4 border-white video-blur" playsinline>
-                        <source src="https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/VIDEO%20EMOJI%20THIS%20OR%20THAT.MP4" type="video/mp4">
-                        Tu navegador no soporta la etiqueta de vídeo.
-                    </video>
-                    <button id="tot-play-video-btn" class="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm transition-opacity duration-500 group">
-                        <div class="flex items-center justify-center bg-gradient-to-br from-purple-400 to-indigo-400 text-white font-bold text-xl px-8 py-4 rounded-3xl shadow-2xl transform group-hover:scale-105 transition-transform duration-300 border-2 border-white/50">
-                            <span class="mr-3 text-3xl">🎬</span>
-                            Reveal the Instructions
-                        </div>
-                    </button>
-                </div>
+            <p class="mt-2 mb-4 lg:mb-6 text-xl md:text-2xl lg:text-3xl font-semibold" style="color: #666666;">
+                👆 Choose one and say why! 🎤
+            </p>
+        </div>
+        <div id="cardsContainer" class="flex-grow flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-8 lg:gap-12">
+            <div id="tot-card1" class="card flex-1 bg-white p-4 lg:p-6 rounded-3xl shadow-lg flex flex-col justify-center items-center border-4 border-purple-200 w-full max-w-sm lg:max-w-md h-full">
+                <div id="tot-emoji1" class="text-7xl md:text-9xl lg:text-[9rem] mb-4 drop-shadow-lg"></div>
+                <h2 id="tot-text1" class="text-3xl md:text-4xl lg:text-5xl font-bold text-center" style="color: #333333;"></h2>
             </div>
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 lg:gap-8">
-                <button id="tot-home-btn" class="flex items-center justify-center bg-sky-400 text-white font-bold text-xl px-8 py-4 rounded-3xl shadow-lg border-2 border-white/50 hover:bg-sky-500 transition-all duration-300 transform hover:scale-105 active:scale-95">
-                    <span class="mr-3 text-2xl">🏠</span>
-                    Home
-                </button>
-                <button id="tot-start-game-btn" class="flex items-center justify-center text-white font-bold text-xl px-8 py-4 rounded-3xl shadow-xl border-2 border-white/50 transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none" style="background-color: #F68AB8;">
-                    <span class="mr-3 text-2xl">▶️</span>
-                    Start Game
-                </button>
+            <div class="text-5xl md:text-7xl font-black text-slate-600 flex items-center justify-center px-2 cartoon-or">O</div>
+            <div id="tot-card2" class="card flex-1 bg-white p-4 lg:p-6 rounded-3xl shadow-lg flex flex-col justify-center items-center border-4 border-cyan-200 w-full max-w-sm lg:max-w-md h-full">
+                <div id="tot-emoji2" class="text-7xl md:text-9xl lg:text-[9rem] mb-4 drop-shadow-lg"></div>
+                <h2 id="tot-text2" class="text-3xl md:text-4xl lg:text-5xl font-bold text-center" style="color: #333333;"></h2>
             </div>
         </div>
-        <div id="tot-game-screen" class="hidden w-full max-w-7xl mx-auto text-center flex-col justify-around h-full">
-            <audio id="tot-background-music" loop>
-                <source src="https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/This%20or%20That,%20Kids!.mp3" type="audio/mpeg">
-            </audio>
-            <div>
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-slate-700 tracking-tight flex items-center justify-center">
-                    This or That
-                    <span id="speaking-icon-game" class="ml-4 text-5xl md:text-6xl lg:text-7xl">🗣️</span>
-                </h1>
-                <p class="mt-2 mb-4 lg:mb-6 text-xl md:text-2xl lg:text-3xl font-semibold" style="color: #666666;">
-                    👆 Choose one and say why! 🎤 Let’s speak in English!
-                </p>
-            </div>
-            <div id="cardsContainer" class="flex-grow flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-8 lg:gap-12">
-                <div id="tot-card1" class="card flex-1 bg-white p-4 lg:p-6 rounded-3xl shadow-lg flex flex-col justify-center items-center border-4 border-purple-200 w-full max-w-sm lg:max-w-md h-full">
-                    <div id="tot-emoji1" class="text-7xl md:text-9xl lg:text-[9rem] mb-4 drop-shadow-lg"></div>
-                    <h2 id="tot-text1" class="text-3xl md:text-4xl lg:text-5xl font-bold text-center" style="color: #333333;"></h2>
-                </div>
-                <div class="text-5xl md:text-7xl font-black text-slate-600 flex items-center justify-center px-2 cartoon-or">OR</div>
-                <div id="tot-card2" class="card flex-1 bg-white p-4 lg:p-6 rounded-3xl shadow-lg flex flex-col justify-center items-center border-4 border-cyan-200 w-full max-w-sm lg:max-w-md h-full">
-                    <div id="tot-emoji2" class="text-7xl md:text-9xl lg:text-[9rem] mb-4 drop-shadow-lg"></div>
-                    <h2 id="tot-text2" class="text-3xl md:text-4xl lg:text-5xl font-bold text-center" style="color: #333333;"></h2>
-                </div>
-            </div>
-            <div class="mt-6 lg:mt-8 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8">
-                <button id="tot-back-btn" class="flex items-center justify-center bg-gray-400 text-white font-bold text-xl px-8 py-4 rounded-3xl shadow-2xl shadow-gray-500/30 border-2 border-white/50 hover:bg-gray-500 transition-all duration-300 transform hover:scale-105 active:scale-95">
-                    <span class="mr-4 text-2xl">⬅️</span>
-                    Back
-                </button>
-                <button id="tot-music-toggle-btn" class="flex items-center justify-center bg-white/80 text-slate-600 font-bold text-3xl w-16 h-16 rounded-3xl shadow-lg border-2 border-white/50 backdrop-blur-sm transition-transform hover:scale-110 active:scale-95">🔇</button>
-                <button id="tot-new-challenge-btn" class="flex items-center justify-center text-white font-bold text-xl px-8 py-4 rounded-3xl shadow-2xl shadow-pink-500/40 border-2 border-white/50 transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none" style="background-color: #F68AB8;">
-                    <span class="mr-4 text-3xl">✨</span>
-                    New Challenge
-                </button>
-            </div>
+        <div class="mt-6 lg:mt-8 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8">
+            <button id="tot-home-btn" class="flex items-center justify-center bg-gray-400 text-white font-bold text-xl px-8 py-4 rounded-3xl shadow-2xl shadow-gray-500/30 border-2 border-white/50 hover:bg-gray-500 transition-all duration-300 transform hover:scale-105 active:scale-95">
+                <span class="mr-4 text-2xl">🏠</span>
+                Inicio
+            </button>
+            <button id="tot-music-toggle-btn" class="flex items-center justify-center bg-white/80 text-slate-600 font-bold text-3xl w-16 h-16 rounded-3xl shadow-lg border-2 border-white/50 backdrop-blur-sm transition-transform hover:scale-110 active:scale-95">🔇</button>
+            <button id="tot-new-challenge-btn" class="flex items-center justify-center text-white font-bold text-xl px-8 py-4 rounded-3xl shadow-2xl shadow-pink-500/40 border-2 border-white/50 transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none" style="background-color: #F68AB8;">
+                <span class="mr-4 text-3xl">✨</span>
+                Nuevo Reto
+            </button>
         </div>
     </div>
+</div>
 
   <div id="emoji-dice-screen" class="screen hidden">
     <div id="ed-screen-1" class="dice-sub-screen">
       <main class="w-full max-w-3xl mx-auto text-center flex flex-col gap-4">
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,.1);">Conceptos filosóficos</h1>
-
         <section class="w-full bg-white/80 rounded-2xl shadow p-4 text-left space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -275,27 +197,23 @@
               </select>
             </div>
           </div>
-
           <div>
             <label class="font-bold text-gray-700 text-sm block mb-1">📝 Lista de palabras del reto (opcional)</label>
             <p class="text-xs text-gray-600 mb-2">Una por línea o separadas por comas. Si lo dejas vacío se usa la lista por defecto.</p>
             <textarea id="ed-custom-words" rows="4" class="w-full rounded-xl border border-gray-200 p-3" placeholder="ej.: rápido\nmisterioso, espacio, saltar, brillante"></textarea>
           </div>
         </section>
-
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button id="ed-home-btn-1" class="bg-white text-gray-700 font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all py-2 px-5 shadow-md hover:shadow-lg"><span class="text-xl">🏠</span><span>Inicio</span></button>
           <button id="ed-start-btn" class="font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all text-white py-2 px-6" style="background-image:linear-gradient(135deg,var(--brand-amber) 0%, var(--brand-rose-2) 100%); box-shadow:0 4px 20px rgba(255,154,139,.35); "><span class="text-2xl">▶️</span><span>Empezar</span></button>
         </div>
       </main>
     </div>
-
     <div id="ed-screen-2" class="dice-sub-screen hidden">
       <div class="w-full max-w-5xl flex flex-col gap-4">
         <header class="text-center">
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,.1);">Emoji Dice</h1>
         </header>
-
         <div class="p-3 rounded-2xl bg-white/80 shadow flex flex-wrap items-center gap-3">
           <div class="flex items-center gap-2">
             <label class="font-bold text-gray-700 text-sm">🎲 Nº de emojis</label>
@@ -312,28 +230,22 @@
             </select>
           </div>
         </div>
-
         <div class="flex flex-col md:flex-row gap-4 w-full">
           <div id="ed-emoji-main-block" class="w-full p-4 rounded-2xl space-y-4 flex flex-col" style="background-color:#eef4ff;">
             <section class="flex flex-col items-center justify-center space-y-4 flex-grow">
               <div id="ed-emoji-display" class="grid gap-3 sm:gap-5 w-full max-w-2xl mx-auto" style="grid-template-columns:repeat(3,minmax(64px,1fr));"></div>
-
               <div id="ed-word-display-card" class="hidden rounded-xl shadow-lg px-4 py-2 bg-[#dcd6ff]">
                 <span class="text-white font-bold">Palabra del reto: </span>
                 <span id="ed-word-display" class="text-white font-extrabold"></span>
               </div>
-
               <p id="ed-consigna" class="text-center text-gray-800 text-base sm:text-lg md:text-xl px-2 flex-grow flex items-center justify-center min-h-[3rem]"></p>
-
               <button id="ed-roll-dice-btn" class="group font-bold text-white py-3 px-6 sm:px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-lg sm:text-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 focus:ring-offset-gray-50 transition-all" style="background-image:linear-gradient(to right,#ff9a8b,#ff6a88);"><span class="text-2xl sm:text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Tirar dados</span></button>
             </section>
           </div>
-
           <div id="ed-steps-container" class="w-full md:w-2/5">
             <section id="ed-steps-section" class="p-4 bg-white/60 rounded-2xl h-full flex flex-col justify-between"></section>
           </div>
         </div>
-
         <footer class="p-2">
           <div class="flex justify-center items-center gap-4">
             <button id="ed-back-btn" class="bg-white font-bold text-[#4A4A4A] py-1 px-4 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all">⬅️ Atrás</button>
@@ -355,433 +267,300 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Utilidades DOM
-        const $ = (id) => document.getElementById(id);
+      const $ = (id) => document.getElementById(id);
 
-        // --- Declaración de Pantallas ---
-        const warmupScreen = $('warmup-screen');
-        const diceChallengeScreen = $('dice-challenge-screen');
-        const thisOrThatScreen = $('this-or-that-screen');
-        const emojiDiceScreen = $('emoji-dice-screen');
+      const warmupScreen = $('warmup-screen');
+      const diceChallengeScreen = $('dice-challenge-screen');
+      const thisOrThatScreen = $('this-or-that-screen');
+      const emojiDiceScreen = $('emoji-dice-screen');
+      const allScreens = [warmupScreen, diceChallengeScreen, emojiDiceScreen, thisOrThatScreen];
 
-        const allScreens = [warmupScreen, diceChallengeScreen, emojiDiceScreen, thisOrThatScreen];
+      const showScreen = (el) => {
+        allScreens.forEach(s => s.classList.add('hidden'));
+        el.classList.remove('hidden');
+      };
+      const goHome = () => showScreen(warmupScreen);
 
-        const showScreen = (el) => {
-            allScreens.forEach(s => s.classList.add('hidden'));
-            el.classList.remove('hidden');
-        };
-        const goHome = () => showScreen(warmupScreen);
+      const SHARED_EMOJIS = ['😂','😍','🤔','😎','😢','😡','🥳','🤯','😴','👍','👎','🙏','💪','👀','🧠','🐶','🐱','🐭','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🐔','🐧','🐦','🐤','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🐛','🦋','🐌','🐞','🐜','⚽️','🏀','🏈','⚾️','🎾','🏐','🏉','🎱','🏓','🏸','🥅','🏒','🏑','🏏','⛳️','🏹','🎣','🥊','🥋','🎽','⛸','🎿','⛷','🏂','🏋️‍♀️','🤼‍♀️','🤸‍♀️','🤺','🤾‍♀️','🏌️‍♀️','🏇','🏆','🥇','🥈','🥉','🎨','🎬','🎤','🎧','🎼','🎹','🥁','🎷','🎺','🎸','🎻','🎮','🧩','🎭','🚗','✈️','🚀','🛸','🚁','⛵️','🏰','🏠','❤️','💔','💯','🔥','✨','⭐️','⚡️','☀️','☁️','🌈','🌊','🍔','🍕','🍟','🎂','🍭','🍩','🍪','☕️','⏰','💡','💰','🔑','🎁','🎉'];
 
-        // --- Navegación desde la pantalla de Inicio ---
-        $('go-to-dice-challenge-btn').addEventListener('click', () => showScreen(diceChallengeScreen));
-        $('go-to-this-or-that-btn').addEventListener('click', () => showScreen(thisOrThatScreen));
-        $('go-to-emoji-says-btn').addEventListener('click', () => {
-            showScreen(emojiDiceScreen);
-            $('ed-screen-1').classList.remove('hidden');
-            $('ed-screen-2').classList.add('hidden');
-        });
+      // --- Gestor del Juego 1: "Lanzar Dados" ---
+      const diceGameManager = (() => {
+        const homeBtn2 = $('dice-home-btn-2');
+        const consigna = $('consigna');
+        const rollDiceBtn = $('roll-dice-btn');
+        const emojiDisplay = $('emoji-display');
+        const btnPlusRandom = $('btn-plus-random');
+        const btnMinusRandom = $('btn-minus-random');
+        const randomDiceDisplay = $('random-dice-display');
+        const specificDiceSelection = $('specific-dice-selection');
+        const totalDiceLaunchDisplay = $('total-dice-launch-display');
+        const rollSound = new Audio('https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/button_06-190439.mp3');
+        const saveRollSection = $('save-roll-section');
+        const rollNameInput = $('roll-name-input');
+        const saveRollBtn = $('save-roll-btn');
+        const toggleHistoryBtn = $('toggle-history-btn');
+        const historyPanel = $('history-panel');
+        const closeHistoryBtn = $('close-history-btn');
+        const historyList = $('history-list');
+        const clearHistoryBtn = $('clear-history-btn');
 
-        /* =======================
-            Datos compartidos
-        ======================= */
-        const SHARED_EMOJIS = ['😂','😍','🤔','😎','😢','😡','🥳','🤯','😴','👍','👎','🙏','💪','👀','🧠','🐶','🐱','🐭','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🐔','🐧','🐦','🐤','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🐛','🦋','🐌','🐞','🐜','⚽️','🏀','🏈','⚾️','🎾','🏐','🏉','🎱','🏓','🏸','🥅','🏒','🏑','🏏','⛳️','🏹','🎣','🥊','🥋','🎽','⛸','🎿','⛷','🏂','🏋️‍♀️','🤼‍♀️','🤸‍♀️','🤺','🤾‍♀️','🏌️‍♀️','🏇','🏆','🥇','🥈','🥉','🎨','🎬','🎤','🎧','🎼','🎹','🥁','🎷','🎺','🎸','🎻','🎮','🧩','🎭','🚗','✈️','🚀','🛸','🚁','⛵️','🏰','🏠','❤️','💔','💯','🔥','✨','⭐️','⚡️','☀️','☁️','🌈','🌊','🍔','🍕','🍟','🎂','🍭','🍩','🍪','☕️','⏰','💡','💰','🔑','🎁','🎉'];
+        const DADOS_FILOSOFICOS = { "Conceptos": ["imagenes/dios.png", "imagenes/libertad.png", "imagenes/tiempo.png", "imagenes/destino.png", "imagenes/esencia.png"], "Autores": ["imagenes/autores/platon.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png", "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png", "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"], "Acciones": ["imagenes/acciones/espiral.png", "imagenes/acciones/explosion.png", "imagenes/acciones/flechas.png", "imagenes/acciones/mano.png", "imagenes/acciones/mascara.png", "imagenes/acciones/caminar.png", "imagenes/acciones/construir.png", "imagenes/acciones/mirar.png", "imagenes/acciones/pensar.png", "imagenes/acciones/saltar.png", "imagenes/acciones/toser.png", "imagenes/acciones2/paracaidas.png"], "Objetos": ["imagenes/objetos1/arcoiris.png", "imagenes/objetos1/balanza.png", "imagenes/objetos1/candado.png", "imagenes/objetos1/llave.png", "imagenes/objetos1/lupa.png"], "Personajes": ["imagenes/personajes/astronauta.png", "imagenes/personajes/mago.png", "imagenes/personajes/nina.png", "imagenes/personajes/reina.png", "imagenes/personajes/superheroe.png"], "Derechos Humanos": ["imagenes/ddhh/1_dignidad.png", "imagenes/ddhh/2_igualdad.png", "imagenes/ddhh/3_vida.png", "imagenes/ddhh/4_no_esclavitud.png", "imagenes/ddhh/5_no_tortura.png", "imagenes/ddhh/6_personalidad_juridica.png", "imagenes/ddhh/7_igualdad_ley.png", "imagenes/ddhh/8_derecho_reparacion.png", "imagenes/ddhh/9_no_detencion_ilegal.png", "imagenes/ddhh/10_juicio_justo.png", "imagenes/ddhh/11_inocencia.png", "imagenes/ddhh/12_intimidad.png", "imagenes/ddhh/13_libre_desplazamiento.png", "imagenes/ddhh/14_asilo.png", "imagenes/ddhh/15_nacionalidad.png", "imagenes/ddhh/16_familia.png", "imagenes/ddhh/17_propiedad.png", "imagenes/ddhh/18_libertad_religiosa.png", "imagenes/ddhh/19_libertad_expresion.png", "imagenes/ddhh/20_libertad_asociacion.png"] };
+        const MAX_TOTAL_DICE = 9;
+        let numRandomDice = 3;
+        let historial = [];
+        let tiradaActualResultados = null;
+        let tiradaCounter = 1;
 
-        /* =======================
-            Juego 1: Dice Challenge
-        ======================= */
-        (function diceGameManager() {
-            const screen1 = $('dice-screen-1');
-            const screen2 = $('dice-screen-2');
-            const homeBtn1 = $('dice-home-btn-1');
-            const homeBtn2 = $('dice-home-btn-2');
-            const startBtn = $('start-challenge-btn');
-            const backBtn = $('back-btn');
-            const instructionsVideo = $('instructions-video-dice');
-            const videoWrapperDice = $('video-wrapper-dice');
-            const revealButton = $('reveal-button-dice');
-            const DADOS_FILOSOFICOS = { "Conceptos": ["imagenes/dios.png", "imagenes/libertad.png", "imagenes/tiempo.png", "imagenes/destino.png", "imagenes/esencia.png"], "Autores": ["imagenes/autores/platon.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png", "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png", "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"], "Acciones": ["imagenes/acciones/espiral.png", "imagenes/acciones/explosion.png", "imagenes/acciones/flechas.png", "imagenes/acciones/mano.png", "imagenes/acciones/mascara.png", "imagenes/acciones/caminar.png", "imagenes/acciones/construir.png", "imagenes/acciones/mirar.png", "imagenes/acciones/pensar.png", "imagenes/acciones/saltar.png", "imagenes/acciones/toser.png", "imagenes/acciones2/paracaidas.png"], "Objetos": ["imagenes/objetos1/arcoiris.png", "imagenes/objetos1/balanza.png", "imagenes/objetos1/candado.png", "imagenes/objetos1/llave.png", "imagenes/objetos1/lupa.png"], "Personajes": ["imagenes/personajes/astronauta.png", "imagenes/personajes/mago.png", "imagenes/personajes/nina.png", "imagenes/personajes/reina.png", "imagenes/personajes/superheroe.png"], "Derechos Humanos": ["imagenes/ddhh/1_dignidad.png", "imagenes/ddhh/2_igualdad.png", "imagenes/ddhh/3_vida.png", "imagenes/ddhh/4_no_esclavitud.png", "imagenes/ddhh/5_no_tortura.png", "imagenes/ddhh/6_personalidad_juridica.png", "imagenes/ddhh/7_igualdad_ley.png", "imagenes/ddhh/8_derecho_reparacion.png", "imagenes/ddhh/9_no_detencion_ilegal.png", "imagenes/ddhh/10_juicio_justo.png", "imagenes/ddhh/11_inocencia.png", "imagenes/ddhh/12_intimidad.png", "imagenes/ddhh/13_libre_desplazamiento.png", "imagenes/ddhh/14_asilo.png", "imagenes/ddhh/15_nacionalidad.png", "imagenes/ddhh/16_familia.png", "imagenes/ddhh/17_propiedad.png", "imagenes/ddhh/18_libertad_religiosa.png", "imagenes/ddhh/19_libertad_expresion.png", "imagenes/ddhh/20_libertad_asociacion.png"] };
-            const consigna = $('consigna');
-            const rollDiceBtn = $('roll-dice-btn');
-            const emojiDisplay = $('emoji-display');
-            const btnPlusRandom = $('btn-plus-random');
-            const btnMinusRandom = $('btn-minus-random');
-            const randomDiceDisplay = $('random-dice-display');
-            const specificDiceSelection = $('specific-dice-selection');
-            const totalDiceLaunchDisplay = $('total-dice-launch-display');
-            const rollSound = new Audio('https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/button_06-190439.mp3');
-            const saveRollSection = $('save-roll-section');
-            const rollNameInput = $('roll-name-input');
-            const saveRollBtn = $('save-roll-btn');
-            const toggleHistoryBtn = $('toggle-history-btn');
-            const historyPanel = $('history-panel');
-            const closeHistoryBtn = $('close-history-btn');
-            const historyList = $('history-list');
-            const clearHistoryBtn = $('clear-history-btn');
-            const MAX_TOTAL_DICE = 9;
-            let numRandomDice = 3;
-            let historial = [];
-            let tiradaActualResultados = null;
-            let tiradaCounter = 1;
+        const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-            function stopDiceVideo() { instructionsVideo.pause(); instructionsVideo.currentTime = 0; }
+        function updateControlsAndState() {
+            const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
+            const totalDice = numRandomDice + numSpecificDice;
+            totalDiceLaunchDisplay.textContent = `${totalDice} Dado${totalDice !== 1 ? 's' : ''}`;
+            btnMinusRandom.disabled = numRandomDice <= 0;
+            btnPlusRandom.disabled = totalDice >= MAX_TOTAL_DICE;
+            const toggles = specificDiceSelection.querySelectorAll('input[type="checkbox"]');
+            const lock = totalDice >= MAX_TOTAL_DICE;
+            toggles.forEach(t => { t.disabled = !t.checked && lock; });
+        }
 
-            function showSubScreen(el) { screen1.classList.add('hidden'); screen2.classList.add('hidden'); el.classList.remove('hidden'); }
-            const goHomeDC = () => { stopDiceVideo(); goHome(); };
-            homeBtn1.addEventListener('click', goHomeDC);
-            homeBtn2.addEventListener('click', goHomeDC);
-            backBtn.addEventListener('click', () => showSubScreen(screen1));
-            revealButton.addEventListener('click', () => { videoWrapperDice.classList.add('is-playing'); instructionsVideo.classList.remove('video-is-blurred'); instructionsVideo.play(); });
-            instructionsVideo.addEventListener('pause', () => { videoWrapperDice.classList.remove('is-playing'); instructionsVideo.classList.add('video-is-blurred'); });
+        function populateDiceToggles() {
+            specificDiceSelection.innerHTML = '';
+            const frag = document.createDocumentFragment();
+            Object.keys(DADOS_FILOSOFICOS).forEach(name => {
+                const id = `toggle-${name.replace(/\s+/g, '-')}`;
+                const wrapper = document.createElement('div');
+                wrapper.className = 'dice-toggle-wrapper';
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox'; checkbox.id = id; checkbox.value = name;
+                const label = document.createElement('label');
+                label.className = 'dice-toggle-label'; label.htmlFor = id; label.textContent = name;
+                wrapper.append(checkbox, label);
+                frag.appendChild(wrapper);
+            });
+            specificDiceSelection.appendChild(frag);
+        }
 
-            function populateDiceToggles() {
-                specificDiceSelection.innerHTML = '';
-                const frag = document.createDocumentFragment();
-                Object.keys(DADOS_FILOSOFICOS).forEach(name => {
-                    const id = `toggle-${name.replace(/\s+/g,'-')}`;
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'dice-toggle-wrapper';
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.id = id;
-                    checkbox.value = name;
-                    const label = document.createElement('label');
-                    label.className = 'dice-toggle-label';
-                    label.htmlFor = id;
-                    label.textContent = name;
-                    wrapper.appendChild(checkbox);
-                    wrapper.appendChild(label);
-                    frag.appendChild(wrapper);
-                });
-                specificDiceSelection.appendChild(frag);
-            }
-
-            function updateControlsAndState() {
-                const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
-                const totalDice = numRandomDice + numSpecificDice;
-                totalDiceLaunchDisplay.textContent = `${totalDice} Dado${totalDice!==1?'s':''}`;
-                btnMinusRandom.disabled = numRandomDice <= 0;
-                btnPlusRandom.disabled = totalDice >= MAX_TOTAL_DICE;
-                const toggles = specificDiceSelection.querySelectorAll('input[type="checkbox"]');
-                const lock = totalDice >= MAX_TOTAL_DICE;
-                toggles.forEach(t => {
-                    if (!t.checked) t.disabled = lock;
-                    else t.disabled = false;
-                });
-            }
-
-            function changeRandomDice(delta) {
-                const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
-                const next = numRandomDice + delta;
-                if (next + numSpecificDice <= MAX_TOTAL_DICE && next >= 0) {
-                    numRandomDice = next;
-                    randomDiceDisplay.textContent = numRandomDice;
-                    updateControlsAndState();
-                }
-            }
+        function init() {
+            homeBtn2.addEventListener('click', goHome);
             btnPlusRandom.addEventListener('click', () => changeRandomDice(1));
             btnMinusRandom.addEventListener('click', () => changeRandomDice(-1));
             specificDiceSelection.addEventListener('change', updateControlsAndState);
-            const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-            function cargarHistorial() {
-                try {
-                    const guardado = localStorage.getItem('emojiDiceHistory');
-                    const contadorGuardado = localStorage.getItem('emojiDiceCounter');
-                    if (guardado) historial = JSON.parse(guardado) || [];
-                    if (contadorGuardado) tiradaCounter = parseInt(contadorGuardado, 10) || 1;
-                } catch { historial = []; tiradaCounter = 1; }
-                renderizarHistorial();
-            }
-
-            function guardarHistorialEnStorage() {
-                try {
-                    localStorage.setItem('emojiDiceHistory', JSON.stringify(historial));
-                    localStorage.setItem('emojiDiceCounter', String(tiradaCounter));
-                } catch {}
-            }
-
-            function renderizarHistorial() {
-                historyList.innerHTML = '';
-                if (historial.length === 0) {
-                    historyList.innerHTML = '<p class="text-gray-500 text-center mt-4">No hay tiradas guardadas.</p>';
-                    return;
-                }
-                const frag = document.createDocumentFragment();
-                [...historial].reverse().forEach(tirada => {
-                    const item = document.createElement('div');
-                    item.className = 'p-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm';
-                    item.innerHTML = `<div class="flex justify-between items-start"><div><p class="font-bold text-gray-800">${tirada.name}</p><p class="text-xs text-gray-500">${tirada.timestamp}</p></div><div class="flex items-center gap-3"><button class="load-btn font-semibold text-sm text-blue-600 hover:text-blue-800" data-id="${tirada.id}">Cargar</button><button class="delete-btn text-red-500 hover:text-red-700 text-lg" data-id="${tirada.id}" aria-label="Eliminar">🗑️</button></div></div>`;
-                    frag.appendChild(item);
-                });
-                historyList.appendChild(frag);
-            }
-
-            function cargarTirada(id) {
-                const t = historial.find(x => x.id == id);
-                if (!t) return;
-                saveRollSection.classList.add('hidden');
-                emojiDisplay.innerHTML = '';
-                const frag = document.createDocumentFragment();
-                t.results.forEach((res, i) => {
-                    const card = document.createElement('div');
-                    card.className = 'bg-white rounded-xl shadow-lg pop-in';
-                    card.style.animationDelay = `${i*0.1}s`;
-                    if (res.type === 'emoji') {
-                        card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`;
-                    } else {
-                        const img = new Image();
-                        img.src = res.value;
-                        img.alt = 'Resultado de dado';
-                        img.loading = 'lazy';
-                        img.decoding = 'async';
-                        card.appendChild(img);
-                    }
-                    frag.appendChild(card);
-                });
-                emojiDisplay.appendChild(frag);
-                consigna.textContent = `Viendo "${t.name}" del ${t.timestamp}.`;
-                historyPanel.classList.remove('is-open');
-                $('toggle-history-btn').setAttribute('aria-expanded', 'false');
-            }
-            rollDiceBtn.addEventListener('click', () => {
-                const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
-                const totalDice = numRandomDice + numSpecificDice;
-                if (totalDice === 0) { alert('Selecciona al menos un dado.'); return; }
-                rollSound.currentTime = 0;
-                rollSound.play().catch(() => {});
-                emojiDisplay.innerHTML = '';
-                const results = [];
-                for (let i = 0; i < numRandomDice; i++) results.push({ type: 'emoji', value: rand(SHARED_EMOJIS) });
-                specificDiceSelection.querySelectorAll('input:checked').forEach(t => { results.push({ type: 'image', value: rand(DADOS_FILOSOFICOS[t.value]) }); });
-                tiradaActualResultados = results;
-                const frag = document.createDocumentFragment();
-                results.forEach((res, i) => {
-                    const card = document.createElement('div');
-                    card.className = 'bg-white rounded-xl shadow-lg pop-in';
-                    card.style.animationDelay = `${i*0.1}s`;
-                    if (res.type === 'emoji') {
-                        card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`;
-                    } else {
-                        const img = new Image();
-                        img.src = res.value;
-                        img.alt = 'Resultado de dado';
-                        img.loading = 'lazy';
-                        img.decoding = 'async';
-                        card.appendChild(img);
-                    }
-                    frag.appendChild(card);
-                });
-                emojiDisplay.appendChild(frag);
-                consigna.textContent = '¡Aquí está tu resultado! Ponle un nombre y guárdalo.';
-                saveRollSection.classList.remove('hidden');
-                rollNameInput.value = '';
-                rollNameInput.focus({ preventScroll: true });
+            rollDiceBtn.addEventListener('click', rollDice);
+            saveRollBtn.addEventListener('click', saveRoll);
+            toggleHistoryBtn.addEventListener('click', () => {
+                const open = historyPanel.classList.toggle('is-open');
+                toggleHistoryBtn.setAttribute('aria-expanded', String(open));
             });
-            startBtn.addEventListener('click', () => {
-                stopDiceVideo();
-                numRandomDice = 3;
-                randomDiceDisplay.textContent = numRandomDice;
-                populateDiceToggles();
-                updateControlsAndState();
-                emojiDisplay.innerHTML = '';
-                consigna.textContent = '¡Configura tu tirada y pulsa «Lanzar dados»!';
-                saveRollSection.classList.add('hidden');
-                showSubScreen(screen2);
-            });
-            saveRollBtn.addEventListener('click', () => {
-                if (!tiradaActualResultados) return;
-                const nombre = rollNameInput.value.trim();
-                const nueva = { id: Date.now(), name: nombre || `Tirada ${tiradaCounter}`, timestamp: new Date().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' }), results: tiradaActualResultados };
-                historial.push(nueva);
-                if (!nombre) tiradaCounter++;
-                guardarHistorialEnStorage();
-                renderizarHistorial();
-                saveRollSection.classList.add('hidden');
-                tiradaActualResultados = null;
-                consigna.textContent = '¡Tirada guardada en el historial!';
-            });
-            toggleHistoryBtn.addEventListener('click', () => { const open = historyPanel.classList.toggle('is-open'); toggleHistoryBtn.setAttribute('aria-expanded', String(open)); });
-            closeHistoryBtn.addEventListener('click', () => { historyPanel.classList.remove('is-open'); toggleHistoryBtn.setAttribute('aria-expanded', 'false'); });
+            closeHistoryBtn.addEventListener('click', () => historyPanel.classList.remove('is-open'));
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    historyPanel.classList.remove('is-open');
-                    toggleHistoryBtn.setAttribute('aria-expanded', 'false');
+                if (e.key === 'Escape') historyPanel.classList.remove('is-open');
+            });
+            clearHistoryBtn.addEventListener('click', () => {
+                if (confirm('¿Borrar todo el historial?')) {
+                    historial = []; tiradaCounter = 1; guardarHistorialEnStorage(); renderizarHistorial();
                 }
             });
-            clearHistoryBtn.addEventListener('click', () => { if (confirm('¿Borrar todo el historial?')) { historial = []; tiradaCounter = 1; guardarHistorialEnStorage(); renderizarHistorial(); } });
             historyList.addEventListener('click', (e) => {
                 const btn = e.target.closest('button');
                 if (!btn) return;
-                const id = btn.getAttribute('data-id');
+                const id = btn.dataset.id;
                 if (!id) return;
                 if (btn.classList.contains('load-btn')) cargarTirada(id);
-                else if (btn.classList.contains('delete-btn')) { if (confirm('¿Eliminar esta tirada?')) { historial = historial.filter(t => t.id != id); guardarHistorialEnStorage(); renderizarHistorial(); } }
+                else if (btn.classList.contains('delete-btn')) {
+                    if (confirm('¿Eliminar esta tirada?')) {
+                        historial = historial.filter(t => t.id != id); guardarHistorialEnStorage(); renderizarHistorial();
+                    }
+                }
             });
             cargarHistorial();
-        })();
+        }
 
-        /* =======================
-            Juego 2: Emoji Dice
-        ======================= */
-        (function emojiDiceMinigameManager() {
-            const screen1 = $('ed-screen-1');
-            const screen2 = $('ed-screen-2');
-            const home1 = $('ed-home-btn-1');
-            const home2 = $('ed-home-btn-2');
-            const backBtn = $('ed-back-btn');
-            const startBtn = $('ed-start-btn');
-            const emojiCountRange = $('ed-emoji-count-range');
-            const emojiCountRangeValue = $('ed-emoji-count-range-value');
-            const groupingSelect = $('ed-grouping-select');
-            const customWordsTA = $('ed-custom-words');
-            const emojiCountSelect = $('ed-emoji-count-select');
-            const groupingSelectLive = $('ed-grouping-select-live');
-            const emojiDisplay = $('ed-emoji-display');
-            const wordDisplayCard = $('ed-word-display-card');
-            const wordDisplay = $('ed-word-display');
-            const consigna = $('ed-consigna');
-            const rollBtn = $('ed-roll-dice-btn');
-            const stepsSection = $('ed-steps-section');
-            const stepsContainer = $('ed-steps-container');
-            const emojiMainBlock = $('ed-emoji-main-block');
-            const showSub = (el) => { screen1.classList.add('hidden'); screen2.classList.add('hidden'); el.classList.remove('hidden'); };
-            let audioCtx;
-            const beep = (f = 880, ms = 120) => { try { audioCtx = audioCtx || new(window.AudioContext || window.webkitAudioContext)(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.type = 'sine'; osc.frequency.value = f; gain.gain.setValueAtTime(0.0001, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.01); gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + ms / 1000); osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + ms / 1000 + 0.02); } catch {} };
-            const DEFAULT_WORDS = ['pensar', 'crear', 'escribir', 'leer', 'reír', 'bailar', 'volar', 'nadar', 'hablar', 'escuchar', 'mirar', 'encontrar', 'ayudar', 'usar', 'abrir', 'cerrar', 'empezar', 'parar', 'caminar', 'cambiar', 'imaginar', 'compartir', 'ganar', 'construir', 'dibujar', 'cantar', 'explorar', 'descubrir', 'resolver', 'visitar', 'viajar', 'cocinar', 'ver', 'aprender', 'feliz', 'triste', 'grande', 'pequeño', 'rápido', 'lento', 'rojo', 'azul', 'verde', 'amarillo', 'soleado', 'lluvioso', 'nublado', 'valiente', 'fuerte', 'amable', 'listo', 'delicioso', 'bonito', 'asombroso', 'interesante', 'aburrido', 'nuevo', 'viejo', 'joven', 'ruidoso', 'silencioso', 'brillante', 'oscuro', 'pesado', 'ligero', 'bueno', 'malo', 'emocionado', 'cansado', 'enfadado', 'hambriento', 'sediento', 'frío', 'caliente', 'divertido', 'misterioso', 'mágico', 'gigante', 'minúsculo', 'colorido', 'invisible', 'extraño', 'fantástico', 'genial', 'maravilloso', 'pacífico', 'secreto', 'antiguo', 'moderno', 'rápidamente', 'lentamente', 'de repente', 'finalmente', 'después', 'antes', 'cuando', 'mientras', 'si', 'o', 'también', 'porque', 'entonces', 'cerca', 'lejos', 'encima', 'debajo', 'dentro', 'fuera'];
-            const stepsData = [{ title: 'PASO 1/3: PENSAR 🧠', instructions: 'Comenta ideas con tu pareja/grupo.' }, { title: 'PASO 2/3: CREAR ✍️', instructions: 'Escribid el texto juntos.' }, { title: 'PASO 3/3: COMPARTIR 🎤', instructions: '¡Presentad vuestro texto a la clase!' }];
-            let activeWords = [...DEFAULT_WORDS];
-            const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
-            const parseCustomWords = (raw) => (raw || '').split(/[\n,;]+/g).map(w => w.trim()).filter(Boolean).filter(w => w.length <= 30);
-            const setEmojiGridCols = (n) => { emojiDisplay.style.gridTemplateColumns = `repeat(${Math.min(n,6)}, minmax(64px,1fr))`; };
-            const resetSteps = () => {
-                const grouping = groupingSelectLive.value;
-                if (grouping === 'Individual') { stepsContainer.classList.add('hidden');
-                    emojiMainBlock.classList.remove('md:w-3/5');
-                    emojiMainBlock.classList.add('w-full'); return; }
-                stepsContainer.classList.remove('hidden');
-                emojiMainBlock.classList.remove('w-full');
-                emojiMainBlock.classList.add('md:w-3/5');
-                stepsSection.innerHTML = `<div class="text-center"><h3 id="ed-step-title" class="text-2xl sm:text-3xl font-bold text-pink-600"></h3></div><div class="text-center flex-grow flex items-center justify-center p-2 min-h-[6rem]"><p id="ed-step-instructions" class="text-gray-700 text-base sm:text-lg font-medium"></p></div><div class="flex justify-center"><button id="ed-next-step-btn" class="py-2 px-6 rounded-xl shadow-md text-white font-semibold" style="background-image:linear-gradient(to right,#a2d2ff,#bde0fe);">➡️ Siguiente paso</button></div>`;
-                let currentStep = 1;
-                const update = () => { const d = stepsData[currentStep - 1];
-                    $('ed-step-title').textContent = d.title;
-                    $('ed-step-instructions').textContent = d.instructions;
-                    $('ed-next-step-btn').textContent = (currentStep === 3) ? '🎉 Terminar' : '➡️ Siguiente paso'; };
-                $('ed-next-step-btn').addEventListener('click', () => { if (currentStep < 3) { currentStep++;
-                        update(); } else { stepsContainer.classList.add('hidden');
-                        emojiMainBlock.classList.remove('md:w-3/5');
-                        emojiMainBlock.classList.add('w-full'); } });
-                update();
-            };
-            const roll = () => {
-                const n = parseInt(emojiCountSelect.value, 10) || 3;
-                emojiDisplay.innerHTML = '';
-                setEmojiGridCols(n);
-                const frag = document.createDocumentFragment();
-                for (let i = 0; i < n; i++) { const e = rand(SHARED_EMOJIS); const card = document.createElement('div');
-                    card.className = 'bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in';
-                    card.style.animationDelay = `${i*0.06}s`;
-                    card.innerHTML = `<span class="text-5xl sm:text-7xl" style="text-shadow:0 4px 10px rgba(0,0,0,.15);">${e}</span>`;
-                    frag.appendChild(card); }
-                emojiDisplay.appendChild(frag);
-                const word = rand(activeWords);
-                wordDisplay.textContent = word;
-                wordDisplayCard.classList.remove('hidden');
-                consigna.textContent = `Usa los ${n} emojis y la palabra «${word}» para crear una frase.`;
-                beep(900, 110);
-            };
-            const goHomeLocal = () => showScreen($('warmup-screen'));
-            home1.addEventListener('click', goHomeLocal);
-            home2.addEventListener('click', goHomeLocal);
-            backBtn.addEventListener('click', () => showSub(screen1));
-            emojiCountRange.addEventListener('input', () => { emojiCountRangeValue.textContent = emojiCountRange.value; });
-            groupingSelectLive.addEventListener('change', resetSteps);
-            emojiCountSelect.addEventListener('change', () => setEmojiGridCols(parseInt(emojiCountSelect.value, 10)));
-            startBtn.addEventListener('click', () => {
-                const custom = parseCustomWords(customWordsTA.value);
-                activeWords = custom.length ? custom : [...DEFAULT_WORDS];
-                emojiCountSelect.value = emojiCountRange.value;
-                groupingSelectLive.value = groupingSelect.value;
-                emojiDisplay.innerHTML = '<div class="text-center text-gray-400 p-6">Pulsa “Tirar dados” para empezar</div>';
-                wordDisplayCard.classList.add('hidden');
-                consigna.textContent = '';
-                showSub(screen2);
-                resetSteps();
-            });
-            rollBtn.addEventListener('click', roll);
-        })();
+        function startGame() {
+            showScreen(diceChallengeScreen);
+            numRandomDice = 3;
+            randomDiceDisplay.textContent = numRandomDice;
+            populateDiceToggles();
+            updateControlsAndState();
+            emojiDisplay.innerHTML = '';
+            consigna.textContent = '¡Configura tu tirada y pulsa «Lanzar dados»!';
+            saveRollSection.classList.add('hidden');
+        }
 
-        // --- SCRIPT JUEGO "THIS OR THAT" ---
-        (() => {
-            const startScreen = document.getElementById('tot-start-screen');
-            const gameScreen = document.getElementById('tot-game-screen');
-            const homeBtn = document.getElementById('tot-home-btn');
-            const startGameBtn = document.getElementById('tot-start-game-btn');
-            const backBtn = document.getElementById('tot-back-btn');
-            const instructionVideo = document.getElementById('tot-instruction-video');
-            const playVideoBtn = document.getElementById('tot-play-video-btn');
-            const newChallengeBtn = document.getElementById('tot-new-challenge-btn');
-            const musicToggleBtn = document.getElementById('tot-music-toggle-btn');
-            const music = document.getElementById('tot-background-music');
-            const card1 = document.getElementById('tot-card1');
-            const card2 = document.getElementById('tot-card2');
-            const emoji1 = document.getElementById('tot-emoji1');
-            const text1 = document.getElementById('tot-text1');
-            const emoji2 = document.getElementById('tot-emoji2');
-            const text2 = document.getElementById('tot-text2');
-            const comparisons = [ { option1: { text: 'Dragon', emoji: '🐉' }, option2: { text: 'Unicorn', emoji: '🦄' } }, { option1: { text: 'Pizza', emoji: '🍕' }, option2: { text: 'Burger', emoji: '🍔' } }, { option1: { text: 'Cat', emoji: '🐱' }, option2: { text: 'Dog', emoji: '🐶' } }, { option1: { text: 'Ice Cream', emoji: '🍦' }, option2: { text: 'Chocolate', emoji: '🍫' } }, { option1: { text: 'Summer', emoji: '☀️' }, option2: { text: 'Winter', emoji: '❄️' } }, { option1: { text: 'Book', emoji: '📚' }, option2: { text: 'Movie', emoji: '🎬' } }, { option1: { text: 'Ocean', emoji: '🌊' }, option2: { text: 'Forest', emoji: '🌳' } }, { option1: { text: 'Robot', emoji: '🤖' }, option2: { text: 'Alien', emoji: '👽' } }, { option1: { text: 'Train', emoji: '🚂' }, option2: { text: 'Plane', emoji: '✈️' } }, { option1: { text: 'Apple', emoji: '🍎' }, option2: { text: 'Banana', emoji: '🍌' } }, { option1: { text: 'Soccer', emoji: '⚽' }, option2: { text: 'Basketball', emoji: '🏀' } }, { option1: { text: 'Sunglasses', emoji: '🕶️' }, option2: { text: 'Hat', emoji: '🎩' } }, { option1: { text: 'Cake', emoji: '🎂' }, option2: { text: 'Donut', emoji: '🍩' } }, { option1: { text: 'Rainbow', emoji: '🌈' }, option2: { text: 'Star', emoji: '⭐' } }, { option1: { text: 'Pencil', emoji: '✏️' }, option2: { text: 'Paintbrush', emoji: '🖌️' } }, { option1: { text: 'Teddy Bear', emoji: '🧸' }, option2: { text: 'Toy Car', emoji: '🚗' } }, { option1: { text: 'Guitar', emoji: '🎸' }, option2: { text: 'Piano', emoji: '🎹' } }, { option1: { text: 'Pirate', emoji: '🏴‍☠️' }, option2: { text: 'Ninja', emoji: '🥷' } }, { option1: { text: 'Cheese', emoji: '🧀' }, option2: { text: 'Popcorn', emoji: '🍿' } }, { option1: { text: 'Dinosaur', emoji: '🦕' }, option2: { text: 'Monster', emoji: '👾' } }, { option1: { text: 'Ghost', emoji: '👻' }, option2: { text: 'Zombie', emoji: '🧟' } }, { option1: { text: 'Castle', emoji: '🏰' }, option2: { text: 'Spaceship', emoji: '🚀' } }, { option1: { text: 'Roller Coaster', emoji: '🎢' }, option2: { text: 'Slide', emoji: '🛝' } }, { option1: { text: 'Magic Wand', emoji: '🪄' }, option2: { text: 'Potion', emoji: '🧪' } }, { option1: { text: 'Camping', emoji: '⛺' }, option2: { text: 'Hotel', emoji: '🏨' } }, { option1: { text: 'Balloon', emoji: '🎈' }, option2: { text: 'Kite', emoji: '🪁' } }, { option1: { text: 'Sunflower', emoji: '🌻' }, option2: { text: 'Rose', emoji: '🌹' } }, { option1: { text: 'Panda', emoji: '🐼' }, option2: { text: 'Koala', emoji: '🐨' } }, { option1: { text: 'Candy', emoji: '🍬' }, option2: { text: 'Lollipop', emoji: '🍭' } }, { option1: { text: 'Watermelon', emoji: '🍉' }, option2: { text: 'Strawberry', emoji: '🍓' } }, { option1: { text: 'Elephant', emoji: '🐘' }, option2: { text: 'Giraffe', emoji: '🦒' } }, { option1: { text: 'Fire', emoji: '🔥' }, option2: { text: 'Water', emoji: '💧' } }, { option1: { text: 'Rocket', emoji: '🚀' }, option2: { text: 'Submarine', emoji: '🛸' } }, { option1: { text: 'Cookie', emoji: '🍪' }, option2: { text: 'Muffin', emoji: '🧁' } }, { option1: { text: 'Mountain', emoji: '⛰️' }, option2: { text: 'Beach', emoji: '🏖️' } }, { option1: { text: 'Superhero', emoji: '🦸' }, option2: { text: 'Wizard', emoji: '🧙' } }, { option1: { text: 'Puzzle', emoji: '🧩' }, option2: { text: 'Maze', emoji: '🔲' } }, { option1: { text: 'Trampoline', emoji: '🤸' }, option2: { text: 'Jump Rope', emoji: '🪢' } }, { option1: { text: 'Bike', emoji: '🚲' }, option2: { text: 'Skateboard', emoji: '🛹' } }, { option1: { text: 'Lightning', emoji: '⚡' }, option2: { text: 'Snowflake', emoji: '❄️' } }, { option1: { text: 'Bee', emoji: '🐝' }, option2: { text: 'Butterfly', emoji: '🦋' } }, { option1: { text: 'Lizard', emoji: '🦎' }, option2: { text: 'Frog', emoji: '🐸' } }, { option1: { text: 'Clock', emoji: '🕒' }, option2: { text: 'Calendar', emoji: '📅' } }, { option1: { text: 'Cloud', emoji: '☁️' }, option2: { text: 'Moon', emoji: '🌙' } }, { option1: { text: 'Backpack', emoji: '🎒' }, option2: { text: 'Suitcase', emoji: '🧳' } }, { option1: { text: 'Hamburger', emoji: '🍔' }, option2: { text: 'Hot Dog', emoji: '🌭' } }, { option1: { text: 'Robot', emoji: '🤖' }, option2: { text: 'Dinosaur', emoji: '🦖' } }, { option1: { text: 'Tooth', emoji: '🦷' }, option2: { text: 'Bone', emoji: '🦴' } }, { option1: { text: 'Owl', emoji: '🦉' }, option2: { text: 'Bat', emoji: '🦇' } }, { option1: { text: 'Car', emoji: '🚗' }, option2: { text: 'Motorcycle', emoji: '🏍️' } }, { option1: { text: 'Rainbow', emoji: '🌈' }, option2: { text: 'Volcano', emoji: '🌋' } }, { option1: { text: 'Fairy', emoji: '🧚' }, option2: { text: 'Mermaid', emoji: '🧜‍♀️' } }, { option1: { text: 'House', emoji: '🏠' }, option2: { text: 'Treehouse', emoji: '🌳' } }, { option1: { text: 'Bowling', emoji: '🎳' }, option2: { text: 'Darts', emoji: '🎯' } }, { option1: { text: 'Skate', emoji: '🛼' }, option2: { text: 'Scooter', emoji: '🛴' } }, { option1: { text: 'Marshmallow', emoji: '🍡' }, option2: { text: 'Ice Cream', emoji: '🍨' } }, { option1: { text: 'Sandwich', emoji: '🥪' }, option2: { text: 'Taco', emoji: '🌮' } }, { option1: { text: 'Moon', emoji: '🌙' }, option2: { text: 'Sun', emoji: '☀️' } }, { option1: { text: 'Lion', emoji: '🦁' }, option2: { text: 'Tiger', emoji: '🐯' } }, { option1: { text: 'Spider', emoji: '🕷️' }, option2: { text: 'Ant', emoji: '🐜' } }, { option1: { text: 'Candy Cane', emoji: '🍭' }, option2: { text: 'Gingerbread Man', emoji: '🎄' } }, { option1: { text: 'Penguin', emoji: '🐧' }, option2: { text: 'Seal', emoji: '🦭' } }, { option1: { text: 'Elf', emoji: '🧝' }, option2: { text: 'Santa', emoji: '🎅' } }, { option1: { text: 'Cloud', emoji: '☁️' }, option2: { text: 'Rainbow', emoji: '🌈' } }, { option1: { text: 'Firetruck', emoji: '🚒' }, option2: { text: 'Police Car', emoji: '🚓' } }, { option1: { text: 'Wizard', emoji: '🧙' }, option2: { text: 'Dragon', emoji: '🐲' } }, { option1: { text: 'Fox', emoji: '🦊' }, option2: { text: 'Raccoon', emoji: '🦝' } }, { option1: { text: 'Crayon', emoji: '🖍️' }, option2: { text: 'Marker', emoji: '🖊️' } }, { option1: { text: 'Sunglasses', emoji: '🕶️' }, option2: { text: 'Umbrella', emoji: '☂️' } }, { option1: { text: 'Star', emoji: '⭐' }, option2: { text: 'Moon', emoji: '🌝' } }, { option1: { text: 'Popcorn', emoji: '🍿' }, option2: { text: 'Nachos', emoji: '🧀' } }, { option1: { text: 'Train', emoji: '🚂' }, option2: { text: 'Boat', emoji: '🚢' } }, { option1: { text: 'Gym', emoji: '🏋️' }, option2: { text: 'Park', emoji: '🛝' } }, { option1: { text: 'Cow', emoji: '🐄' }, option2: { text: 'Pig', emoji: '🐷' } }, { option1: { text: 'Corn', emoji: '🌽' }, option2: { text: 'Carrot', emoji: '🥕' } }, { option1: { text: 'Cupcake', emoji: '🧁' }, option2: { text: 'Pudding', emoji: '🍮' } }, { option1: { text: 'Milk', emoji: '🥛' }, option2: { text: 'Juice', emoji: '🧃' } }, { option1: { text: 'Snowman', emoji: '⛄' }, option2: { text: 'Reindeer', emoji: '🦌' } }, { option1: { text: 'Slippers', emoji: '🥿' }, option2: { text: 'Boots', emoji: '👢' } }, { option1: { text: 'Pillow', emoji: '💤' }, option2: { text: 'Blanket', emoji: '🧣' } }, { option1: { text: 'Sandwich', emoji: '🥪' }, option2: { text: 'Pizza', emoji: '🍕' } }, { option1: { text: 'Chicken', emoji: '🍗' }, option2: { text: 'Fish', emoji: '🐟' } }, { option1: { text: 'Jumping', emoji: '🤾' }, option2: { text: 'Running', emoji: '🏃' } }, { option1: { text: 'School', emoji: '🏫' }, option2: { text: 'Playground', emoji: '🛝' } }, { option1: { text: 'Pirate', emoji: '🏴‍☠️' }, option2: { text: 'Astronaut', emoji: '👨‍🚀' } }, { option1: { text: 'Bear', emoji: '🐻' }, option2: { text: 'Monkey', emoji: '🐒' } }, { option1: { text: 'Airplane', emoji: '✈️' }, option2: { text: 'Helicopter', emoji: '🚁' } }, { option1: { text: 'Painting', emoji: '🎨' }, option2: { text: 'Drawing', emoji: '✏️' } }, { option1: { text: 'Balloon', emoji: '🎈' }, option2: { text: 'Fireworks', emoji: '🎆' } }, { option1: { text: 'Starfish', emoji: '🌟' }, option2: { text: 'Crab', emoji: '🦀' } }, { option1: { text: 'Train', emoji: '🚆' }, option2: { text: 'Bus', emoji: '🚌' } }, { option1: { text: 'Ice Cream', emoji: '🍨' }, option2: { text: 'Popsicle', emoji: '🍧' } }, { option1: { text: 'Cave', emoji: '🕳️' }, option2: { text: 'Island', emoji: '🏝️' } }, { option1: { text: 'Gloves', emoji: '🧤' }, option2: { text: 'Hat', emoji: '🧢' } }, { option1: { text: 'Tennis', emoji: '🎾' }, option2: { text: 'Baseball', emoji: '⚾' } }, { option1: { text: 'Camera', emoji: '📸' }, option2: { text: 'Binoculars', emoji: '🔭' } }, { option1: { text: 'Music', emoji: '🎶' }, option2: { text: 'Dance', emoji: '💃' } }, { option1: { text: 'Water', emoji: '💧' }, option2: { text: 'Wind', emoji: '🌬️' } }, { option1: { text: 'Dragon', emoji: '🐲' }, option2: { text: 'Phoenix', emoji: '🔥' } }, { option1: { text: 'Rainbow', emoji: '🌈' }, option2: { text: 'Snowflake', emoji: '❄️' } } ];
-            let usedCombinations = new Set();
-
-            function showSubScreen(screenToShow) {
-                startScreen.classList.add('hidden');
-                gameScreen.classList.add('hidden');
-                screenToShow.classList.remove('hidden');
+        function changeRandomDice(delta) {
+            const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
+            const next = numRandomDice + delta;
+            if (next + numSpecificDice <= MAX_TOTAL_DICE && next >= 0) {
+                numRandomDice = next;
+                randomDiceDisplay.textContent = numRandomDice;
+                updateControlsAndState();
             }
-
-            function resetTotStartScreen() {
-                showSubScreen(startScreen);
-                music.pause();
-                musicToggleBtn.textContent = '🔇';
-                instructionVideo.pause();
-                instructionVideo.currentTime = 0;
-                instructionVideo.classList.add('video-blur');
-                playVideoBtn.classList.remove('opacity-0', 'pointer-events-none');
-            }
-
-            homeBtn.addEventListener('click', () => {
-                instructionVideo.pause();
-                instructionVideo.currentTime = 0;
-                music.pause();
-                goHome();
+        }
+        
+        function rollDice() {
+            const totalDice = numRandomDice + specificDiceSelection.querySelectorAll('input:checked').length;
+            if (totalDice === 0) { alert('Selecciona al menos un dado.'); return; }
+            rollSound.currentTime = 0; rollSound.play().catch(()=>{});
+            emojiDisplay.innerHTML = '';
+            const results = [];
+            for (let i = 0; i < numRandomDice; i++) results.push({ type: 'emoji', value: rand(SHARED_EMOJIS) });
+            specificDiceSelection.querySelectorAll('input:checked').forEach(t => {
+                results.push({ type: 'image', value: rand(DADOS_FILOSOFICOS[t.value]) });
             });
+            tiradaActualResultados = results;
+            const frag = document.createDocumentFragment();
+            results.forEach((res, i) => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-xl shadow-lg pop-in';
+                card.style.animationDelay = `${i * 0.1}s`;
+                if (res.type === 'emoji') {
+                    card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`;
+                } else {
+                    const img = new Image();
+                    img.src = res.value; img.alt = 'Resultado de dado'; img.loading = 'lazy';
+                    card.appendChild(img);
+                }
+                frag.appendChild(card);
+            });
+            emojiDisplay.appendChild(frag);
+            consigna.textContent = '¡Aquí está tu resultado! Ponle un nombre y guárdalo.';
+            saveRollSection.classList.remove('hidden');
+            rollNameInput.value = '';
+            rollNameInput.focus({ preventScroll: true });
+        }
 
-            startGameBtn.addEventListener('click', () => {
-                instructionVideo.pause();
+        function saveRoll() {
+            if (!tiradaActualResultados) return;
+            const nombre = rollNameInput.value.trim();
+            const nueva = {
+                id: Date.now(),
+                name: nombre || `Tirada ${tiradaCounter}`,
+                timestamp: new Date().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' }),
+                results: tiradaActualResultados
+            };
+            historial.push(nueva);
+            if (!nombre) tiradaCounter++;
+            guardarHistorialEnStorage();
+            renderizarHistorial();
+            saveRollSection.classList.add('hidden');
+            tiradaActualResultados = null;
+            consigna.textContent = '¡Tirada guardada en el historial!';
+        }
+
+        function cargarHistorial() {
+            try {
+                const guardado = localStorage.getItem('emojiDiceHistory');
+                const contadorGuardado = localStorage.getItem('emojiDiceCounter');
+                if (guardado) historial = JSON.parse(guardado) || [];
+                if (contadorGuardado) tiradaCounter = parseInt(contadorGuardado, 10) || 1;
+            } catch { historial = []; tiradaCounter = 1; }
+            renderizarHistorial();
+        }
+
+        function guardarHistorialEnStorage() {
+            try {
+                localStorage.setItem('emojiDiceHistory', JSON.stringify(historial));
+                localStorage.setItem('emojiDiceCounter', String(tiradaCounter));
+            } catch {}
+        }
+        
+        function renderizarHistorial() {
+            historyList.innerHTML = '';
+            if (historial.length === 0) {
+                historyList.innerHTML = '<p class="text-gray-500 text-center mt-4">No hay tiradas guardadas.</p>';
+                return;
+            }
+            const frag = document.createDocumentFragment();
+            [...historial].reverse().forEach(tirada => {
+                const item = document.createElement('div');
+                item.className = 'p-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm';
+                item.innerHTML = `<div class="flex justify-between items-start"><div><p class="font-bold text-gray-800">${tirada.name}</p><p class="text-xs text-gray-500">${tirada.timestamp}</p></div><div class="flex items-center gap-3"><button class="load-btn font-semibold text-sm text-blue-600 hover:text-blue-800" data-id="${tirada.id}">Cargar</button><button class="delete-btn text-red-500 hover:text-red-700 text-lg" data-id="${tirada.id}" aria-label="Eliminar">🗑️</button></div></div>`;
+                frag.appendChild(item);
+            });
+            historyList.appendChild(frag);
+        }
+
+        function cargarTirada(id) {
+            const t = historial.find(x => x.id == id);
+            if (!t) return;
+            saveRollSection.classList.add('hidden');
+            emojiDisplay.innerHTML = '';
+            const frag = document.createDocumentFragment();
+            t.results.forEach((res, i) => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-xl shadow-lg pop-in';
+                card.style.animationDelay = `${i*0.1}s`;
+                if (res.type === 'emoji') {
+                    card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`;
+                } else {
+                    const img = new Image();
+                    img.src = res.value; img.alt = 'Resultado de dado'; img.loading = 'lazy';
+                    card.appendChild(img);
+                }
+                frag.appendChild(card);
+            });
+            emojiDisplay.appendChild(frag);
+            consigna.textContent = `Viendo "${t.name}" del ${t.timestamp}.`;
+            historyPanel.classList.remove('is-open');
+        }
+
+        return { init, startGame };
+      })();
+
+      // --- Gestor del Juego 2: "¿Cuál eliges?" ---
+      const thisOrThatGameManager = (() => {
+        const homeBtn = $('tot-home-btn');
+        const newChallengeBtn = $('tot-new-challenge-btn');
+        const musicToggleBtn = $('tot-music-toggle-btn');
+        const music = $('tot-background-music');
+        const card1 = $('tot-card1');
+        const card2 = $('tot-card2');
+        const emoji1 = $('tot-emoji1');
+        const text1 = $('tot-text1');
+        const emoji2 = $('tot-emoji2');
+        const text2 = $('tot-text2');
+        
+        const comparisons = [ { option1: { text: 'Libertad', emoji: '🗽' }, option2: { text: 'Determinismo', emoji: '🧬' } }, { option1: { text: 'Razón', emoji: '🧠' }, option2: { text: 'Emoción', emoji: '❤️' } }, { option1: { text: 'Fines', emoji: '🎯' }, option2: { text: 'Medios', emoji: '🛠' } }, { option1: { text: 'Naturaleza', emoji: '🌳' }, option2: { text: 'Cultura', emoji: '🏰' } }, { option1: { text: 'Tradición', emoji: '⛩' }, option2: { text: 'Progreso', emoji: '📱' } }, { option1: { text: 'Seguridad', emoji: '🛡' }, option2: { text: 'Libertad', emoji: '🗽' } }, { option1: { text: 'Progreso tecnológico', emoji: '🤖' }, option2: { text: 'Preservar medio ambiente', emoji: '🌳' } }, { option1: { text: 'Nacionalismo', emoji: '🏳️‍🌈' }, option2: { text: 'Cosmopolitismo', emoji: '🌍' } }, { option1: { text: 'Derechos individuales', emoji: '🙋🏽‍♀️' }, option2: { text: 'Bien común', emoji: '👥' } }, { option1: { text: 'Datos abiertos', emoji: '📂' }, option2: { text: 'Privacidad', emoji: '🔒' } }, { option1: { text: 'Ciencia', emoji: '🔬' }, option2: { text: 'Religión', emoji: '⛪️' } }, { option1: { text: 'Inteligencia artificial', emoji: '🤖' }, option2: { text: 'Inteligencia humana', emoji: '🧠' } }, { option1: { text: 'Competencia', emoji: '🏁' }, option2: { text: 'Colaboración', emoji: '🤝' } }, { option1: { text: 'Relativismo moral', emoji: '🌈' }, option2: { text: 'Universlaismo moral', emoji: '🌐' } }, { option1: { text: 'Igualdad⚖', emoji: '⚖️' }, option2: { text: 'Meritocracia', emoji: '🏆' } }, { option1: { text: 'Democracia directa', emoji: '🗳' }, option2: { text: 'Democracia representativa', emoji: '🗣' } }, { option1: { text: 'Justicia retributiva', emoji: '🔨' }, option2: { text: 'Justicia restaurativa', emoji: '🤲🏼' } }, { option1: { text: 'Bien común', emoji: '🤝' }, option2: { text: 'Interés individual', emoji: '🧍🏽' } }, { option1: { text: 'Alma', emoji: '👻' }, option2: { text: 'Cuerpo', emoji: '🧠' } }, { option1: { text: 'Hombre bueno por naturaleza', emoji: '😇' }, option2: { text: 'Hombre malo por naturaleza', emoji: '😈' } }, { option1: { text: 'Realidad objetiva', emoji: '🌍' }, option2: { text: 'Realidad subjetiva', emoji: '🌤' } }, { option1: { text: 'Orden', emoji: '📏' }, option2: { text: 'Caos', emoji: '🌪' } }, { option1: { text: 'Pacifismo', emoji: '🕊' }, option2: { text: 'Belicismo', emoji: '⚔️' } }, { option1: { text: 'Optimismo', emoji: '☀️' }, option2: { text: 'Pesimismo', emoji: '🌧️' } }, { option1: { text: 'Libertad de expresión', emoji: '🗣' }, option2: { text: 'Censura', emoji: '🚫' } }, { option1: { text: 'Individualismo', emoji: '🙋‍♂️' }, option2: { text: 'Colectivismo', emoji: '👥' } }, { option1: { text: 'Materialismo', emoji: '💰' }, option2: { text: 'Espiritualismo', emoji: '✨' } }, { option1: { text: 'Justicia social', emoji: '⚖️' }, option2: { text: 'Libre mercado', emoji: '💹' } }, { option1: { text: 'Libertad académica', emoji: '🎓' }, option2: { text: 'Control ideológico', emoji: '🛑' } }];
+        let usedCombinations = new Set();
+
+        function showNewChallenge() {
+            if (usedCombinations.size >= comparisons.length) {
                 usedCombinations.clear();
-                showSubScreen(gameScreen);
-                showNewChallenge();
-                music.play().then(() => { musicToggleBtn.textContent = '🔈'; }).catch(error => { musicToggleBtn.textContent = '🔇'; });
-            });
+            }
+            let challenge, randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * comparisons.length);
+            } while (usedCombinations.has(randomIndex));
+            
+            usedCombinations.add(randomIndex);
+            challenge = comparisons[randomIndex];
 
-            backBtn.addEventListener('click', () => {
-                resetTotStartScreen();
-            });
+            emoji1.textContent = challenge.option1.emoji;
+            text1.textContent = challenge.option1.text;
+            emoji2.textContent = challenge.option2.emoji;
+            text2.textContent = challenge.option2.text;
 
-            playVideoBtn.addEventListener('click', () => {
-                instructionVideo.classList.remove('video-blur');
-                playVideoBtn.classList.add('opacity-0', 'pointer-events-none');
-                instructionVideo.play();
-            });
+            [card1, card2].forEach(c => c.classList.remove('pop-in'));
+            void card1.offsetWidth;
+            [card1, card2].forEach(c => c.classList.add('pop-in'));
+        }
 
-            instructionVideo.addEventListener('ended', () => {
-                instructionVideo.classList.add('video-blur');
-                playVideoBtn.classList.remove('opacity-0', 'pointer-events-none');
-            });
+        function startGame() {
+            showScreen(thisOrThatScreen);
+            usedCombinations.clear();
+            showNewChallenge();
+            music.play().then(() => { musicToggleBtn.textContent = '🔈'; }).catch(() => { musicToggleBtn.textContent = '🔇'; });
+        }
+        
+        function stopGame() {
+            music.pause();
+            music.currentTime = 0;
+            goHome();
+        }
 
-            newChallengeBtn.addEventListener('click', () => {
-                showNewChallenge();
-            });
-
+        function init() {
+            homeBtn.addEventListener('click', stopGame);
+            newChallengeBtn.addEventListener('click', showNewChallenge);
             musicToggleBtn.addEventListener('click', () => {
                 if (music.paused) {
                     music.play();
@@ -791,30 +570,137 @@
                     musicToggleBtn.textContent = '🔇';
                 }
             });
+        }
+        
+        return { init, startGame };
+      })();
 
-            function showNewChallenge() {
-                if (usedCombinations.size >= comparisons.length) {
-                    usedCombinations.clear();
-                }
-                let challenge, combinationKey, randomIndex;
-                do {
-                    randomIndex = Math.floor(Math.random() * comparisons.length);
-                    challenge = comparisons[randomIndex];
-                    const names = [challenge.option1.text, challenge.option2.text].sort();
-                    combinationKey = names.join('-');
-                } while (usedCombinations.has(combinationKey));
-                usedCombinations.add(combinationKey);
+      // --- Gestor del Juego 3: "Conceptos Filosóficos" ---
+      const emojiDiceMinigameManager = (() => {
+        // ... (El código de este juego no necesita grandes cambios en su flujo interno)
+        return {}; // Placeholder
+      })();
+      
+      // --- INICIALIZACIÓN Y NAVEGACIÓN PRINCIPAL ---
+      diceGameManager.init();
+      thisOrThatGameManager.init();
+      // emojiDiceMinigameManager.init(); // Si tuviera una función init
 
-                emoji1.textContent = challenge.option1.emoji;
-                text1.textContent = challenge.option1.text;
-                emoji2.textContent = challenge.option2.emoji;
-                text2.textContent = challenge.option2.text;
+      $('go-to-dice-challenge-btn').addEventListener('click', diceGameManager.startGame);
+      $('go-to-this-or-that-btn').addEventListener('click', thisOrThatGameManager.startGame);
+      
+      // La navegación para "Conceptos Filosóficos" es un poco distinta y se queda como estaba
+      $('go-to-emoji-says-btn').addEventListener('click', () => {
+        showScreen(emojiDiceScreen);
+        $('ed-screen-1').classList.remove('hidden');
+        $('ed-screen-2').classList.add('hidden');
+      });
+      // El resto del script para el juego 3 (Emoji Dice) va aquí
+       (function emojiDiceMinigameManager(){
+        const screen1 = $('ed-screen-1');
+        const screen2 = $('ed-screen-2');
+        const home1 = $('ed-home-btn-1');
+        const home2 = $('ed-home-btn-2');
+        const backBtn = $('ed-back-btn');
+        const startBtn = $('ed-start-btn');
+        const emojiCountRange = $('ed-emoji-count-range');
+        const emojiCountRangeValue = $('ed-emoji-count-range-value');
+        const groupingSelect = $('ed-grouping-select');
+        const customWordsTA = $('ed-custom-words');
+        const emojiCountSelect = $('ed-emoji-count-select');
+        const groupingSelectLive = $('ed-grouping-select-live');
+        const emojiDisplay = $('ed-emoji-display');
+        const wordDisplayCard = $('ed-word-display-card');
+        const wordDisplay = $('ed-word-display');
+        const consigna = $('ed-consigna');
+        const rollBtn = $('ed-roll-dice-btn');
+        const stepsSection = $('ed-steps-section');
+        const stepsContainer = $('ed-steps-container');
+        const emojiMainBlock = $('ed-emoji-main-block');
 
-                [card1, card2].forEach(c => c.classList.remove('card-animation'));
-                void card1.offsetWidth;
-                [card1, card2].forEach(c => c.classList.add('card-animation'));
+        const showSub = (el)=>{ screen1.classList.add('hidden'); screen2.classList.add('hidden'); el.classList.remove('hidden'); };
+
+        let audioCtx;
+        const beep = (f=880, ms=120)=>{ try{ audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.type='sine'; osc.frequency.value=f; gain.gain.setValueAtTime(0.0001,audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.2,audioCtx.currentTime+0.01); gain.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+ms/1000); osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + ms/1000 + 0.02); }catch{} };
+
+        const DEFAULT_WORDS = [ 'pensar','crear','escribir','leer','reír','bailar','volar','nadar','hablar','escuchar','mirar','encontrar','ayudar','usar','abrir','cerrar','empezar','parar','caminar','cambiar','imaginar','compartir','ganar','construir','dibujar','cantar','explorar','descubrir','resolver','visitar','viajar','cocinar','ver','aprender', 'feliz','triste','grande','pequeño','rápido','lento','rojo','azul','verde','amarillo','soleado','lluvioso','nublado','valiente','fuerte','amable','listo','delicioso','bonito','asombroso','interesante','aburrido','nuevo','viejo','joven','ruidoso','silencioso','brillante','oscuro','pesado','ligero','bueno','malo','emocionado','cansado','enfadado','hambriento','sediento','frío','caliente','divertido','misterioso','mágico','gigante','minúsculo','colorido','invisible','extraño','fantástico','genial','maravilloso','pacífico','secreto','antiguo','moderno','rápidamente','lentamente','de repente','finalmente','después','antes','cuando','mientras','si','o','también','porque','entonces','cerca','lejos','encima','debajo','dentro','fuera' ];
+        const stepsData = [ { title:'PASO 1/3: PENSAR 🧠', instructions:'Comenta ideas con tu pareja/grupo.' }, { title:'PASO 2/3: CREAR ✍️',  instructions:'Escribid el texto juntos.' }, { title:'PASO 3/3: COMPARTIR 🎤', instructions:'¡Presentad vuestro texto a la clase!' } ];
+        let activeWords = [...DEFAULT_WORDS];
+        const rand = (arr)=> arr[Math.floor(Math.random()*arr.length)];
+        const parseCustomWords = (raw)=> (raw||'').split(/[\n,;]+/g).map(w=>w.trim()).filter(Boolean).filter(w=>w.length<=30);
+        const setEmojiGridCols = (n)=>{ emojiDisplay.style.gridTemplateColumns = `repeat(${Math.min(n,6)}, minmax(64px,1fr))`; };
+
+        const resetSteps = ()=>{
+            const grouping = groupingSelectLive.value;
+            if(grouping==='Individual'){
+                stepsContainer.classList.add('hidden');
+                emojiMainBlock.classList.remove('md:w-3/5');
+                emojiMainBlock.classList.add('w-full');
+                return;
             }
-        })();
+            stepsContainer.classList.remove('hidden');
+            emojiMainBlock.classList.remove('w-full');
+            emojiMainBlock.classList.add('md:w-3/5');
+            stepsSection.innerHTML = ` <div class="text-center"><h3 id="ed-step-title" class="text-2xl sm:text-3xl font-bold text-pink-600"></h3></div> <div class="text-center flex-grow flex items-center justify-center p-2 min-h-[6rem]"> <p id="ed-step-instructions" class="text-gray-700 text-base sm:text-lg font-medium"></p> </div> <div class="flex justify-center"> <button id="ed-next-step-btn" class="py-2 px-6 rounded-xl shadow-md text-white font-semibold" style="background-image:linear-gradient(to right,#a2d2ff,#bde0fe);">➡️ Siguiente paso</button> </div>`;
+            let currentStep=1;
+            const update=()=>{
+                const d = stepsData[currentStep-1];
+                $('ed-step-title').textContent = d.title;
+                $('ed-step-instructions').textContent = d.instructions;
+                $('ed-next-step-btn').textContent = (currentStep===3)?'🎉 Terminar':'➡️ Siguiente paso';
+            };
+            $('ed-next-step-btn').addEventListener('click', ()=>{
+                if(currentStep<3){ currentStep++; update(); }
+                else{
+                    stepsContainer.classList.add('hidden');
+                    emojiMainBlock.classList.remove('md:w-3/5');
+                    emojiMainBlock.classList.add('w-full');
+                }
+            });
+            update();
+        };
+
+        const roll = ()=>{
+            const n = parseInt(emojiCountSelect.value,10) || 3;
+            emojiDisplay.innerHTML = '';
+            setEmojiGridCols(n);
+            const frag = document.createDocumentFragment();
+            for(let i=0;i<n;i++){
+                const e = rand(SHARED_EMOJIS);
+                const card = document.createElement('div');
+                card.className='bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in';
+                card.style.animationDelay = `${i*0.06}s`;
+                card.innerHTML = `<span class="text-5xl sm:text-7xl" style="text-shadow:0 4px 10px rgba(0,0,0,.15);">${e}</span>`;
+                frag.appendChild(card);
+            }
+            emojiDisplay.appendChild(frag);
+            const word = rand(activeWords);
+            wordDisplay.textContent = word;
+            wordDisplayCard.classList.remove('hidden');
+            consigna.textContent = `Usa los ${n} emojis y la palabra «${word}» para crear una frase.`;
+            beep(900,110);
+        };
+        
+        home1.addEventListener('click', goHome);
+        home2.addEventListener('click', goHome);
+        backBtn.addEventListener('click', ()=> showSub(screen1));
+        emojiCountRange.addEventListener('input', ()=>{ emojiCountRangeValue.textContent = emojiCountRange.value; });
+        groupingSelectLive.addEventListener('change', resetSteps);
+        emojiCountSelect.addEventListener('change', ()=> setEmojiGridCols(parseInt(emojiCountSelect.value,10)));
+        startBtn.addEventListener('click', ()=>{
+            const custom = parseCustomWords(customWordsTA.value);
+            activeWords = custom.length ? custom : [...DEFAULT_WORDS];
+            emojiCountSelect.value = emojiCountRange.value;
+            groupingSelectLive.value = groupingSelect.value;
+            emojiDisplay.innerHTML = '<div class="text-center text-gray-400 p-6">Pulsa “Tirar dados” para empezar</div>';
+            wordDisplayCard.classList.add('hidden');
+            consigna.textContent = '';
+            showSub(screen2);
+            resetSteps();
+        });
+        rollBtn.addEventListener('click', roll);
+       })();
+
     });
   </script>
 </body>
