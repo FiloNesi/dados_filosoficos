@@ -7,7 +7,6 @@
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com" defer></script>
-  <!-- (Eliminado Tone.js: no se usaba) -->
 
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -335,43 +334,39 @@
       const videoWrapperDice = $('video-wrapper-dice');
       const revealButton = $('reveal-button-dice');
 
-      // Helper para rutas (evita 404 de paths relativos)
-      const BASE = 'https://raw.githubusercontent.com/TamaraLlorens/dados-filosoficos/main/';
-      const abs = (p)=> p.startsWith('http') ? p : BASE + p.replace(/^\/?/, '');
-
       const DADOS_FILOSOFICOS = {
-        ""Conceptos": [
-    "imagenes/dios.png",
-    "imagenes/libertad.png",
-    "imagenes/tiempo.png",
-    "imagenes/destino.png",
-    "imagenes/esencia.png"
-  ],
-  "Autores": [
-    "imagenes/autores/platon.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png",
-    "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png",
-    "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"
-  ],
-  "Acciones": [
-    "imagenes/acciones/espiral.png", "imagenes/acciones/explosion.png", "imagenes/acciones/flechas.png",
-    "imagenes/acciones/mano.png", "imagenes/acciones/mascara.png", "imagenes/acciones/caminar.png",
-    "imagenes/acciones/construir.png", "imagenes/acciones/mirar.png", "imagenes/acciones/pensar.png",
-    "imagenes/acciones/saltar.png", "imagenes/acciones/toser.png", "imagenes/acciones2/paracaidas.png"
-  ],
+        "Conceptos": [
+          "imagenes/dios.png",
+          "imagenes/libertad.png",
+          "imagenes/tiempo.png",
+          "imagenes/destino.png",
+          "imagenes/esencia.png"
+        ],
+        "Autores": [
+          "imagenes/autores/platon.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png",
+          "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png",
+          "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"
+        ],
+        "Acciones": [
+          "imagenes/acciones/espiral.png", "imagenes/acciones/explosion.png", "imagenes/acciones/flechas.png",
+          "imagenes/acciones/mano.png", "imagenes/acciones/mascara.png", "imagenes/acciones/caminar.png",
+          "imagenes/acciones/construir.png", "imagenes/acciones/mirar.png", "imagenes/acciones/pensar.png",
+          "imagenes/acciones/saltar.png", "imagenes/acciones/toser.png", "imagenes/acciones2/paracaidas.png"
+        ],
         "Objetos": [
-          abs('imagenes/objetos1/arcoiris.png'), abs('imagenes/objetos1/balanza.png'), abs('imagenes/objetos1/candado.png'),
-          abs('imagenes/objetos1/llave.png'), abs('imagenes/objetos1/lupa.png')
+          "imagenes/objetos1/arcoiris.png", "imagenes/objetos1/balanza.png", "imagenes/objetos1/candado.png",
+          "imagenes/objetos1/llave.png", "imagenes/objetos1/lupa.png"
         ],
         "Personajes": [
-          abs('imagenes/personajes/astronauta.png'), abs('imagenes/personajes/mago.png'), abs('imagenes/personajes/nina.png'),
-          abs('imagenes/personajes/reina.png'), abs('imagenes/personajes/superheroe.png')
+          "imagenes/personajes/astronauta.png", "imagenes/personajes/mago.png", "imagenes/personajes/nina.png",
+          "imagenes/personajes/reina.png", "imagenes/personajes/superheroe.png"
         ],
         "Derechos Humanos": [
-          abs('imagenes/ddhh/1_dignidad.png'), abs('imagenes/ddhh/2_igualdad.png'), abs('imagenes/ddhh/3_vida.png'), abs('imagenes/ddhh/4_no_esclavitud.png'),
-          abs('imagenes/ddhh/5_no_tortura.png'), abs('imagenes/ddhh/6_personalidad_jurídica.png'), abs('imagenes/ddhh/7_igualdad_ley.png'), abs('imagenes/ddhh/8_derecho_reparacion.png'),
-          abs('imagenes/ddhh/9_no_detencion_ilegal.png'), abs('imagenes/ddhh/10_juicio_justo.png'), abs('imagenes/ddhh/11_inocencia.png'), abs('imagenes/ddhh/12_intimidad.png'),
-          abs('imagenes/ddhh/13_libre_desplazamiento.png'), abs('imagenes/ddhh/14_asilo.png'), abs('imagenes/ddhh/15_nacionalidad.png'), abs('imagenes/ddhh/16_familia.png'),
-          abs('imagenes/ddhh/17_propiedad.png'), abs('imagenes/ddhh/18_libertad_religiosa.png'), abs('imagenes/ddhh/19_libertad_expresion.png'), abs('imagenes/ddhh/20_libertad_asociacion.png')
+          "imagenes/ddhh/1_dignidad.png", "imagenes/ddhh/2_igualdad.png", "imagenes/ddhh/3_vida.png", "imagenes/ddhh/4_no_esclavitud.png",
+          "imagenes/ddhh/5_no_tortura.png", "imagenes/ddhh/6_personalidad_juridica.png", "imagenes/ddhh/7_igualdad_ley.png", "imagenes/ddhh/8_derecho_reparacion.png",
+          "imagenes/ddhh/9_no_detencion_ilegal.png", "imagenes/ddhh/10_juicio_justo.png", "imagenes/ddhh/11_inocencia.png", "imagenes/ddhh/12_intimidad.png",
+          "imagenes/ddhh/13_libre_desplazamiento.png", "imagenes/ddhh/14_asilo.png", "imagenes/ddhh/15_nacionalidad.png", "imagenes/ddhh/16_familia.png",
+          "imagenes/ddhh/17_propiedad.png", "imagenes/ddhh/18_libertad_religiosa.png", "imagenes/ddhh/19_libertad_expresion.png", "imagenes/ddhh/20_libertad_asociacion.png"
         ]
       };
 
