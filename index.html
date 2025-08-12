@@ -62,6 +62,124 @@
     #history-panel{position:fixed;transition:transform .3s ease-in-out}
     #history-panel.is-open{transform:translateX(0)}
     @media (prefers-reduced-motion: reduce){.pop-in{animation:none}}
+    
+    /* --- Estilos Pantalla "Secret Message" --- */
+    #secret-message-screen {
+        font-family: 'Nunito', sans-serif;
+        background-color: #E8D9FF;
+        background-image: radial-gradient(circle, #f3e8ff 0%, #E8D9FF 70%, #e0cffc 100%);
+    }
+    #secret-message-screen h1, #secret-message-screen h3 { font-family: 'Fredoka', sans-serif; }
+    #secret-message-screen .app-split-container {
+        background-color: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        min-height: auto;
+        max-height: none;
+        overflow: visible;
+    }
+    @media (min-width: 1024px) { /* lg breakpoint */
+        #secret-message-screen .app-split-container {
+            min-height: calc(100vh - 2rem);
+            max-height: calc(100vh - 2rem);
+            overflow: hidden;
+        }
+    }
+    #secret-message-screen .btn {
+        border-width: 2px;
+        box-shadow: 0 5px 0 0;
+        transition: all 0.15s ease-in-out;
+        border-radius: 0.75rem;
+    }
+    #secret-message-screen .btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 0 0; }
+    #secret-message-screen .btn:active:not(:disabled) { transform: translateY(5px); box-shadow: 0 0 0 0; }
+    #secret-message-screen .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    #secret-message-screen .btn-pink { background-color: #FFE8F0; border-color: #FBCFE8; box-shadow-color: #F472B6; }
+    #secret-message-screen .btn-lilac { background-color: #e9d5ff; border-color: #d8b4fe; box-shadow-color: #a855f7; color: #581c87; }
+    #secret-message-screen .btn-lilac:hover:not(:disabled) { box-shadow-color: #a855f7; }
+    #secret-message-screen .btn-speaker { background-color: #c4b5fd; border-color: #a78bfa; box-shadow-color: #7c3aed; }
+    #secret-message-screen .btn-speaker:hover:not(:disabled) { box-shadow-color: #7c3aed; }
+    #secret-message-screen .btn-yellow { background-color: #fef9c3; border-color: #fde047; box-shadow-color: #eab308; color: #854d0e; }
+    #secret-message-screen .btn-yellow:hover:not(:disabled) { box-shadow-color: #eab308; }
+    #secret-message-screen .btn-yellow:hover:not(:disabled) .lock-icon { transform: rotate(-15deg) scale(1.1); }
+    #secret-message-screen .nav-btn {
+        width: auto; height: 3.5rem; padding: 0.75rem 1.5rem; font-size: 1.125rem; font-weight: 700;
+        display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        border-radius: 0.75rem; box-shadow: 0 5px 0 0;
+        text-transform: capitalize;
+    }
+    #secret-message-screen .nav-btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 0 0; }
+    #secret-message-screen .nav-btn:active:not(:disabled) { transform: translateY(5px); box-shadow: 0 0 0 0; }
+    #secret-message-screen .tabs-container { background-color: rgba(232, 217, 255, 0.5); padding: 0.5rem; border-radius: 0.75rem; }
+    #secret-message-screen .tab { transition: all 0.3s ease; border-radius: 0.5rem; font-weight: 700; }
+    #secret-message-screen .tab-active { background-color: white; color: #86198F; box-shadow: 0 4px 10px -2px rgba(0,0,0,0.1); }
+    #secret-message-screen .emoji-space { display: inline-block; width: 1rem; }
+    #secret-message-screen .styled-input::placeholder { color: #a1a1aa; font-weight: 700; }
+    #secret-message-screen .code-cell {
+        background-color: white; border-radius: 0.75rem; padding: 0.75rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.25rem;
+    }
+    #secret-message-screen .code-cell:hover { transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 10; }
+    #secret-message-screen #emoji-code-grid > .code-cell:nth-child(odd) { background-color: #faf5ff; }
+    #secret-message-screen .key-sparkle { position: absolute; font-size: 2rem; animation: sparkle 0.7s ease-out forwards; opacity: 0; }
+    #secret-message-screen .input-wrapper { position: relative; }
+    #secret-message-screen .input-watermark {
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        color: #e5e7eb; user-select: none; transition: opacity 0.3s ease; z-index: 0;
+    }
+    #secret-message-screen .input-watermark.hidden { opacity: 0; }
+    #secret-message-screen #encode-input { position: relative; z-index: 1; background-color: transparent; }
+    #secret-message-screen .flip-card {
+        display: inline-block; vertical-align: top; background-color: transparent;
+        width: 3.2rem; height: 3.2rem; margin: 0.2rem;
+        perspective: 1000px; cursor: pointer; animation: bounceIn 0.5s ease forwards;
+    }
+    #secret-message-screen .flip-card-inner {
+        position: relative; width: 100%; height: 100%;
+        transition: transform 0.6s; transform-style: preserve-3d;
+    }
+    #secret-message-screen .flip-card.is-flipped .flip-card-inner { transform: rotateY(180deg); }
+    #secret-message-screen .flip-card-front, #secret-message-screen .flip-card-back {
+        position: absolute; width: 100%; height: 100%;
+        -webkit-backface-visibility: hidden; backface-visibility: hidden;
+        border-radius: 1rem; display: flex; align-items: center; justify-content: center;
+        background-color: white; border: 2px solid #f3e8ff;
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.08); font-size: 2rem;
+    }
+    #secret-message-screen .flip-card-back { transform: rotateY(180deg); font-weight: 800; color: #86198F; }
+    @media (min-width: 640px) { /* sm */
+        #secret-message-screen .flip-card { width: 4.5rem; height: 4.5rem; margin: 0.3rem; }
+        #secret-message-screen .flip-card-front, #secret-message-screen .flip-card-back { font-size: 3rem; border-radius: 1.25rem; }
+    }
+    @media (min-width: 1024px) { /* lg */
+        #secret-message-screen .flip-card { width: 4.5rem; height: 4.5rem; margin: 0.25rem; }
+        #secret-message-screen .flip-card-front, #secret-message-screen .flip-card-back { font-size: 3rem; border-radius: 1rem; }
+    }
+    #secret-message-screen .video-card {
+        background-color: rgba(255, 255, 255, 0.6); backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 1.5rem;
+        padding: 1rem; text-align: center;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        width: 100%; max-width: 450px; position: relative;
+    }
+    #secret-message-screen .video-container { position: relative; border-radius: 1rem; overflow: hidden; }
+    #secret-message-screen #sm-intro-video { width: 100%; display: block; filter: blur(8px); transition: filter 0.5s ease; }
+    #secret-message-screen #sm-intro-video.unblur { filter: blur(0px); }
+    #secret-message-screen #watch-intro-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    #secret-message-screen .intro-title { color: #772D8B; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    #secret-message-screen #game-ui-panel, #secret-message-screen #code-table-panel {
+        overflow-y: visible; max-height: none; flex-shrink: 0;
+    }
+    @media (min-width: 768px) { /* md breakpoint */
+        #secret-message-screen #game-ui-panel, #secret-message-screen #code-table-panel {
+            overflow-y: auto; max-height: 100%; flex-shrink: 1;
+        }
+    }
+    #secret-message-screen #emoji-code-grid { overflow-y: visible; flex-grow: 1; }
+    @media (min-width: 768px) { /* md breakpoint */
+        #secret-message-screen #emoji-code-grid { overflow-y: auto; }
+    }
   </style>
 </head>
 <body>
@@ -256,6 +374,108 @@
     </div>
   </div>
 
+  <div id="secret-message-screen" class="screen hidden">
+      <div id="sm-intro-screen" class="flex flex-col items-center justify-center">
+          <div class="video-card">
+              <h1 class="text-3xl sm:text-4xl md:text-5xl intro-title">Secret Emoji Message</h1>
+              <p class="mt-2 text-purple-700">Become an English Spy!</p>
+              <div class="video-container mt-4">
+                  <video id="sm-intro-video" muted playsinline>
+                      <source src="https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/emoji%20secret%20code%20video%20intro.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                  <button id="watch-intro-btn" class="py-2 px-4 text-base sm:py-3 sm:px-6 sm:text-lg rounded-xl font-bold btn btn-lilac flex items-center gap-2">
+                      🔍 Watch Instructions
+                  </button>
+              </div>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4 mt-4">
+              <button id="sm-home-btn-intro-main" class="py-3 px-6 text-lg sm:py-4 sm:px-8 sm:text-xl rounded-xl font-bold btn btn-pink flex items-center gap-2">
+                  🏠 Home
+              </button>
+              <button id="start-mission-btn" class="py-3 px-6 text-lg sm:py-4 sm:px-8 sm:text-xl rounded-xl font-bold btn btn-lilac">
+                  🔐 Start Your Secret Mission
+              </button>
+          </div>
+      </div>
+      <div id="main-app-container" class="hidden flex-col md:flex-row w-full max-w-6xl mx-auto gap-4 p-4 app-split-container">
+          <div id="game-ui-panel" class="relative w-full rounded-2xl shadow-xl p-4 sm:p-8 lg:p-4 md:flex-1">
+              <header class="text-center mb-6 pt-12 sm:pt-0 lg:pt-0">
+                  <h1 class="text-3xl sm:text-4xl font-extrabold text-purple-800 tracking-wider">SECRET EMOJI MESSAGE</h1>
+                  <p class="text-purple-600">Become an English Spy!</p>
+              </header>
+              <div class="tabs-container flex justify-center mb-8">
+                  <button id="tab-decode" class="tab tab-active flex-1 py-2 px-4 flex items-center justify-center gap-2"><span class="text-xl sm:text-2xl">🕵️‍♂️</span> Decode</button>
+                  <button id="tab-encode" class="tab flex-1 py-2 px-4 flex items-center justify-center gap-2"><span class="text-xl sm:text-2xl">✏️</span> Create</button>
+              </div>
+              <div id="decode-section">
+                  <div id="level-selection-area" class="text-center p-4">
+                      <h3 class="text-2xl font-bold text-purple-800 mb-4">Choose your level</h3>
+                      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                          <button id="level-easy-btn" class="py-3 px-6 rounded-xl font-bold text-lg btn btn-lilac">Easy (Words)</button>
+                          <button id="level-hard-btn" class="py-3 px-6 rounded-xl font-bold text-lg btn btn-pink">Hard (Sentences)</button>
+                      </div>
+                  </div>
+                  <div id="game-area" class="hidden">
+                      <div class="relative text-center bg-purple-100 p-4 rounded-xl">
+                          <div id="confetti-container" class="absolute top-0 left-1/2 -translate-x-1/2"></div>
+                          <p class="font-bold text-purple-800 mb-2">Can you decode the message?</p>
+                          <div id="secret-message-display" class="flex flex-wrap justify-center items-center min-h-[4.5rem] sm:min-h-[5.5rem] lg:min-h-[4rem]"></div>
+                      </div>
+                      <div class="mt-4 flex flex-col items-center gap-3">
+                          <input type="text" id="decode-input" placeholder="Type the secret message…" class="w-full max-w-md p-3 text-center border-2 border-purple-300 rounded-full styled-input focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition">
+                          <p id="feedback-message" class="h-6 text-lg font-bold">&nbsp;</p>
+                      </div>
+                      <div class="mt-4 grid grid-cols-2 gap-4 text-center">
+                          <button id="check-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-lilac">✔️ Check!</button>
+                          <button id="new-message-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-pink">🔄 New</button>
+                          <button id="show-code-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-pink col-span-2 md:hidden">🕵️ Show Code</button>
+                          <button id="read-aloud-btn" class="w-full py-3 px-4 rounded-xl font-bold text-lg text-purple-900 btn btn-speaker col-span-2 flex items-center justify-center gap-3"><span class="text-2xl sm:text-3xl">📢</span> Read it aloud</button>
+                      </div>
+                      <div class="text-center mt-4">
+                          <button id="change-level-btn" class="text-purple-600 hover:text-purple-900 font-bold underline">Change Level</button>
+                      </div>
+                  </div>
+              </div>
+              <div id="encode-section" class="hidden">
+                  <div id="encode-input-area" class="text-center">
+                      <label for="encode-input" class="block font-bold text-purple-800 mb-2 flex items-center justify-center gap-2">Write your own secret message <span class="text-2xl">🔍</span></label>
+                      <div class="input-wrapper mt-2">
+                          <div id="input-watermark" class="input-watermark text-3xl sm:text-5xl">🕵️‍♂️ 🔎 💬</div>
+                          <textarea id="encode-input" rows="3" placeholder="e.g., Hello friend" class="w-full p-3 border-4 border-purple-300 rounded-3xl styled-input focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition"></textarea>
+                      </div>
+                      <button id="encode-btn" class="btn btn-yellow mt-4 w-full max-w-sm py-3 px-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3">
+                          <span class="lock-icon text-3xl transition-transform">🔐</span>
+                          Create Message
+                      </button>
+                  </div>
+                  <div id="encode-reveal-area" class="hidden text-center">
+                      <div class="bg-purple-100 p-6 rounded-xl">
+                          <h3 class="text-2xl font-bold text-purple-800 mb-4">Awesome! Your secret emoji message is ready! 🥳</h3>
+                          <div id="encoded-output" class="flex flex-wrap justify-center items-center min-h-[4.5rem] sm:min-h-[5.5rem] lg:min-h-[4rem]"></div>
+                          <button id="back-to-create-btn" class="btn btn-pink mt-4 w-full max-w-xs py-3 px-4 rounded-xl font-bold text-lg">✍️ Create Another</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div id="code-table-panel" class="w-full bg-white/80 rounded-2xl shadow-xl border-2 border-purple-300 p-4 lg:p-4 md:flex-1 flex-col">
+              <div class="text-center mb-4 p-2 bg-purple-100 rounded-lg">
+                  <h3 class="text-xl font-bold text-purple-800 flex items-center justify-center gap-2"><span>🗝️</span> Emoji Code</h3>
+                  <p class="text-xs text-purple-500 mt-1"><span class="italic">Pssst… True spies always keep the code secret!</span> 😉</p>
+              </div>
+              <div id="emoji-code-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 md:gap-3 flex-grow overflow-y-auto p-1"></div>
+              <div class="mt-6 flex justify-center gap-4">
+                  <button id="sm-home-btn" title="Back to Home" class="nav-btn btn-pink">
+                      🏠 <span class="ml-1">Home</span>
+                  </button>
+                  <button id="sm-back-to-intro-btn" title="Back to Intro" class="nav-btn btn-lilac">
+                      ⬅️ <span class="ml-1">Back</span>
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+
   <div id="history-panel" class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl p-4 flex flex-col transition-transform translate-x-full z-20" role="dialog" aria-modal="true" aria-labelledby="history-title">
     <div class="flex justify-between items-center mb-4 flex-shrink-0">
       <h2 id="history-title" class="text-2xl font-bold text-gray-800">Historial de tiradas</h2>
@@ -269,11 +489,14 @@
     document.addEventListener('DOMContentLoaded', () => {
       const $ = (id) => document.getElementById(id);
 
+      // --- Declaración de Pantallas ---
       const warmupScreen = $('warmup-screen');
       const diceChallengeScreen = $('dice-challenge-screen');
       const thisOrThatScreen = $('this-or-that-screen');
       const emojiDiceScreen = $('emoji-dice-screen');
-      const allScreens = [warmupScreen, diceChallengeScreen, emojiDiceScreen, thisOrThatScreen];
+      const secretMessageScreen = $('secret-message-screen');
+      
+      const allScreens = [warmupScreen, diceChallengeScreen, thisOrThatScreen, emojiDiceScreen, secretMessageScreen];
 
       const showScreen = (el) => {
         allScreens.forEach(s => s.classList.add('hidden'));
@@ -577,26 +800,6 @@
 
       // --- Gestor del Juego 3: "Conceptos Filosóficos" ---
       const emojiDiceMinigameManager = (() => {
-        // ... (El código de este juego no necesita grandes cambios en su flujo interno)
-        return {}; // Placeholder
-      })();
-      
-      // --- INICIALIZACIÓN Y NAVEGACIÓN PRINCIPAL ---
-      diceGameManager.init();
-      thisOrThatGameManager.init();
-      // emojiDiceMinigameManager.init(); // Si tuviera una función init
-
-      $('go-to-dice-challenge-btn').addEventListener('click', diceGameManager.startGame);
-      $('go-to-this-or-that-btn').addEventListener('click', thisOrThatGameManager.startGame);
-      
-      // La navegación para "Conceptos Filosóficos" es un poco distinta y se queda como estaba
-      $('go-to-emoji-says-btn').addEventListener('click', () => {
-        showScreen(emojiDiceScreen);
-        $('ed-screen-1').classList.remove('hidden');
-        $('ed-screen-2').classList.add('hidden');
-      });
-      // El resto del script para el juego 3 (Emoji Dice) va aquí
-       (function emojiDiceMinigameManager(){
         const screen1 = $('ed-screen-1');
         const screen2 = $('ed-screen-2');
         const home1 = $('ed-home-btn-1');
@@ -699,7 +902,314 @@
             resetSteps();
         });
         rollBtn.addEventListener('click', roll);
-       })();
+      })();
+
+      // --- Gestor del Juego 4: "Mensaje Secreto" ---
+      const secretMessageManager = (() => {
+        const introScreen = $('sm-intro-screen');
+        const mainAppContainer = $('main-app-container');
+        const watchIntroBtn = $('watch-intro-btn');
+        const startMissionBtn = $('start-mission-btn');
+        const homeBtnIntroMain = $('sm-home-btn-intro-main');
+        const introVideo = $('sm-intro-video');
+        const homeBtn = $('sm-home-btn');
+        const backToIntroBtn = $('sm-back-to-intro-btn');
+        
+        const tabDecode = $('tab-decode');
+        const tabEncode = $('tab-encode');
+        const decodeSection = $('decode-section');
+        const encodeSection = $('encode-section');
+        const levelSelectionArea = $('level-selection-area');
+        const gameArea = $('game-area');
+        const levelEasyBtn = $('level-easy-btn');
+        const levelHardBtn = $('level-hard-btn');
+        const changeLevelBtn = $('change-level-btn');
+        const secretMessageDisplay = $('secret-message-display');
+        const decodeInput = $('decode-input');
+        const feedbackMessage = $('feedback-message');
+        const checkBtn = $('check-btn');
+        const newMessageBtn = $('new-message-btn');
+        const showCodeBtn = $('show-code-btn');
+        const readAloudBtn = $('read-aloud-btn');
+        const codeTablePanel = $('code-table-panel');
+        const emojiCodeGrid = $('emoji-code-grid');
+        const encodeInputArea = $('encode-input-area');
+        const encodeRevealArea = $('encode-reveal-area');
+        const encodeInput = $('encode-input');
+        const encodeBtn = $('encode-btn');
+        const encodedOutput = $('encoded-output');
+        const backToCreateBtn = $('back-to-create-btn');
+        const confettiContainer = $('confetti-container');
+        const inputWatermark = $('input-watermark');
+        const newMessageSound = new Audio('https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/button_06-190439.mp3');
+
+        const EMOJI_CIPHER = { 'A': '🐶', 'B': '🍌', 'C': '🐱', 'D': '🦖', 'E': '🍎', 'F': '🐸', 'G': '🌈', 'H': '🐹', 'I': '🍦', 'J': '🎈', 'K': '🐨', 'L': '🍋', 'M': '🐵', 'N': '🍉', 'O': '🐙', 'P': '🐧', 'Q': '🧁', 'R': '🤖', 'S': '☀️', 'T': '🧸', 'U': '🦄', 'V': '🍇', 'W': '🐺', 'X': '❌', 'Y': '🌻', 'Z': '🦓' };
+        const EMOJI_NAMES = { '🐶': 'dog', '🍌': 'banana', '🐱': 'cat', '🦖': 'dinosaur', '🍎': 'apple', '🐸': 'frog', '🌈': 'rainbow', '🐹': 'hamster', '🍦': 'ice cream', '🎈': 'balloon', '🐨': 'koala', '🍋': 'lemon', '🐵': 'monkey', '🍉': 'watermelon', '🐙': 'octopus', '🐧': 'penguin', '🧁': 'cupcake', '🤖': 'robot', '☀️': 'sun', '🧸': 'teddy bear', '🦄': 'unicorn', '🍇': 'grapes', '🐺': 'wolf', '❌': 'cross', '🌻': 'sunflower', '🦓': 'zebra' };
+        const SECRET_WORDS = ["HELLO", "DOG", "CAT", "RED", "BLUE", "APPLE", "BANANA", "PIZZA", "HAPPY", "SUNNY", "ORANGE", "WATER", "FRIEND", "SCHOOL", "TEACHER", "STUDENT", "BOOK", "PENCIL", "HOME", "FAMILY", "LION", "TIGER", "MONKEY", "ELEPHANT", "GIRAFFE", "PENGUIN", "CHEESE", "BREAD", "JUICE", "CARROT", "CLASSROOM", "HOMEWORK", "READ", "WRITE", "PLAY", "EAT", "DRINK", "SLEEP", "JUMP", "RUN", "BIG", "SMALL", "FAST", "SLOW", "GOOD", "GREEN", "PURPLE", "BLACK", "WHITE", "PINK"];
+        const SECRET_SENTENCES = ["GOOD MORNING", "I AM HAPPY", "IT IS SUNNY", "MY NAME IS ANNA", "SCHOOL IS COOL", "PLAY TIME", "GOOD JOB", "I LIKE PIZZA", "WHAT IS YOUR NAME", "SHE IS MY FRIEND", "HE IS READING A BOOK", "THEY ARE EATING LUNCH", "IT IS RAINING TODAY", "MY FAVORITE COLOR IS BLUE", "I HAVE A BIG FAMILY", "CAN YOU HELP ME", "WHERE ARE YOU FROM", "I GO TO SCHOOL BY BUS", "SHE LIKES TO DRAW", "HE CAN RUN FAST"];
+        
+        let currentSecretMessage = '';
+        let currentLevel = '';
+
+        function stopSmVideo() {
+            introVideo.pause();
+            introVideo.currentTime = 0;
+        }
+
+        const showIntro = () => {
+            stopSmVideo();
+            introVideo.classList.remove('unblur');
+            watchIntroBtn.classList.remove('hidden');
+            mainAppContainer.classList.add('hidden');
+            introScreen.classList.remove('hidden');
+            introScreen.classList.add('flex');
+        };
+
+        const hideIntro = () => {
+            stopSmVideo();
+            introScreen.classList.add('hidden');
+            introScreen.classList.remove('flex');
+            mainAppContainer.classList.remove('hidden');
+            mainAppContainer.classList.add('flex');
+            updateSecretMessageLayout();
+        };
+
+        function startGame() {
+            showScreen(secretMessageScreen);
+            showIntro();
+        }
+        
+        const updateSecretMessageLayout = () => {
+            const isMobile = window.innerWidth < 768; // md
+            if (isMobile) {
+                showCodeBtn.classList.remove('hidden');
+                if (!codeTablePanel.dataset.toggled) {
+                    codeTablePanel.classList.add('hidden');
+                }
+            } else {
+                showCodeBtn.classList.add('hidden');
+                codeTablePanel.classList.remove('hidden');
+                codeTablePanel.classList.add('flex');
+            }
+        };
+
+        const initSpeech = () => {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.getVoices();
+            }
+        };
+
+        const switchView = (view) => {
+            const isDecode = view === 'decode';
+            decodeSection.classList.toggle('hidden', !isDecode);
+            encodeSection.classList.toggle('hidden', isDecode);
+            tabDecode.classList.toggle('tab-active', isDecode);
+            tabEncode.classList.toggle('tab-active', !isDecode);
+            if (isDecode) {
+                showLevelSelection();
+            }
+        };
+        
+        const textToEmojiHTML = (text, container) => {
+            container.innerHTML = '';
+            for (const char of text.toUpperCase()) {
+                if (EMOJI_CIPHER[char]) {
+                    const emoji = EMOJI_CIPHER[char];
+                    const flipCard = document.createElement('div');
+                    flipCard.className = 'flip-card';
+                    flipCard.innerHTML = `
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">${emoji}</div>
+                            <div class="flip-card-back">${char}</div>
+                        </div>`;
+                    container.appendChild(flipCard);
+                } else if (char === ' ') {
+                    const space = document.createElement('div');
+                    space.className = 'emoji-space';
+                    container.appendChild(space);
+                } else if (char.trim() !== '') {
+                    const nonFlipCard = document.createElement('div');
+                    nonFlipCard.className = 'flip-card';
+                    nonFlipCard.innerHTML = `<div class="flip-card-inner"><div class="flip-card-front">${char}</div><div class="flip-card-back">${char}</div></div>`;
+                    container.appendChild(nonFlipCard);
+                }
+            }
+        };
+        
+        const addFlipListener = (container) => {
+            container.addEventListener('click', (e) => {
+                const flipCard = e.target.closest('.flip-card');
+                if (flipCard) {
+                    flipCard.classList.toggle('is-flipped');
+                }
+            });
+        };
+
+        const triggerConfetti = () => {
+            confettiContainer.innerHTML = '';
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `position: absolute; width: 10px; height: 10px; background-color: hsl(${Math.random() * 360}, 100%, 50%); opacity: 0; animation: fall 3s ease-in-out forwards;`;
+                confetti.style.left = `${Math.random() * 100 - 50}px`;
+                confetti.style.animationDelay = `${Math.random() * 2}s`;
+                confettiContainer.appendChild(confetti);
+            }
+        };
+        
+        const generateNewMessageContent = () => {
+            const sourceArray = currentLevel === 'easy' ? SECRET_WORDS : SECRET_SENTENCES;
+            let newMessage;
+            do {
+                newMessage = sourceArray[Math.floor(Math.random() * sourceArray.length)];
+            } while (newMessage === currentSecretMessage && sourceArray.length > 1);
+            currentSecretMessage = newMessage;
+            textToEmojiHTML(currentSecretMessage, secretMessageDisplay);
+            decodeInput.value = '';
+            feedbackMessage.textContent = '\xa0';
+        };
+
+        const checkAnswer = () => {
+            const userAnswer = decodeInput.value.trim().toUpperCase();
+            if (userAnswer === currentSecretMessage) {
+                feedbackMessage.textContent = 'Correct! 🎉';
+                feedbackMessage.className = 'h-6 text-lg font-bold text-green-600';
+                triggerConfetti();
+            } else {
+                feedbackMessage.textContent = 'Try again! 🤔';
+                feedbackMessage.className = 'h-6 text-lg font-bold text-red-600';
+            }
+        };
+        
+        const speak = (text) => {
+            if (!('speechSynthesis' in window)) return;
+            const utterance = new SpeechSynthesisUtterance(text);
+            const setVoiceAndSpeak = () => {
+                const voices = speechSynthesis.getVoices();
+                let selectedVoice = voices.find(voice => voice.name === 'Google US English') || voices.find(voice => voice.lang === 'en-US' && !voice.localService) || voices.find(voice => voice.lang === 'en-US');
+                if (selectedVoice) utterance.voice = selectedVoice;
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                utterance.pitch = 1;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utterance);
+            };
+            if (speechSynthesis.getVoices().length > 0) {
+                setVoiceAndSpeak();
+            } else {
+                speechSynthesis.onvoiceschanged = setVoiceAndSpeak;
+            }
+        };
+
+        const populateCodeTable = () => {
+            emojiCodeGrid.innerHTML = '';
+            Object.keys(EMOJI_CIPHER).forEach(letter => {
+                const cell = document.createElement('div');
+                cell.className = 'code-cell';
+                cell.innerHTML = `<span class="font-bold text-lg md:text-xl">${letter}</span><span class="text-lg md:text-xl">=</span><span class="text-2xl md:text-3xl">${EMOJI_CIPHER[letter]}</span>`;
+                cell.addEventListener('click', () => {
+                    const emoji = EMOJI_CIPHER[letter];
+                    const emojiName = EMOJI_NAMES[emoji] || 'emoji';
+                    speak(`${letter} is for ${emojiName}.`);
+                });
+                emojiCodeGrid.appendChild(cell);
+            });
+        };
+
+        const createOwnMessage = () => {
+            const textToEncode = encodeInput.value.trim();
+            if (!textToEncode) return;
+            textToEmojiHTML(textToEncode, encodedOutput);
+            encodeInputArea.classList.add('hidden');
+            encodeRevealArea.classList.remove('hidden');
+        };
+        
+        const resetCreateView = () => {
+            encodeRevealArea.classList.add('hidden');
+            encodeInputArea.classList.remove('hidden');
+            encodeInput.value = '';
+            inputWatermark.classList.remove('hidden');
+        };
+
+        const showLevelSelection = () => {
+            levelSelectionArea.classList.remove('hidden');
+            gameArea.classList.add('hidden');
+        };
+
+        const startDecodeLevel = (level) => {
+            currentLevel = level;
+            levelSelectionArea.classList.add('hidden');
+            gameArea.classList.remove('hidden');
+            generateNewMessageContent();
+        };
+
+        function init() {
+            homeBtnIntroMain.addEventListener('click', () => { stopSmVideo(); goHome(); });
+            homeBtn.addEventListener('click', () => { stopSmVideo(); goHome(); });
+            startMissionBtn.addEventListener('click', hideIntro);
+            backToIntroBtn.addEventListener('click', showIntro);
+            
+            watchIntroBtn.addEventListener('click', () => {
+                watchIntroBtn.classList.add('hidden');
+                introVideo.classList.add('unblur');
+                introVideo.muted = false;
+                introVideo.currentTime = 0;
+                introVideo.play();
+            });
+
+            tabDecode.addEventListener('click', () => switchView('decode'));
+            tabEncode.addEventListener('click', () => switchView('encode'));
+            levelEasyBtn.addEventListener('click', () => startDecodeLevel('easy'));
+            levelHardBtn.addEventListener('click', () => startDecodeLevel('hard'));
+            changeLevelBtn.addEventListener('click', showLevelSelection);
+            
+            if (showCodeBtn) {
+                showCodeBtn.addEventListener('click', () => {
+                    codeTablePanel.classList.toggle('hidden');
+                    codeTablePanel.classList.toggle('flex');
+                    codeTablePanel.dataset.toggled = !codeTablePanel.classList.contains('hidden');
+                });
+            }
+
+            newMessageBtn.addEventListener('click', () => {
+                newMessageSound.currentTime = 0;
+                newMessageSound.play();
+                generateNewMessageContent();
+            });
+            checkBtn.addEventListener('click', checkAnswer);
+            decodeInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') checkAnswer(); });
+            readAloudBtn.addEventListener('click', () => { if(currentSecretMessage) speak(currentSecretMessage); });
+            encodeBtn.addEventListener('click', createOwnMessage);
+            backToCreateBtn.addEventListener('click', resetCreateView);
+            encodeInput.addEventListener('input', () => {
+                inputWatermark.classList.toggle('hidden', encodeInput.value.length > 0);
+            });
+            
+            document.body.addEventListener('click', initSpeech, { once: true });
+            document.body.addEventListener('touchstart', initSpeech, { once: true });
+            window.addEventListener('resize', updateSecretMessageLayout);
+            addFlipListener(secretMessageDisplay);
+            addFlipListener(encodedOutput);
+            populateCodeTable();
+        }
+
+        return { init, startGame };
+      })();
+      
+      // --- INICIALIZACIÓN Y NAVEGACIÓN PRINCIPAL ---
+      diceGameManager.init();
+      thisOrThatGameManager.init();
+      secretMessageManager.init();
+
+      $('go-to-dice-challenge-btn').addEventListener('click', diceGameManager.startGame);
+      $('go-to-this-or-that-btn').addEventListener('click', thisOrThatGameManager.startGame);
+      $('go-to-secret-message-btn').addEventListener('click', secretMessageManager.startGame);
+      
+      // La navegación para "Conceptos Filosóficos" se queda como estaba
+      $('go-to-emoji-says-btn').addEventListener('click', () => {
+        showScreen(emojiDiceScreen);
+        $('ed-screen-1').classList.remove('hidden');
+        $('ed-screen-2').classList.add('hidden');
+      });
 
     });
   </script>
