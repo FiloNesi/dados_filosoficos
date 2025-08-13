@@ -131,7 +131,7 @@
     #secret-message-screen .tabs-container { background-color: rgba(232, 217, 255, 0.5); padding: 0.5rem; border-radius: 0.75rem; }
     #secret-message-screen .tab { transition: all 0.3s ease; border-radius: 0.5rem; font-weight: 700; }
     #secret-message-screen .tab-active { background-color: white; color: #86198F; box-shadow: 0 4px 10px -2px rgba(0,0,0,0.1); }
-    #secret-message-screen .emoji-space { display: inline-block; width: 3rem; }
+    #secret-message-screen .emoji-space { display: inline-block; width: 1rem; }
     #secret-message-screen .styled-input::placeholder { color: #a1a1aa; font-weight: 700; }
     #secret-message-screen .code-cell {
         background-color: white; border-radius: 0.75rem; padding: 0.75rem;
@@ -747,7 +747,7 @@
 
             words.forEach((word, index) => {
                 const wordWrapper = document.createElement('div');
-                wordWrapper.className = 'flex flex-nowrap'; 
+                wordWrapper.className = 'inline-flex flex-nowrap'; 
 
                 for (const char of word) {
                     if (EMOJI_CIPHER[char]) {
@@ -849,6 +849,15 @@
                 cell.innerHTML = `<span class="font-bold text-lg md:text-xl">${letter}</span><span class="text-lg md:text-xl">=</span><span class="text-2xl md:text-3xl">${EMOJI_CIPHER[letter]}</span>`;
                 cell.addEventListener('click', () => {
                     const emoji = EMOJI_CIPHER[letter];
+                    
+                    const isEncodeActive = !encodeSection.classList.contains('hidden');
+                    const targetInput = isEncodeActive ? encodeInput : decodeInput;
+                    targetInput.value += emoji;
+                    if(isEncodeActive) {
+                        inputWatermark.classList.add('hidden');
+                    }
+                    targetInput.focus();
+
                     const emojiName = EMOJI_NAMES[emoji] || 'emoji';
                     speak(`${letter} es para ${emojiName}.`);
                 });
