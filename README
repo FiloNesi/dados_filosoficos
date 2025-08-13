@@ -1,0 +1,41 @@
+Dados Filosóficos 🎲
+¡Bienvenido a Dados Filosóficos! Una colección interactiva de minijuegos educativos diseñados para fomentar la creatividad, el pensamiento crítico y el aprendizaje de la filosofía de una manera divertida y visual. Este proyecto está basado en la idea original de los emoji warm-up games de Tamara Llorens.
+
+🎮 Juegos Incluidos
+Actualmente, la aplicación cuenta con cuatro minijuegos accesibles desde un menú principal:
+
+1. Lanzar Dados
+Este juego permite a los usuarios crear "tiradas" personalizadas combinando dos tipos de dados:
+
+- Dados de Emojis: Dados con emojis aleatorios para estimular la creatividad visual.
+
+- Dados Filosóficos: Dados temáticos con imágenes relacionadas con conceptos, autores, acciones y más, incluyendo categorías como Ética y Política, ODS y Derechos Humanos.
+Las tiradas se pueden nombrar y guardar en un historial local en el navegador.
+
+2. ¿Cuál eliges? (This or That)
+Un juego de debate rápido donde se presentan dos conceptos opuestos (por ejemplo, "Razón ❤️" vs. "Emoción 🧠"). El objetivo es que los jugadores elijan una opción y argumenten su decisión, fomentando el diálogo y la justificación de ideas.
+
+3. Mensaje Secreto
+Un juego de criptografía donde las letras del alfabeto se corresponden con emojis. Los jugadores pueden:
+
+- Descodificar: Resolver mensajes secretos en dos niveles de dificultad (palabras o frases).
+
+- Crear: Escribir sus propios mensajes y convertirlos en una secuencia de emojis para compartir.
+
+4. Conceptos Filosóficos
+Un desafío creativo para construir frases. El juego proporciona una cantidad de emojis seleccionable (entre 3 y 9) y una "palabra del reto". El objetivo es crear una frase coherente que utilice todos los elementos, ideal para trabajar tanto individualmente como en grupo.
+
+🛠️ Características Técnicas
+- Frontend: El proyecto está construido íntegramente con HTML, CSS y JavaScript puro (Vanilla JS).
+
+- Estilos: Se utiliza Tailwind CSS para un diseño rápido y responsivo, combinado con algunos estilos CSS personalizados para animaciones y elementos de juego específicos.
+
+- Estructura: El código está organizado en "gestores" de juegos autocontenidos dentro de un único script, lo que facilita su mantenimiento y la adición de nuevos minijuegos.
+
+- Autocontenido: No requiere dependencias externas ni procesos de compilación. Funciona directamente en cualquier navegador web moderno.
+
+🚀 Uso
+Para ejecutar la aplicación, simplemente abre el archivo index.html en tu navegador web preferido. No se necesita instalación ni configuración adicional.
+
+✨ Créditos
+Este proyecto está inspirado y basado en el trabajo original de Tamara Llorens (Chromtastic Teacher).
