@@ -304,82 +304,74 @@
 
   <!-- JUEGO 3: EMOJI DICE (Conceptos filosóficos) -->
   <div id="emoji-dice-screen" class="screen hidden">
-    <!-- SUBPANTALLA 1 · Configuración -->
-    <div id="ed-screen-1" class="dice-sub-screen">
-      <main class="w-full max-w-3xl mx-auto text-center flex flex-col gap-4">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,.1);">Conceptos filosóficos</h1>
-        <section class="w-full bg-white/80 rounded-2xl shadow p-4 text-left space-y-4">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="font-bold text-gray-700 text-sm flex items-center justify-center">🎲 Nº de emojis (3–9)</label>
-              <div id="ed-emoji-controls" class="flex items-center justify-center gap-4 mt-2">
-                  <button id="ed-btn-minus" class="quantity-btn" aria-label="Restar emoji">-</button>
-                  <span id="ed-emoji-count-display" class="text-3xl font-bold text-pink-500 w-16 text-center">3</span>
-                  <button id="ed-btn-plus" class="quantity-btn" aria-label="Sumar emoji">+</button>
-              </div>
-            </div>
-            <div>
-              <label class="font-bold text-gray-700 text-sm">👥 Agrupación</label>
-              <select id="ed-grouping-select" class="w-full rounded-xl border-0 bg-white shadow-sm px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
-                <option value="Individual">Individual 👤</option>
-                <option value="Pairs">Parejas 👥</option>
-                <option value="Group">Grupo 👨‍👩‍👧‍👦</option>
-              </select>
-            </div>
-          </div>
-          <div>
-            <label class="font-bold text-gray-700 text-sm block mb-1">📝 Lista de palabras del reto (opcional)</label>
-            <p class="text-xs text-gray-600 mb-2">Una por línea o separadas por comas. Si lo dejas vacío se usa la lista por defecto.</p>
-            <textarea id="ed-custom-words" rows="4" class="w-full rounded-xl border border-gray-200 p-3" placeholder="ej.: rápido\nmisterioso, espacio, saltar, brillante"></textarea>
-          </div>
-        </section>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button id="ed-home-btn-1" class="bg-white text-gray-700 font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all py-2 px-5 shadow-md hover:shadow-lg"><span class="text-xl">🏠</span><span>Inicio</span></button>
-          <button id="ed-start-btn" class="font-semibold text-lg rounded-xl flex items-center justify-center gap-2 transition-all text-white py-2 px-6" style="background-image:linear-gradient(135deg,var(--brand-amber) 0%, var(--brand-rose-2) 100%); box-shadow:0 4px 20px rgba(255,154,139,.35); "><span class="text-2xl">▶️</span><span>Empezar</span></button>
-        </div>
-      </main>
-    </div>
-    <!-- SUBPANTALLA 2 · Juego -->
-    <div id="ed-screen-2" class="dice-sub-screen hidden">
-      <div class="w-full max-w-5xl flex flex-col gap-4">
-        <header class="text-center">
-          <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-1px -1px 0 #FFF9E6, 1px -1px 0 #FFF9E6, -1px 1px 0 #FFF9E6, 1px 1px 0 #FFF9E6, 2px 2px 8px rgba(0,0,0,.1);">Emoji Dice</h1>
-        </header>
-        <div class="p-3 rounded-2xl bg-white/80 shadow flex flex-wrap items-center gap-3">
-          <div class="flex items-center gap-2">
-            <label class="font-bold text-gray-700 text-sm">👥 Agrupación</label>
-            <select id="ed-grouping-select-live" class="rounded-lg border border-gray-200 px-2 py-1">
-              <option value="Individual">Individual</option>
-              <option value="Pairs">Parejas</option>
-              <option value="Group">Grupo</option>
-            </select>
-          </div>
-        </div>
-        <div class="flex flex-col md:flex-row gap-4 w-full">
-          <div id="ed-emoji-main-block" class="w-full p-4 rounded-2xl space-y-4 flex flex-col" style="background-color:#eef4ff;">
-            <section class="flex flex-col items-center justify-center space-y-4 flex-grow">
-              <div id="ed-emoji-display" class="grid gap-3 sm:gap-5 w-full max-w-2xl mx-auto" style="grid-template-columns:repeat(3,minmax(64px,1fr));"></div>
-              <div id="ed-word-display-card" class="hidden rounded-xl shadow-lg px-4 py-2 bg-[#dcd6ff]">
-                <span class="text-white font-bold">Palabra del reto: </span>
-                <span id="ed-word-display" class="text-white font-extrabold"></span>
-              </div>
-              <p id="ed-consigna" class="text-center text-gray-800 text-base sm:text-lg md:text-xl px-2 flex-grow flex items-center justify-center min-h-[3rem]"></p>
-              <button id="ed-roll-dice-btn" class="group font-bold text-white py-3 px-6 sm:px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-lg sm:text-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 focus:ring-offset-gray-50 transition-all" style="background-image:linear-gradient(to right,#ff9a8b,#ff6a88);"><span class="text-2xl sm:text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Tirar dados</span></button>
+    <div class="screen-content-wrapper">
+        <main class="w-full max-w-4xl mx-auto text-center flex flex-col gap-4 p-4">
+            <!-- Título -->
+            <header>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,.1);">Conceptos filosóficos</h1>
+                <h2 class="text-xl font-bold text-gray-600 mt-4">Selecciona las opciones de juego</h2>
+            </header>
+
+            <!-- Panel de Configuración -->
+            <section class="w-full bg-white/80 rounded-2xl shadow p-4 text-left space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="font-bold text-gray-700 text-sm flex items-center justify-center">🎲 Nº de emojis (3–9)</label>
+                        <div id="ed-emoji-controls" class="flex items-center justify-center gap-4 mt-2">
+                            <button id="ed-btn-minus" class="quantity-btn" aria-label="Restar emoji">-</button>
+                            <span id="ed-emoji-count-display" class="text-3xl font-bold text-pink-500 w-16 text-center">3</span>
+                            <button id="ed-btn-plus" class="quantity-btn" aria-label="Sumar emoji">+</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="font-bold text-gray-700 text-sm">👥 Agrupación</label>
+                        <select id="ed-grouping-select" class="w-full rounded-xl border-0 bg-white shadow-sm px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <option value="Individual">Individual 👤</option>
+                            <option value="Pairs">Parejas 👥</option>
+                            <option value="Group">Grupo 👨‍👩‍👧‍👦</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="font-bold text-gray-700 text-sm block mb-1">📝 Lista de palabras del reto (opcional)</label>
+                    <p class="text-xs text-gray-600 mb-2">Una por línea o separadas por comas. Si lo dejas vacío se usa la lista por defecto.</p>
+                    <textarea id="ed-custom-words" rows="3" class="w-full rounded-xl border border-gray-200 p-3" placeholder="ej.: rápido\nmisterioso, espacio, saltar, brillante"></textarea>
+                </div>
             </section>
-          </div>
-          <div id="ed-steps-container" class="w-full md:w-2/5">
-            <section id="ed-steps-section" class="p-4 bg-white/60 rounded-2xl h-full flex flex-col justify-between"></section>
-          </div>
-        </div>
-        <footer class="p-2">
-          <div class="flex justify-center items-center gap-4">
-            <button id="ed-back-btn" class="bg-white font-bold text-[#4A4A4A] py-1 px-4 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all">⬅️ Atrás</button>
-            <button id="ed-home-btn-2" class="bg-white font-bold text-[#4A4A4A] py-1 px-4 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all no-underline">🏠 Inicio</button>
-          </div>
-        </footer>
-      </div>
+
+            <!-- Botón de Acción Principal -->
+            <div class="my-4 flex justify-center">
+                 <button id="ed-roll-dice-btn" class="group font-bold text-white py-3 px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-lg sm:text-xl focus:outline-none transition-all duration-300" style="background-image:linear-gradient(to right,#ff9a8b,#ff6a88);"><span class="text-2xl sm:text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Tirar dados</span></button>
+            </div>
+
+            <!-- Área de Resultados y Pasos -->
+            <div class="flex flex-col md:flex-row gap-4 w-full">
+                <div id="ed-emoji-main-block" class="w-full p-4 rounded-2xl space-y-4 flex flex-col" style="background-color:#eef4ff;">
+                    <section class="flex flex-col items-center justify-center space-y-4 flex-grow">
+                        <div id="ed-emoji-display" class="grid gap-3 sm:gap-5 w-full max-w-2xl mx-auto" style="grid-template-columns:repeat(3,minmax(64px,1fr));">
+                            <div class="text-center text-gray-400 p-6 col-span-3">Configura tu partida y pulsa “Tirar dados” para empezar</div>
+                        </div>
+                        <div id="ed-word-display-card" class="hidden rounded-xl shadow-lg px-4 py-2 bg-[#dcd6ff]">
+                            <span class="text-white font-bold">Palabra del reto: </span>
+                            <span id="ed-word-display" class="text-white font-extrabold"></span>
+                        </div>
+                        <p id="ed-consigna" class="text-center text-gray-800 text-base sm:text-lg md:text-xl px-2 flex-grow flex items-center justify-center min-h-[3rem]"></p>
+                    </section>
+                </div>
+                <div id="ed-steps-container" class="w-full md:w-2/5 hidden">
+                    <section id="ed-steps-section" class="p-4 bg-white/60 rounded-2xl h-full flex flex-col justify-between"></section>
+                </div>
+            </div>
+
+            <!-- Footer con botón de Inicio -->
+            <footer class="p-2 mt-4">
+                <div class="flex justify-center items-center gap-4">
+                    <button id="ed-home-btn" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all no-underline">🏠 Inicio</button>
+                </div>
+            </footer>
+        </main>
     </div>
-  </div>
+</div>
 
   <!-- Pantalla 4: Secret Message -->
   <div id="secret-message-screen" class="screen hidden">
@@ -510,7 +502,25 @@
         const closeHistoryBtn = $('close-history-btn');
         const historyList = $('history-list');
         const clearHistoryBtn = $('clear-history-btn');
-        const DADOS_FILOSOFICOS = { "Conceptos": ["imagenes/dios.png", "imagenes/libertad.png", "imagenes/tiempo.png", "imagenes/destino.png", "imagenes/esencia.png"], "Autores": ["imagenes/autores/platon.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png", "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png", "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"], "Acciones": ["imagenes/acciones/espiral.png", "imagenes/acciones/explosion.png", "imagenes/acciones/flechas.png", "imagenes/acciones/mano.png", "imagenes/acciones/mascara.png", "imagenes/acciones/caminar.png", "imagenes/acciones/construir.png", "imagenes/acciones/mirar.png", "imagenes/acciones/pensar.png", "imagenes/acciones/saltar.png", "imagenes/acciones/toser.png", "imagenes/acciones2/paracaidas.png"], "Objetos": ["imagenes/objetos1/arcoiris.png", "imagenes/objetos1/balanza.png", "imagenes/objetos1/candado.png", "imagenes/objetos1/llave.png", "imagenes/objetos1/lupa.png"], "Personajes": ["imagenes/personajes/astronauta.png", "imagenes/personajes/mago.png", "imagenes/personajes/nina.png", "imagenes/personajes/reina.png", "imagenes/personajes/superheroe.png"], "Derechos Humanos": ["imagenes/ddhh/1_dignidad.png", "imagenes/ddhh/2_igualdad.png", "imagenes/ddhh/3_vida.png", "imagenes/ddhh/4_no_esclavitud.png", "imagenes/ddhh/5_no_tortura.png", "imagenes/ddhh/6_personalidad_juridica.png", "imagenes/ddhh/7_igualdad_ley.png", "imagenes/ddhh/8_derecho_reparacion.png", "imagenes/ddhh/9_no_detencion_ilegal.png", "imagenes/ddhh/10_juicio_justo.png", "imagenes/ddhh/11_inocencia.png", "imagenes/ddhh/12_intimidad.png", "imagenes/ddhh/13_libre_desplazamiento.png", "imagenes/ddhh/14_asilo.png", "imagenes/ddhh/15_nacionalidad.png", "imagenes/ddhh/16_familia.png", "imagenes/ddhh/17_propiedad.png", "imagenes/ddhh/18_libertad_religiosa.png", "imagenes/ddhh/19_libertad_expresion.png", "imagenes/ddhh/20_libertad_asociacion.png"] };
+        const DADOS_FILOSOFICOS = { 
+            "Conceptos": ["imagenes/dios.png", "imagenes/libertad.png", "imagenes/tiempo.png", "imagenes/destino.png", "imagenes/esencia.png"], 
+            "Autores": ["imagenes/autores/platon.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png", "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png", "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"], 
+            "Acciones": ["imagenes/acciones/espiral.png", "imagenes/acciones/explosion.png", "imagenes/acciones/flechas.png", "imagenes/acciones/mano.png", "imagenes/acciones/mascara.png", "imagenes/acciones/caminar.png", "imagenes/acciones/construir.png", "imagenes/acciones/mirar.png", "imagenes/acciones/pensar.png", "imagenes/acciones/saltar.png", "imagenes/acciones/toser.png", "imagenes/acciones2/paracaidas.png"], 
+            "Objetos": ["imagenes/objetos1/arcoiris.png", "imagenes/objetos1/balanza.png", "imagenes/objetos1/candado.png", "imagenes/objetos1/llave.png", "imagenes/objetos1/lupa.png"], 
+            "Personajes": ["imagenes/personajes/astronauta.png", "imagenes/personajes/mago.png", "imagenes/personajes/nina.png", "imagenes/personajes/reina.png", "imagenes/personajes/superheroe.png"], 
+            "Ética y Política": ["imagenes/etica/Conexiones y Colaboración.png", "imagenes/etica/Eslabón de cadena minimalista.png", "imagenes/etica/Figura con antorcha y llama.png", "imagenes/etica/Figuras humanas minimalistas en azul.png", "imagenes/etica/huella dactilar estilizada.png", "imagenes/etica/Icono de libro abierto.png", "imagenes/etica/Icono de pergamino azul minimalista.png", "imagenes/etica/Icono de Templo Clásico.png", "imagenes/etica/Icono minimalista de duda.png", "imagenes/etica/Puerta abierta en líneas sencillas.png", "imagenes/etica/Puño cerrado en blanco y negro.png"], 
+            "ODS": ["imagenes/ODS/1ODS.png", "imagenes/ODS/2ODS.png", "imagenes/ODS/3ODS.png", "imagenes/ODS/4ODS.png", "imagenes/ODS/5ODS.png", "imagenes/ODS/6ODS.png", "imagenes/ODS/7ODS.png", "imagenes/ODS/8ODS.png", "imagenes/ODS/9ODS.png", "imagenes/ODS/10ODS.png", "imagenes/ODS/11ODS.png", "imagenes/ODS/12ODS.png", "imagenes/ODS/13ODS.png", "imagenes/ODS/14ODS.png", "imagenes/ODS/15ODS.png", "imagenes/ODS/16ODS.png"],
+            "Derechos Humanos": ["imagenes/ddhh/1_dignidad.png", "imagenes/ddhh/2_igualdad.png", "imagenes/ddhh/3_vida.png", "imagenes/ddhh/4_no_esclavitud.png", "imagenes/ddhh/5_no_tortura.png", "imagenes/ddhh/6_personalidad_juridica.png", "imagenes/ddhh/7_igualdad_ley.png", "imagenes/ddhh/8_derecho_reparacion.png", "imagenes/ddhh/9_no_detencion_ilegal.png", "imagenes/ddhh/10_juicio_justo.png", "imagenes/ddhh/11_inocencia.png", "imagenes/ddhh/12_intimidad.png", "imagenes/ddhh/13_libre_desplazamiento.png", "imagenes/ddhh/14_asilo.png", "imagenes/ddhh/15_nacionalidad.png", "imagenes/ddhh/16_familia.png", "imagenes/ddhh/17_propiedad.png", "imagenes/ddhh/18_libertad_religiosa.png", "imagenes/ddhh/19_libertad_expresion.png", "imagenes/ddhh/20_libertad_asociacion.png", "imagenes/ddhh/21_Votando.png”,
+"imagenes/ddhh/22_Asistencia medica.png”,
+"imagenes/ddhh/23_Trabajo.png”,
+"imagenes/ddhh/24_descando.png”,
+"imagenes/ddhh/25_bienes_basicos.png”,
+"imagenes/ddhh/26_educacion.png”,
+"imagenes/ddhh/27_culturas.png”,
+"imagenes/ddhh/28_orden social.png”,
+"imagenes/ddhh/29_deberes.png”,
+"imagenes/ddhh/30_respeto_ddhh.png”] 
+        };
         const MAX_TOTAL_DICE = 9;
         let numRandomDice = 3;
         let historial = [];
@@ -554,23 +564,17 @@
 
       // --- Gestor del Juego 3: "Conceptos Filosóficos" ---
       const emojiDiceMinigameManager = (() => {
-        const screen1 = $('ed-screen-1');
-        const screen2 = $('ed-screen-2');
-        const home1 = $('ed-home-btn-1');
-        const home2 = $('ed-home-btn-2');
-        const backBtn = $('ed-back-btn');
-        const startBtn = $('ed-start-btn');
+        const homeBtn = $('ed-home-btn');
+        const rollBtn = $('ed-roll-dice-btn');
         const btnPlus = $('ed-btn-plus');
         const btnMinus = $('ed-btn-minus');
         const emojiCountDisplay = $('ed-emoji-count-display');
         const groupingSelect = $('ed-grouping-select');
         const customWordsTA = $('ed-custom-words');
-        const groupingSelectLive = $('ed-grouping-select-live');
         const emojiDisplay = $('ed-emoji-display');
         const wordDisplayCard = $('ed-word-display-card');
         const wordDisplay = $('ed-word-display');
         const consigna = $('ed-consigna');
-        const rollBtn = $('ed-roll-dice-btn');
         const stepsSection = $('ed-steps-section');
         const stepsContainer = $('ed-steps-container');
         const emojiMainBlock = $('ed-emoji-main-block');
@@ -580,8 +584,6 @@
         const DEFAULT_WORDS = [ 'pensar','crear','escribir','leer','reír','bailar','volar','nadar','hablar','escuchar','mirar','encontrar','ayudar','usar','abrir','cerrar','empezar','parar','caminar','cambiar','imaginar','compartir','ganar','construir','dibujar','cantar','explorar','descubrir','resolver','visitar','viajar','cocinar','ver','aprender', 'feliz','triste','grande','pequeño','rápido','lento','rojo','azul','verde','amarillo','soleado','lluvioso','nublado','valiente','fuerte','amable','listo','delicioso','bonito','asombroso','interesante','aburrido','nuevo','viejo','joven','ruidoso','silencioso','brillante','oscuro','pesado','ligero','bueno','malo','emocionado','cansado','enfadado','hambriento','sediento','frío','caliente','divertido','misterioso','mágico','gigante','minúsculo','colorido','invisible','extraño','fantástico','genial','maravilloso','pacífico','secreto','antiguo','moderno','rápidamente','lentamente','de repente','finalmente','después','antes','cuando','mientras','si','o','también','porque','entonces','cerca','lejos','encima','debajo','dentro','fuera' ];
         const stepsData = [ { title:'PASO 1/3: PENSAR 🧠', instructions:'Comenta ideas con tu pareja/grupo.' }, { title:'PASO 2/3: CREAR ✍️',  instructions:'Escribid el texto juntos.' }, { title:'PASO 3/3: COMPARTIR 🎤', instructions:'¡Presentad vuestro texto a la clase!' } ];
 
-        const showSub = (el)=>{ screen1.classList.add('hidden'); screen2.classList.add('hidden'); el.classList.remove('hidden'); };
-        
         let audioCtx;
         const beep = (f=880, ms=120)=>{ try{ audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.type='sine'; osc.frequency.value=f; gain.gain.setValueAtTime(0.0001,audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.2,audioCtx.currentTime+0.01); gain.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+ms/1000); osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + ms/1000 + 0.02); }catch{} };
         
@@ -600,7 +602,7 @@
         };
 
         const resetSteps = ()=>{
-            const grouping = groupingSelectLive.value;
+            const grouping = groupingSelect.value;
             if(grouping==='Individual'){
                 stepsContainer.classList.add('hidden');
                 emojiMainBlock.classList.remove('md:w-3/5');
@@ -630,7 +632,10 @@
         };
 
         const roll = ()=>{
-            const n = numEmojis; // Usar la variable de estado
+            const custom = parseCustomWords(customWordsTA.value);
+            activeWords = custom.length ? custom : [...DEFAULT_WORDS];
+            
+            const n = numEmojis;
             emojiDisplay.innerHTML = '';
             setEmojiGridCols(n);
             const frag = document.createDocumentFragment();
@@ -648,26 +653,33 @@
             wordDisplayCard.classList.remove('hidden');
             consigna.textContent = `Usa los ${n} emojis y la palabra «${word}» para crear una frase.`;
             beep(900,110);
+            resetSteps();
         };
         
-        home1.addEventListener('click', goHome);
-        home2.addEventListener('click', goHome);
-        backBtn.addEventListener('click', ()=> showSub(screen1));
-        btnPlus.addEventListener('click', () => changeEmojiCount(1));
-        btnMinus.addEventListener('click', () => changeEmojiCount(-1));
-        groupingSelectLive.addEventListener('change', resetSteps);
-        
-        startBtn.addEventListener('click', ()=>{
-            const custom = parseCustomWords(customWordsTA.value);
-            activeWords = custom.length ? custom : [...DEFAULT_WORDS];
-            groupingSelectLive.value = groupingSelect.value;
-            emojiDisplay.innerHTML = '<div class="text-center text-gray-400 p-6">Pulsa “Tirar dados” para empezar</div>';
+        function init() {
+            homeBtn.addEventListener('click', goHome);
+            btnPlus.addEventListener('click', () => changeEmojiCount(1));
+            btnMinus.addEventListener('click', () => changeEmojiCount(-1));
+            groupingSelect.addEventListener('change', resetSteps);
+            rollBtn.addEventListener('click', roll);
+        }
+
+        function startGame() {
+            showScreen(emojiDiceScreen);
+            // Resetear a valores por defecto al iniciar
+            numEmojis = 3;
+            emojiCountDisplay.textContent = '3';
+            btnMinus.disabled = true;
+            btnPlus.disabled = false;
+            groupingSelect.value = 'Individual';
+            customWordsTA.value = '';
+            emojiDisplay.innerHTML = '<div class="text-center text-gray-400 p-6 col-span-3">Configura tu partida y pulsa “Tirar dados” para empezar</div>';
             wordDisplayCard.classList.add('hidden');
             consigna.textContent = '';
-            showSub(screen2);
             resetSteps();
-        });
-        rollBtn.addEventListener('click', roll);
+        }
+
+        return { init, startGame };
       })();
 
       // --- Gestor del Juego 4: "Mensaje Secreto" ---
@@ -749,24 +761,38 @@
         
         const textToEmojiHTML = (text, container) => {
             container.innerHTML = '';
-            for (const char of text.toUpperCase()) {
-                if (EMOJI_CIPHER[char]) {
-                    const emoji = EMOJI_CIPHER[char];
-                    const flipCard = document.createElement('div');
-                    flipCard.className = 'flip-card';
-                    flipCard.innerHTML = `<div class="flip-card-inner"><div class="flip-card-front">${emoji}</div><div class="flip-card-back">${char}</div></div>`;
-                    container.appendChild(flipCard);
-                } else if (char === ' ') {
+            const words = text.toUpperCase().split(' ');
+
+            words.forEach((word, index) => {
+                const wordWrapper = document.createElement('div');
+                wordWrapper.className = 'inline-flex flex-nowrap'; 
+
+                for (const char of word) {
+                    if (EMOJI_CIPHER[char]) {
+                        const emoji = EMOJI_CIPHER[char];
+                        const flipCard = document.createElement('div');
+                        flipCard.className = 'flip-card';
+                        flipCard.innerHTML = `
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">${emoji}</div>
+                                <div class="flip-card-back">${char}</div>
+                            </div>`;
+                        wordWrapper.appendChild(flipCard);
+                    } else if (char.trim() !== '') {
+                        const nonFlipCard = document.createElement('div');
+                        nonFlipCard.className = 'flip-card';
+                        nonFlipCard.innerHTML = `<div class="flip-card-inner"><div class="flip-card-front">${char}</div><div class="flip-card-back">${char}</div></div>`;
+                        wordWrapper.appendChild(nonFlipCard);
+                    }
+                }
+                container.appendChild(wordWrapper);
+
+                if (index < words.length - 1) {
                     const space = document.createElement('div');
                     space.className = 'emoji-space';
                     container.appendChild(space);
-                } else if (char.trim() !== '') {
-                    const nonFlipCard = document.createElement('div');
-                    nonFlipCard.className = 'flip-card';
-                    nonFlipCard.innerHTML = `<div class="flip-card-inner"><div class="flip-card-front">${char}</div><div class="flip-card-back">${char}</div></div>`;
-                    container.appendChild(nonFlipCard);
                 }
-            }
+            });
         };
         
         const addFlipListener = (container) => {
@@ -841,6 +867,15 @@
                 cell.innerHTML = `<span class="font-bold text-lg md:text-xl">${letter}</span><span class="text-lg md:text-xl">=</span><span class="text-2xl md:text-3xl">${EMOJI_CIPHER[letter]}</span>`;
                 cell.addEventListener('click', () => {
                     const emoji = EMOJI_CIPHER[letter];
+                    
+                    const isEncodeActive = !encodeSection.classList.contains('hidden');
+                    const targetInput = isEncodeActive ? encodeInput : decodeInput;
+                    targetInput.value += emoji;
+                    if(isEncodeActive) {
+                        inputWatermark.classList.add('hidden');
+                    }
+                    targetInput.focus();
+
                     const emojiName = EMOJI_NAMES[emoji] || 'emoji';
                     speak(`${letter} es para ${emojiName}.`);
                 });
@@ -919,17 +954,12 @@
       diceGameManager.init();
       thisOrThatGameManager.init();
       secretMessageManager.init();
+      emojiDiceMinigameManager.init();
 
       $('go-to-dice-challenge-btn').addEventListener('click', diceGameManager.startGame);
       $('go-to-this-or-that-btn').addEventListener('click', thisOrThatGameManager.startGame);
       $('go-to-secret-message-btn').addEventListener('click', secretMessageManager.startGame);
-      
-      // La navegación para "Conceptos Filosóficos" se queda como estaba
-      $('go-to-emoji-says-btn').addEventListener('click', () => {
-        showScreen(emojiDiceScreen);
-        $('ed-screen-1').classList.remove('hidden');
-        $('ed-screen-2').classList.add('hidden');
-      });
+      $('go-to-emoji-says-btn').addEventListener('click', emojiDiceMinigameManager.startGame);
 
     });
   </script>
