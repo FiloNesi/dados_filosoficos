@@ -4,10 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dados filosóficos</title>
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com" defer></script>
+
+  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet"/>
+
   <style>
     :root{
       --brand-rose:#FF6F61;
@@ -29,10 +34,18 @@
         transition:opacity .3s ease-in-out
     }
     .hidden{display:none!important}
+
+    /* Animaciones */
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     @keyframes popIn{0%{opacity:0;transform:scale(.8)}80%{opacity:1;transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
+    /* Añadidas: eran usadas pero no estaban definidas */
+    @keyframes bounceIn{0%{opacity:0;transform:scale(.85)}60%{opacity:1;transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
+    @keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+                    100%{transform:translateY(120px) rotate(360deg);opacity:0}}
+
     @keyframes animate-border{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
+    /* Pantalla principal */
     #warmup-screen{
         font-family:'Nunito',sans-serif;
         background:radial-gradient(circle at 50% 50%,#e6f7f3,#d0f0e8);
@@ -58,8 +71,8 @@
     #warmup-screen .btn-4{background-image:linear-gradient(to right,#fdffb6,#ffd6a5 51%,#fdffb6 100%)}
     #warmup-screen .footer-text{margin-top:1rem;font-family:'Nunito',sans-serif;font-size:12px;color:#6d6d6d;opacity:.7}
 
+    /* Juegos 1,3,4 */
     #dice-challenge-screen, #emoji-dice-screen, #this-or-that-screen {font-family:'Nunito',sans-serif;background-color:var(--bg-cream);background-image:linear-gradient(to bottom,#fefae0 0%,#fde4cf 100%);position:relative;justify-content:flex-start}
-    
     .screen-content-wrapper{width:100%;height:100%;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
     .dice-sub-screen{display:flex;flex-direction:column;align-items:center; justify-content:flex-start;width:100%;min-height:100%;padding:1rem;box-sizing:border-box}
     #dice-challenge-screen h1, #emoji-dice-screen h1 {font-family:'Fredoka',sans-serif}
@@ -78,10 +91,13 @@
     #dice-challenge-screen .grid-container .pop-in span{font-size:clamp(2rem,12vw,4rem);line-height:1}
     #dice-challenge-screen .grid-container .pop-in img{width:90%;height:90%;object-fit:contain}
 
-    #history-panel{position:fixed;transition:transform .3s ease-in-out}
+    /* Panel Historial */
+    #history-panel{position:fixed;transition:transform .3s ease-in-out;transform:translateX(100%)}
     #history-panel.is-open{transform:translateX(0)}
+
     @media (prefers-reduced-motion: reduce){.pop-in{animation:none}}
-    
+
+    /* Secret Message */
     #secret-message-screen {
         font-family: 'Nunito', sans-serif;
         background-color: #E8D9FF;
@@ -105,28 +121,31 @@
     }
     #secret-message-screen .btn {
         border-width: 2px;
-        box-shadow: 0 5px 0 0;
+        box-shadow: 0 5px 0 0 rgba(0,0,0,0.15);
         transition: all 0.15s ease-in-out;
         border-radius: 0.75rem;
     }
-    #secret-message-screen .btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 0 0; }
+    #secret-message-screen .btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 0 0 rgba(0,0,0,0.15); }
     #secret-message-screen .btn:active:not(:disabled) { transform: translateY(5px); box-shadow: 0 0 0 0; }
     #secret-message-screen .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    #secret-message-screen .btn-pink { background-color: #FFE8F0; border-color: #FBCFE8; box-shadow-color: #F472B6; }
-    #secret-message-screen .btn-lilac { background-color: #e9d5ff; border-color: #d8b4fe; box-shadow-color: #a855f7; color: #581c87; }
-    #secret-message-screen .btn-lilac:hover:not(:disabled) { box-shadow-color: #a855f7; }
-    #secret-message-screen .btn-speaker { background-color: #c4b5fd; border-color: #a78bfa; box-shadow-color: #7c3aed; }
-    #secret-message-screen .btn-speaker:hover:not(:disabled) { box-shadow-color: #7c3aed; }
-    #secret-message-screen .btn-yellow { background-color: #fef9c3; border-color: #fde047; box-shadow-color: #eab308; color: #854d0e; }
-    #secret-message-screen .btn-yellow:hover:not(:disabled) { box-shadow-color: #eab308; }
+    /* Colores con box-shadow correcto */
+    #secret-message-screen .btn-pink { background-color: #FFE8F0; border-color: #FBCFE8; box-shadow: 0 5px 0 0 #F472B6; }
+    #secret-message-screen .btn-pink:hover:not(:disabled) { box-shadow: 0 8px 0 0 #F472B6; }
+    #secret-message-screen .btn-lilac { background-color: #e9d5ff; border-color: #d8b4fe; color: #581c87; box-shadow: 0 5px 0 0 #a855f7; }
+    #secret-message-screen .btn-lilac:hover:not(:disabled) { box-shadow: 0 8px 0 0 #a855f7; }
+    #secret-message-screen .btn-speaker { background-color: #c4b5fd; border-color: #a78bfa; box-shadow: 0 5px 0 0 #7c3aed; }
+    #secret-message-screen .btn-speaker:hover:not(:disabled) { box-shadow: 0 8px 0 0 #7c3aed; }
+    #secret-message-screen .btn-yellow { background-color: #fef9c3; border-color: #fde047; color: #854d0e; box-shadow: 0 5px 0 0 #eab308; }
+    #secret-message-screen .btn-yellow:hover:not(:disabled) { box-shadow: 0 8px 0 0 #eab308; }
     #secret-message-screen .btn-yellow:hover:not(:disabled) .lock-icon { transform: rotate(-15deg) scale(1.1); }
+
     #secret-message-screen .nav-btn {
         width: auto; height: 3.5rem; padding: 0.75rem 1.5rem; font-size: 1.125rem; font-weight: 700;
         display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-        border-radius: 0.75rem; box-shadow: 0 5px 0 0;
+        border-radius: 0.75rem; box-shadow: 0 5px 0 0 rgba(0,0,0,0.15);
         text-transform: capitalize;
     }
-    #secret-message-screen .nav-btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 0 0; }
+    #secret-message-screen .nav-btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 0 0 rgba(0,0,0,0.15); }
     #secret-message-screen .nav-btn:active:not(:disabled) { transform: translateY(5px); box-shadow: 0 0 0 0; }
     #secret-message-screen .tabs-container { background-color: rgba(232, 217, 255, 0.5); padding: 0.5rem; border-radius: 0.75rem; }
     #secret-message-screen .tab { transition: all 0.3s ease; border-radius: 0.5rem; font-weight: 700; }
@@ -293,26 +312,24 @@
                 <span class="mr-4 text-2xl">🏠</span>
                 Inicio
             </button>
-            <button id="tot-music-toggle-btn" class="flex items-center justify-center bg-white/80 text-slate-600 font-bold text-3xl w-16 h-16 rounded-3xl shadow-lg border-2 border-white/50 backdrop-blur-sm transition-transform hover:scale-110 active:scale-95">🔇</button>
+            <button id="tot-music-toggle-btn" class="flex items-center justify-center bg-white/80 text-slate-600 font-bold text-3xl w-16 h-16 rounded-3xl shadow-lg border-2 border-white/50 backdrop-blur-sm transition-transform hover:scale-110 active:scale-95" title="Activar/desactivar música">🔇</button>
             <button id="tot-new-challenge-btn" class="flex items-center justify-center text-white font-bold text-xl px-8 py-4 rounded-3xl shadow-2xl shadow-pink-500/40 border-2 border-white/50 transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none" style="background-color: #F68AB8;">
                 <span class="mr-4 text-3xl">✨</span>
                 Nuevo Reto
             </button>
         </div>
     </div>
-</div>
+  </div>
 
   <!-- JUEGO 3: EMOJI DICE (Conceptos filosóficos) -->
   <div id="emoji-dice-screen" class="screen hidden">
     <div class="screen-content-wrapper">
         <main class="w-full max-w-4xl mx-auto text-center flex flex-col gap-4 p-4">
-            <!-- Título -->
             <header>
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase" style="color:var(--brand-rose);text-shadow:-2px -2px 0 #FFF9E6, 2px -2px 0 #FFF9E6, -2px 2px 0 #FFF9E6, 2px 2px 0 #FFF9E6, 4px 4px 10px rgba(0,0,0,.1);">Conceptos filosóficos</h1>
                 <h2 class="text-xl font-bold text-gray-600 mt-4">Selecciona las opciones de juego</h2>
             </header>
 
-            <!-- Panel de Configuración -->
             <section class="w-full bg-white/80 rounded-2xl shadow p-4 text-left space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -339,12 +356,10 @@
                 </div>
             </section>
 
-            <!-- Botón de Acción Principal -->
             <div class="my-4 flex justify-center">
                  <button id="ed-roll-dice-btn" class="group font-bold text-white py-3 px-8 rounded-xl shadow-lg flex items-center justify-center gap-3 text-lg sm:text-xl focus:outline-none transition-all duration-300" style="background-image:linear-gradient(to right,#ff9a8b,#ff6a88);"><span class="text-2xl sm:text-3xl transition-transform duration-300 group-hover:rotate-45">🎲</span><span>Tirar dados</span></button>
             </div>
 
-            <!-- Área de Resultados y Pasos -->
             <div class="flex flex-col md:flex-row gap-4 w-full">
                 <div id="ed-emoji-main-block" class="w-full p-4 rounded-2xl space-y-4 flex flex-col" style="background-color:#eef4ff;">
                     <section class="flex flex-col items-center justify-center space-y-4 flex-grow">
@@ -363,7 +378,6 @@
                 </div>
             </div>
 
-            <!-- Footer con botón de Inicio -->
             <footer class="p-2 mt-4">
                 <div class="flex justify-center items-center gap-4">
                     <button id="ed-home-btn" class="bg-white font-bold text-[#4A4A4A] py-2 px-5 rounded-xl border border-gray-200 flex items-center justify-center gap-2 text-base transition-all no-underline">🏠 Inicio</button>
@@ -371,7 +385,7 @@
             </footer>
         </main>
     </div>
-</div>
+  </div>
 
   <!-- Pantalla 4: Secret Message -->
   <div id="secret-message-screen" class="screen hidden">
@@ -471,7 +485,6 @@
       const thisOrThatScreen = $('this-or-that-screen');
       const emojiDiceScreen = $('emoji-dice-screen');
       const secretMessageScreen = $('secret-message-screen');
-      
       const allScreens = [warmupScreen, diceChallengeScreen, thisOrThatScreen, emojiDiceScreen, secretMessageScreen];
 
       const showScreen = (el) => {
@@ -481,6 +494,30 @@
       const goHome = () => showScreen(warmupScreen);
 
       const SHARED_EMOJIS = ['😂','😍','🤔','😎','😢','😡','🥳','🤯','😴','👍','👎','🙏','💪','👀','🧠','🐶','🐱','🐭','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🐔','🐧','🐦','🐤','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🐛','🦋','🐌','🐞','🐜','⚽️','🏀','🏈','⚾️','🎾','🏐','🏉','🎱','🏓','🏸','🥅','🏒','🏑','🏏','⛳️','🏹','🎣','🥊','🥋','🎽','⛸','🎿','⛷','🏂','🏋️‍♀️','🤼‍♀️','🤸‍♀️','🤺','🤾‍♀️','🏌️‍♀️','🏇','🏆','🥇','🥈','🥉','🎨','🎬','🎤','🎧','🎼','🎹','🥁','🎷','🎺','🎸','🎻','🎮','🧩','🎭','🚗','✈️','🚀','🛸','🚁','⛵️','🏰','🏠','❤️','💔','💯','🔥','✨','⭐️','⚡️','☀️','☁️','🌈','🌊','🍔','🍕','🍟','🎂','🍭','🍩','🍪','☕️','⏰','💡','💰','🔑','🎁','🎉'];
+
+      /* Utilidad: crea una tarjeta para un resultado y aporta fallback si la imagen no carga */
+      function createResultCard(res, i) {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-xl shadow-lg pop-in';
+        card.style.animationDelay = `${i * 0.1}s`;
+        if (res.type === 'emoji') {
+          card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`;
+        } else {
+          const img = new Image();
+          img.src = res.value;
+          img.alt = 'Resultado de dado';
+          img.loading = 'lazy';
+          img.onerror = () => {
+            const span = document.createElement('span');
+            span.textContent = '🖼️';
+            span.style.fontSize = '3rem';
+            span.className = 'emoji-shadow';
+            img.replaceWith(span);
+          };
+          card.appendChild(img);
+        }
+        return card;
+      }
 
       // --- Gestor del Juego 1: "Lanzar Dados" ---
       const diceGameManager = (() => {
@@ -502,33 +539,227 @@
         const closeHistoryBtn = $('close-history-btn');
         const historyList = $('history-list');
         const clearHistoryBtn = $('clear-history-btn');
+
         const DADOS_FILOSOFICOS = { 
-            "Conceptos": ["imagenes/dios.png", "imagenes/libertad.png", "imagenes/tiempo.png", "imagenes/destino.png", "imagenes/esencia.png"], 
-            "Autores": ["imagenes/autores/platon.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png", "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png", "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"], 
-            "Acciones": ["imagenes/acciones/espiral.png", "imagenes/acciones/explosion.png", "imagenes/acciones/flechas.png", "imagenes/acciones/mano.png", "imagenes/acciones/mascara.png", "imagenes/acciones/caminar.png", "imagenes/acciones/construir.png", "imagenes/acciones/mirar.png", "imagenes/acciones/pensar.png", "imagenes/acciones/saltar.png", "imagenes/acciones/toser.png", "imagenes/acciones2/paracaidas.png"], 
-            "Objetos": ["imagenes/objetos1/arcoiris.png", "imagenes/objetos1/balanza.png", "imagenes/objetos1/candado.png", "imagenes/objetos1/llave.png", "imagenes/objetos1/lupa.png"], 
-            "Personajes": ["imagenes/personajes/astronauta.png", "imagenes/personajes/mago.png", "imagenes/personajes/nina.png", "imagenes/personajes/reina.png", "imagenes/personajes/superheroe.png"], 
-            "Ética y Política": ["imagenes/etica/Conexiones y Colaboración.png", "imagenes/etica/Eslabón de cadena minimalista.png", "imagenes/etica/Figura con antorcha y llama.png", "imagenes/etica/Figuras humanas minimalistas en azul.png", "imagenes/etica/huella dactilar estilizada.png", "imagenes/etica/Icono de libro abierto.png", "imagenes/etica/Icono de pergamino azul minimalista.png", "imagenes/etica/Icono de Templo Clásico.png", "imagenes/etica/Icono minimalista de duda.png", "imagenes/etica/Puerta abierta en líneas sencillas.png", "imagenes/etica/Puño cerrado en blanco y negro.png"], 
-            "ODS": ["imagenes/ODS/1ODS.png", "imagenes/ODS/2ODS.png", "imagenes/ODS/3ODS.png", "imagenes/ODS/4ODS.png", "imagenes/ODS/5ODS.png", "imagenes/ODS/6ODS.png", "imagenes/ODS/7ODS.png", "imagenes/ODS/8ODS.png", "imagenes/ODS/9ODS.png", "imagenes/ODS/10ODS.png", "imagenes/ODS/11ODS.png", "imagenes/ODS/12ODS.png", "imagenes/ODS/13ODS.png", "imagenes/ODS/14ODS.png", "imagenes/ODS/15ODS.png", "imagenes/ODS/16ODS.png"],
-            "Derechos Humanos": ["imagenes/ddhh/1_dignidad.png", "imagenes/ddhh/2_igualdad.png", "imagenes/ddhh/3_vida.png", "imagenes/ddhh/4_no_esclavitud.png", "imagenes/ddhh/5_no_tortura.png", "imagenes/ddhh/6_personalidad_juridica.png", "imagenes/ddhh/7_igualdad_ley.png", "imagenes/ddhh/8_derecho_reparacion.png", "imagenes/ddhh/9_no_detencion_ilegal.png", "imagenes/ddhh/10_juicio_justo.png", "imagenes/ddhh/11_inocencia.png", "imagenes/ddhh/12_intimidad.png", "imagenes/ddhh/13_libre_desplazamiento.png", "imagenes/ddhh/14_asilo.png", "imagenes/ddhh/15_nacionalidad.png", "imagenes/ddhh/16_familia.png", "imagenes/ddhh/17_propiedad.png", "imagenes/ddhh/18_libertad_religiosa.png", "imagenes/ddhh/19_libertad_expresion.png", "imagenes/ddhh/20_libertad_asociacion.png"] 
+          "Conceptos": ["imagenes/dios.png", "imagenes/libertad.png", "imagenes/tiempo.png", "imagenes/destino.png", "imagenes/esencia.png"], 
+          "Autores": ["imagenes/autores/platon.png", "imagenes/autores/kant.png", "imagenes/autores/descartes.png", "imagenes/autores/nietzsche.png", "imagenes/autores/wittgenstein.png", "imagenes/autores/aristoteles.png", "imagenes/autores/spinoza.png", "imagenes/autores/aquino.png"], 
+          "Acciones": ["imagenes/acciones/espiral.png", "imagenes/acciones/explosion.png", "imagenes/acciones/flechas.png", "imagenes/acciones/mano.png", "imagenes/acciones/mascara.png", "imagenes/acciones/caminar.png", "imagenes/acciones/construir.png", "imagenes/acciones/mirar.png", "imagenes/acciones/pensar.png", "imagenes/acciones/saltar.png", "imagenes/acciones/toser.png", "imagenes/acciones2/paracaidas.png"], 
+          "Objetos": ["imagenes/objetos1/arcoiris.png", "imagenes/objetos1/balanza.png", "imagenes/objetos1/candado.png", "imagenes/objetos1/llave.png", "imagenes/objetos1/lupa.png"], 
+          "Personajes": ["imagenes/personajes/astronauta.png", "imagenes/personajes/mago.png", "imagenes/personajes/nina.png", "imagenes/personajes/reina.png", "imagenes/personajes/superheroe.png"], 
+          "Ética y Política": ["imagenes/etica/Conexiones y Colaboración.png", "imagenes/etica/Eslabón de cadena minimalista.png", "imagenes/etica/Figura con antorcha y llama.png", "imagenes/etica/Figuras humanas minimalistas en azul.png", "imagenes/etica/huella dactilar estilizada.png", "imagenes/etica/Icono de libro abierto.png", "imagenes/etica/Icono de pergamino azul minimalista.png", "imagenes/etica/Icono de Templo Clásico.png", "imagenes/etica/Icono minimalista de duda.png", "imagenes/etica/Puerta abierta en líneas sencillas.png", "imagenes/etica/Puño cerrado en blanco y negro.png"], 
+          "ODS": ["imagenes/ODS/1ODS.png", "imagenes/ODS/2ODS.png", "imagenes/ODS/3ODS.png", "imagenes/ODS/4ODS.png", "imagenes/ODS/5ODS.png", "imagenes/ODS/6ODS.png", "imagenes/ODS/7ODS.png", "imagenes/ODS/8ODS.png", "imagenes/ODS/9ODS.png", "imagenes/ODS/10ODS.png", "imagenes/ODS/11ODS.png", "imagenes/ODS/12ODS.png", "imagenes/ODS/13ODS.png", "imagenes/ODS/14ODS.png", "imagenes/ODS/15ODS.png", "imagenes/ODS/16ODS.png"],
+          "Derechos Humanos": ["imagenes/ddhh/1_dignidad.png", "imagenes/ddhh/2_igualdad.png", "imagenes/ddhh/3_vida.png", "imagenes/ddhh/4_no_esclavitud.png", "imagenes/ddhh/5_no_tortura.png", "imagenes/ddhh/6_personalidad_juridica.png", "imagenes/ddhh/7_igualdad_ley.png", "imagenes/ddhh/8_derecho_reparacion.png", "imagenes/ddhh/9_no_detencion_ilegal.png", "imagenes/ddhh/10_juicio_justo.png", "imagenes/ddhh/11_inocencia.png", "imagenes/ddhh/12_intimidad.png", "imagenes/ddhh/13_libre_desplazamiento.png", "imagenes/ddhh/14_asilo.png", "imagenes/ddhh/15_nacionalidad.png", "imagenes/ddhh/16_familia.png", "imagenes/ddhh/17_propiedad.png", "imagenes/ddhh/18_libertad_religiosa.png", "imagenes/ddhh/19_libertad_expresion.png", "imagenes/ddhh/20_libertad_asociacion.png"] 
         };
+
         const MAX_TOTAL_DICE = 9;
         let numRandomDice = 3;
         let historial = [];
         let tiradaActualResultados = null;
         let tiradaCounter = 1;
+
         const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
-        function updateControlsAndState() { const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length; const totalDice = numRandomDice + numSpecificDice; totalDiceLaunchDisplay.textContent = `${totalDice} Dado${totalDice !== 1 ? 's' : ''}`; btnMinusRandom.disabled = numRandomDice <= 0; btnPlusRandom.disabled = totalDice >= MAX_TOTAL_DICE; const toggles = specificDiceSelection.querySelectorAll('input[type="checkbox"]'); const lock = totalDice >= MAX_TOTAL_DICE; toggles.forEach(t => { t.disabled = !t.checked && lock; }); }
-        function populateDiceToggles() { specificDiceSelection.innerHTML = ''; const frag = document.createDocumentFragment(); Object.keys(DADOS_FILOSOFICOS).forEach(name => { const id = `toggle-${name.replace(/\s+/g, '-')}`; const wrapper = document.createElement('div'); wrapper.className = 'dice-toggle-wrapper'; const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.id = id; checkbox.value = name; const label = document.createElement('label'); label.className = 'dice-toggle-label'; label.htmlFor = id; label.textContent = name; wrapper.append(checkbox, label); frag.appendChild(wrapper); }); specificDiceSelection.appendChild(frag); }
-        function init() { homeBtn2.addEventListener('click', goHome); btnPlusRandom.addEventListener('click', () => changeRandomDice(1)); btnMinusRandom.addEventListener('click', () => changeRandomDice(-1)); specificDiceSelection.addEventListener('change', updateControlsAndState); rollDiceBtn.addEventListener('click', rollDice); saveRollBtn.addEventListener('click', saveRoll); toggleHistoryBtn.addEventListener('click', () => { const open = historyPanel.classList.toggle('is-open'); toggleHistoryBtn.setAttribute('aria-expanded', String(open)); }); closeHistoryBtn.addEventListener('click', () => historyPanel.classList.remove('is-open')); document.addEventListener('keydown', (e) => { if (e.key === 'Escape') historyPanel.classList.remove('is-open'); }); clearHistoryBtn.addEventListener('click', () => { if (confirm('¿Borrar todo el historial?')) { historial = []; tiradaCounter = 1; guardarHistorialEnStorage(); renderizarHistorial(); } }); historyList.addEventListener('click', (e) => { const btn = e.target.closest('button'); if (!btn) return; const id = btn.dataset.id; if (!id) return; if (btn.classList.contains('load-btn')) cargarTirada(id); else if (btn.classList.contains('delete-btn')) { if (confirm('¿Eliminar esta tirada?')) { historial = historial.filter(t => t.id != id); guardarHistorialEnStorage(); renderizarHistorial(); } } }); cargarHistorial(); }
-        function startGame() { showScreen(diceChallengeScreen); numRandomDice = 3; randomDiceDisplay.textContent = numRandomDice; populateDiceToggles(); updateControlsAndState(); emojiDisplay.innerHTML = ''; consigna.textContent = '¡Configura tu tirada y pulsa «Lanzar dados»!'; saveRollSection.classList.add('hidden'); }
-        function changeRandomDice(delta) { const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length; const next = numRandomDice + delta; if (next + numSpecificDice <= MAX_TOTAL_DICE && next >= 0) { numRandomDice = next; randomDiceDisplay.textContent = numRandomDice; updateControlsAndState(); } }
-        function rollDice() { const totalDice = numRandomDice + specificDiceSelection.querySelectorAll('input:checked').length; if (totalDice === 0) { alert('Selecciona al menos un dado.'); return; } rollSound.currentTime = 0; rollSound.play().catch(()=>{}); emojiDisplay.innerHTML = ''; const results = []; for (let i = 0; i < numRandomDice; i++) results.push({ type: 'emoji', value: rand(SHARED_EMOJIS) }); specificDiceSelection.querySelectorAll('input:checked').forEach(t => { results.push({ type: 'image', value: rand(DADOS_FILOSOFICOS[t.value]) }); }); tiradaActualResultados = results; const frag = document.createDocumentFragment(); results.forEach((res, i) => { const card = document.createElement('div'); card.className = 'bg-white rounded-xl shadow-lg pop-in'; card.style.animationDelay = `${i * 0.1}s`; if (res.type === 'emoji') { card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`; } else { const img = new Image(); img.src = res.value; img.alt = 'Resultado de dado'; img.loading = 'lazy'; card.appendChild(img); } frag.appendChild(card); }); emojiDisplay.appendChild(frag); consigna.textContent = '¡Aquí está tu resultado! Ponle un nombre y guárdalo.'; saveRollSection.classList.remove('hidden'); rollNameInput.value = ''; rollNameInput.focus({ preventScroll: true }); }
-        function saveRoll() { if (!tiradaActualResultados) return; const nombre = rollNameInput.value.trim(); const nueva = { id: Date.now(), name: nombre || `Tirada ${tiradaCounter}`, timestamp: new Date().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' }), results: tiradaActualResultados }; historial.push(nueva); if (!nombre) tiradaCounter++; guardarHistorialEnStorage(); renderizarHistorial(); saveRollSection.classList.add('hidden'); tiradaActualResultados = null; consigna.textContent = '¡Tirada guardada en el historial!'; }
-        function cargarHistorial() { try { const guardado = localStorage.getItem('emojiDiceHistory'); const contadorGuardado = localStorage.getItem('emojiDiceCounter'); if (guardado) historial = JSON.parse(guardado) || []; if (contadorGuardado) tiradaCounter = parseInt(contadorGuardado, 10) || 1; } catch { historial = []; tiradaCounter = 1; } renderizarHistorial(); }
-        function guardarHistorialEnStorage() { try { localStorage.setItem('emojiDiceHistory', JSON.stringify(historial)); localStorage.setItem('emojiDiceCounter', String(tiradaCounter)); } catch {} }
-        function renderizarHistorial() { historyList.innerHTML = ''; if (historial.length === 0) { historyList.innerHTML = '<p class="text-gray-500 text-center mt-4">No hay tiradas guardadas.</p>'; return; } const frag = document.createDocumentFragment(); [...historial].reverse().forEach(tirada => { const item = document.createElement('div'); item.className = 'p-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm'; item.innerHTML = `<div class="flex justify-between items-start"><div><p class="font-bold text-gray-800">${tirada.name}</p><p class="text-xs text-gray-500">${tirada.timestamp}</p></div><div class="flex items-center gap-3"><button class="load-btn font-semibold text-sm text-blue-600 hover:text-blue-800" data-id="${tirada.id}">Cargar</button><button class="delete-btn text-red-500 hover:text-red-700 text-lg" data-id="${tirada.id}" aria-label="Eliminar">🗑️</button></div></div>`; frag.appendChild(item); }); historyList.appendChild(frag); }
-        function cargarTirada(id) { const t = historial.find(x => x.id == id); if (!t) return; saveRollSection.classList.add('hidden'); emojiDisplay.innerHTML = ''; const frag = document.createDocumentFragment(); t.results.forEach((res, i) => { const card = document.createElement('div'); card.className = 'bg-white rounded-xl shadow-lg pop-in'; card.style.animationDelay = `${i*0.1}s`; if (res.type === 'emoji') { card.innerHTML = `<span class="emoji-shadow">${res.value}</span>`; } else { const img = new Image(); img.src = res.value; img.alt = 'Resultado de dado'; img.loading = 'lazy'; card.appendChild(img); } frag.appendChild(card); }); emojiDisplay.appendChild(frag); consigna.textContent = `Viendo "${t.name}" del ${t.timestamp}.`; historyPanel.classList.remove('is-open'); }
+
+        function updateControlsAndState() {
+          const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
+          const totalDice = numRandomDice + numSpecificDice;
+          totalDiceLaunchDisplay.textContent = `${totalDice} Dado${totalDice !== 1 ? 's' : ''}`;
+          btnMinusRandom.disabled = numRandomDice <= 0;
+          btnPlusRandom.disabled = totalDice >= MAX_TOTAL_DICE;
+          const toggles = specificDiceSelection.querySelectorAll('input[type="checkbox"]');
+          const lock = totalDice >= MAX_TOTAL_DICE;
+          toggles.forEach(t => { t.disabled = !t.checked && lock; });
+        }
+
+        function populateDiceToggles() {
+          specificDiceSelection.innerHTML = '';
+          const frag = document.createDocumentFragment();
+          Object.keys(DADOS_FILOSOFICOS).forEach(name => {
+            const safeId = name
+              .normalize('NFD').replace(/[\u0300-\u036f]/g,'')  // quita tildes
+              .replace(/[^a-zA-Z0-9 ]/g,'')                     // quita símbolos raros
+              .trim().replace(/\s+/g,'-');                      // espacios -> guiones
+            const id = `toggle-${safeId}`;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'dice-toggle-wrapper';
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = id;
+            checkbox.value = name;
+            const label = document.createElement('label');
+            label.className = 'dice-toggle-label';
+            label.htmlFor = id;
+            label.textContent = name;
+            wrapper.append(checkbox, label);
+            frag.appendChild(wrapper);
+          });
+          specificDiceSelection.appendChild(frag);
+        }
+
+        function init() {
+          homeBtn2.addEventListener('click', goHome);
+          btnPlusRandom.addEventListener('click', () => changeRandomDice(1));
+          btnMinusRandom.addEventListener('click', () => changeRandomDice(-1));
+          specificDiceSelection.addEventListener('change', updateControlsAndState);
+          rollDiceBtn.addEventListener('click', rollDice);
+          saveRollBtn.addEventListener('click', saveRoll);
+
+          toggleHistoryBtn.addEventListener('click', () => {
+            const open = historyPanel.classList.toggle('is-open');
+            toggleHistoryBtn.setAttribute('aria-expanded', String(open));
+          });
+          closeHistoryBtn.addEventListener('click', () => historyPanel.classList.remove('is-open'));
+          document.addEventListener('keydown', (e) => { if (e.key === 'Escape') historyPanel.classList.remove('is-open'); });
+
+          clearHistoryBtn.addEventListener('click', () => {
+            if (confirm('¿Borrar todo el historial?')) {
+              historial = [];
+              tiradaCounter = 1;
+              guardarHistorialEnStorage();
+              renderizarHistorial();
+            }
+          });
+
+          historyList.addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            const id = btn.dataset.id;
+            if (!id) return;
+            if (btn.classList.contains('load-btn')) cargarTirada(id);
+            else if (btn.classList.contains('delete-btn')) {
+              if (confirm('¿Eliminar esta tirada?')) {
+                historial = historial.filter(t => t.id != id);
+                guardarHistorialEnStorage();
+                renderizarHistorial();
+              }
+            }
+          });
+
+          cargarHistorial();
+        }
+
+        function startGame() {
+          showScreen(diceChallengeScreen);
+          numRandomDice = 3;
+          randomDiceDisplay.textContent = numRandomDice;
+          populateDiceToggles();
+          updateControlsAndState();
+          emojiDisplay.innerHTML = '';
+          consigna.textContent = '¡Configura tu tirada y pulsa «Lanzar dados»!';
+          saveRollSection.classList.add('hidden');
+        }
+
+        function changeRandomDice(delta) {
+          const numSpecificDice = specificDiceSelection.querySelectorAll('input:checked').length;
+          const next = numRandomDice + delta;
+          if (next + numSpecificDice <= MAX_TOTAL_DICE && next >= 0) {
+            numRandomDice = next;
+            randomDiceDisplay.textContent = numRandomDice;
+            updateControlsAndState();
+          }
+        }
+
+        function rollDice() {
+          const totalDice = numRandomDice + specificDiceSelection.querySelectorAll('input:checked').length;
+          if (totalDice === 0) {
+            alert('Selecciona al menos un dado.');
+            return;
+          }
+          rollSound.currentTime = 0;
+          rollSound.play().catch(()=>{});
+          emojiDisplay.innerHTML = '';
+          const results = [];
+          for (let i = 0; i < numRandomDice; i++) results.push({ type: 'emoji', value: rand(SHARED_EMOJIS) });
+          specificDiceSelection.querySelectorAll('input:checked').forEach(t => {
+            results.push({ type: 'image', value: rand(DADOS_FILOSOFICOS[t.value]) });
+          });
+          tiradaActualResultados = results;
+
+          const frag = document.createDocumentFragment();
+          results.forEach((res, i) => frag.appendChild(createResultCard(res, i)));
+          emojiDisplay.appendChild(frag);
+
+          consigna.textContent = '¡Aquí está tu resultado! Ponle un nombre y guárdalo.';
+          saveRollSection.classList.remove('hidden');
+          rollNameInput.value = '';
+          rollNameInput.focus({ preventScroll: true });
+        }
+
+        function saveRoll() {
+          if (!tiradaActualResultados) return;
+          const nombre = rollNameInput.value.trim();
+          const nueva = {
+            id: Date.now(),
+            name: nombre || `Tirada ${tiradaCounter}`,
+            timestamp: new Date().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' }),
+            results: tiradaActualResultados
+          };
+          historial.push(nueva);
+          if (!nombre) tiradaCounter++;
+          guardarHistorialEnStorage();
+          renderizarHistorial();
+          saveRollSection.classList.add('hidden');
+          tiradaActualResultados = null;
+          consigna.textContent = '¡Tirada guardada en el historial!';
+        }
+
+        function cargarHistorial() {
+          try {
+            const guardado = localStorage.getItem('emojiDiceHistory');
+            const contadorGuardado = localStorage.getItem('emojiDiceCounter');
+            if (guardado) historial = JSON.parse(guardado) || [];
+            if (contadorGuardado) tiradaCounter = parseInt(contadorGuardado, 10) || 1;
+          } catch {
+            historial = [];
+            tiradaCounter = 1;
+          }
+          renderizarHistorial();
+        }
+
+        function guardarHistorialEnStorage() {
+          try {
+            localStorage.setItem('emojiDiceHistory', JSON.stringify(historial));
+            localStorage.setItem('emojiDiceCounter', String(tiradaCounter));
+          } catch {}
+        }
+
+        function renderizarHistorial() {
+          historyList.innerHTML = '';
+          if (historial.length === 0) {
+            historyList.innerHTML = '<p class="text-gray-500 text-center mt-4">No hay tiradas guardadas.</p>';
+            return;
+          }
+          const frag = document.createDocumentFragment();
+          [...historial].reverse().forEach(tirada => {
+            const item = document.createElement('div');
+            item.className = 'p-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm';
+            item.innerHTML = `
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="font-bold text-gray-800">${tirada.name}</p>
+                  <p class="text-xs text-gray-500">${tirada.timestamp}</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <button class="load-btn font-semibold text-sm text-blue-600 hover:text-blue-800" data-id="${tirada.id}">Cargar</button>
+                  <button class="delete-btn text-red-500 hover:text-red-700 text-lg" data-id="${tirada.id}" aria-label="Eliminar">🗑️</button>
+                </div>
+              </div>`;
+            frag.appendChild(item);
+          });
+          historyList.appendChild(frag);
+        }
+
+        function cargarTirada(id) {
+          const t = historial.find(x => x.id == id);
+          if (!t) return;
+          saveRollSection.classList.add('hidden');
+          emojiDisplay.innerHTML = '';
+          const frag = document.createDocumentFragment();
+          t.results.forEach((res, i) => frag.appendChild(createResultCard(res, i)));
+          emojiDisplay.appendChild(frag);
+          consigna.textContent = `Viendo "${t.name}" del ${t.timestamp}.`;
+          historyPanel.classList.remove('is-open');
+        }
+
         return { init, startGame };
       })();
 
@@ -544,12 +775,75 @@
         const text1 = $('tot-text1');
         const emoji2 = $('tot-emoji2');
         const text2 = $('tot-text2');
-        const comparisons = [ { option1: { text: 'Libertad', emoji: '🗽' }, option2: { text: 'Determinismo', emoji: '🧬' } }, { option1: { text: 'Razón', emoji: '🧠' }, option2: { text: 'Emoción', emoji: '❤️' } }, { option1: { text: 'Fines', emoji: '🎯' }, option2: { text: 'Medios', emoji: '🛠' } }, { option1: { text: 'Naturaleza', emoji: '🌳' }, option2: { text: 'Cultura', emoji: '🏰' } }, { option1: { text: 'Tradición', emoji: '⛩' }, option2: { text: 'Progreso', emoji: '📱' } }, { option1: { text: 'Seguridad', emoji: '🛡' }, option2: { text: 'Libertad', emoji: '🗽' } }, { option1: { text: 'Progreso tecnológico', emoji: '🤖' }, option2: { text: 'Preservar medio ambiente', emoji: '🌳' } }, { option1: { text: 'Nacionalismo', emoji: '🏳️‍🌈' }, option2: { text: 'Cosmopolitismo', emoji: '🌍' } }, { option1: { text: 'Derechos individuales', emoji: '🙋🏽‍♀️' }, option2: { text: 'Bien común', emoji: '👥' } }, { option1: { text: 'Datos abiertos', emoji: '📂' }, option2: { text: 'Privacidad', emoji: '🔒' } }, { option1: { text: 'Ciencia', emoji: '🔬' }, option2: { text: 'Religión', emoji: '⛪️' } }, { option1: { text: 'Inteligencia artificial', emoji: '🤖' }, option2: { text: 'Inteligencia humana', emoji: '🧠' } }, { option1: { text: 'Competencia', emoji: '🏁' }, option2: { text: 'Colaboración', emoji: '🤝' } }, { option1: { text: 'Relativismo moral', emoji: '🌈' }, option2: { text: 'Universlaismo moral', emoji: '🌐' } }, { option1: { text: 'Igualdad⚖', emoji: '⚖️' }, option2: { text: 'Meritocracia', emoji: '🏆' } }, { option1: { text: 'Democracia directa', emoji: '🗳' }, option2: { text: 'Democracia representativa', emoji: '🗣' } }, { option1: { text: 'Justicia retributiva', emoji: '🔨' }, option2: { text: 'Justicia restaurativa', emoji: '🤲🏼' } }, { option1: { text: 'Bien común', emoji: '🤝' }, option2: { text: 'Interés individual', emoji: '🧍🏽' } }, { option1: { text: 'Alma', emoji: '👻' }, option2: { text: 'Cuerpo', emoji: '🧠' } }, { option1: { text: 'Hombre bueno por naturaleza', emoji: '😇' }, option2: { text: 'Hombre malo por naturaleza', emoji: '😈' } }, { option1: { text: 'Realidad objetiva', emoji: '🌍' }, option2: { text: 'Realidad subjetiva', emoji: '🌤' } }, { option1: { text: 'Orden', emoji: '📏' }, option2: { text: 'Caos', emoji: '🌪' } }, { option1: { text: 'Pacifismo', emoji: '🕊' }, option2: { text: 'Belicismo', emoji: '⚔️' } }, { option1: { text: 'Optimismo', emoji: '☀️' }, option2: { text: 'Pesimismo', emoji: '🌧️' } }, { option1: { text: 'Libertad de expresión', emoji: '🗣' }, option2: { text: 'Censura', emoji: '🚫' } }, { option1: { text: 'Individualismo', emoji: '🙋‍♂️' }, option2: { text: 'Colectivismo', emoji: '👥' } }, { option1: { text: 'Materialismo', emoji: '💰' }, option2: { text: 'Espiritualismo', emoji: '✨' } }, { option1: { text: 'Justicia social', emoji: '⚖️' }, option2: { text: 'Libre mercado', emoji: '💹' } }, { option1: { text: 'Libertad académica', emoji: '🎓' }, option2: { text: 'Control ideológico', emoji: '🛑' } }];
+
+        const comparisons = [
+          { option1: { text: 'Libertad', emoji: '🗽' }, option2: { text: 'Determinismo', emoji: '🧬' } },
+          { option1: { text: 'Razón', emoji: '🧠' }, option2: { text: 'Emoción', emoji: '❤️' } },
+          { option1: { text: 'Fines', emoji: '🎯' }, option2: { text: 'Medios', emoji: '🛠' } },
+          { option1: { text: 'Naturaleza', emoji: '🌳' }, option2: { text: 'Cultura', emoji: '🏰' } },
+          { option1: { text: 'Tradición', emoji: '⛩' }, option2: { text: 'Progreso', emoji: '📱' } },
+          { option1: { text: 'Seguridad', emoji: '🛡' }, option2: { text: 'Libertad', emoji: '🗽' } },
+          { option1: { text: 'Progreso tecnológico', emoji: '🤖' }, option2: { text: 'Preservar medio ambiente', emoji: '🌳' } },
+          { option1: { text: 'Nacionalismo', emoji: '🏳️' }, option2: { text: 'Cosmopolitismo', emoji: '🌍' } },
+          { option1: { text: 'Derechos individuales', emoji: '🙋🏽‍♀️' }, option2: { text: 'Bien común', emoji: '👥' } },
+          { option1: { text: 'Datos abiertos', emoji: '📂' }, option2: { text: 'Privacidad', emoji: '🔒' } },
+          { option1: { text: 'Ciencia', emoji: '🔬' }, option2: { text: 'Religión', emoji: '⛪️' } },
+          { option1: { text: 'Inteligencia artificial', emoji: '🤖' }, option2: { text: 'Inteligencia humana', emoji: '🧠' } },
+          { option1: { text: 'Competencia', emoji: '🏁' }, option2: { text: 'Colaboración', emoji: '🤝' } },
+          { option1: { text: 'Relativismo moral', emoji: '🌈' }, option2: { text: 'Universalismo moral', emoji: '🌐' } },
+          { option1: { text: 'Igualdad', emoji: '⚖️' }, option2: { text: 'Meritocracia', emoji: '🏆' } },
+          { option1: { text: 'Democracia directa', emoji: '🗳' }, option2: { text: 'Democracia representativa', emoji: '🗣' } },
+          { option1: { text: 'Justicia retributiva', emoji: '🔨' }, option2: { text: 'Justicia restaurativa', emoji: '🤲🏼' } },
+          { option1: { text: 'Bien común', emoji: '🤝' }, option2: { text: 'Interés individual', emoji: '🧍🏽' } },
+          { option1: { text: 'Alma', emoji: '👻' }, option2: { text: 'Cuerpo', emoji: '💪' } },
+          { option1: { text: 'Hombre bueno por naturaleza', emoji: '😇' }, option2: { text: 'Hombre malo por naturaleza', emoji: '😈' } },
+          { option1: { text: 'Realidad objetiva', emoji: '🌍' }, option2: { text: 'Realidad subjetiva', emoji: '🌤' } },
+          { option1: { text: 'Orden', emoji: '📏' }, option2: { text: 'Caos', emoji: '🌪' } },
+          { option1: { text: 'Pacifismo', emoji: '🕊' }, option2: { text: 'Belicismo', emoji: '⚔️' } },
+          { option1: { text: 'Optimismo', emoji: '☀️' }, option2: { text: 'Pesimismo', emoji: '🌧️' } },
+          { option1: { text: 'Libertad de expresión', emoji: '🗣' }, option2: { text: 'Censura', emoji: '🚫' } },
+          { option1: { text: 'Individualismo', emoji: '🙋‍♂️' }, option2: { text: 'Colectivismo', emoji: '👥' } },
+          { option1: { text: 'Materialismo', emoji: '💰' }, option2: { text: 'Espiritualismo', emoji: '✨' } },
+          { option1: { text: 'Justicia social', emoji: '⚖️' }, option2: { text: 'Libre mercado', emoji: '💹' } },
+          { option1: { text: 'Libertad académica', emoji: '🎓' }, option2: { text: 'Control ideológico', emoji: '🛑' } }
+        ];
         let usedCombinations = new Set();
-        function showNewChallenge() { if (usedCombinations.size >= comparisons.length) { usedCombinations.clear(); } let challenge, randomIndex; do { randomIndex = Math.floor(Math.random() * comparisons.length); } while (usedCombinations.has(randomIndex)); usedCombinations.add(randomIndex); challenge = comparisons[randomIndex]; emoji1.textContent = challenge.option1.emoji; text1.textContent = challenge.option1.text; emoji2.textContent = challenge.option2.emoji; text2.textContent = challenge.option2.text; [card1, card2].forEach(c => c.classList.remove('pop-in')); void card1.offsetWidth; [card1, card2].forEach(c => c.classList.add('pop-in')); }
-        function startGame() { showScreen(thisOrThatScreen); usedCombinations.clear(); showNewChallenge(); music.play().then(() => { musicToggleBtn.textContent = '🔈'; }).catch(() => { musicToggleBtn.textContent = '�'; }); }
-        function stopGame() { music.pause(); music.currentTime = 0; goHome(); }
-        function init() { homeBtn.addEventListener('click', stopGame); newChallengeBtn.addEventListener('click', showNewChallenge); musicToggleBtn.addEventListener('click', () => { if (music.paused) { music.play(); musicToggleBtn.textContent = '🔈'; } else { music.pause(); musicToggleBtn.textContent = '🔇'; } }); }
+
+        function showNewChallenge() {
+          if (usedCombinations.size >= comparisons.length) { usedCombinations.clear(); }
+          let randomIndex;
+          do { randomIndex = Math.floor(Math.random() * comparisons.length); }
+          while (usedCombinations.has(randomIndex));
+          usedCombinations.add(randomIndex);
+          const challenge = comparisons[randomIndex];
+          emoji1.textContent = challenge.option1.emoji; text1.textContent = challenge.option1.text;
+          emoji2.textContent = challenge.option2.emoji; text2.textContent = challenge.option2.text;
+          [card1, card2].forEach(c => c.classList.remove('pop-in'));
+          void card1.offsetWidth; // fuerza reflow
+          [card1, card2].forEach(c => c.classList.add('pop-in'));
+        }
+
+        function startGame() {
+          showScreen(thisOrThatScreen);
+          usedCombinations.clear();
+          showNewChallenge();
+          music.play()
+            .then(() => { musicToggleBtn.textContent = '🔈'; })
+            .catch(() => { musicToggleBtn.textContent = '🔇'; }); // no carácter raro
+        }
+
+        function stopGame() {
+          music.pause(); music.currentTime = 0; goHome();
+        }
+
+        function init() {
+          homeBtn.addEventListener('click', stopGame);
+          newChallengeBtn.addEventListener('click', showNewChallenge);
+          musicToggleBtn.addEventListener('click', () => {
+            if (music.paused) { music.play().then(()=>{ musicToggleBtn.textContent='🔈'; }).catch(()=>{ /* ignore */ }); }
+            else { music.pause(); musicToggleBtn.textContent = '🔇'; }
+          });
+        }
         return { init, startGame };
       })();
 
@@ -569,105 +863,129 @@
         const stepsSection = $('ed-steps-section');
         const stepsContainer = $('ed-steps-container');
         const emojiMainBlock = $('ed-emoji-main-block');
-        
+
         let numEmojis = 3;
         let activeWords = [];
         const DEFAULT_WORDS = [ 'pensar','crear','escribir','leer','reír','bailar','volar','nadar','hablar','escuchar','mirar','encontrar','ayudar','usar','abrir','cerrar','empezar','parar','caminar','cambiar','imaginar','compartir','ganar','construir','dibujar','cantar','explorar','descubrir','resolver','visitar','viajar','cocinar','ver','aprender', 'feliz','triste','grande','pequeño','rápido','lento','rojo','azul','verde','amarillo','soleado','lluvioso','nublado','valiente','fuerte','amable','listo','delicioso','bonito','asombroso','interesante','aburrido','nuevo','viejo','joven','ruidoso','silencioso','brillante','oscuro','pesado','ligero','bueno','malo','emocionado','cansado','enfadado','hambriento','sediento','frío','caliente','divertido','misterioso','mágico','gigante','minúsculo','colorido','invisible','extraño','fantástico','genial','maravilloso','pacífico','secreto','antiguo','moderno','rápidamente','lentamente','de repente','finalmente','después','antes','cuando','mientras','si','o','también','porque','entonces','cerca','lejos','encima','debajo','dentro','fuera' ];
-        const stepsData = [ { title:'PASO 1/3: PENSAR 🧠', instructions:'Comenta ideas con tu pareja/grupo.' }, { title:'PASO 2/3: CREAR ✍️',  instructions:'Escribid el texto juntos.' }, { title:'PASO 3/3: COMPARTIR 🎤', instructions:'¡Presentad vuestro texto a la clase!' } ];
+        const stepsData = [ 
+          { title:'PASO 1/3: PENSAR 🧠', instructions:'Comenta ideas con tu pareja/grupo.' }, 
+          { title:'PASO 2/3: CREAR ✍️',  instructions:'Escribid el texto juntos.' }, 
+          { title:'PASO 3/3: COMPARTIR 🎤', instructions:'¡Presentad vuestro texto a la clase!' } 
+        ];
 
         let audioCtx;
-        const beep = (f=880, ms=120)=>{ try{ audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.type='sine'; osc.frequency.value=f; gain.gain.setValueAtTime(0.0001,audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.2,audioCtx.currentTime+0.01); gain.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+ms/1000); osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + ms/1000 + 0.02); }catch{} };
-        
+        const beep = (f=880, ms=120)=>{
+          try{
+            audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type='sine'; osc.frequency.value=f;
+            gain.gain.setValueAtTime(0.0001,audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.2,audioCtx.currentTime+0.01);
+            gain.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+ms/1000);
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.start(); osc.stop(audioCtx.currentTime + ms/1000 + 0.02);
+          }catch{}
+        };
+
         const rand = (arr)=> arr[Math.floor(Math.random()*arr.length)];
         const parseCustomWords = (raw)=> (raw||'').split(/[\n,;]+/g).map(w=>w.trim()).filter(Boolean).filter(w=>w.length<=30);
         const setEmojiGridCols = (n)=>{ emojiDisplay.style.gridTemplateColumns = `repeat(${Math.min(n,6)}, minmax(64px,1fr))`; };
 
         const changeEmojiCount = (delta) => {
-            const newValue = numEmojis + delta;
-            if (newValue >= 3 && newValue <= 9) {
-                numEmojis = newValue;
-                emojiCountDisplay.textContent = numEmojis;
-                btnMinus.disabled = numEmojis <= 3;
-                btnPlus.disabled = numEmojis >= 9;
-            }
+          const newValue = numEmojis + delta;
+          if (newValue >= 3 && newValue <= 9) {
+            numEmojis = newValue;
+            emojiCountDisplay.textContent = numEmojis;
+            btnMinus.disabled = numEmojis <= 3;
+            btnPlus.disabled = numEmojis >= 9;
+          }
         };
 
         const resetSteps = ()=>{
-            const grouping = groupingSelect.value;
-            if(grouping==='Individual'){
-                stepsContainer.classList.add('hidden');
-                emojiMainBlock.classList.remove('md:w-3/5');
-                emojiMainBlock.classList.add('w-full');
-                return;
+          const grouping = groupingSelect.value;
+          if(grouping==='Individual'){
+            stepsContainer.classList.add('hidden');
+            emojiMainBlock.classList.remove('md:w-3/5');
+            emojiMainBlock.classList.add('w-full');
+            return;
+          }
+          stepsContainer.classList.remove('hidden');
+          emojiMainBlock.classList.remove('w-full');
+          emojiMainBlock.classList.add('md:w-3/5');
+          stepsSection.innerHTML = `
+            <div class="text-center">
+              <h3 id="ed-step-title" class="text-2xl sm:text-3xl font-bold text-pink-600"></h3>
+            </div>
+            <div class="text-center flex-grow flex items-center justify-center p-2 min-h-[6rem]">
+              <p id="ed-step-instructions" class="text-gray-700 text-base sm:text-lg font-medium"></p>
+            </div>
+            <div class="flex justify-center">
+              <button id="ed-next-step-btn" class="py-2 px-6 rounded-xl shadow-md text-white font-semibold" style="background-image:linear-gradient(to right,#a2d2ff,#bde0fe);">➡️ Siguiente paso</button>
+            </div>`;
+          let currentStep=1;
+          const update=()=>{
+            const d = stepsData[currentStep-1];
+            $('ed-step-title').textContent = d.title;
+            $('ed-step-instructions').textContent = d.instructions;
+            $('ed-next-step-btn').textContent = (currentStep===3)?'🎉 Terminar':'➡️ Siguiente paso';
+          };
+          $('ed-next-step-btn').addEventListener('click', ()=>{
+            if(currentStep<3){ currentStep++; update(); }
+            else{
+              stepsContainer.classList.add('hidden');
+              emojiMainBlock.classList.remove('md:w-3/5');
+              emojiMainBlock.classList.add('w-full');
             }
-            stepsContainer.classList.remove('hidden');
-            emojiMainBlock.classList.remove('w-full');
-            emojiMainBlock.classList.add('md:w-3/5');
-            stepsSection.innerHTML = ` <div class="text-center"><h3 id="ed-step-title" class="text-2xl sm:text-3xl font-bold text-pink-600"></h3></div> <div class="text-center flex-grow flex items-center justify-center p-2 min-h-[6rem]"> <p id="ed-step-instructions" class="text-gray-700 text-base sm:text-lg font-medium"></p> </div> <div class="flex justify-center"> <button id="ed-next-step-btn" class="py-2 px-6 rounded-xl shadow-md text-white font-semibold" style="background-image:linear-gradient(to right,#a2d2ff,#bde0fe);">➡️ Siguiente paso</button> </div>`;
-            let currentStep=1;
-            const update=()=>{
-                const d = stepsData[currentStep-1];
-                $('ed-step-title').textContent = d.title;
-                $('ed-step-instructions').textContent = d.instructions;
-                $('ed-next-step-btn').textContent = (currentStep===3)?'🎉 Terminar':'➡️ Siguiente paso';
-            };
-            $('ed-next-step-btn').addEventListener('click', ()=>{
-                if(currentStep<3){ currentStep++; update(); }
-                else{
-                    stepsContainer.classList.add('hidden');
-                    emojiMainBlock.classList.remove('md:w-3/5');
-                    emojiMainBlock.classList.add('w-full');
-                }
-            });
-            update();
+          });
+          update();
         };
 
         const roll = ()=>{
-            const custom = parseCustomWords(customWordsTA.value);
-            activeWords = custom.length ? custom : [...DEFAULT_WORDS];
-            
-            const n = numEmojis;
-            emojiDisplay.innerHTML = '';
-            setEmojiGridCols(n);
-            const frag = document.createDocumentFragment();
-            for(let i=0;i<n;i++){
-                const e = rand(SHARED_EMOJIS);
-                const card = document.createElement('div');
-                card.className='bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in';
-                card.style.animationDelay = `${i*0.06}s`;
-                card.innerHTML = `<span class="text-5xl sm:text-7xl" style="text-shadow:0 4px 10px rgba(0,0,0,.15);">${e}</span>`;
-                frag.appendChild(card);
-            }
-            emojiDisplay.appendChild(frag);
-            const word = rand(activeWords);
-            wordDisplay.textContent = word;
-            wordDisplayCard.classList.remove('hidden');
-            consigna.textContent = `Usa los ${n} emojis y la palabra «${word}» para crear una frase.`;
-            beep(900,110);
-            resetSteps();
+          const custom = parseCustomWords(customWordsTA.value);
+          activeWords = custom.length ? custom : [...DEFAULT_WORDS];
+
+          const n = numEmojis;
+          emojiDisplay.innerHTML = '';
+          setEmojiGridCols(n);
+          const frag = document.createDocumentFragment();
+          for(let i=0;i<n;i++){
+            const e = rand(SHARED_EMOJIS);
+            const card = document.createElement('div');
+            card.className='bg-white rounded-2xl shadow-lg p-2 sm:p-4 flex items-center justify-center aspect-square pop-in';
+            card.style.animationDelay = `${i*0.06}s`;
+            card.innerHTML = `<span class="text-5xl sm:text-7xl" style="text-shadow:0 4px 10px rgba(0,0,0,.15);">${e}</span>`;
+            frag.appendChild(card);
+          }
+          emojiDisplay.appendChild(frag);
+          const word = rand(activeWords);
+          wordDisplay.textContent = word;
+          wordDisplayCard.classList.remove('hidden');
+          consigna.textContent = `Usa los ${n} emojis y la palabra «${word}» para crear una frase.`;
+          beep(900,110);
+          resetSteps();
         };
-        
+
         function init() {
-            homeBtn.addEventListener('click', goHome);
-            btnPlus.addEventListener('click', () => changeEmojiCount(1));
-            btnMinus.addEventListener('click', () => changeEmojiCount(-1));
-            groupingSelect.addEventListener('change', resetSteps);
-            rollBtn.addEventListener('click', roll);
+          homeBtn.addEventListener('click', goHome);
+          btnPlus.addEventListener('click', () => changeEmojiCount(1));
+          btnMinus.addEventListener('click', () => changeEmojiCount(-1));
+          groupingSelect.addEventListener('change', resetSteps);
+          rollBtn.addEventListener('click', roll);
         }
 
         function startGame() {
-            showScreen(emojiDiceScreen);
-            // Resetear a valores por defecto al iniciar
-            numEmojis = 3;
-            emojiCountDisplay.textContent = '3';
-            btnMinus.disabled = true;
-            btnPlus.disabled = false;
-            groupingSelect.value = 'Individual';
-            customWordsTA.value = '';
-            emojiDisplay.innerHTML = '<div class="text-center text-gray-400 p-6 col-span-3">Configura tu partida y pulsa “Tirar dados” para empezar</div>';
-            wordDisplayCard.classList.add('hidden');
-            consigna.textContent = '';
-            resetSteps();
+          showScreen(emojiDiceScreen);
+          numEmojis = 3;
+          emojiCountDisplay.textContent = '3';
+          btnMinus.disabled = true;
+          btnPlus.disabled = false;
+          groupingSelect.value = 'Individual';
+          customWordsTA.value = '';
+          emojiDisplay.innerHTML = '<div class="text-center text-gray-400 p-6 col-span-3">Configura tu partida y pulsa “Tirar dados” para empezar</div>';
+          wordDisplayCard.classList.add('hidden');
+          consigna.textContent = '';
+          resetSteps();
         }
 
         return { init, startGame };
@@ -705,242 +1023,222 @@
         const newMessageSound = new Audio('https://github.com/TamaraLlorens/warmup-assets/raw/refs/heads/main/button_06-190439.mp3');
 
         const EMOJI_CIPHER = { 'A': '🐶', 'B': '🍌', 'C': '🐱', 'D': '🦖', 'E': '🍎', 'F': '🐸', 'G': '🌈', 'H': '🐹', 'I': '🍦', 'J': '🎈', 'K': '🐨', 'L': '🍋', 'M': '🐵', 'N': '🍉', 'O': '🐙', 'P': '🐧', 'Q': '🧁', 'R': '🤖', 'S': '☀️', 'T': '🧸', 'U': '🦄', 'V': '🍇', 'W': '🐺', 'X': '❌', 'Y': '🌻', 'Z': '🦓' };
-        const EMOJI_NAMES = { '🐶': 'dog', '🍌': 'banana', '🐱': 'cat', '🦖': 'dinosaur', '🍎': 'apple', '🐸': 'frog', '🌈': 'rainbow', '🐹': 'hamster', '🍦': 'ice cream', '🎈': 'balloon', '🐨': 'koala', '🍋': 'lemon', '🐵': 'monkey', '🍉': 'watermelon', '🐙': 'octopus', '🐧': 'penguin', '🧁': 'cupcake', '🤖': 'robot', '☀️': 'sun', '🧸': 'teddy bear', '🦄': 'unicorn', '🍇': 'grapes', '🐺': 'wolf', '❌': 'cross', '🌻': 'sunflower', '🦓': 'zebra' };
+        const EMOJI_NAMES = { '🐶': 'perro', '🍌': 'banana', '🐱': 'gato', '🦖': 'dinosaurio', '🍎': 'manzana', '🐸': 'rana', '🌈': 'arcoíris', '🐹': 'hámster', '🍦': 'helado', '🎈': 'globo', '🐨': 'koala', '🍋': 'limón', '🐵': 'mono', '🍉': 'sandía', '🐙': 'pulpo', '🐧': 'pingüino', '🧁': 'magdalena', '🤖': 'robot', '☀️': 'sol', '🧸': 'osito', '🦄': 'unicornio', '🍇': 'uvas', '🐺': 'lobo', '❌': 'equis', '🌻': 'girasol', '🦓': 'cebra' };
         const SECRET_WORDS = ["KANT", "PLATON", "ARISTOTELES", "NIETZSCHE", "SARTRE", "DESCARTES", "SPINOZA", "HUME", "LOCKE", "HEGEL"];
         const SECRET_SENTENCES = ["SOLO SE QUE NO SE NADA", "PIENSO LUEGO EXISTO", "EL HOMBRE ES UN LOBO PARA EL HOMBRE", "DIOS HA MUERTO", "LA EXISTENCIA PRECEDE A LA ESENCIA", "EL FIN JUSTIFICA LOS MEDIOS", "CONOCETE A TI MISMO", "VIVIR ES SUFRIR", "LA VIDA ES ABSURDA"];
-        
+
         let currentSecretMessage = '';
         let currentLevel = '';
 
         function startGame() {
-            showScreen(secretMessageScreen);
-            mainAppContainer.classList.remove('hidden');
-            mainAppContainer.classList.add('flex');
-            updateSecretMessageLayout();
+          showScreen(secretMessageScreen);
+          mainAppContainer.classList.remove('hidden');
+          mainAppContainer.classList.add('flex');
+          updateSecretMessageLayout();
         }
-        
+
         const updateSecretMessageLayout = () => {
-            const isMobile = window.innerWidth < 768; // md
-            if (isMobile) {
-                showCodeBtn.classList.remove('hidden');
-                if (!codeTablePanel.dataset.toggled) {
-                    codeTablePanel.classList.add('hidden');
-                }
-            } else {
-                showCodeBtn.classList.add('hidden');
-                codeTablePanel.classList.remove('hidden');
-                codeTablePanel.classList.add('flex');
+          const isMobile = window.innerWidth < 768; // md
+          if (isMobile) {
+            showCodeBtn.classList.remove('hidden');
+            if (!codeTablePanel.dataset.toggled) {
+              codeTablePanel.classList.add('hidden');
             }
+          } else {
+            showCodeBtn.classList.add('hidden');
+            codeTablePanel.classList.remove('hidden');
+            codeTablePanel.classList.add('flex');
+          }
         };
 
         const initSpeech = () => {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.getVoices();
-            }
+          if ('speechSynthesis' in window) { window.speechSynthesis.getVoices(); }
         };
 
         const switchView = (view) => {
-            const isDecode = view === 'decode';
-            decodeSection.classList.toggle('hidden', !isDecode);
-            encodeSection.classList.toggle('hidden', isDecode);
-            tabDecode.classList.toggle('tab-active', isDecode);
-            tabEncode.classList.toggle('tab-active', !isDecode);
-            if (isDecode) {
-                showLevelSelection();
-            }
+          const isDecode = view === 'decode';
+          decodeSection.classList.toggle('hidden', !isDecode);
+          encodeSection.classList.toggle('hidden', isDecode);
+          tabDecode.classList.toggle('tab-active', isDecode);
+          tabEncode.classList.toggle('tab-active', !isDecode);
+          if (isDecode) { showLevelSelection(); }
         };
-        
+
         const textToEmojiHTML = (text, container) => {
-            container.innerHTML = '';
-            const words = text.toUpperCase().split(' ');
-
-            words.forEach((word, index) => {
-                const wordWrapper = document.createElement('div');
-                wordWrapper.className = 'inline-flex flex-wrap'; 
-
-                for (const char of word) {
-                    if (EMOJI_CIPHER[char]) {
-                        const emoji = EMOJI_CIPHER[char];
-                        const flipCard = document.createElement('div');
-                        flipCard.className = 'flip-card';
-                        flipCard.innerHTML = `
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">${emoji}</div>
-                                <div class="flip-card-back">${char}</div>
-                            </div>`;
-                        wordWrapper.appendChild(flipCard);
-                    } else if (char.trim() !== '') {
-                        const nonFlipCard = document.createElement('div');
-                        nonFlipCard.className = 'flip-card';
-                        nonFlipCard.innerHTML = `<div class="flip-card-inner"><div class="flip-card-front">${char}</div><div class="flip-card-back">${char}</div></div>`;
-                        wordWrapper.appendChild(nonFlipCard);
-                    }
-                }
-                container.appendChild(wordWrapper);
-
-                if (index < words.length - 1) {
-                    const space = document.createElement('div');
-                    space.className = 'emoji-space';
-                    container.appendChild(space);
-                }
-            });
+          container.innerHTML = '';
+          const words = text.toUpperCase().split(' ');
+          words.forEach((word, index) => {
+            const wordWrapper = document.createElement('div');
+            wordWrapper.className = 'inline-flex flex-wrap';
+            for (const char of word) {
+              if (EMOJI_CIPHER[char]) {
+                const emoji = EMOJI_CIPHER[char];
+                const flipCard = document.createElement('div');
+                flipCard.className = 'flip-card';
+                flipCard.innerHTML = `
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">${emoji}</div>
+                    <div class="flip-card-back">${char}</div>
+                  </div>`;
+                wordWrapper.appendChild(flipCard);
+              } else if (char.trim() !== '') {
+                const nonFlipCard = document.createElement('div');
+                nonFlipCard.className = 'flip-card';
+                nonFlipCard.innerHTML = `<div class="flip-card-inner"><div class="flip-card-front">${char}</div><div class="flip-card-back">${char}</div></div>`;
+                wordWrapper.appendChild(nonFlipCard);
+              }
+            }
+            container.appendChild(wordWrapper);
+            if (index < words.length - 1) {
+              const space = document.createElement('div');
+              space.className = 'emoji-space';
+              container.appendChild(space);
+            }
+          });
         };
-        
+
         const addFlipListener = (container) => {
-            container.addEventListener('click', (e) => {
-                const flipCard = e.target.closest('.flip-card');
-                if (flipCard) {
-                    flipCard.classList.toggle('is-flipped');
-                }
-            });
+          container.addEventListener('click', (e) => {
+            const flipCard = e.target.closest('.flip-card');
+            if (flipCard) { flipCard.classList.toggle('is-flipped'); }
+          });
         };
 
         const triggerConfetti = () => {
-            confettiContainer.innerHTML = '';
-            for (let i = 0; i < 30; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.cssText = `position: absolute; width: 10px; height: 10px; background-color: hsl(${Math.random() * 360}, 100%, 50%); opacity: 0; animation: fall 3s ease-in-out forwards;`;
-                confetti.style.left = `${Math.random() * 100 - 50}px`;
-                confetti.style.animationDelay = `${Math.random() * 2}s`;
-                confettiContainer.appendChild(confetti);
-            }
+          confettiContainer.innerHTML = '';
+          for (let i = 0; i < 30; i++) {
+            const confetti = document.createElement('div');
+            confetti.style.cssText = `position: absolute; width: 10px; height: 10px; background-color: hsl(${Math.random() * 360}, 100%, 50%); opacity: 0; animation: fall 3s ease-in-out forwards;`;
+            confetti.style.left = `${Math.random() * 100 - 50}px`;
+            confetti.style.animationDelay = `${Math.random() * 2}s`;
+            confettiContainer.appendChild(confetti);
+          }
         };
-        
+
         const generateNewMessageContent = () => {
-            const sourceArray = currentLevel === 'easy' ? SECRET_WORDS : SECRET_SENTENCES;
-            let newMessage;
-            do {
-                newMessage = sourceArray[Math.floor(Math.random() * sourceArray.length)];
-            } while (newMessage === currentSecretMessage && sourceArray.length > 1);
-            currentSecretMessage = newMessage;
-            textToEmojiHTML(currentSecretMessage, secretMessageDisplay);
-            decodeInput.value = '';
-            feedbackMessage.textContent = '\xa0';
+          const sourceArray = currentLevel === 'easy' ? SECRET_WORDS : SECRET_SENTENCES;
+          let newMessage;
+          do { newMessage = sourceArray[Math.floor(Math.random() * sourceArray.length)]; }
+          while (newMessage === currentSecretMessage && sourceArray.length > 1);
+          currentSecretMessage = newMessage;
+          textToEmojiHTML(currentSecretMessage, secretMessageDisplay);
+          decodeInput.value = '';
+          feedbackMessage.textContent = '\xa0';
         };
 
         const checkAnswer = () => {
-            const userAnswer = decodeInput.value.trim().toUpperCase();
-            if (userAnswer === currentSecretMessage) {
-                feedbackMessage.textContent = '¡Correcto! 🎉';
-                feedbackMessage.className = 'h-6 text-lg font-bold text-green-600';
-                triggerConfetti();
-            } else {
-                feedbackMessage.textContent = '¡Inténtalo de nuevo! 🤔';
-                feedbackMessage.className = 'h-6 text-lg font-bold text-red-600';
-            }
+          const userAnswer = decodeInput.value.trim().toUpperCase();
+          if (userAnswer === currentSecretMessage) {
+            feedbackMessage.textContent = '¡Correcto! 🎉';
+            feedbackMessage.className = 'h-6 text-lg font-bold text-green-600';
+            triggerConfetti();
+          } else {
+            feedbackMessage.textContent = '¡Inténtalo de nuevo! 🤔';
+            feedbackMessage.className = 'h-6 text-lg font-bold text-red-600';
+          }
         };
-        
+
         const speak = (text) => {
-            if (!('speechSynthesis' in window)) return;
-            const utterance = new SpeechSynthesisUtterance(text);
-            const setVoiceAndSpeak = () => {
-                const voices = speechSynthesis.getVoices();
-                let selectedVoice = voices.find(voice => voice.lang === 'es-ES');
-                if (selectedVoice) utterance.voice = selectedVoice;
-                utterance.lang = 'es-ES';
-                utterance.rate = 0.9;
-                utterance.pitch = 1;
-                window.speechSynthesis.cancel();
-                window.speechSynthesis.speak(utterance);
-            };
-            if (speechSynthesis.getVoices().length > 0) {
-                setVoiceAndSpeak();
-            } else {
-                speechSynthesis.onvoiceschanged = setVoiceAndSpeak;
-            }
+          if (!('speechSynthesis' in window)) return;
+          const utterance = new SpeechSynthesisUtterance(text);
+          const setVoiceAndSpeak = () => {
+            const voices = speechSynthesis.getVoices();
+            let selectedVoice = voices.find(voice => voice.lang === 'es-ES');
+            if (selectedVoice) utterance.voice = selectedVoice;
+            utterance.lang = 'es-ES'; utterance.rate = 0.9; utterance.pitch = 1;
+            window.speechSynthesis.cancel(); window.speechSynthesis.speak(utterance);
+          };
+          if (speechSynthesis.getVoices().length > 0) { setVoiceAndSpeak(); }
+          else { speechSynthesis.onvoiceschanged = setVoiceAndSpeak; }
         };
 
         const populateCodeTable = () => {
-            emojiCodeGrid.innerHTML = '';
-            Object.keys(EMOJI_CIPHER).forEach(letter => {
-                const cell = document.createElement('div');
-                cell.className = 'code-cell';
-                cell.innerHTML = `<span class="font-bold text-lg md:text-xl">${letter}</span><span class="text-lg md:text-xl">=</span><span class="text-2xl md:text-3xl">${EMOJI_CIPHER[letter]}</span>`;
-                cell.addEventListener('click', () => {
-                    const emoji = EMOJI_CIPHER[letter];
-                    
-                    const isEncodeActive = !encodeSection.classList.contains('hidden');
-                    const targetInput = isEncodeActive ? encodeInput : decodeInput;
-                    targetInput.value += emoji;
-                    if(isEncodeActive) {
-                        inputWatermark.classList.add('hidden');
-                    }
-                    targetInput.focus();
-
-                    const emojiName = EMOJI_NAMES[emoji] || 'emoji';
-                    speak(`${letter} es para ${emojiName}.`);
-                });
-                emojiCodeGrid.appendChild(cell);
+          emojiCodeGrid.innerHTML = '';
+          Object.keys(EMOJI_CIPHER).forEach(letter => {
+            const cell = document.createElement('div');
+            cell.className = 'code-cell';
+            cell.innerHTML = `<span class="font-bold text-lg md:text-xl">${letter}</span><span class="text-lg md:text-xl">=</span><span class="text-2xl md:text-3xl">${EMOJI_CIPHER[letter]}</span>`;
+            cell.addEventListener('click', () => {
+              const emoji = EMOJI_CIPHER[letter];
+              const isEncodeActive = !encodeSection.classList.contains('hidden');
+              const targetInput = isEncodeActive ? encodeInput : decodeInput;
+              targetInput.value += isEncodeActive ? emoji : letter; // en decodificar, metemos la LETRA
+              if(isEncodeActive) { inputWatermark.classList.add('hidden'); }
+              targetInput.focus();
+              const emojiName = EMOJI_NAMES[emoji] || 'emoji';
+              speak(`${letter} es para ${emojiName}.`);
             });
+            emojiCodeGrid.appendChild(cell);
+          });
         };
 
         const createOwnMessage = () => {
-            const textToEncode = encodeInput.value.trim();
-            if (!textToEncode) return;
-            textToEmojiHTML(textToEncode, encodedOutput);
-            encodeInputArea.classList.add('hidden');
-            encodeRevealArea.classList.remove('hidden');
+          const textToEncode = encodeInput.value.trim();
+          if (!textToEncode) return;
+          textToEmojiHTML(textToEncode, encodedOutput);
+          encodeInputArea.classList.add('hidden');
+          encodeRevealArea.classList.remove('hidden');
         };
-        
+
         const resetCreateView = () => {
-            encodeRevealArea.classList.add('hidden');
-            encodeInputArea.classList.remove('hidden');
-            encodeInput.value = '';
-            inputWatermark.classList.remove('hidden');
+          encodeRevealArea.classList.add('hidden');
+          encodeInputArea.classList.remove('hidden');
+          encodeInput.value = '';
+          inputWatermark.classList.remove('hidden');
         };
 
         const showLevelSelection = () => {
-            levelSelectionArea.classList.remove('hidden');
-            gameArea.classList.add('hidden');
+          levelSelectionArea.classList.remove('hidden');
+          gameArea.classList.add('hidden');
         };
 
         const startDecodeLevel = (level) => {
-            currentLevel = level;
-            levelSelectionArea.classList.add('hidden');
-            gameArea.classList.remove('hidden');
-            generateNewMessageContent();
+          currentLevel = level;
+          levelSelectionArea.classList.add('hidden');
+          gameArea.classList.remove('hidden');
+          generateNewMessageContent();
         };
 
         function init() {
-            homeBtn.addEventListener('click', goHome);
-            tabDecode.addEventListener('click', () => switchView('decode'));
-            tabEncode.addEventListener('click', () => switchView('encode'));
-            levelEasyBtn.addEventListener('click', () => startDecodeLevel('easy'));
-            levelHardBtn.addEventListener('click', () => startDecodeLevel('hard'));
-            changeLevelBtn.addEventListener('click', showLevelSelection);
-            
-            if (showCodeBtn) {
-                showCodeBtn.addEventListener('click', () => {
-                    codeTablePanel.classList.toggle('hidden');
-                    codeTablePanel.classList.toggle('flex');
-                    codeTablePanel.dataset.toggled = !codeTablePanel.classList.contains('hidden');
-                });
-            }
+          homeBtn.addEventListener('click', goHome);
+          tabDecode.addEventListener('click', () => switchView('decode'));
+          tabEncode.addEventListener('click', () => switchView('encode'));
+          levelEasyBtn.addEventListener('click', () => startDecodeLevel('easy'));
+          levelHardBtn.addEventListener('click', () => startDecodeLevel('hard'));
+          changeLevelBtn.addEventListener('click', showLevelSelection);
 
-            newMessageBtn.addEventListener('click', () => {
-                newMessageSound.currentTime = 0;
-                newMessageSound.play();
-                generateNewMessageContent();
+          if (showCodeBtn) {
+            showCodeBtn.addEventListener('click', () => {
+              codeTablePanel.classList.toggle('hidden');
+              codeTablePanel.classList.toggle('flex');
+              codeTablePanel.dataset.toggled = !codeTablePanel.classList.contains('hidden');
             });
-            checkBtn.addEventListener('click', checkAnswer);
-            decodeInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') checkAnswer(); });
-            encodeBtn.addEventListener('click', createOwnMessage);
-            backToCreateBtn.addEventListener('click', resetCreateView);
-            encodeInput.addEventListener('input', () => {
-                inputWatermark.classList.toggle('hidden', encodeInput.value.length > 0);
-            });
-            
-            document.body.addEventListener('click', initSpeech, { once: true });
-            document.body.addEventListener('touchstart', initSpeech, { once: true });
-            window.addEventListener('resize', updateSecretMessageLayout);
-            addFlipListener(secretMessageDisplay);
-            addFlipListener(encodedOutput);
-            populateCodeTable();
+          }
+
+          newMessageBtn.addEventListener('click', () => {
+            newMessageSound.currentTime = 0;
+            newMessageSound.play();
+            generateNewMessageContent();
+          });
+          checkBtn.addEventListener('click', checkAnswer);
+          decodeInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') checkAnswer(); });
+          encodeBtn.addEventListener('click', createOwnMessage);
+          backToCreateBtn.addEventListener('click', resetCreateView);
+          encodeInput.addEventListener('input', () => {
+            inputWatermark.classList.toggle('hidden', encodeInput.value.length > 0);
+          });
+
+          document.body.addEventListener('click', initSpeech, { once: true });
+          document.body.addEventListener('touchstart', initSpeech, { once: true });
+          window.addEventListener('resize', updateSecretMessageLayout);
+          addFlipListener(secretMessageDisplay);
+          addFlipListener(encodedOutput);
+          populateCodeTable();
         }
 
         return { init, startGame };
       })();
-      
+
       // --- INICIALIZACIÓN Y NAVEGACIÓN PRINCIPAL ---
       diceGameManager.init();
       thisOrThatGameManager.init();
@@ -951,9 +1249,7 @@
       $('go-to-this-or-that-btn').addEventListener('click', thisOrThatGameManager.startGame);
       $('go-to-secret-message-btn').addEventListener('click', secretMessageManager.startGame);
       $('go-to-emoji-says-btn').addEventListener('click', emojiDiceMinigameManager.startGame);
-
     });
   </script>
 </body>
 </html>
-�
